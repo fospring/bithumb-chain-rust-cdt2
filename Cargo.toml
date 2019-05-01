@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "pwasm-std",
+    "bxa-std",
     "pwasm-abi",
     "pwasm-abi-derive",
     "pwasm-ethereum",

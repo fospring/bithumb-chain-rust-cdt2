@@ -26,12 +26,11 @@ repository = "https://github.com/paritytech/pwasm-ethereum"
 version = "1"
 default-features = false
 
-[dependencies.pwasm-std]
-#version = "0.13"
-path="../pwasm-std"
+[dependencies.bxa-std]
+path="../bxa-std"
 
 [features]
 default = []
 kip4 = []
 kip6 = []
-std = ["pwasm-std/std", "byteorder/std"]
+std = ["bxa-std/std", "byteorder/std"]

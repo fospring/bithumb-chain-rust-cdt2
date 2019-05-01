@@ -3,7 +3,7 @@
 use lib::*;
 use super::{util, Stream, AbiType, Sink, Error};
 use super::types::{H160, H256, U256};
-use pwasm_std::str::from_utf8;
+use bxa_std::str::from_utf8;
 
 impl AbiType for u32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {

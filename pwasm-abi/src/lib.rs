@@ -6,7 +6,7 @@
 #![cfg_attr(feature="strict", deny(unused))]
 
 extern crate byteorder;
-extern crate pwasm_std;
+extern crate bxa_std;
 
 #[cfg(test)]
 #[cfg_attr(all(test, feature = "std"), macro_use)]
@@ -20,9 +20,9 @@ pub mod eth;
 
 /// Custom types which AbiType supports
 pub mod types {
-	pub use pwasm_std::Vec;
-	pub use pwasm_std::String;
-	pub use pwasm_std::types::*;
+	pub use bxa_std::Vec;
+	pub use bxa_std::String;
+	pub use bxa_std::types::*;
 }
 
 mod lib {

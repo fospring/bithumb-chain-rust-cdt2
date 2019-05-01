@@ -38,10 +38,14 @@
       <sourceFolder url="file://$MODULE_DIR$/examples/bxa/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/examples/bxa/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/examples/bxa/benches" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/pwasm-std/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-std/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-std/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-std/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-std/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-std/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-std/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-std/benches" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/bxa-std/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/array/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/bxa/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/erc20/contract/target" />

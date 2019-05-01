@@ -8,7 +8,7 @@ authors = ["fospring <fospring@outlook.com>"]
 #pwasm-ethereum = "0.8"
 #pwasm-abi = "0.2"
 #pwasm-abi-derive = "0.2"
-pwasm-std = {path="../../pwasm-std"}
+bxa-std = {path="../../bxa-std"}
 pwasm-ethereum = {path="../../pwasm-ethereum"}
 pwasm-abi = {path="../../pwasm-abi"}
 pwasm-abi-derive = {path="../../pwasm-abi-derive"}

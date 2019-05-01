@@ -6,7 +6,7 @@ use types::H256;
 /// # Examples
 ///
 /// ```rust
-/// use pwasm_std::{keccak, types};
+/// use bxa_std::{keccak, types};
 ///
 /// let hash = keccak("hello world".as_bytes());
 ///

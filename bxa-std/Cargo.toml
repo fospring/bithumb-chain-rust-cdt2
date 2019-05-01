@@ -11,18 +11,8 @@
 # will likely look very different (and much more reasonable)
 
 [package]
-name = "pwasm-std"
+name = "bxa-std"
 version = "0.13.1"
-authors = ["Nikolay Volf <nikvolf@gmail.com>", "Sergey Shulepov <s.pepyakin@gmail.com>"]
-exclude = ["demo/*"]
-description = "Parity WebAssembly standard library for contract development"
-homepage = "https://github.com/paritytech/pwasm-std"
-documentation = "https://paritytech.github.io/pwasm-std/pwasm_std/"
-readme = "README.md"
-keywords = ["wasm", "parity", "webassembly", "blockchain"]
-categories = ["no-std", "embedded"]
-license = "MIT/Apache-2.0"
-repository = "https://github.com/paritytech/pwasm-std"
 [dependencies.byteorder]
 version = "1"
 default-features = false

@@ -2,7 +2,7 @@
 
 #![cfg_attr(not(feature="std"), no_std)]
 
-extern crate pwasm_std;
+extern crate bxa_std;
 
 mod ext;
 mod storage;

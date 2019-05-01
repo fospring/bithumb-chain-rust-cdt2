@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 #![feature(proc_macro_hygiene)]
 
-extern crate pwasm_std;
+extern crate bxa_std;
 extern crate pwasm_ethereum;
 extern crate pwasm_abi;
 extern crate pwasm_abi_derive;
