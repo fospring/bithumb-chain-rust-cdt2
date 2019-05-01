@@ -670,7 +670,7 @@
                                       local.get 0
                                       i32.const 208
                                       i32.add
-                                      call $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE
+                                      call $_ZN7bxa_abi3eth4sink4Sink4push17h9799acae2410b2aeE
                                       local.get 3
                                       local.get 5
                                       i32.load
@@ -693,7 +693,7 @@
                                       local.get 0
                                       i32.const 208
                                       i32.add
-                                      call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
+                                      call $_ZN7bxa_abi3eth4sink4Sink18finalize_panicking17h109d245a2ce3aa73E
                                       br 14 (;@3;)
                                     end
                                     local.get 0
@@ -866,7 +866,7 @@
                                     local.get 0
                                     i32.const 304
                                     i32.add
-                                    call $_ZN9pwasm_abi3eth6stream6Stream3pop17h179d7d4986b5e2b0E
+                                    call $_ZN7bxa_abi3eth6stream6Stream3pop17hd3c089ead2d256c8E
                                     local.get 0
                                     i32.load8_u offset=208
                                     i32.const 1
@@ -983,7 +983,7 @@
                                     local.get 0
                                     i32.const 208
                                     i32.add
-                                    call $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE
+                                    call $_ZN7bxa_abi3eth4sink4Sink4push17h9799acae2410b2aeE
                                     local.get 1
                                     local.get 2
                                     i32.load
@@ -1006,7 +1006,7 @@
                                     local.get 0
                                     i32.const 208
                                     i32.add
-                                    call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
+                                    call $_ZN7bxa_abi3eth4sink4Sink18finalize_panicking17h109d245a2ce3aa73E
                                     br 13 (;@3;)
                                   end
                                   local.get 0
@@ -1179,7 +1179,7 @@
                                   local.get 0
                                   i32.const 16
                                   i32.add
-                                  call $_ZN9pwasm_abi3eth6stream6Stream3pop17h179d7d4986b5e2b0E
+                                  call $_ZN7bxa_abi3eth6stream6Stream3pop17hd3c089ead2d256c8E
                                   local.get 0
                                   i32.load8_u offset=208
                                   i32.const 1
@@ -1220,7 +1220,7 @@
                                   local.get 0
                                   i32.const 16
                                   i32.add
-                                  call $_ZN9pwasm_abi3eth6stream6Stream3pop17h9ff04943fc6efbb6E
+                                  call $_ZN7bxa_abi3eth6stream6Stream3pop17h02a82048a3ab58e7E
                                   local.get 0
                                   i32.load8_u offset=208
                                   i32.const 1
@@ -1505,7 +1505,7 @@
                       end
                       local.get 0
                       i32.load8_u offset=209
-                      call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
+                      call $_ZN4core6result13unwrap_failed17hf479945fa2c61b90E
                       unreachable
                     end
                     i32.const 32
@@ -1519,12 +1519,12 @@
                 end
                 local.get 0
                 i32.load8_u offset=209
-                call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
+                call $_ZN4core6result13unwrap_failed17hf479945fa2c61b90E
                 unreachable
               end
               local.get 0
               i32.load8_u offset=209
-              call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
+              call $_ZN4core6result13unwrap_failed17hf479945fa2c61b90E
               unreachable
             end
             local.get 0
@@ -2392,7 +2392,7 @@
             local.get 0
             i32.const 368
             i32.add
-            call $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE
+            call $_ZN7bxa_abi3eth4sink4Sink4push17h9799acae2410b2aeE
             local.get 4
             local.get 5
             i32.load
@@ -2415,7 +2415,7 @@
             local.get 0
             i32.const 368
             i32.add
-            call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
+            call $_ZN7bxa_abi3eth4sink4Sink18finalize_panicking17h109d245a2ce3aa73E
             local.get 0
             i32.const 208
             i32.add
@@ -2509,7 +2509,7 @@
           i32.add
           i32.const 32
           i32.add
-          call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7e34188838c6f6faE
+          call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7b67a650fda91297E
           local.get 0
           i32.const 208
           i32.add
@@ -2544,7 +2544,7 @@
           local.get 0
           i32.const 208
           i32.add
-          call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
+          call $_ZN7bxa_abi3eth4sink4Sink18finalize_panicking17h109d245a2ce3aa73E
         end
         local.get 0
         i32.load offset=176
@@ -2777,7 +2777,7 @@
   (func $__rust_alloc (type 2) (param i32) (result i32)
     local.get 0
     call $__rg_alloc)
-  (func $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE (type 3) (param i32 i32)
+  (func $_ZN7bxa_abi3eth4sink4Sink4push17h9799acae2410b2aeE (type 3) (param i32 i32)
     (local i32 i32 i32 i32 i32 i32 i64)
     global.get 0
     i32.const 32
@@ -2834,7 +2834,7 @@
         local.get 1
         local.get 4
         i32.const 32
-        call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hfc788d493fac21efE
+        call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hf65b1e8caf0de8c8E
         local.get 1
         i32.load
         local.get 3
@@ -3015,7 +3015,7 @@
     local.get 6
     call $_ZN4core5slice20slice_index_len_fail17hb81ac75c4a989ce8E
     unreachable)
-  (func $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E (type 3) (param i32 i32)
+  (func $_ZN7bxa_abi3eth4sink4Sink18finalize_panicking17h109d245a2ce3aa73E (type 3) (param i32 i32)
     (local i32 i32 i32 i32)
     global.get 0
     i32.const 16
@@ -3058,7 +3058,7 @@
       i32.add
       i32.load
       i32.add
-      call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7e34188838c6f6faE
+      call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7b67a650fda91297E
       local.get 0
       i32.const 8
       i32.add
@@ -3085,7 +3085,7 @@
     end
     call $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E
     unreachable)
-  (func $_ZN9pwasm_abi3eth6stream6Stream3pop17h179d7d4986b5e2b0E (type 3) (param i32 i32)
+  (func $_ZN7bxa_abi3eth6stream6Stream3pop17hd3c089ead2d256c8E (type 3) (param i32 i32)
     (local i32 i32 i32 i32 i32 i32 i64 i32 i32 i32)
     global.get 0
     i32.const 160
@@ -3424,7 +3424,7 @@
     local.get 4
     call $_ZN4core5slice22slice_index_order_fail17h3d34e0ef769a011fE
     unreachable)
-  (func $_ZN9pwasm_abi3eth6stream6Stream3pop17h9ff04943fc6efbb6E (type 3) (param i32 i32)
+  (func $_ZN7bxa_abi3eth6stream6Stream3pop17h02a82048a3ab58e7E (type 3) (param i32 i32)
     (local i32 i32 i32)
     global.get 0
     i32.const 64
@@ -3591,14 +3591,14 @@
   (func $rust_oom (type 3) (param i32 i32)
     unreachable
     unreachable)
-  (func $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE (type 4) (param i32)
+  (func $_ZN4core6result13unwrap_failed17hf479945fa2c61b90E (type 4) (param i32)
     call $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E
     unreachable)
   (func $__rust_dealloc (type 3) (param i32 i32)
     local.get 0
     local.get 1
     call $__rg_dealloc)
-  (func $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7e34188838c6f6faE (type 7) (param i32 i32 i32)
+  (func $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7b67a650fda91297E (type 7) (param i32 i32 i32)
     (local i32)
     local.get 0
     local.get 0
@@ -3607,7 +3607,7 @@
     local.get 1
     i32.sub
     local.tee 2
-    call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hfc788d493fac21efE
+    call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hf65b1e8caf0de8c8E
     local.get 0
     local.get 0
     i32.load offset=8
@@ -3803,7 +3803,7 @@
         local.get 0
         i32.const 24
         i32.add
-        call $_ZN9pwasm_abi3eth6stream6Stream3pop17h9ff04943fc6efbb6E
+        call $_ZN7bxa_abi3eth6stream6Stream3pop17h02a82048a3ab58e7E
         local.get 0
         i32.load8_u offset=72
         i32.const 1
@@ -4037,9 +4037,9 @@
     end
     local.get 0
     i32.load8_u offset=73
-    call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
+    call $_ZN4core6result13unwrap_failed17hf479945fa2c61b90E
     unreachable)
-  (func $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hfc788d493fac21efE (type 7) (param i32 i32 i32)
+  (func $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hf65b1e8caf0de8c8E (type 7) (param i32 i32 i32)
     (local i32)
     block  ;; label = @1
       local.get 0
@@ -5095,5 +5095,5 @@
   (export "deploy" (func $deploy))
   (elem (;0;) (i32.const 1) $_ZN4core3ptr18real_drop_in_place17hb362d9cbd0511fbaE $_ZN70_$LT$wee_alloc..LargeAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$22new_cell_for_free_list17he8633747b3e68f20E $_ZN70_$LT$wee_alloc..LargeAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$13min_cell_size17h36473a24a292ef1eE $_ZN70_$LT$wee_alloc..LargeAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$32should_merge_adjacent_free_cells17h9fb2f0c3765940e8E $_ZN4core3ptr18real_drop_in_place17h7f1c6dba4d8a1f3eE $_ZN88_$LT$wee_alloc..size_classes..SizeClassAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$22new_cell_for_free_list17h7f322e3989781476E $_ZN88_$LT$wee_alloc..size_classes..SizeClassAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$13min_cell_size17h449f13d5e04898a2E $_ZN88_$LT$wee_alloc..size_classes..SizeClassAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$32should_merge_adjacent_free_cells17h51f2062887788390E $_ZN4core3ptr18real_drop_in_place17hb362d9cbd0511fbaE.106)
   (data (;0;) (i32.const 32768) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
-  (data (;1;) (i32.const 33836) "\1c\85\00\00\11\00\00\00-\85\00\00\17\00\00\00\ea\02\00\00\05\00\00\00\01\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00\05\00\00\00\04\00\00\00\04\00\00\00\06\00\00\00\07\00\00\00\08\00\00\00\09\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00D\85\00\00\1d\00\00\00a\85\00\00[\00\00\00)\00\00\00\02\00\00\00!\86\00\00\12\00\00\00\d4\85\00\00\17\00\00\00\1a\00\00\00\01\00\00\00\eb\85\00\006\00\00\00\d4\85\00\00\17\00\00\00\1a\00\00\00\01\00\00\00\bc\85\00\00\18\00\00\00\d4\85\00\00\17\00\00\00\1a\00\00\00\01\00\00\00\a0\86\00\00(\00\00\00D\86\00\00\5c\00\00\00{\00\00\00\1f\00\00\003\86\00\00\11\00\00\00D\86\00\00\5c\00\00\00\80\00\00\00\1d\00\00\00")
+  (data (;1;) (i32.const 33836) "\1c\85\00\00\11\00\00\00-\85\00\00\17\00\00\00\ea\02\00\00\05\00\00\00\01\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00\05\00\00\00\04\00\00\00\04\00\00\00\06\00\00\00\07\00\00\00\08\00\00\00\09\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00D\85\00\00\1d\00\00\00a\85\00\00[\00\00\00)\00\00\00\02\00\00\00!\86\00\00\12\00\00\00\d4\85\00\00\17\00\00\00\19\00\00\00\01\00\00\00\eb\85\00\006\00\00\00\d4\85\00\00\17\00\00\00\19\00\00\00\01\00\00\00\bc\85\00\00\18\00\00\00\d4\85\00\00\17\00\00\00\19\00\00\00\01\00\00\00\a0\86\00\00(\00\00\00D\86\00\00\5c\00\00\00{\00\00\00\1f\00\00\003\86\00\00\11\00\00\00D\86\00\00\5c\00\00\00\80\00\00\00\1d\00\00\00")
   (data (;2;) (i32.const 34076) "capacity overflowsrc/liballoc/raw_vec.rsarithmetic operation overflow/Users/admin/.cargo/registry/src/mirrors.ustc.edu.cn-61ef6e0cd06fb9b8/uint-0.5.0/src/lib.rsInvalid method signatureexamples/bxa/src/lib.rsUnable to accept value in non-payable constructor callInvalid abi invokeOnce has panicked/Users/admin/.cargo/registry/src/mirrors.ustc.edu.cn-61ef6e0cd06fb9b8/spin-0.5.0/src/once.rsinternal error: entered unreachable code"))

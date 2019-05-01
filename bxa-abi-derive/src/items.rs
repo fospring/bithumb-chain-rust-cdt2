@@ -275,10 +275,10 @@ impl quote::ToTokens for Item {
 							quote! {
 								let topics = &[
 									[#(#hash_bytes),*].into(),
-									#(::pwasm_abi::eth::AsLog::as_log(&#indexed_pats)),*
+									#(::bxa_abi::eth::AsLog::as_log(&#indexed_pats)),*
 								];
 
-								let mut sink = ::pwasm_abi::eth::Sink::new(#data_pats_count_lit);
+								let mut sink = ::bxa_abi::eth::Sink::new(#data_pats_count_lit);
 								#(sink.push(#data_pats));*;
 								let payload = sink.finalize_panicking();
 

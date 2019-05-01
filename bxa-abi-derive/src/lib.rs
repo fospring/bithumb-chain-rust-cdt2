@@ -117,40 +117,40 @@ impl Args {
 /// client implementation named `Client2` for the interface
 /// defined in the `Contract2` trait.
 #[proc_macro_attribute]
-pub fn eth_abi(
+pub fn bxa_abi(
 	args: proc_macro::TokenStream,
 	input: proc_macro::TokenStream,
 ) -> proc_macro::TokenStream {
 	let args_toks = parse_macro_input!(args as syn::AttributeArgs);
 	let input_toks = parse_macro_input!(input as syn::Item);
 
-	let output = match impl_eth_abi(args_toks, input_toks) {
+	let output = match impl_bxa_abi(args_toks, input_toks) {
 		Ok(output) => output,
-		Err(err) => panic!("[eth_abi] encountered error: {}", err),
+		Err(err) => panic!("[bxa_abi] encountered error: {}", err),
 	};
 
 	output.into()
 }
 
-/// Implementation of `eth_abi`.
+/// Implementation of `bxa_abi`.
 ///
 /// This convenience function is mainly used to better handle the results of token stream.
-fn impl_eth_abi(args: syn::AttributeArgs, input: syn::Item) -> Result<proc_macro2::TokenStream> {
+fn impl_bxa_abi(args: syn::AttributeArgs, input: syn::Item) -> Result<proc_macro2::TokenStream> {
 	let args = Args::from_attribute_args(args)?;
 	let intf = items::Interface::from_item(input);
 
 	write_json_abi(&intf)?;
 
 	match args.client_name() {
-		None => generate_eth_endpoint_wrapper(&intf, args.endpoint_name()),
+		None => generate_bxa_endpoint_wrapper(&intf, args.endpoint_name()),
 		Some(client_name) => {
-			generate_eth_endpoint_and_client_wrapper(&intf, args.endpoint_name(), client_name)
+			generate_bxa_endpoint_and_client_wrapper(&intf, args.endpoint_name(), client_name)
 		}
 	}
 }
 
 /// Generates the eth abi code in case of a single provided endpoint.
-fn generate_eth_endpoint_wrapper(
+fn generate_bxa_endpoint_wrapper(
 	intf: &items::Interface,
 	endpoint_name: &str,
 ) -> Result<proc_macro2::TokenStream> {
@@ -158,11 +158,11 @@ fn generate_eth_endpoint_wrapper(
 	//        We might want to fix this, however it is not critical.
 	//        >>>
 	let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
-	let mod_name = format!("pwasm_abi_impl_{}", &intf.name().clone());
+	let mod_name = format!("bxa_abi_impl_{}", &intf.name().clone());
 	let mod_name_ident = syn::Ident::new(&mod_name, Span::call_site());
 	// FIXME: <<<
 
-	let endpoint_toks = generate_eth_endpoint(endpoint_name, intf);
+	let endpoint_toks = generate_bxa_endpoint(endpoint_name, intf);
 	let endpoint_ident = syn::Ident::new(endpoint_name, Span::call_site());
 
 	Ok(quote! {
@@ -170,8 +170,8 @@ fn generate_eth_endpoint_wrapper(
 		#[allow(non_snake_case)]
 		mod #mod_name_ident {
 			extern crate bxa_ethereum;
-			extern crate pwasm_abi;
-			use pwasm_abi::types::{H160, H256, U256, Address, Vec, String};
+			extern crate bxa_abi;
+			use bxa_abi::types::{H160, H256, U256, Address, Vec, String};
 			use super::#name_ident_use;
 			#endpoint_toks
 		}
@@ -180,7 +180,7 @@ fn generate_eth_endpoint_wrapper(
 }
 
 /// Generates the eth abi code in case of a provided endpoint and client.
-fn generate_eth_endpoint_and_client_wrapper(
+fn generate_bxa_endpoint_and_client_wrapper(
 	intf: &items::Interface,
 	endpoint_name: &str,
 	client_name: &str,
@@ -190,12 +190,12 @@ fn generate_eth_endpoint_and_client_wrapper(
 	//        We might want to fix this, however it is not critical.
 	//        >>>
 	let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
-	let mod_name = format!("pwasm_abi_impl_{}", &intf.name().clone());
+	let mod_name = format!("bxa_abi_impl_{}", &intf.name().clone());
 	let mod_name_ident = syn::Ident::new(&mod_name, Span::call_site());
 	// FIXME: <<<
 
-	let endpoint_toks = generate_eth_endpoint(endpoint_name, &intf);
-	let client_toks = generate_eth_client(client_name, &intf);
+	let endpoint_toks = generate_bxa_endpoint(endpoint_name, &intf);
+	let client_toks = generate_bxa_client(client_name, &intf);
 	let endpoint_name_ident = syn::Ident::new(endpoint_name, Span::call_site());
 	let client_name_ident = syn::Ident::new(&client_name, Span::call_site());
 
@@ -204,8 +204,8 @@ fn generate_eth_endpoint_and_client_wrapper(
 		#[allow(non_snake_case)]
 		mod #mod_name_ident {
 			extern crate bxa_ethereum;
-			extern crate pwasm_abi;
-			use pwasm_abi::types::{H160, H256, U256, Address, Vec, String};
+			extern crate bxa_abi;
+			use bxa_abi::types::{H160, H256, U256, Address, Vec, String};
 			use super::#name_ident_use;
 			#endpoint_toks
 			#client_toks
@@ -215,7 +215,7 @@ fn generate_eth_endpoint_and_client_wrapper(
 	})
 }
 
-fn generate_eth_client(client_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
+fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
 	let client_ctor = intf.constructor().map(
 		|signature| utils::produce_signature(
 			&signature.name,
@@ -252,7 +252,7 @@ fn generate_eth_client(client_name: &str, intf: &items::Interface) -> proc_macro
 					syn::ReturnType::Default => None,
 					syn::ReturnType::Type(_, _) => Some(
 						quote!{
-							let mut stream = pwasm_abi::eth::Stream::new(&result);
+							let mut stream = bxa_abi::eth::Stream::new(&result);
 							stream.pop().expect("failed decode call output")
 						}
 					),
@@ -270,7 +270,7 @@ fn generate_eth_client(client_name: &str, intf: &items::Interface) -> proc_macro
 						payload.push((#hash_literal >> 8) as u8);
 						payload.push(#hash_literal as u8);
 
-						let mut sink = pwasm_abi::eth::Sink::new(#argument_count_literal);
+						let mut sink = bxa_abi::eth::Sink::new(#argument_count_literal);
 						#(#argument_push)*
 
 						sink.drain_to(&mut payload);
@@ -335,7 +335,7 @@ fn generate_eth_client(client_name: &str, intf: &items::Interface) -> proc_macro
 	}
 }
 
-fn generate_eth_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
+fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
 	fn check_value_if_payable_toks(is_payable: bool) -> proc_macro2::TokenStream {
 		if is_payable {
 			return quote!{}
@@ -353,7 +353,7 @@ fn generate_eth_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
 			quote! {
 				#check_value_if_payable
-				let mut stream = pwasm_abi::eth::Stream::new(payload);
+				let mut stream = bxa_abi::eth::Stream::new(payload);
 				self.inner.constructor(
 					#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
 				);
@@ -375,11 +375,11 @@ fn generate_eth_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					Some(quote! {
 						#hash_literal => {
 							#check_value_if_payable
-							let mut stream = pwasm_abi::eth::Stream::new(method_payload);
+							let mut stream = bxa_abi::eth::Stream::new(method_payload);
 							let result = inner.#ident(
 								#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
 							);
-							let mut sink = pwasm_abi::eth::Sink::new(#return_count_literal);
+							let mut sink = bxa_abi::eth::Sink::new(#return_count_literal);
 							sink.push(result);
 							sink.finalize_panicking()
 						}
@@ -388,7 +388,7 @@ fn generate_eth_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					Some(quote! {
 						#hash_literal => {
 							#check_value_if_payable
-							let mut stream = pwasm_abi::eth::Stream::new(method_payload);
+							let mut stream = bxa_abi::eth::Stream::new(method_payload);
 							inner.#ident(
 								#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
 							);
@@ -429,7 +429,7 @@ fn generate_eth_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			}
 		}
 
-		impl<T: #name_ident> pwasm_abi::eth::EndpointInterface for #endpoint_ident<T> {
+		impl<T: #name_ident> bxa_abi::eth::EndpointInterface for #endpoint_ident<T> {
 			#[allow(unused_mut)]
 			#[allow(unused_variables)]
 			fn dispatch(&mut self, payload: &[u8]) -> Vec<u8> {

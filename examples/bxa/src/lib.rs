@@ -4,17 +4,16 @@
 
 extern crate bxa_std;
 extern crate bxa_ethereum;
-extern crate pwasm_abi;
-extern crate pwasm_abi_derive;
+extern crate bxa_abi;
+extern crate bxa_abi_derive;
 
 #[macro_use]
 extern crate lazy_static;
 
-// use pwasm_ethereum;
-use pwasm_abi::types::*;
+use bxa_abi::types::*;
 
 // eth_abi is a procedural macros https://doc.rust-lang.org/book/first-edition/procedural-macros.html
-use pwasm_abi_derive::eth_abi;
+use bxa_abi_derive::bxa_abi;
 
 lazy_static! {
     static ref TOTAL_SUPPLY_KEY: H256 =
@@ -23,7 +22,7 @@ lazy_static! {
         );
 }
 
-#[eth_abi(TokenEndpoint, TokenClient)]
+#[bxa_abi(TokenEndpoint, TokenClient)]
 pub trait TokenInterface {
     /// The constructor
     fn constructor(&mut self, _total_supply: U256);
@@ -86,7 +85,7 @@ fn balance_key(address: &Address) -> H256 {
     key
 }
 // Declares the dispatch and dispatch_ctor methods
-use pwasm_abi::eth::EndpointInterface;
+use bxa_abi::eth::EndpointInterface;
 
 #[no_mangle]
 pub fn call() {

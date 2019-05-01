@@ -11,44 +11,26 @@
 # will likely look very different (and much more reasonable)
 
 [package]
-name = "pwasm-abi-derive"
+name = "bxa-abi"
 version = "0.2.2"
+exclude = ["tests/*", "derive/*"]
+description = "Rust WebAssembly Contracts Abi"
 readme = "README.md"
 keywords = ["wasm", "parity", "webassembly", "blockchain", "abi"]
 categories = ["no-std", "embedded"]
+license = "MIT/Apache-2.0"
 [profile.release]
 panic = "abort"
-
-[lib]
-name = "pwasm_abi_derive"
-proc-macro = true
 [dependencies.byteorder]
-version = "1.2.3"
+version = "1.2"
 default-features = false
 
-[dependencies.fixed-hash]
-version = "0.3.0"
-default-features = false
+[dependencies.bxa-std]
+path="../bxa-std"
+[dev-dependencies.hex-literal]
+version = "0.1"
 
-[dependencies.proc-macro2]
-version = "0.4"
-
-[dependencies.quote]
-version = "0.6.8"
-
-[dependencies.serde]
-version = "1.0.70"
-
-[dependencies.serde_derive]
-version = "1.0.70"
-
-[dependencies.serde_json]
-version = "1.0.24"
-
-[dependencies.syn]
-version = "0.15.12"
-features = ["full", "extra-traits"]
-
-[dependencies.tiny-keccak]
-version = "1.4.2"
-default-features = false
+[features]
+default = []
+std = ["bxa-std/std", "byteorder/std"]
+strict = []

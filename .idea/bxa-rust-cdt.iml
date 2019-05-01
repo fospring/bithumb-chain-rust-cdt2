@@ -10,11 +10,11 @@
       <sourceFolder url="file://$MODULE_DIR$/examples/erc20/contract/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/examples/erc20/contract/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/examples/erc20/contract/benches" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/pwasm-abi/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-abi/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-abi/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-abi/benches" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/pwasm-abi-derive/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi-derive/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-abi-derive/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-abi-derive/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-abi-derive/benches" isTestSource="true" />
@@ -48,6 +48,14 @@
       <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi-derive/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi-derive/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-abi-derive/benches" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/bxa-abi-derive/target" />
+      <excludeFolder url="file://$MODULE_DIR$/bxa-abi/target" />
       <excludeFolder url="file://$MODULE_DIR$/bxa-ethereum/target" />
       <excludeFolder url="file://$MODULE_DIR$/bxa-std/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/array/target" />
