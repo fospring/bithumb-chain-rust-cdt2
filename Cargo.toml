@@ -3,7 +3,7 @@ members = [
     "bxa-std",
     "pwasm-abi",
     "pwasm-abi-derive",
-    "pwasm-ethereum",
+    "bxa-ethereum",
     "examples/bxa",
 ]
 

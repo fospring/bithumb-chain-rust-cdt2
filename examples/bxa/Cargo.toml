@@ -9,7 +9,7 @@ authors = ["fospring <fospring@outlook.com>"]
 #pwasm-abi = "0.2"
 #pwasm-abi-derive = "0.2"
 bxa-std = {path="../../bxa-std"}
-pwasm-ethereum = {path="../../pwasm-ethereum"}
+bxa-ethereum = {path="../../bxa-ethereum"}
 pwasm-abi = {path="../../pwasm-abi"}
 pwasm-abi-derive = {path="../../pwasm-abi-derive"}
 lazy_static = { version = "1.2.0", features = ["spin_no_std"] }

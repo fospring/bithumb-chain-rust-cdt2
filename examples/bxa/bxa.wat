@@ -243,7 +243,7 @@
     local.tee 0
     global.set 0
     local.get 0
-    call $_ZN14pwasm_ethereum3ext5input17h50360a7f649837d1E
+    call $_ZN12bxa_ethereum3ext5input17hc86ce898da4ce5acE
     block  ;; label = @1
       block  ;; label = @2
         block  ;; label = @3
@@ -670,7 +670,7 @@
                                       local.get 0
                                       i32.const 208
                                       i32.add
-                                      call $_ZN9pwasm_abi3eth4sink4Sink4push17heedea567a9a62864E
+                                      call $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE
                                       local.get 3
                                       local.get 5
                                       i32.load
@@ -693,7 +693,7 @@
                                       local.get 0
                                       i32.const 208
                                       i32.add
-                                      call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h2c3d9c18a6c51e2bE
+                                      call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
                                       br 14 (;@3;)
                                     end
                                     local.get 0
@@ -866,7 +866,7 @@
                                     local.get 0
                                     i32.const 304
                                     i32.add
-                                    call $_ZN9pwasm_abi3eth6stream6Stream3pop17h51f3ca2eb53745eeE
+                                    call $_ZN9pwasm_abi3eth6stream6Stream3pop17h179d7d4986b5e2b0E
                                     local.get 0
                                     i32.load8_u offset=208
                                     i32.const 1
@@ -983,7 +983,7 @@
                                     local.get 0
                                     i32.const 208
                                     i32.add
-                                    call $_ZN9pwasm_abi3eth4sink4Sink4push17heedea567a9a62864E
+                                    call $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE
                                     local.get 1
                                     local.get 2
                                     i32.load
@@ -1006,7 +1006,7 @@
                                     local.get 0
                                     i32.const 208
                                     i32.add
-                                    call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h2c3d9c18a6c51e2bE
+                                    call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
                                     br 13 (;@3;)
                                   end
                                   local.get 0
@@ -1179,7 +1179,7 @@
                                   local.get 0
                                   i32.const 16
                                   i32.add
-                                  call $_ZN9pwasm_abi3eth6stream6Stream3pop17h51f3ca2eb53745eeE
+                                  call $_ZN9pwasm_abi3eth6stream6Stream3pop17h179d7d4986b5e2b0E
                                   local.get 0
                                   i32.load8_u offset=208
                                   i32.const 1
@@ -1220,7 +1220,7 @@
                                   local.get 0
                                   i32.const 16
                                   i32.add
-                                  call $_ZN9pwasm_abi3eth6stream6Stream3pop17h0dcad5af36d0a5c2E
+                                  call $_ZN9pwasm_abi3eth6stream6Stream3pop17h9ff04943fc6efbb6E
                                   local.get 0
                                   i32.load8_u offset=208
                                   i32.const 1
@@ -1505,7 +1505,7 @@
                       end
                       local.get 0
                       i32.load8_u offset=209
-                      call $_ZN4core6result13unwrap_failed17hcb50b7d466eac709E
+                      call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
                       unreachable
                     end
                     i32.const 32
@@ -1519,12 +1519,12 @@
                 end
                 local.get 0
                 i32.load8_u offset=209
-                call $_ZN4core6result13unwrap_failed17hcb50b7d466eac709E
+                call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
                 unreachable
               end
               local.get 0
               i32.load8_u offset=209
-              call $_ZN4core6result13unwrap_failed17hcb50b7d466eac709E
+              call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
               unreachable
             end
             local.get 0
@@ -2392,7 +2392,7 @@
             local.get 0
             i32.const 368
             i32.add
-            call $_ZN9pwasm_abi3eth4sink4Sink4push17heedea567a9a62864E
+            call $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE
             local.get 4
             local.get 5
             i32.load
@@ -2415,7 +2415,7 @@
             local.get 0
             i32.const 368
             i32.add
-            call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h2c3d9c18a6c51e2bE
+            call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
             local.get 0
             i32.const 208
             i32.add
@@ -2509,7 +2509,7 @@
           i32.add
           i32.const 32
           i32.add
-          call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17he57d1ab261c7d14dE
+          call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7e34188838c6f6faE
           local.get 0
           i32.const 208
           i32.add
@@ -2544,7 +2544,7 @@
           local.get 0
           i32.const 208
           i32.add
-          call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h2c3d9c18a6c51e2bE
+          call $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E
         end
         local.get 0
         i32.load offset=176
@@ -2588,7 +2588,7 @@
     i32.const 1
     call $rust_oom
     unreachable)
-  (func $_ZN14pwasm_ethereum3ext5input17h50360a7f649837d1E (type 4) (param i32)
+  (func $_ZN12bxa_ethereum3ext5input17hc86ce898da4ce5acE (type 4) (param i32)
     (local i32 i32 i32)
     block  ;; label = @1
       block  ;; label = @2
@@ -2629,7 +2629,7 @@
         i32.store
         return
       end
-      call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$11allocate_in28_$u7b$$u7b$closure$u7d$$u7d$17hcdccfa205e72f2b9E.llvm.3191857540347925924
+      call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$11allocate_in28_$u7b$$u7b$closure$u7d$$u7d$17h821b4ebcd561d883E.llvm.16801011177413829184
       unreachable
     end
     local.get 1
@@ -2777,7 +2777,7 @@
   (func $__rust_alloc (type 2) (param i32) (result i32)
     local.get 0
     call $__rg_alloc)
-  (func $_ZN9pwasm_abi3eth4sink4Sink4push17heedea567a9a62864E (type 3) (param i32 i32)
+  (func $_ZN9pwasm_abi3eth4sink4Sink4push17he0152c83ae707eeaE (type 3) (param i32 i32)
     (local i32 i32 i32 i32 i32 i32 i64)
     global.get 0
     i32.const 32
@@ -2834,7 +2834,7 @@
         local.get 1
         local.get 4
         i32.const 32
-        call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hdf825918c3f0a25dE
+        call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hfc788d493fac21efE
         local.get 1
         i32.load
         local.get 3
@@ -3015,7 +3015,7 @@
     local.get 6
     call $_ZN4core5slice20slice_index_len_fail17hb81ac75c4a989ce8E
     unreachable)
-  (func $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h2c3d9c18a6c51e2bE (type 3) (param i32 i32)
+  (func $_ZN9pwasm_abi3eth4sink4Sink18finalize_panicking17h5fac2e7cd5d67d70E (type 3) (param i32 i32)
     (local i32 i32 i32 i32)
     global.get 0
     i32.const 16
@@ -3058,7 +3058,7 @@
       i32.add
       i32.load
       i32.add
-      call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17he57d1ab261c7d14dE
+      call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7e34188838c6f6faE
       local.get 0
       i32.const 8
       i32.add
@@ -3085,7 +3085,7 @@
     end
     call $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E
     unreachable)
-  (func $_ZN9pwasm_abi3eth6stream6Stream3pop17h51f3ca2eb53745eeE (type 3) (param i32 i32)
+  (func $_ZN9pwasm_abi3eth6stream6Stream3pop17h179d7d4986b5e2b0E (type 3) (param i32 i32)
     (local i32 i32 i32 i32 i32 i32 i64 i32 i32 i32)
     global.get 0
     i32.const 160
@@ -3424,7 +3424,7 @@
     local.get 4
     call $_ZN4core5slice22slice_index_order_fail17h3d34e0ef769a011fE
     unreachable)
-  (func $_ZN9pwasm_abi3eth6stream6Stream3pop17h0dcad5af36d0a5c2E (type 3) (param i32 i32)
+  (func $_ZN9pwasm_abi3eth6stream6Stream3pop17h9ff04943fc6efbb6E (type 3) (param i32 i32)
     (local i32 i32 i32)
     global.get 0
     i32.const 64
@@ -3591,14 +3591,14 @@
   (func $rust_oom (type 3) (param i32 i32)
     unreachable
     unreachable)
-  (func $_ZN4core6result13unwrap_failed17hcb50b7d466eac709E (type 4) (param i32)
+  (func $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE (type 4) (param i32)
     call $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E
     unreachable)
   (func $__rust_dealloc (type 3) (param i32 i32)
     local.get 0
     local.get 1
     call $__rg_dealloc)
-  (func $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17he57d1ab261c7d14dE (type 7) (param i32 i32 i32)
+  (func $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h7e34188838c6f6faE (type 7) (param i32 i32 i32)
     (local i32)
     local.get 0
     local.get 0
@@ -3607,7 +3607,7 @@
     local.get 1
     i32.sub
     local.tee 2
-    call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hdf825918c3f0a25dE
+    call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hfc788d493fac21efE
     local.get 0
     local.get 0
     i32.load offset=8
@@ -3633,7 +3633,7 @@
     local.get 0
     i32.const 8
     i32.add
-    call $_ZN14pwasm_ethereum3ext5input17h50360a7f649837d1E
+    call $_ZN12bxa_ethereum3ext5input17hc86ce898da4ce5acE
     local.get 0
     i32.load offset=16
     local.set 1
@@ -3803,7 +3803,7 @@
         local.get 0
         i32.const 24
         i32.add
-        call $_ZN9pwasm_abi3eth6stream6Stream3pop17h0dcad5af36d0a5c2E
+        call $_ZN9pwasm_abi3eth6stream6Stream3pop17h9ff04943fc6efbb6E
         local.get 0
         i32.load8_u offset=72
         i32.const 1
@@ -4037,9 +4037,9 @@
     end
     local.get 0
     i32.load8_u offset=73
-    call $_ZN4core6result13unwrap_failed17hcb50b7d466eac709E
+    call $_ZN4core6result13unwrap_failed17h73d67c6df6b99c6bE
     unreachable)
-  (func $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hdf825918c3f0a25dE (type 7) (param i32 i32 i32)
+  (func $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hfc788d493fac21efE (type 7) (param i32 i32 i32)
     (local i32)
     block  ;; label = @1
       local.get 0
@@ -4136,7 +4136,7 @@
   (func $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E (type 6)
     call $rust_begin_unwind
     unreachable)
-  (func $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$11allocate_in28_$u7b$$u7b$closure$u7d$$u7d$17hcdccfa205e72f2b9E.llvm.3191857540347925924 (type 6)
+  (func $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$11allocate_in28_$u7b$$u7b$closure$u7d$$u7d$17h821b4ebcd561d883E.llvm.16801011177413829184 (type 6)
     call $_ZN5alloc7raw_vec17capacity_overflow17hf2acb48acb5ae20aE
     unreachable)
   (func $rust_begin_unwind (type 6)

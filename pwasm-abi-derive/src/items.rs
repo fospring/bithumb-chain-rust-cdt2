@@ -282,7 +282,7 @@ impl quote::ToTokens for Item {
 								#(sink.push(#data_pats));*;
 								let payload = sink.finalize_panicking();
 
-								::pwasm_ethereum::log(topics, &payload);
+								::bxa_ethereum::log(topics, &payload);
 							}
 						}
 					)

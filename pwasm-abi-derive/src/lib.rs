@@ -169,7 +169,7 @@ fn generate_eth_endpoint_wrapper(
 		#intf
 		#[allow(non_snake_case)]
 		mod #mod_name_ident {
-			extern crate pwasm_ethereum;
+			extern crate bxa_ethereum;
 			extern crate pwasm_abi;
 			use pwasm_abi::types::{H160, H256, U256, Address, Vec, String};
 			use super::#name_ident_use;
@@ -203,7 +203,7 @@ fn generate_eth_endpoint_and_client_wrapper(
 		#intf
 		#[allow(non_snake_case)]
 		mod #mod_name_ident {
-			extern crate pwasm_ethereum;
+			extern crate bxa_ethereum;
 			extern crate pwasm_abi;
 			use pwasm_abi::types::{H160, H256, U256, Address, Vec, String};
 			use super::#name_ident_use;
@@ -277,7 +277,7 @@ fn generate_eth_client(client_name: &str, intf: &items::Interface) -> proc_macro
 
 						#result_instance
 
-						pwasm_ethereum::call(self.gas.unwrap_or(200000), &self.address, self.value.clone().unwrap_or(U256::zero()), &payload, &mut result[..])
+						bxa_ethereum::call(self.gas.unwrap_or(200000), &self.address, self.value.clone().unwrap_or(U256::zero()), &payload, &mut result[..])
 							.expect("Call failed; todo: allow handling inside contracts");
 
 						#result_pop
@@ -341,7 +341,7 @@ fn generate_eth_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			return quote!{}
 		}
 		quote!{
-			if pwasm_ethereum::value() > 0.into() {
+			if bxa_ethereum::value() > 0.into() {
 				panic!("Unable to accept value in non-payable constructor call");
 			}
 		}

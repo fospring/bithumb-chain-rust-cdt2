@@ -26,7 +26,7 @@
       <sourceFolder url="file://$MODULE_DIR$/examples/erc20/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/examples/erc20/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/examples/erc20/benches" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/pwasm-ethereum/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-ethereum/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-ethereum/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/pwasm-ethereum/benches" isTestSource="true" />
@@ -45,6 +45,10 @@
       <sourceFolder url="file://$MODULE_DIR$/bxa-std/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bxa-std/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/bxa-std/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/bxa-ethereum/benches" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/bxa-ethereum/target" />
       <excludeFolder url="file://$MODULE_DIR$/bxa-std/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/array/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/bxa/target" />

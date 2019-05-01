@@ -13,11 +13,8 @@
 [package]
 name = "pwasm-abi"
 version = "0.2.2"
-authors = ["NikVolf <nikvolf@gmail.com>", "Alexey Frolov <alexey@parity.io>"]
 exclude = ["tests/*", "derive/*"]
 description = "Rust WebAssembly Contracts Abi"
-homepage = "https://github.com/paritytech/pwasm-abi"
-documentation = "https://paritytech.github.io/pwasm-abi/pwasm_abi/"
 readme = "README.md"
 keywords = ["wasm", "parity", "webassembly", "blockchain", "abi"]
 categories = ["no-std", "embedded"]
