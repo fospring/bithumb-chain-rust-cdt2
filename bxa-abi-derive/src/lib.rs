@@ -32,7 +32,7 @@ use json::write_json_abi;
 use items::Item;
 use error::{Result, Error};
 
-/// Arguments given to the `eth_abi` attribute macro.
+/// Arguments given to the `bxa_abi` attribute macro.
 struct Args {
 	/// The required name of the endpoint.
 	endpoint_name: String,
@@ -41,7 +41,7 @@ struct Args {
 }
 
 impl Args {
-	/// Extracts `eth_abi` argument information from the given `syn::AttributeArgs`.
+	/// Extracts `bxa_abi` argument information from the given `syn::AttributeArgs`.
 	pub fn from_attribute_args(attr_args: syn::AttributeArgs) -> Result<Args> {
 		if attr_args.len() == 0 || attr_args.len() > 2 {
 			return Err(Error::invalid_number_of_arguments(0));
@@ -99,7 +99,7 @@ impl Args {
 /// # Example: Using just one argument
 ///
 /// ```
-/// #[eth_abi(Endpoint)]
+/// #[bxa_abi(Endpoint)]
 /// trait Contract { }
 /// ```
 ///
@@ -109,7 +109,7 @@ impl Args {
 /// # Example: Using two arguments
 ///
 /// ```
-/// #[eth_abi(Endpoint2, Client2)]
+/// #[bxa_abi(Endpoint2, Client2)]
 /// trait Contract2 { }
 /// ```
 ///
@@ -149,12 +149,12 @@ fn impl_bxa_abi(args: syn::AttributeArgs, input: syn::Item) -> Result<proc_macro
 	}
 }
 
-/// Generates the eth abi code in case of a single provided endpoint.
+/// Generates the bxa abi code in case of a single provided endpoint.
 fn generate_bxa_endpoint_wrapper(
 	intf: &items::Interface,
 	endpoint_name: &str,
 ) -> Result<proc_macro2::TokenStream> {
-	// FIXME: Code duplication with `generate_eth_endpoint_and_client_wrapper`
+	// FIXME: Code duplication with `generate_bxa_endpoint_and_client_wrapper`
 	//        We might want to fix this, however it is not critical.
 	//        >>>
 	let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
@@ -179,14 +179,14 @@ fn generate_bxa_endpoint_wrapper(
 	})
 }
 
-/// Generates the eth abi code in case of a provided endpoint and client.
+/// Generates the bxa abi code in case of a provided endpoint and client.
 fn generate_bxa_endpoint_and_client_wrapper(
 	intf: &items::Interface,
 	endpoint_name: &str,
 	client_name: &str,
 ) -> Result<proc_macro2::TokenStream> {
 
-	// FIXME: Code duplication with `generate_eth_endpoint_and_client_wrapper`
+	// FIXME: Code duplication with `generate_bxa_endpoint_and_client_wrapper`
 	//        We might want to fix this, however it is not critical.
 	//        >>>
 	let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
@@ -252,7 +252,7 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 					syn::ReturnType::Default => None,
 					syn::ReturnType::Type(_, _) => Some(
 						quote!{
-							let mut stream = bxa_abi::eth::Stream::new(&result);
+							let mut stream = bxa_abi::bxa::Stream::new(&result);
 							stream.pop().expect("failed decode call output")
 						}
 					),
@@ -270,7 +270,7 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 						payload.push((#hash_literal >> 8) as u8);
 						payload.push(#hash_literal as u8);
 
-						let mut sink = bxa_abi::eth::Sink::new(#argument_count_literal);
+						let mut sink = bxa_abi::bxa::Sink::new(#argument_count_literal);
 						#(#argument_push)*
 
 						sink.drain_to(&mut payload);
@@ -353,7 +353,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
 			quote! {
 				#check_value_if_payable
-				let mut stream = bxa_abi::eth::Stream::new(payload);
+				let mut stream = bxa_abi::bxa::Stream::new(payload);
 				self.inner.constructor(
 					#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
 				);
@@ -375,11 +375,11 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					Some(quote! {
 						#hash_literal => {
 							#check_value_if_payable
-							let mut stream = bxa_abi::eth::Stream::new(method_payload);
+							let mut stream = bxa_abi::bxa::Stream::new(method_payload);
 							let result = inner.#ident(
 								#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
 							);
-							let mut sink = bxa_abi::eth::Sink::new(#return_count_literal);
+							let mut sink = bxa_abi::bxa::Sink::new(#return_count_literal);
 							sink.push(result);
 							sink.finalize_panicking()
 						}
@@ -388,7 +388,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					Some(quote! {
 						#hash_literal => {
 							#check_value_if_payable
-							let mut stream = bxa_abi::eth::Stream::new(method_payload);
+							let mut stream = bxa_abi::bxa::Stream::new(method_payload);
 							inner.#ident(
 								#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
 							);
@@ -429,7 +429,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			}
 		}
 
-		impl<T: #name_ident> bxa_abi::eth::EndpointInterface for #endpoint_ident<T> {
+		impl<T: #name_ident> bxa_abi::bxa::EndpointInterface for #endpoint_ident<T> {
 			#[allow(unused_mut)]
 			#[allow(unused_variables)]
 			fn dispatch(&mut self, payload: &[u8]) -> Vec<u8> {

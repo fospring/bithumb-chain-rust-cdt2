@@ -85,7 +85,7 @@ fn balance_key(address: &Address) -> H256 {
     key
 }
 // Declares the dispatch and dispatch_ctor methods
-use bxa_abi::eth::EndpointInterface;
+use bxa_abi::bxa::EndpointInterface;
 
 #[no_mangle]
 pub fn call() {

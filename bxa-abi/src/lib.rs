@@ -16,7 +16,7 @@ extern crate hex_literal;
 #[allow(unused)]
 #[macro_use] extern crate alloc;
 
-pub mod eth;
+pub mod bxa;
 
 /// Custom types which AbiType supports
 pub mod types {
