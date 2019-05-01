@@ -347,19 +347,19 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 		}
 	}
 
-	let ctor_branch = intf.constructor().map(
-		|signature| {
-			let arg_types = signature.arguments.iter().map(|&(_, ref ty)| quote! { #ty });
-			let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
-			quote! {
-				#check_value_if_payable
-				let mut stream = bxa_abi::bxa::Stream::new(payload);
-				self.inner.constructor(
-					#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
-				);
-			}
-		}
-	);
+//	let ctor_branch = intf.constructor().map(
+//		|signature| {
+//			let arg_types = signature.arguments.iter().map(|&(_, ref ty)| quote! { #ty });
+//			let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
+//			quote! {
+//				#check_value_if_payable
+//				let mut stream = bxa_abi::bxa::Stream::new(payload);
+//				self.inner.constructor(
+//					#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
+//				);
+//			}
+//		}
+//	);
 
 	let branches: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
 		match *item {
@@ -450,11 +450,11 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 				}
 			}
 
-			#[allow(unused_variables)]
-			#[allow(unused_mut)]
-			fn dispatch_ctor(&mut self, payload: &[u8]) {
-				#ctor_branch
-			}
+//			#[allow(unused_variables)]
+//			#[allow(unused_mut)]
+//			fn dispatch_ctor(&mut self, payload: &[u8]) {
+//				#ctor_branch
+//			}
 		}
 	}
 }

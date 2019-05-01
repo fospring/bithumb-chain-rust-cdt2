@@ -25,7 +25,7 @@ lazy_static! {
 #[bxa_abi(TokenEndpoint, TokenClient)]
 pub trait TokenInterface {
     /// The constructor
-    fn constructor(&mut self, _total_supply: U256);
+//    fn constructor(&mut self, _total_supply: U256);
     /// Total amount of tokens
     #[constant]
     fn totalSupply(&mut self) -> U256;
@@ -42,10 +42,10 @@ pub trait TokenInterface {
 pub struct TokenContract;
 
 impl TokenInterface for TokenContract {
-    fn constructor(&mut self, total_supply: U256) {
-        // Set up the total supply for the token
-        bxa_ethereum::write(&TOTAL_SUPPLY_KEY, &total_supply.into());
-    }
+//    fn constructor(&mut self, total_supply: U256) {
+//        // Set up the total supply for the token
+//        bxa_ethereum::write(&TOTAL_SUPPLY_KEY, &total_supply.into());
+//    }
 
     fn totalSupply(&mut self) -> U256 {
         U256::from_big_endian(&bxa_ethereum::read(&TOTAL_SUPPLY_KEY))
@@ -94,8 +94,8 @@ pub fn call() {
     bxa_ethereum::ret(&endpoint.dispatch(&bxa_ethereum::input()));
 }
 
-#[no_mangle]
-pub fn deploy() {
-    let mut endpoint = TokenEndpoint::new(TokenContract{});
-    endpoint.dispatch_ctor(&bxa_ethereum::input());
-}
+//#[no_mangle]
+//pub fn deploy() {
+//    let mut endpoint = TokenEndpoint::new(TokenContract{});
+//    endpoint.dispatch_ctor(&bxa_ethereum::input());
+//}
