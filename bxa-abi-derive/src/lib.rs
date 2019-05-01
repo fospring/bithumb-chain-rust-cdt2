@@ -347,25 +347,11 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 		}
 	}
 
-//	let ctor_branch = intf.constructor().map(
-//		|signature| {
-//			let arg_types = signature.arguments.iter().map(|&(_, ref ty)| quote! { #ty });
-//			let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
-//			quote! {
-//				#check_value_if_payable
-//				let mut stream = bxa_abi::bxa::Stream::new(payload);
-//				self.inner.constructor(
-//					#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
-//				);
-//			}
-//		}
-//	);
-
 	let branches: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
 		match *item {
 			Item::Signature(ref signature)  => {
-				let hash_literal = syn::Lit::Int(
-					syn::LitInt::new(signature.hash as u64, syn::IntSuffix::U32, Span::call_site()));
+				let name =
+					syn::LitStr::new(&signature.name.to_string(), Span::call_site());
 				let ident = &signature.name;
 				let arg_types = signature.arguments.iter().map(|&(_, ref ty)| quote! { #ty });
 				let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
@@ -373,7 +359,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					let return_count_literal = syn::Lit::Int(
 						syn::LitInt::new(signature.return_types.len() as u64, syn::IntSuffix::Usize, Span::call_site()));
 					Some(quote! {
-						#hash_literal => {
+						#name => {
 							#check_value_if_payable
 							let mut stream = bxa_abi::bxa::Stream::new(method_payload);
 							let result = inner.#ident(
@@ -386,7 +372,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					})
 				} else {
 					Some(quote! {
-						#hash_literal => {
+						#name => {
 							#check_value_if_payable
 							let mut stream = bxa_abi::bxa::Stream::new(method_payload);
 							inner.#ident(
@@ -434,27 +420,18 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			#[allow(unused_variables)]
 			fn dispatch(&mut self, payload: &[u8]) -> Vec<u8> {
 				let inner = &mut self.inner;
-				if payload.len() < 4 {
-					panic!("Invalid abi invoke");
-				}
-				let method_id = ((payload[0] as u32) << 24)
+				let method_name = ((payload[0] as u32) << 24)
 					+ ((payload[1] as u32) << 16)
 					+ ((payload[2] as u32) << 8)
 					+ (payload[3] as u32);
 
 				let method_payload = &payload[4..];
 
-				match method_id {
+				match method_name.as_str() {
 					#(#branches,)*
 					_ => panic!("Invalid method signature"),
 				}
 			}
-
-//			#[allow(unused_variables)]
-//			#[allow(unused_mut)]
-//			fn dispatch_ctor(&mut self, payload: &[u8]) {
-//				#ctor_branch
-//			}
 		}
 	}
 }
