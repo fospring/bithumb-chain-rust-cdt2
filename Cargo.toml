@@ -6,6 +6,7 @@ edition = "2018"
 
 [workspace]
 members = [
+    "pwasm-std",
     "pwasm-abi",
     "pwasm-abi-derive",
     "pwasm-ethereum",

@@ -38,6 +38,10 @@
       <sourceFolder url="file://$MODULE_DIR$/examples/bxa/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/examples/bxa/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/examples/bxa/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/pwasm-std/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pwasm-std/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pwasm-std/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/pwasm-std/benches" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/examples/array/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/bxa/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/erc20/contract/target" />
@@ -46,6 +50,7 @@
       <excludeFolder url="file://$MODULE_DIR$/pwasm-abi-derive/target" />
       <excludeFolder url="file://$MODULE_DIR$/pwasm-abi/target" />
       <excludeFolder url="file://$MODULE_DIR$/pwasm-ethereum/target" />
+      <excludeFolder url="file://$MODULE_DIR$/pwasm-std/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

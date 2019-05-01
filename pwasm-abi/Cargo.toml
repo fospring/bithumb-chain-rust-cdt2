@@ -30,7 +30,8 @@ version = "1.2"
 default-features = false
 
 [dependencies.pwasm-std]
-version = "0.13"
+#version = "0.13"
+path="../pwasm-std"
 [dev-dependencies.hex-literal]
 version = "0.1"
 

@@ -27,7 +27,8 @@ version = "1"
 default-features = false
 
 [dependencies.pwasm-std]
-version = "0.13"
+#version = "0.13"
+path="../pwasm-std"
 
 [features]
 default = []
