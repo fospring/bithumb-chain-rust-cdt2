@@ -1,0 +1,23 @@
+[package]
+name = "bxa"
+version = "0.1.0"
+authors = ["fospring <fospring@outlook.com>"]
+
+[dependencies]
+pwasm-std = "0.13"
+#pwasm-ethereum = "0.8"
+#pwasm-abi = "0.2"
+#pwasm-abi-derive = "0.2"
+pwasm-ethereum = {path="../../pwasm-ethereum"}
+pwasm-abi = {path="../../pwasm-abi"}
+pwasm-abi-derive = {path="../../pwasm-abi-derive"}
+lazy_static = { version = "1.2.0", features = ["spin_no_std"] }
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[profile.release]
+panic = "abort"
+lto = true
+opt-level = "z"
