@@ -24,6 +24,10 @@ impl Sink {
 		self.preamble.push(b)
 	}
 
+	pub fn write_bytes(&mut self, data: &[u8]) {
+		self.preamble.extend_from_slice(data)
+	}
+
 	/// Consume `val` to the Sink
 	pub fn push<T: AbiType>(&mut self, val: T) {
 			val.encode(self)

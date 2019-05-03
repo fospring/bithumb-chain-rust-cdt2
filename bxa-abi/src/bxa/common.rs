@@ -149,8 +149,9 @@ impl AbiType for Address {
 
 impl AbiType for H256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let arr = <[u8; 32]>::decode(stream)?;
-		Ok(arr.into())
+		let mut hash = H256::zero();
+		stream.read_into(hash.as_mut())?;
+		Ok(hash)
 	}
 
 	fn encode(self, sink: &mut Sink) {
