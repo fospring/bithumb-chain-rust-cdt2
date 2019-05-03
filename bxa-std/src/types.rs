@@ -3,7 +3,8 @@
 // Constructed via `fixed_hash` crate macro.
 
 pub use uint::U256;
-
+use core::ops::{Deref, DerefMut};
+use core::mem;
 construct_fixed_hash!{
 	/// A 160 bits (20 bytes) hash type.
 	///
@@ -27,6 +28,12 @@ impl_fixed_hash_conversions!(H256, H160);
 /// 
 /// Addresses have 160 bytes length.
 pub type Address = H160;
+
+impl AsRef<Address> for Address {
+	fn as_ref(&self) -> &Address {
+		return self;
+	}
+}
 
 impl From<U256> for H256 {
 	fn from(uint: U256) -> H256 {

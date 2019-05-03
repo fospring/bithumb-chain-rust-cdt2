@@ -20,21 +20,13 @@ impl Sink {
 		}
 	}
 
-//	fn top_ptr(&self) -> usize {
-//		self.preamble.capacity() + self.heap.len()
-//	}
+	pub fn write_byte(&mut self, b: u8){
+		self.preamble.push(b)
+	}
 
 	/// Consume `val` to the Sink
 	pub fn push<T: AbiType>(&mut self, val: T) {
-//		if T::IS_FIXED {
 			val.encode(self)
-//		} else {
-//			let mut nested_sink = Sink::new(1);
-//			val.encode(&mut nested_sink);
-//			let top_ptr = self.top_ptr() as u32;
-//			nested_sink.drain_to(&mut self.heap);
-//			self.push(top_ptr);
-//		}
 	}
 
 	/// Drain current Sink to the target vector

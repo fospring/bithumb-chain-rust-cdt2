@@ -14,6 +14,7 @@ use bxa_abi::types::*;
 pub trait TokenInterface {
     fn boo(&mut self) -> u32;
     fn add(&mut self, x: u32, y: u32) -> u32;
+    fn addu64(&mut self, x: u64, y: u64) -> u64;
     fn s(&mut self) -> String;
 }
 
@@ -30,6 +31,14 @@ impl TokenInterface for TokenContract {
     }
 
     fn add(&mut self, x: u32, y: u32) -> u32 {
+        let TOTAL_SUPPLY_KEY = H256::from(
+            [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        );
+        bxa_ethereum::read(&TOTAL_SUPPLY_KEY);
+        x + y
+    }
+
+    fn addu64(&mut self, x: u64, y: u64) -> u64 {
         let TOTAL_SUPPLY_KEY = H256::from(
             [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         );

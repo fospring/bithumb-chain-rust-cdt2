@@ -60,6 +60,13 @@ impl<'a> Stream<'a> {
 		self.payload
 	}
 
+	/// read into
+	pub fn read_into(&mut self, arr: &mut [u8]) -> Result<(), Error> {
+		let bytes = self.read_bytes(arr.len())?;
+		arr.copy_from_slice(bytes);
+		Ok(())
+	}
+
 	/// read bytes
 	pub fn read_bytes(&mut self, len: usize) -> Result<&[u8], Error> {
 		if self.position + len > self.payload.len() {

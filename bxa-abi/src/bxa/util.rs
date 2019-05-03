@@ -15,14 +15,14 @@ pub fn pad_u32(value: u32) -> [u8; 4] {
 /// Converts u64 to right aligned array of 32 bytes.
 pub fn pad_u64(value: u64) -> [u8; 8] {
 	let mut padded = [0u8; 8];
-	padded[0] = (value >> 56) as u8;
-	padded[1] = (value >> 48) as u8;
-	padded[2] = (value >> 40) as u8;
-	padded[3] = (value >> 32) as u8;
-	padded[4] = (value >> 24) as u8;
-	padded[5] = (value >> 16) as u8;
-	padded[6] = (value >> 8) as u8;
-	padded[7] = value as u8;
+	padded[0] = value as u8;
+	padded[1] = (value >> 8) as u8;
+	padded[2] = (value >> 16) as u8;
+	padded[3] = (value >> 24) as u8;
+	padded[4] = (value >> 32) as u8;
+	padded[5] = (value >> 40) as u8;
+	padded[6] = (value >> 48) as u8;
+	padded[7] = (value >> 56) as u8;
 	padded
 }
 

@@ -62,6 +62,20 @@ macro_rules! assert_eq_core  { ($a:expr, $b:expr) => (assert_eq!($a, $b)) }
 macro_rules! assert_eq_core  { ($a:expr, $b:expr) => (assert!($a == $b, stringify!($a == $b))) }
 
 #[test]
+fn u8() {
+	let payload: &[u8; 2] = &[
+		0x45, 0x46
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: u8 = stream.pop::<u8>().unwrap();
+	assert_eq!(val, 69);
+	let val: u8 = stream.pop::<u8>().expect("argument decoding failed");
+	assert_eq!(val, 70);
+}
+
+#[test]
 fn simple() {
 	let payload: &[u8; 8] = &[
 		0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00
@@ -73,6 +87,39 @@ fn simple() {
 	assert_eq!(val, 69);
 	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
 	assert_eq!(val, 70);
+}
+
+#[test]
+fn u64() {
+	let payload: &[u8; 16] = &[
+		0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: u64 = stream.pop::<u64>().unwrap();
+	assert_eq!(val, 69);
+	let val: u64 = stream.pop::<u64>().expect("argument decoding failed");
+	assert_eq!(val, 70);
+}
+
+#[test]
+fn u256() {
+	let payload: &[u8; 36] = &[
+		0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x03, 0x61,0x64,0x64
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: U256 = stream.pop::<U256>().unwrap();
+	assert_eq!(val, U256::from(69));
+	let val: String = stream.pop::<String>().unwrap();
+	assert_eq!(val, "add".to_string());
 }
 
 #[test]
@@ -104,6 +151,26 @@ fn params() {
 	assert_eq!(val, 69);
 	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
 	assert_eq!(val, 69);
+}
+
+#[test]
+fn addr() {
+	let payload: &[u8; 24] = &[
+		0x03, 0x61, 0x64, 0x64,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x03, 0x61, 0x64, 0x64
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	// stream.pop::<Address>().unwrap();
+	let mut addr = stream.pop::<Address>().unwrap();
+	assert_eq!(addr.as_mut(), &[0x03, 0x61, 0x64, 0x64,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,]);
+	let val: String = stream.pop::<String>().unwrap();
+	assert_eq!(val, "add".to_string());
 }
 
 fn single_decode<T: super::AbiType>(payload: &[u8]) -> (T) {

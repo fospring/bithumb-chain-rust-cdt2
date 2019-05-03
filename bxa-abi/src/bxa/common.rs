@@ -2,11 +2,19 @@
 
 use lib::*;
 use super::{util, Stream, AbiType, Sink, Error};
-use super::types::{H160, H256, U256};
+use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
 
+impl AbiType for u8 {
+	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		stream.read_byte()
+	}
 
-// const IS_FIXED: bool = true;
+	fn encode(self, sink: &mut Sink) {
+		sink.write_byte(self);
+	}
+}
+
 impl AbiType for u32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let previous_position = stream.advance(4)?;
@@ -26,27 +34,21 @@ impl AbiType for u32 {
 
 }
 
-
-// const IS_FIXED: bool = true;
 impl AbiType for u64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let previous_position = stream.advance(8)?;
 
 		let slice = &stream.payload()[previous_position..stream.position()];
 
-		if !slice[..24].iter().all(|x| *x == 0) {
-			return Err(Error::InvalidU64)
-		}
-
 		let result =
-			((slice[24] as u64) << 56) +
-			((slice[25] as u64) << 48) +
-			((slice[26] as u64) << 40) +
-			((slice[27] as u64) << 32) +
-			((slice[28] as u64) << 24) +
-			((slice[29] as u64) << 16) +
-			((slice[30] as u64) << 8) +
-			 (slice[31] as u64);
+			(slice[0] as u64) +
+			((slice[1] as u64) << 8) +
+			((slice[2] as u64) << 16) +
+			((slice[3] as u64) << 24) +
+			((slice[4] as u64) << 32) +
+			((slice[5] as u64) << 40) +
+			((slice[6] as u64) << 48) +
+			((slice[7] as u64) << 56);
 
 		Ok(result)
 	}
@@ -57,36 +59,30 @@ impl AbiType for u64 {
 
 }
 
+//impl AbiType for Vec<u8> {
+//	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+//		let len = stream.read_len()? as usize;
+//
+//		let result = stream.payload()[stream.position()..stream.position() + len].to_vec();
+//		stream.advance(len)?;
+//
+//		Ok(result)
+//	}
+//
+//	fn encode(self, sink: &mut Sink) {
+//		let mut val = self;
+//		let len = val.len();
+//		if len % 32 != 0 {
+//			val.resize(len + (32 - len % 32), 0);
+//		}
+//		sink.push(len as u32);
+//		sink.preamble_mut().extend_from_slice(&val[..]);
+//	}
+//
+//}
 
-// const IS_FIXED: bool = false;
-impl AbiType for Vec<u8> {
-	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let len = u32::decode(stream)? as usize;
-
-		let result = stream.payload()[stream.position()..stream.position() + len].to_vec();
-		stream.advance(len)?;
-
-		Ok(result)
-	}
-
-	fn encode(self, sink: &mut Sink) {
-		let mut val = self;
-		let len = val.len();
-		if len % 32 != 0 {
-			val.resize(len + (32 - len % 32), 0);
-		}
-		sink.push(len as u32);
-		sink.preamble_mut().extend_from_slice(&val[..]);
-	}
-
-}
-
-
-// const IS_FIXED: bool = false;
 impl AbiType for String {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		// first is length
-		// let len = u32::decode(stream)? as usize;
 		let len = stream.read_len()? as usize;
 
 		let result = from_utf8(&stream.payload()[stream.position()..stream.position() + len])
@@ -110,8 +106,6 @@ impl AbiType for String {
 
 }
 
-
-// const IS_FIXED: bool = true;
 impl AbiType for bool {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let decoded = u32::decode(stream)?;
@@ -128,31 +122,28 @@ impl AbiType for bool {
 
 }
 
-
-// const IS_FIXED: bool = true;
 impl AbiType for U256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let previous = stream.advance(32)?;
 
 		Ok(
-			U256::from_big_endian(&stream.payload()[previous..stream.position()])
+			U256::from_little_endian(&stream.payload()[previous..stream.position()])
 		)
 	}
 
 	fn encode(self, sink: &mut Sink) {
 		let tail = sink.preamble_mut().len();
 		sink.preamble_mut().resize(tail + 32, 0);
-		self.to_big_endian(&mut sink.preamble_mut()[tail..tail+32]);
+		self.to_little_endian(&mut sink.preamble_mut()[tail..tail+32]);
 	}
 
 }
 
-
-// const IS_FIXED: bool = true;
-impl AbiType for H160 {
+impl AbiType for Address {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let arr = <H256>::decode(stream)?;
-		Ok(H160::from(arr).into())
+		let mut addr = Address::zero();
+		stream.read_into(addr.as_mut())?;
+		Ok(addr)
 	}
 
 	fn encode(self, sink: &mut Sink) {
@@ -170,12 +161,8 @@ impl AbiType for H256 {
 	fn encode(self, sink: &mut Sink) {
 		self.as_fixed_bytes().encode(sink)
 	}
-
-	// const IS_FIXED: bool = true;
 }
 
-
-// const IS_FIXED: bool = false;
 impl<T: AbiType> AbiType for Vec<T> {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let len = u32::decode(stream)? as usize;
@@ -199,12 +186,6 @@ impl<T: AbiType> AbiType for Vec<T> {
 // const IS_FIXED: bool = true;
 impl AbiType for i32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-
-//		let is_negative = stream.peek() & 0x80 != 0;
-//
-//		if !is_negative {
-//			return Ok(u32::decode(stream)? as i32);
-//		}
 
 		let previous_position = stream.advance(32)?;
 
@@ -233,12 +214,6 @@ impl AbiType for i32 {
 // const IS_FIXED: bool = true;
 impl AbiType for i64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-
-//		let is_negative = stream.peek() & 0x80 != 0;
-//
-//		if !is_negative {
-//			return Ok(u64::decode(stream)? as i64);
-//		}
 
 		let previous_position = stream.advance(32)?;
 
