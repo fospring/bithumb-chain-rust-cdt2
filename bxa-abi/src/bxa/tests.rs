@@ -318,6 +318,23 @@ fn addr() {
 	assert_eq!(&payload[..],sample);
 }
 
+#[test]
+fn u32slice() {
+	let payload: &[u8; 9] = &[
+		0x02, 0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: Vec<u32> = stream.pop::<Vec<u32>>().unwrap();
+	assert_eq!(val, vec![69_u32,70_u32]);
+
+	let mut sink = Sink::new(1);
+	let v1 = vec![69_u32,70_u32];
+	sink.push(v1);
+	assert_eq!(sink.preamble_mut(),&[0x02, 0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00]);
+}
+
 fn single_decode<T: super::AbiType>(payload: &[u8]) -> (T) {
 	let mut stream = super::Stream::new(payload);
 	stream.pop().expect("argument type 1 should be decoded")

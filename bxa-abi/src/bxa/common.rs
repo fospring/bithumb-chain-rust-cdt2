@@ -161,17 +161,16 @@ impl AbiType for H256 {
 
 impl<T: AbiType> AbiType for Vec<T> {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let len = u32::decode(stream)? as usize;
-		let mut result = Vec::with_capacity(len);
+		let len = stream.read_len()?;
+		let mut result = Vec::with_capacity(cmp::min(len, 1024) as usize);
 		for _ in 0..len {
-			result.push(stream.pop()?);
+			result.push(stream.pop::<T>()?);
 		}
 		Ok(result)
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		sink.push(self.len() as u32);
-
+		sink.write_len(self.len() as u32);
 		for member in self.into_iter() {
 			sink.push(member);
 		}

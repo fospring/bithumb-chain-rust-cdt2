@@ -1,7 +1,8 @@
 //! Sink module;
 
 use lib::*;
-use super::AbiType;
+// use super::AbiType;
+use super::{AbiType};
 use byteorder::{ByteOrder, LittleEndian};
 /// Sink for returning number of arguments
 pub struct Sink {
@@ -18,6 +19,10 @@ impl Sink {
 			preamble: Vec::with_capacity(32 * capacity),
 			heap: Vec::new(),
 		}
+	}
+
+	pub fn write<T: AbiType>(&mut self, val: T) {
+		val.encode(self)
 	}
 
 	pub fn write_byte(&mut self, b: u8){
