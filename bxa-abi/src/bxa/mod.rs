@@ -50,6 +50,10 @@ pub trait AbiType : Sized {
 
 }
 
+pub trait Encoder {
+	fn encode(&self, sink: &mut Sink);
+}
+
 /// Endpoint interface for contracts
 pub trait EndpointInterface {
 	/// Dispatch payload for regular method

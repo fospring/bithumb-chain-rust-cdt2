@@ -2,7 +2,7 @@
 
 use lib::*;
 use super::AbiType;
-
+use byteorder::{ByteOrder, LittleEndian};
 /// Sink for returning number of arguments
 pub struct Sink {
 	// capacity: usize,
@@ -26,6 +26,30 @@ impl Sink {
 
 	pub fn write_bytes(&mut self, data: &[u8]) {
 		self.preamble.extend_from_slice(data)
+	}
+
+	pub fn write_u16(&mut self, val: u16) {
+		let mut buf = [0; 2];
+		LittleEndian::write_u16(&mut buf, val);
+		self.write_bytes(&buf)
+	}
+
+	pub(crate) fn write_u32(&mut self, val: u32) {
+		let mut buf = [0; 4];
+		LittleEndian::write_u32(&mut buf, val);
+		self.write_bytes(&buf)
+	}
+
+	pub fn write_len(&mut self, val: u32) {
+		if val < 0xFE {
+			self.write_byte(val as u8);
+		} else if val < 0xFFFF {
+			self.write_byte(0xFE);
+			self.write_u16(val as u16);
+		} else {
+			self.write_byte(0xFF);
+			self.write_u32(val);
+		}
 	}
 
 	/// Consume `val` to the Sink

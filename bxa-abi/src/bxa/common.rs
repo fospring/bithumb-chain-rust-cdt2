@@ -1,7 +1,7 @@
 //! Common types encoding/decoding
 
 use lib::*;
-use super::{util, Stream, AbiType, Sink, Error};
+use super::{util, Stream, AbiType, Encoder, Sink, Error};
 use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
 
@@ -75,6 +75,12 @@ impl AbiType for u64 {
 	}
 
 }
+impl Encoder for &str {
+	fn encode(&self, sink: &mut Sink) {
+		sink.write_len(self.len() as u32);
+		sink.write_bytes(self.as_bytes());
+	}
+}
 
 impl AbiType for String {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -90,13 +96,7 @@ impl AbiType for String {
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		let mut val = self.into_bytes();
-		let len = val.len();
-		if len % 32 != 0 {
-			val.resize(len + (32 - len % 32), 0);
-		}
-		sink.push(len as u32);
-		sink.preamble_mut().extend_from_slice(&val[..]);
+		self.as_str().encode(sink);
 	}
 
 }
@@ -179,7 +179,6 @@ impl<T: AbiType> AbiType for Vec<T> {
 
 }
 
-// const IS_FIXED: bool = true;
 impl AbiType for i32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 
