@@ -223,6 +223,14 @@ fn boo() {
 	assert_eq!(val, false);
 	let val: bool = stream.pop::<bool>().expect("argument decoding failed");
 	assert_eq!(val, true);
+
+	let mut sink = Sink::new(1);
+	sink.push(true);
+	sink.push(false);
+	let sample: &[u8] = &[
+		0x01, 0x00];
+	let payload = sink.finalize_panicking();
+	assert_eq!(&payload[..],sample);
 }
 
 #[test]
