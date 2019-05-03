@@ -87,8 +87,8 @@ impl AbiType for Vec<u8> {
 impl AbiType for String {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		// first is length
-		let len = u32::decode(stream)? as usize;
-
+		// let len = u32::decode(stream)? as usize;
+		let len = stream.read_len()? as usize;
 
 		let result = from_utf8(&stream.payload()[stream.position()..stream.position() + len])
 			.map_err(|_err| Error::Other)?

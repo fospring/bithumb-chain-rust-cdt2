@@ -27,6 +27,8 @@ pub enum Error {
 	InvalidU64,
 	/// Unexpected end of the stream
 	UnexpectedEof,
+	/// Unexpected data the stream
+	UnexpectedData,
 	/// Invalid padding for fixed type
 	InvalidPadding,
 	/// Other error

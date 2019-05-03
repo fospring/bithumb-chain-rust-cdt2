@@ -2,6 +2,18 @@
 
 use lib::*;
 use super::{AbiType, Error};
+use byteorder::{ByteOrder, LittleEndian};
+
+
+fn varuint_encode_size(val: u32) -> usize {
+	if val < 0xfe {
+		1
+	} else if val <= 0xffff {
+		3
+	} else {
+		5
+	}
+}
 
 /// Stream interpretation of incoming payload
 pub struct Stream<'a> {
@@ -52,5 +64,45 @@ impl<'a> Stream<'a> {
 	/// Stream payload
 	pub fn payload(&self) -> &[u8] {
 		self.payload
+	}
+
+	pub fn read_bytes(&mut self, len: usize) -> Result<&[u8], Error> {
+		if self.position + len > self.payload.len() {
+			Err(Error::UnexpectedEof)
+		} else {
+			let bytes = &self.payload[self.position..self.position + len];
+			self.position += len;
+			Ok(bytes)
+		}
+	}
+
+	pub fn read_u16(&mut self) -> Result<u16, Error> {
+		Ok(LittleEndian::read_u16(self.read_bytes(2)?))
+	}
+
+	pub fn read_u32(&mut self) -> Result<u32, Error> {
+		Ok(LittleEndian::read_u32(self.read_bytes(4)?))
+	}
+
+	pub fn read_len(&mut self) -> Result<u32, Error> {
+		match self.read_byte() ? {
+			0xFE => self.read_u16().map(|v|(3, v as u32)),
+			0xFF => self.read_u32().map(|v|(5, v as u32)),
+			val => Ok((1, val as u32)),
+		}
+		.and_then(|(len,val)| match len == varuint_encode_size(val){
+				true => Ok(val),
+				false => Err(Error::UnexpectedData),
+		})
+	}
+
+	pub fn read_byte(&mut self) -> Result<u8, Error> {
+		if self.position >= self.payload.len() {
+			Err(Error::UnexpectedEof)
+		} else {
+			let b = self.payload[self.position];
+			self.advance(1);
+			Ok(b)
+		}
 	}
 }

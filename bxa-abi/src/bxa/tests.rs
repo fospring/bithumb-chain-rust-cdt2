@@ -77,8 +77,8 @@ fn simple() {
 
 #[test]
 fn string() {
-	let payload: &[u8; 7] = &[
-		0x03, 0x00, 0x00, 0x00,0x61,0x64,0x64
+	let payload: &[u8; 4] = &[
+		0x03, 0x61,0x64,0x64
 	];
 
 	let mut stream = Stream::new(&payload[..]);
