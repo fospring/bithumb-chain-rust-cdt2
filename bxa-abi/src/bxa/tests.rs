@@ -90,8 +90,8 @@ fn string() {
 
 #[test]
 fn params() {
-	let payload: &[u8; 15] = &[
-		0x03, 0x00, 0x00, 0x00,0x61,0x64,0x64,
+	let payload: &[u8; 12] = &[
+		0x03, 0x61, 0x64, 0x64,
 		0x45, 0x00, 0x00, 0x00,
 		0x45, 0x00, 0x00, 0x00
 	];
@@ -103,7 +103,7 @@ fn params() {
 	let val: u32 = stream.pop::<u32>().unwrap();
 	assert_eq!(val, 69);
 	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
-	assert_eq!(val, 70);
+	assert_eq!(val, 69);
 }
 
 fn single_decode<T: super::AbiType>(payload: &[u8]) -> (T) {

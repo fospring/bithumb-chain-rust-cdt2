@@ -65,7 +65,6 @@ impl AbiType for Vec<u8> {
 
 		let result = stream.payload()[stream.position()..stream.position() + len].to_vec();
 		stream.advance(len)?;
-		stream.finish_advance();
 
 		Ok(result)
 	}
@@ -95,7 +94,6 @@ impl AbiType for String {
 			.to_string();
 
 		stream.advance(len)?;
-		stream.finish_advance();
 
 		Ok(result)
 	}

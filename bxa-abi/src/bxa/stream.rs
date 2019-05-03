@@ -50,12 +50,6 @@ impl<'a> Stream<'a> {
 		Ok(old_position)
 	}
 
-	/// Finish current advance, advancing stream to the next 32 byte step
-	pub fn finish_advance(&mut self) {
-		if self.position % 32 > 0 { self.position += 32 - (self.position % 32); }
-	}
-
-
 	/// Peek next byte in stream
 	//	pub fn peek(&self) -> u8 {
 	//		self.payload[self.position]
