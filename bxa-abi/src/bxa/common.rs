@@ -103,7 +103,7 @@ impl AbiType for String {
 
 impl AbiType for bool {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let decoded = u32::decode(stream)?;
+		let decoded = u8::decode(stream)?;
 		match decoded {
 			0 => Ok(false),
 			1 => Ok(true),
@@ -112,7 +112,7 @@ impl AbiType for bool {
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		sink.preamble_mut().extend_from_slice(&util::pad_u32(match self { true => 1, false => 0})[..]);
+		sink.preamble_mut().extend_from_slice(&util::pad_u8(match self { true => 1, false => 0})[..]);
 	}
 
 }
@@ -205,8 +205,6 @@ impl AbiType for i32 {
 
 }
 
-
-// const IS_FIXED: bool = true;
 impl AbiType for i64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 
@@ -235,11 +233,8 @@ impl AbiType for i64 {
 	fn encode(self, sink: &mut Sink) {
 		sink.preamble_mut().extend_from_slice(&util::pad_i64(self)[..]);
 	}
-
 }
 
-
-// const IS_FIXED: bool = true;
 macro_rules! abi_type_fixed_impl {
 	($num: expr) => {
 		impl AbiType for [u8; $num] {
@@ -261,8 +256,6 @@ macro_rules! abi_type_fixed_impl {
 	}
 }
 
-
-// const IS_FIXED: bool = true;
 macro_rules! tuple_impls {
 	($(
 		$Tuple:ident {

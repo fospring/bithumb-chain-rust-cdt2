@@ -138,6 +138,20 @@ fn u256() {
 }
 
 #[test]
+fn boo() {
+	let payload: &[u8; 2] = &[
+		0x0, 0x1
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: bool = stream.pop::<bool>().unwrap();
+	assert_eq!(val, false);
+	let val: bool = stream.pop::<bool>().expect("argument decoding failed");
+	assert_eq!(val, true);
+}
+
+#[test]
 fn string() {
 	let payload: &[u8; 4] = &[
 		0x03, 0x61,0x64,0x64
