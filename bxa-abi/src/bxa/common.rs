@@ -142,7 +142,7 @@ impl AbiType for Address {
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		H256::from(self).encode(sink)
+		sink.write_bytes(self.as_ref())
 	}
 
 }

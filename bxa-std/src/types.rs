@@ -3,8 +3,6 @@
 // Constructed via `fixed_hash` crate macro.
 
 pub use uint::U256;
-use core::ops::{Deref, DerefMut};
-use core::mem;
 construct_fixed_hash!{
 	/// A 160 bits (20 bytes) hash type.
 	///
@@ -60,5 +58,11 @@ impl From<H256> for U256 {
 impl<'a> From<&'a H256> for U256 {
 	fn from(hash: &'a H256) -> U256 {
 		U256::from(hash.as_bytes())
+	}
+}
+
+impl Address {
+	pub fn new(data: [u8; 20]) -> Self {
+		H160(data)
 	}
 }
