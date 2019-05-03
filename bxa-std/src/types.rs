@@ -36,7 +36,7 @@ impl AsRef<Address> for Address {
 impl From<U256> for H256 {
 	fn from(uint: U256) -> H256 {
 		let mut hash = H256::zero();
-		uint.to_big_endian(hash.as_bytes_mut());
+		uint.to_little_endian(hash.as_bytes_mut());
 		hash
 	}
 }
@@ -64,5 +64,11 @@ impl<'a> From<&'a H256> for U256 {
 impl Address {
 	pub fn new(data: [u8; 20]) -> Self {
 		H160(data)
+	}
+}
+
+impl H256 {
+	pub fn new(data: [u8; 32]) -> Self {
+		H256(data)
 	}
 }
