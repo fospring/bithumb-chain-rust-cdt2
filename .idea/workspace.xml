@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c24009fb-cd41-4151-836d-0fbefa6fd3a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/bxa/bxa.wat" beforeDir="false" afterPath="$PROJECT_DIR$/examples/bxa/bxa.wat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,26 +17,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bxa-std/src/panic.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/common.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
+            <state relative-caret-position="36">
+              <caret line="2" selection-start-line="2" selection-start-column="2" selection-end-line="97" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/common.rs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="321">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
+            <state relative-caret-position="-208">
+              <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
               <folding>
                 <element signature="e#410#411#0" expanded="true" />
                 <element signature="e#431#432#0" expanded="true" />
@@ -57,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/mod.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="36">
+              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -66,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bxa-std/src/lib.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="52" selection-start-line="52" selection-start-column="2" selection-end-line="58" selection-end-column="21" />
+            <state relative-caret-position="71">
+              <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -75,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="103" column="24" lean-forward="true" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
+            <state relative-caret-position="647">
+              <caret line="92" column="31" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -85,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/bxa-abi/Cargo.toml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="343">
-              <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -186,12 +186,12 @@
         <option value="$PROJECT_DIR$/examples/bxa/src/lib.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/sink.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/Cargo.toml" />
-        <option value="$PROJECT_DIR$/bxa-std/src/lib.rs" />
-        <option value="$PROJECT_DIR$/bxa-std/src/panic.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/mod.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs" />
-        <option value="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" />
+        <option value="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" />
+        <option value="$PROJECT_DIR$/bxa-std/src/panic.rs" />
+        <option value="$PROJECT_DIR$/bxa-std/src/lib.rs" />
       </list>
     </option>
   </component>
@@ -414,9 +414,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_bxa__tests__string - 2019.05.03 at 16h 26m 17s.xml">
-      <configuration name="Test bxa::tests::string" configurationId="CargoCommandRunConfiguration" />
-    </history-entry>
     <history-entry file="Test_bxa__tests__string - 2019.05.03 at 16h 26m 37s.xml">
       <configuration name="Test bxa::tests::string" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
@@ -444,6 +441,9 @@
     <history-entry file="Test_bxa__tests__params - 2019.05.03 at 17h 38m 23s.xml">
       <configuration name="Test bxa::tests::params" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
+    <history-entry file="Test_bxa__tests__params - 2019.05.03 at 17h 56m 45s.xml">
+      <configuration name="Test bxa::tests::params" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="1116" y="59" width="1376" height="1336" extended-state="0" />
@@ -454,7 +454,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.45454547" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.45454547" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -462,7 +462,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32961586" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.44799346" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.44799346" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -721,17 +721,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bxa-std/src/lib.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="52" selection-start-line="52" selection-start-column="2" selection-end-line="58" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bxa-abi/Cargo.toml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
-          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -753,42 +746,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/common.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/mod.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        <state relative-caret-position="36">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bxa-std/src/panic.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-start-column="2" selection-end-line="97" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bxa-std/src/lib.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="103" column="24" lean-forward="true" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
+        <state relative-caret-position="647">
+          <caret line="92" column="31" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="-208">
+          <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
           <folding>
             <element signature="e#410#411#0" expanded="true" />
             <element signature="e#431#432#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/common.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
         </state>
       </provider>
     </entry>

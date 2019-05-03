@@ -60,6 +60,7 @@ impl<'a> Stream<'a> {
 		self.payload
 	}
 
+	/// read bytes
 	pub fn read_bytes(&mut self, len: usize) -> Result<&[u8], Error> {
 		if self.position + len > self.payload.len() {
 			Err(Error::UnexpectedEof)
@@ -70,14 +71,17 @@ impl<'a> Stream<'a> {
 		}
 	}
 
+	/// read u16
 	pub fn read_u16(&mut self) -> Result<u16, Error> {
 		Ok(LittleEndian::read_u16(self.read_bytes(2)?))
 	}
 
+	/// read u32
 	pub fn read_u32(&mut self) -> Result<u32, Error> {
 		Ok(LittleEndian::read_u32(self.read_bytes(4)?))
 	}
 
+	/// read lens
 	pub fn read_len(&mut self) -> Result<u32, Error> {
 		match self.read_byte() ? {
 			0xFE => self.read_u16().map(|v|(3, v as u32)),
@@ -90,13 +94,16 @@ impl<'a> Stream<'a> {
 		})
 	}
 
+	/// read byte as u8
 	pub fn read_byte(&mut self) -> Result<u8, Error> {
 		if self.position >= self.payload.len() {
 			Err(Error::UnexpectedEof)
 		} else {
 			let b = self.payload[self.position];
-			self.advance(1);
-			Ok(b)
+			match self.advance(1) {
+				Ok(_) => Ok(b),
+				Err(err) => Err(err),
+			}
 		}
 	}
 }
