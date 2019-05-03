@@ -2,6 +2,14 @@
 
 use lib::*;
 
+/// Converts u16 to right aligned array of 32 bytes.
+pub fn pad_u16(value: u16) -> [u8; 2] {
+	let mut padded = [0u8; 2];
+	padded[0] = value as u8;
+	padded[1] = (value >> 8) as u8;
+	padded
+}
+
 /// Converts u32 to right aligned array of 32 bytes.
 pub fn pad_u32(value: u32) -> [u8; 4] {
 	let mut padded = [0u8; 4];

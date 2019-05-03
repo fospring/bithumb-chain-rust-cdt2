@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c24009fb-cd41-4151-836d-0fbefa6fd3a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/sink.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/sink.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bxa-abi/src/bxa/util.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-abi/src/bxa/util.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bxa-std/src/types.rs" beforeDir="false" afterPath="$PROJECT_DIR$/bxa-std/src/types.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/common.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+            <state relative-caret-position="353">
+              <caret line="48" column="58" lean-forward="true" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
               <folding>
                 <element signature="e#245#246#0" expanded="true" />
                 <element signature="e#269#270#0" expanded="true" />
@@ -41,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/util.rs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+              <caret line="5" column="39" lean-forward="true" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -107,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="72" column="24" lean-forward="true" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
+            <state relative-caret-position="350">
+              <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -206,10 +203,10 @@
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/stream.rs" />
         <option value="$PROJECT_DIR$/bxa-std/src/types.rs" />
         <option value="$PROJECT_DIR$/examples/bxa/src/lib.rs" />
-        <option value="$PROJECT_DIR$/bxa-abi/src/bxa/util.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/sink.rs" />
-        <option value="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" />
         <option value="$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs" />
+        <option value="$PROJECT_DIR$/bxa-abi/src/bxa/common.rs" />
+        <option value="$PROJECT_DIR$/bxa-abi/src/bxa/util.rs" />
       </list>
     </option>
   </component>
@@ -363,7 +360,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Cargo Command.Test bxa::tests::u8">
+  <component name="RunManager" selected="Cargo Command.Test bxa::tests::u16">
     <configuration name="Test bxa::tests::addr (1)" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="test --package bxa-abi --lib bxa::tests::addr -- --exact" />
@@ -374,9 +371,9 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="Test bxa::tests::addr" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
-      <option name="channel" value="NIGHTLY" />
-      <option name="command" value="test --package bxa-abi --lib bxa::tests::addr -- --exact" />
+    <configuration name="Test bxa::tests::u16" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test --package bxa-abi --lib bxa::tests::u16 -- --exact" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="backtrace" value="SHORT" />
@@ -415,26 +412,23 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Cargo Command.Test bxa::tests::addr" />
       <item itemvalue="Cargo Command.Test bxa::tests::addr (1)" />
       <item itemvalue="Cargo Command.Test bxa::tests::u64" />
       <item itemvalue="Cargo Command.Test bxa::tests::u256" />
       <item itemvalue="Cargo Command.Test bxa::tests::u8" />
+      <item itemvalue="Cargo Command.Test bxa::tests::u16" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Cargo Command.Test bxa::tests::u16" />
         <item itemvalue="Cargo Command.Test bxa::tests::u8" />
         <item itemvalue="Cargo Command.Test bxa::tests::u256" />
         <item itemvalue="Cargo Command.Test bxa::tests::addr (1)" />
         <item itemvalue="Cargo Command.Test bxa::tests::u64" />
-        <item itemvalue="Cargo Command.Test bxa::tests::addr" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_bxa__tests__addr - 2019.05.03 at 18h 46m 06s.xml">
-      <configuration name="Test bxa::tests::addr" configurationId="CargoCommandRunConfiguration" />
-    </history-entry>
     <history-entry file="Test_bxa__tests__u64 - 2019.05.03 at 19h 31m 40s.xml">
       <configuration name="Test bxa::tests::u64" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
@@ -460,6 +454,9 @@
       <configuration name="Test bxa::tests::u8" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
     <history-entry file="Test_bxa__tests__u8 - 2019.05.03 at 20h 10m 04s.xml">
+      <configuration name="Test bxa::tests::u8" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_bxa__tests__u8 - 2019.05.03 at 20h 10m 15s.xml">
       <configuration name="Test bxa::tests::u8" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
   </component>
@@ -789,13 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/util.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/sink.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
@@ -811,10 +801,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/common.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+        <state relative-caret-position="353">
+          <caret line="48" column="58" lean-forward="true" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
           <folding>
             <element signature="e#245#246#0" expanded="true" />
             <element signature="e#269#270#0" expanded="true" />
@@ -824,10 +821,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/tests.rs">
+    <entry file="file://$PROJECT_DIR$/bxa-abi/src/bxa/util.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="72" column="24" lean-forward="true" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
+        <state relative-caret-position="90">
+          <caret line="5" column="39" lean-forward="true" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
         </state>
       </provider>
     </entry>

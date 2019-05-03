@@ -76,6 +76,21 @@ fn u8() {
 }
 
 #[test]
+fn u16() {
+	let payload: &[u8; 4] = &[
+		0x45, 0x00, 0x46, 0x00
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: u16 = stream.pop::<u16>().unwrap();
+	assert_eq!(val, 69);
+	let val: u16 = stream.pop::<u16>().expect("argument decoding failed");
+	assert_eq!(val, 70);
+}
+
+
+#[test]
 fn simple() {
 	let payload: &[u8; 8] = &[
 		0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00

@@ -31,6 +31,23 @@ impl AbiType for u32 {
 	fn encode(self, sink: &mut Sink) {
 		sink.preamble_mut().extend_from_slice(&util::pad_u32(self)[..]);
 	}
+}
+
+
+impl AbiType for u16 {
+	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		let previous_position = stream.advance(2)?;
+
+		let slice = &stream.payload()[previous_position..stream.position()];
+		let result = (slice[0] as u16) +
+			((slice[1] as u16) << 8);
+
+		Ok(result)
+	}
+
+	fn encode(self, sink: &mut Sink) {
+		sink.preamble_mut().extend_from_slice(&util::pad_u16(self)[..]);
+	}
 
 }
 
@@ -58,28 +75,6 @@ impl AbiType for u64 {
 	}
 
 }
-
-//impl AbiType for Vec<u8> {
-//	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-//		let len = stream.read_len()? as usize;
-//
-//		let result = stream.payload()[stream.position()..stream.position() + len].to_vec();
-//		stream.advance(len)?;
-//
-//		Ok(result)
-//	}
-//
-//	fn encode(self, sink: &mut Sink) {
-//		let mut val = self;
-//		let len = val.len();
-//		if len % 32 != 0 {
-//			val.resize(len + (32 - len % 32), 0);
-//		}
-//		sink.push(len as u32);
-//		sink.preamble_mut().extend_from_slice(&val[..]);
-//	}
-//
-//}
 
 impl AbiType for String {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
