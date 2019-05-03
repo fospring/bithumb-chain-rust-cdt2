@@ -12,7 +12,7 @@
 
 [package]
 name = "bxa-abi"
-version = "0.2.2"
+version = "0.1.0"
 exclude = ["tests/*", "derive/*"]
 description = "Rust WebAssembly Contracts Abi"
 readme = "README.md"
@@ -27,6 +27,8 @@ default-features = false
 
 [dependencies.bxa-std]
 path="../bxa-std"
+version = "0.1"
+# default-features = false
 [dev-dependencies.hex-literal]
 version = "0.1"
 

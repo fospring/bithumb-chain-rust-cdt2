@@ -252,7 +252,7 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 					syn::ReturnType::Default => None,
 					syn::ReturnType::Type(_, _) => Some(
 						quote!{
-							let mut stream = bxa_abi::bxa::Stream::new(&result);
+							// let mut stream = bxa_abi::bxa::Stream::new(&result);
 							stream.pop().expect("failed decode call output")
 						}
 					),
@@ -340,11 +340,12 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 		if is_payable {
 			return quote!{}
 		}
-		quote!{
-			if bxa_ethereum::value() > 0.into() {
-				panic!("Unable to accept value in non-payable constructor call");
-			}
-		}
+//		quote!{
+//			if bxa_ethereum::value() > 0.into() {
+//				panic!("Unable to accept value in non-payable constructor call");
+//			}
+//		}
+		quote!{}
 	}
 
 	let branches: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
@@ -361,9 +362,8 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					Some(quote! {
 						#name => {
 							#check_value_if_payable
-							let mut stream = bxa_abi::bxa::Stream::new(method_payload);
 							let result = inner.#ident(
-								#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
+								#(stream.pop::<#arg_types>().unwrap()),*
 							);
 							let mut sink = bxa_abi::bxa::Sink::new(#return_count_literal);
 							sink.push(result);
@@ -374,9 +374,8 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					Some(quote! {
 						#name => {
 							#check_value_if_payable
-							let mut stream = bxa_abi::bxa::Stream::new(method_payload);
 							inner.#ident(
-								#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
+								#(stream.pop::<#arg_types>().unwrap()),*
 							);
 							Vec::new()
 						}
@@ -420,16 +419,11 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 			#[allow(unused_variables)]
 			fn dispatch(&mut self, payload: &[u8]) -> Vec<u8> {
 				let inner = &mut self.inner;
-				let method_name = ((payload[0] as u32) << 24)
-					+ ((payload[1] as u32) << 16)
-					+ ((payload[2] as u32) << 8)
-					+ (payload[3] as u32);
-
-				let method_payload = &payload[4..];
-
+				let mut stream = bxa_abi::bxa::Stream::new(payload);
+				let method_name = stream.pop::<String>().unwrap();
 				match method_name.as_str() {
 					#(#branches,)*
-					_ => panic!("Invalid method signature"),
+					_ => panic!("Invalid method name"),
 				}
 			}
 		}

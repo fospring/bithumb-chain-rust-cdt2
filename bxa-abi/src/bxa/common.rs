@@ -5,20 +5,17 @@ use super::{util, Stream, AbiType, Sink, Error};
 use super::types::{H160, H256, U256};
 use bxa_std::str::from_utf8;
 
+
+// const IS_FIXED: bool = true;
 impl AbiType for u32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let previous_position = stream.advance(32)?;
+		let previous_position = stream.advance(4)?;
 
 		let slice = &stream.payload()[previous_position..stream.position()];
-
-		if !slice[..28].iter().all(|x| *x == 0) {
-			return Err(Error::InvalidU32)
-		}
-
-		let result = ((slice[28] as u32) << 24) +
-			((slice[29] as u32) << 16) +
-			((slice[30] as u32) << 8) +
-			(slice[31] as u32);
+		let result = (slice[0] as u32) +
+			((slice[1] as u32) << 8) +
+			((slice[2] as u32) << 16) +
+			((slice[3] as u32)<< 24);
 
 		Ok(result)
 	}
@@ -27,12 +24,13 @@ impl AbiType for u32 {
 		sink.preamble_mut().extend_from_slice(&util::pad_u32(self)[..]);
 	}
 
-	const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = true;
 impl AbiType for u64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let previous_position = stream.advance(32)?;
+		let previous_position = stream.advance(8)?;
 
 		let slice = &stream.payload()[previous_position..stream.position()];
 
@@ -57,9 +55,10 @@ impl AbiType for u64 {
 		sink.preamble_mut().extend_from_slice(&util::pad_u64(self)[..]);
 	}
 
-	const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = false;
 impl AbiType for Vec<u8> {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let len = u32::decode(stream)? as usize;
@@ -81,13 +80,15 @@ impl AbiType for Vec<u8> {
 		sink.preamble_mut().extend_from_slice(&val[..]);
 	}
 
-	const IS_FIXED: bool = false;
 }
 
+
+// const IS_FIXED: bool = false;
 impl AbiType for String {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		// first is length
 		let len = u32::decode(stream)? as usize;
+
 
 		let result = from_utf8(&stream.payload()[stream.position()..stream.position() + len])
 			.map_err(|_err| Error::Other)?
@@ -109,9 +110,10 @@ impl AbiType for String {
 		sink.preamble_mut().extend_from_slice(&val[..]);
 	}
 
-	const IS_FIXED: bool = false;
 }
 
+
+// const IS_FIXED: bool = true;
 impl AbiType for bool {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let decoded = u32::decode(stream)?;
@@ -126,9 +128,10 @@ impl AbiType for bool {
 		sink.preamble_mut().extend_from_slice(&util::pad_u32(match self { true => 1, false => 0})[..]);
 	}
 
-	const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = true;
 impl AbiType for U256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let previous = stream.advance(32)?;
@@ -144,9 +147,10 @@ impl AbiType for U256 {
 		self.to_big_endian(&mut sink.preamble_mut()[tail..tail+32]);
 	}
 
-	const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = true;
 impl AbiType for H160 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let arr = <H256>::decode(stream)?;
@@ -157,7 +161,6 @@ impl AbiType for H160 {
 		H256::from(self).encode(sink)
 	}
 
-	const IS_FIXED: bool = true;
 }
 
 impl AbiType for H256 {
@@ -170,9 +173,11 @@ impl AbiType for H256 {
 		self.as_fixed_bytes().encode(sink)
 	}
 
-	const IS_FIXED: bool = true;
+	// const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = false;
 impl<T: AbiType> AbiType for Vec<T> {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let len = u32::decode(stream)? as usize;
@@ -191,17 +196,17 @@ impl<T: AbiType> AbiType for Vec<T> {
 		}
 	}
 
-	const IS_FIXED: bool = false;
 }
 
+// const IS_FIXED: bool = true;
 impl AbiType for i32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 
-		let is_negative = stream.peek() & 0x80 != 0;
-
-		if !is_negative {
-			return Ok(u32::decode(stream)? as i32);
-		}
+//		let is_negative = stream.peek() & 0x80 != 0;
+//
+//		if !is_negative {
+//			return Ok(u32::decode(stream)? as i32);
+//		}
 
 		let previous_position = stream.advance(32)?;
 
@@ -224,17 +229,18 @@ impl AbiType for i32 {
 		sink.preamble_mut().extend_from_slice(&util::pad_i32(self)[..]);
 	}
 
-	const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = true;
 impl AbiType for i64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 
-		let is_negative = stream.peek() & 0x80 != 0;
-
-		if !is_negative {
-			return Ok(u64::decode(stream)? as i64);
-		}
+//		let is_negative = stream.peek() & 0x80 != 0;
+//
+//		if !is_negative {
+//			return Ok(u64::decode(stream)? as i64);
+//		}
 
 		let previous_position = stream.advance(32)?;
 
@@ -262,9 +268,10 @@ impl AbiType for i64 {
 		sink.preamble_mut().extend_from_slice(&util::pad_i64(self)[..]);
 	}
 
-	const IS_FIXED: bool = true;
 }
 
+
+// const IS_FIXED: bool = true;
 macro_rules! abi_type_fixed_impl {
 	($num: expr) => {
 		impl AbiType for [u8; $num] {
@@ -282,11 +289,12 @@ macro_rules! abi_type_fixed_impl {
 				sink.preamble_mut().extend_from_slice(&padded[..]);
 			}
 
-			const IS_FIXED: bool = true;
 		}
 	}
 }
 
+
+// const IS_FIXED: bool = true;
 macro_rules! tuple_impls {
 	($(
 		$Tuple:ident {
@@ -303,7 +311,6 @@ macro_rules! tuple_impls {
 					$(sink.push(self.$idx);)+
 				}
 
-				const IS_FIXED: bool = true;
 
 			}
 		)+

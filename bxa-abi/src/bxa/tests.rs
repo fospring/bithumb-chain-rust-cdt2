@@ -63,16 +63,47 @@ macro_rules! assert_eq_core  { ($a:expr, $b:expr) => (assert!($a == $b, stringif
 
 #[test]
 fn simple() {
-	let payload: &[u8; 32] = &[
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x45
+	let payload: &[u8; 8] = &[
+		0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00
 	];
 
 	let mut stream = Stream::new(&payload[..]);
 
-	let val: u32 = stream.pop().unwrap();
-
+	let val: u32 = stream.pop::<u32>().unwrap();
 	assert_eq!(val, 69);
+	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
+	assert_eq!(val, 70);
+}
+
+#[test]
+fn string() {
+	let payload: &[u8; 7] = &[
+		0x03, 0x00, 0x00, 0x00,0x61,0x64,0x64
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let str_val: String = stream.pop::<String>().unwrap();
+
+	assert_eq!(str_val, "add".to_string());
+}
+
+#[test]
+fn params() {
+	let payload: &[u8; 15] = &[
+		0x03, 0x00, 0x00, 0x00,0x61,0x64,0x64,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let str_val: String = stream.pop::<String>().unwrap();
+	assert_eq!(str_val, "add".to_string());
+	let val: u32 = stream.pop::<u32>().unwrap();
+	assert_eq!(val, 69);
+	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
+	assert_eq!(val, 70);
 }
 
 fn single_decode<T: super::AbiType>(payload: &[u8]) -> (T) {
@@ -178,7 +209,7 @@ fn sample2_decode() {
 #[test]
 fn negative_i32() {
 	let x: i32 = -1;
-	let mut sink = ::eth::Sink::new(1);
+	let mut sink = ::bxa::Sink::new(1);
 	sink.push(x);
 	let payload = sink.finalize_panicking();
 
@@ -187,7 +218,7 @@ fn negative_i32() {
 		&[0xff; 32]
 	);
 
-	let mut stream = ::eth::Stream::new(&payload[..]);
+	let mut stream = ::bxa::Stream::new(&payload[..]);
 	let value: i32 = stream.pop().expect("x failed to pop");
 	assert_eq!(value, x);
 }
@@ -195,7 +226,7 @@ fn negative_i32() {
 #[test]
 fn negative_i32_max() {
 	let x: i32 = i32::min_value();
-	let mut sink = ::eth::Sink::new(1);
+	let mut sink = ::bxa::Sink::new(1);
 	sink.push(x);
 	let payload = sink.finalize_panicking();
 
@@ -207,7 +238,7 @@ fn negative_i32_max() {
 		]
 	);
 
-	let mut stream = ::eth::Stream::new(&payload[..]);
+	let mut stream = ::bxa::Stream::new(&payload[..]);
 	let value: i32 = stream.pop().expect("x failed to pop");
 	assert_eq!(value, x);
 }
@@ -216,7 +247,7 @@ fn negative_i32_max() {
 fn padding_test_i32() {
 	let mut sample = [0xff; 32];
 	sample[0] = 0x80;
-	let mut stream = ::eth::Stream::new(&sample);
+	let mut stream = ::bxa::Stream::new(&sample);
 	assert_eq!(stream.pop::<i32>().unwrap_err(), Error::InvalidPadding);
 }
 
@@ -224,7 +255,7 @@ fn padding_test_i32() {
 fn padding_test_i64() {
 	let mut sample = [0xff; 32];
 	sample[0] = 0x80;
-	let mut stream = ::eth::Stream::new(&sample);
+	let mut stream = ::bxa::Stream::new(&sample);
 	assert_eq!(stream.pop::<i64>().unwrap_err(), Error::InvalidPadding);
 }
 
@@ -253,7 +284,7 @@ fn string_encode_decode() {
 		sample
 	);
 
-	let mut stream = ::eth::Stream::new(&payload[..]);
+	let mut stream = ::bxa::Stream::new(&payload[..]);
 	let output: String = stream.pop().expect("Test string failed to pop");
 	assert_eq!(test_string, output);
 }

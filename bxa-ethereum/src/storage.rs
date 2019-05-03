@@ -4,15 +4,15 @@
 use bxa_std::types::H256;
 
 extern "C" {
-	fn storage_read(key: *const u8, dst: *mut u8);
-	fn storage_write(key: *const u8, src: *const u8);
+	fn storage_read2(key: *const u8, dst: *mut u8);
+	fn storage_write2(key: *const u8, src: *const u8);
 }
 
 /// Performs read from the storage.
 pub fn read(key: &H256) -> [u8; 32] {
 	let mut dst = [0u8; 32];
 	unsafe {
-		storage_read(key.as_ptr(), dst.as_mut_ptr());
+		storage_read2(key.as_ptr(), dst.as_mut_ptr());
 	}
 	dst
 }
@@ -20,6 +20,6 @@ pub fn read(key: &H256) -> [u8; 32] {
 /// Performs write to the storage
 pub fn write(key: &H256, val: &[u8; 32]) {
 	unsafe {
-		storage_write(key.as_ptr(), val.as_ptr());
+		storage_write2(key.as_ptr(), val.as_ptr());
 	}
 }

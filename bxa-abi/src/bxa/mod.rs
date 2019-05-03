@@ -34,6 +34,9 @@ pub enum Error {
 }
 
 /// Abi type trait
+///
+/// Whether type has fixed length or not
+// const IS_FIXED: bool;
 pub trait AbiType : Sized {
 	/// Insantiate type from data stream
 	/// Should never be called manually! Use stream.pop()
@@ -43,8 +46,6 @@ pub trait AbiType : Sized {
 	/// Should never be called manually! Use sink.push(val)
 	fn encode(self, sink: &mut Sink);
 
-	/// Whether type has fixed length or not
-	const IS_FIXED: bool;
 }
 
 /// Endpoint interface for contracts

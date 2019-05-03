@@ -23,6 +23,7 @@ default-features = false
 
 [dependencies.bxa-std]
 path="../bxa-std"
+version = "0.1.0"
 
 [features]
 default = []

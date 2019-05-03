@@ -1,9 +1,5 @@
 #![cfg(not(feature = "std"))]
 
-extern "C" {
-	fn panic(payload_ptr: *const u8, payload_len: u32) -> !;
-}
-
 /// Overrides the default panic_fmt
 #[cfg(not(feature = "panic_with_msg"))]
 #[no_mangle]
@@ -99,4 +95,7 @@ extern "C" fn eh_personality() {}
 #[no_mangle]
 pub extern fn oom(_: crate::core::alloc::Layout) -> ! {
 	unsafe { crate::core::intrinsics::abort() }
+}
+extern "C" {
+	fn panic(payload_ptr: *const u8, payload_len: u32) -> !;
 }

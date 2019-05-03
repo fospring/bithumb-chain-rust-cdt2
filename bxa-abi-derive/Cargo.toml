@@ -12,7 +12,7 @@
 
 [package]
 name = "bxa-abi-derive"
-version = "0.2.2"
+version = "0.1.0"
 readme = "README.md"
 keywords = ["wasm", "parity", "webassembly", "blockchain", "abi"]
 categories = ["no-std", "embedded"]
