@@ -50,13 +50,13 @@ mod crypto;
 
 mod panic;
 
-//#[no_mangle]
-//#[cfg(not(feature = "std"))]
-//pub use panic::panic_fmt;
-//
-//#[no_mangle]
-//#[cfg(not(feature = "std"))]
-//pub use panic::oom;
+#[no_mangle]
+#[cfg(not(feature = "std"))]
+pub use panic::panic_fmt;
+
+#[no_mangle]
+#[cfg(not(feature = "std"))]
+pub use panic::oom;
 
 pub use crypto::keccak;
 

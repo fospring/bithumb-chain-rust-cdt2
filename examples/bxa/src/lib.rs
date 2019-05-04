@@ -17,7 +17,8 @@ pub trait TokenInterface {
     fn addu64(&mut self, x: u64, y: u64) -> u64;
     fn s(&mut self) -> String;
     fn add_u8(&mut self, x: u8, y: u8) -> u8;
-    fn add_u16(&mut self, x: u16, y: u16) -> u16;
+    fn add_i32(&mut self, x: i32, y: i32) -> i32;
+    fn add_i64(&mut self, x: i64, y: i64) -> i64;
 }
 
 pub struct TokenContract;
@@ -57,8 +58,12 @@ impl TokenInterface for TokenContract {
     fn add_u8(&mut self, x: u8, y: u8) -> u8 {
         x+y
     }
-    fn add_u16(&mut self, x: u16, y: u16) -> u16 {
-       x+y
+
+    fn add_i32(&mut self, x: i32, y: i32) -> i32{
+        x+y
+    }
+    fn add_i64(&mut self, x: i64, y: i64) -> i64{
+        x+y
     }
 }
 
