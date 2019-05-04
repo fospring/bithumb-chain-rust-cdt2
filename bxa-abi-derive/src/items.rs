@@ -42,18 +42,6 @@ pub struct Signature {
 	pub arguments: Vec<(syn::Pat, syn::Type)>,
 	/// The return type of this signature.
 	pub return_types: Vec<syn::Type>,
-	/// If this signature is constant.
-	/// 
-	/// # Note
-	/// 
-	/// A constant signature cannot mutate chain state.
-	pub is_constant: bool,
-	/// If this signature is payable.
-	/// 
-	/// # Note
-	/// 
-	/// Only a payable signature can be invoked with value.
-	pub is_payable: bool,
 }
 
 /// An item within a contract trait.
@@ -148,9 +136,7 @@ impl Interface {
 
 fn into_signature(
 	ident: syn::Ident,
-	method_sig: syn::MethodSig,
-	is_constant: bool,
-	is_payable: bool
+	method_sig: syn::MethodSig
 )
 	-> Signature
 {
@@ -176,8 +162,8 @@ fn into_signature(
 		canonical: canonical,
 		hash: hash,
 		return_types: return_types,
-		is_constant: is_constant,
-		is_payable: is_payable,
+//		is_constant: is_constant,
+//		is_payable: is_payable,
 	}
 }
 
@@ -210,24 +196,24 @@ impl Item {
 	}
 
 	fn signature_from_trait_item(method_trait_item: syn::TraitItemMethod) -> Self {
-		let constant = has_attribute(&method_trait_item.attrs, "constant");
-		let payable = has_attribute(&method_trait_item.attrs, "payable");
-		assert!(
-			!(constant && payable),
-			format!(
-				"Method {} cannot be constant and payable at the same time",
-				method_trait_item.sig.ident.to_string()
-			)
-		);
-		assert!(
-			!(method_trait_item.sig.ident.to_string() == "constructor" && constant),
-			"Constructor can't be constant"
-		);
+//		let constant = has_attribute(&method_trait_item.attrs, "constant");
+//		let payable = has_attribute(&method_trait_item.attrs, "payable");
+//		assert!(
+//			!(constant && payable),
+//			format!(
+//				"Method {} cannot be constant and payable at the same time",
+//				method_trait_item.sig.ident.to_string()
+//			)
+//		);
+//		assert!(
+//			!(method_trait_item.sig.ident.to_string() == "constructor" && constant),
+//			"Constructor can't be constant"
+//		);
 		Item::Signature(into_signature(
 			method_trait_item.sig.ident.clone(),
 			method_trait_item.sig,
-			constant,
-			payable,
+//			constant,
+//			payable,
 		))
 	}
 

@@ -336,17 +336,6 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 }
 
 fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
-	fn check_value_if_payable_toks(is_payable: bool) -> proc_macro2::TokenStream {
-		if is_payable {
-			return quote!{}
-		}
-//		quote!{
-//			if bxa_ethereum::value() > 0.into() {
-//				panic!("Unable to accept value in non-payable constructor call");
-//			}
-//		}
-		quote!{}
-	}
 
 	let branches: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
 		match *item {
@@ -355,13 +344,11 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					syn::LitStr::new(&signature.name.to_string(), Span::call_site());
 				let ident = &signature.name;
 				let arg_types = signature.arguments.iter().map(|&(_, ref ty)| quote! { #ty });
-				let check_value_if_payable = check_value_if_payable_toks(signature.is_payable);
 				if !signature.return_types.is_empty() {
 					let return_count_literal = syn::Lit::Int(
 						syn::LitInt::new(signature.return_types.len() as u64, syn::IntSuffix::Usize, Span::call_site()));
 					Some(quote! {
 						#name => {
-							#check_value_if_payable
 							let result = inner.#ident(
 								#(stream.pop::<#arg_types>().unwrap()),*
 							);
@@ -373,7 +360,6 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 				} else {
 					Some(quote! {
 						#name => {
-							#check_value_if_payable
 							inner.#ident(
 								#(stream.pop::<#arg_types>().unwrap()),*
 							);
