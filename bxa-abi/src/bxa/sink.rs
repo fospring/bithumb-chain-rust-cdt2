@@ -21,30 +21,36 @@ impl Sink {
 		}
 	}
 
+	/// write all type
 	pub fn write<T: AbiType>(&mut self, val: T) {
 		val.encode(self)
 	}
 
+	/// write a byte
 	pub fn write_byte(&mut self, b: u8){
 		self.preamble.push(b)
 	}
 
+	/// write bytes
 	pub fn write_bytes(&mut self, data: &[u8]) {
 		self.preamble.extend_from_slice(data)
 	}
 
+	/// write u16
 	pub fn write_u16(&mut self, val: u16) {
 		let mut buf = [0; 2];
 		LittleEndian::write_u16(&mut buf, val);
 		self.write_bytes(&buf)
 	}
 
+	/// write u32
 	pub(crate) fn write_u32(&mut self, val: u32) {
 		let mut buf = [0; 4];
 		LittleEndian::write_u32(&mut buf, val);
 		self.write_bytes(&buf)
 	}
 
+	/// write length
 	pub fn write_len(&mut self, val: u32) {
 		if val < 0xFE {
 			self.write_byte(val as u8);

@@ -62,12 +62,14 @@ impl<'a> From<&'a H256> for U256 {
 }
 
 impl Address {
+	/// new Address
 	pub fn new(data: [u8; 20]) -> Self {
 		H160(data)
 	}
 }
 
 impl H256 {
+	/// new Hash256
 	pub fn new(data: [u8; 32]) -> Self {
 		H256(data)
 	}

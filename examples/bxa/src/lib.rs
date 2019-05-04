@@ -16,6 +16,8 @@ pub trait TokenInterface {
     fn add(&mut self, x: u32, y: u32) -> u32;
     fn addu64(&mut self, x: u64, y: u64) -> u64;
     fn s(&mut self) -> String;
+    fn add_u8(&mut self, x: u8, y: u8) -> u8;
+    fn add_u16(&mut self, x: u16, y: u16) -> u16;
 }
 
 pub struct TokenContract;
@@ -50,6 +52,13 @@ impl TokenInterface for TokenContract {
         let mut hello = String::from("Hello,");
         hello.push(' ');
         hello
+    }
+
+    fn add_u8(&mut self, x: u8, y: u8) -> u8 {
+        x+y
+    }
+    fn add_u16(&mut self, x: u16, y: u16) -> u16 {
+       x+y
     }
 }
 

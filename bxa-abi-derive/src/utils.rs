@@ -101,6 +101,7 @@ fn push_canonicalized_vec(target: &mut String, args: &syn::PathArguments) {
 
 fn push_canonicalized_primitive(target: &mut String, seg: &syn::PathSegment) {
 	match seg.ident.to_string().as_str() {
+		"u8" => target.push_str("uint8"),
 		"u32" => target.push_str("uint32"),
 		"i32" => target.push_str("int32"),
 		"u64" => target.push_str("uint64"),

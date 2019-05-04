@@ -99,6 +99,24 @@ fn u16() {
 	assert_eq!(sink.preamble_mut(),&[0x45, 0x00, 0x46, 0x00]);
 }
 
+#[test]
+fn i32() {
+	let payload: &[u8; 8] = &[
+		0x09, 0x00, 0x00, 0x00, 0xf9, 0xff, 0xff, 0xff
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: i32 = stream.pop::<i32>().unwrap();
+	assert_eq!(val, 9_i32);
+	let val: i32 = stream.pop::<i32>().expect("argument decoding failed");
+	assert_eq!(val, -7_i32);
+
+	let mut sink = Sink::new(1);
+	sink.push(9_i32);
+	sink.push(-7_i32);
+	assert_eq!(sink.preamble_mut(),&[0x09, 0x00, 0x00, 0x00, 0xf9, 0xff, 0xff, 0xff]);
+}
 
 #[test]
 fn u32() {
@@ -138,6 +156,25 @@ fn u64() {
 	sink.push(70_u64);
 	assert_eq!(sink.preamble_mut(),&[0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]);
+}
+
+#[test]
+fn i64() {
+	let payload: &[u8; 16] = &[
+		0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0xf9, 0xff, 0xff, 0xff,0xff, 0xff, 0xff,0xff
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: i64 = stream.pop::<i64>().unwrap();
+	assert_eq!(val, 9_i64);
+	let val: i64 = stream.pop::<i64>().expect("argument decoding failed");
+	assert_eq!(val, -7_i64);
+
+	let mut sink = Sink::new(1);
+	sink.push(9_i64);
+	sink.push(-7_i64);
+	assert_eq!(sink.preamble_mut(),&[0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0xf9, 0xff, 0xff, 0xff,0xff, 0xff, 0xff,0xff]);
 }
 
 #[test]

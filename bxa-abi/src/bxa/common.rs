@@ -15,6 +15,43 @@ impl AbiType for u8 {
 	}
 }
 
+impl AbiType for u16 {
+	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		let previous_position = stream.advance(2)?;
+
+		let slice = &stream.payload()[previous_position..stream.position()];
+		let result = (slice[0] as u16) +
+			((slice[1] as u16) << 8);
+
+		Ok(result)
+	}
+
+	fn encode(self, sink: &mut Sink) {
+		sink.preamble_mut().extend_from_slice(&util::pad_u16(self)[..]);
+	}
+
+}
+
+impl AbiType for i32 {
+	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+
+		let previous_position = stream.advance(4)?;
+
+		let slice = &stream.payload()[previous_position..stream.position()];
+
+		let result = (slice[0] as u32) +
+			((slice[1] as u32) << 8) +
+			((slice[2] as u32) << 16) +
+			((slice[3] as u32) << 24);
+
+		Ok(result as i32)
+	}
+
+	fn encode(self, sink: &mut Sink) {
+		sink.preamble_mut().extend_from_slice(&util::pad_i32(self)[..]);
+	}
+}
+
 impl AbiType for u32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let previous_position = stream.advance(4)?;
@@ -33,22 +70,29 @@ impl AbiType for u32 {
 	}
 }
 
-
-impl AbiType for u16 {
+impl AbiType for i64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let previous_position = stream.advance(2)?;
+
+		let previous_position = stream.advance(8)?;
 
 		let slice = &stream.payload()[previous_position..stream.position()];
-		let result = (slice[0] as u16) +
-			((slice[1] as u16) << 8);
 
-		Ok(result)
+		let result =
+			(slice[0] as u64) +
+				((slice[1] as u64) << 8) +
+				((slice[2] as u64) << 16) +
+				((slice[3] as u64) << 24) +
+				((slice[4] as u64) << 32) +
+				((slice[5] as u64) << 40) +
+				((slice[6] as u64) << 48) +
+				((slice[7] as u64) << 56);
+
+		Ok(result as i64)
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		sink.preamble_mut().extend_from_slice(&util::pad_u16(self)[..]);
+		sink.preamble_mut().extend_from_slice(&util::pad_i64(self)[..]);
 	}
-
 }
 
 impl AbiType for u64 {
@@ -75,6 +119,7 @@ impl AbiType for u64 {
 	}
 
 }
+
 impl Encoder for &str {
 	fn encode(&self, sink: &mut Sink) {
 		sink.write_len(self.len() as u32);
@@ -176,62 +221,6 @@ impl<T: AbiType> AbiType for Vec<T> {
 		}
 	}
 
-}
-
-impl AbiType for i32 {
-	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-
-		let previous_position = stream.advance(32)?;
-
-		let slice = &stream.payload()[previous_position..stream.position()];
-
-		// only negative path here
-		if !slice[0..28].iter().all(|x| *x == 0xff) {
-			return Err(Error::InvalidPadding);
-		}
-
-		let result = ((slice[28] as u32) << 24) +
-			((slice[29] as u32) << 16) +
-			((slice[30] as u32) << 8) +
-			(slice[31] as u32);
-
-		Ok(result as i32)
-	}
-
-	fn encode(self, sink: &mut Sink) {
-		sink.preamble_mut().extend_from_slice(&util::pad_i32(self)[..]);
-	}
-
-}
-
-impl AbiType for i64 {
-	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-
-		let previous_position = stream.advance(32)?;
-
-		let slice = &stream.payload()[previous_position..stream.position()];
-
-		// only negative path here
-		if !slice[0..24].iter().all(|x| *x == 0xff) {
-			return Err(Error::InvalidPadding);
-		}
-
-		let result =
-			((slice[24] as u64) << 56) +
-			((slice[25] as u64) << 48) +
-			((slice[26] as u64) << 40) +
-			((slice[27] as u64) << 32) +
-			((slice[28] as u64) << 24) +
-			((slice[29] as u64) << 16) +
-			((slice[30] as u64) << 8) +
-			 (slice[31] as u64);
-
-		Ok(result as i64)
-	}
-
-	fn encode(self, sink: &mut Sink) {
-		sink.preamble_mut().extend_from_slice(&util::pad_i64(self)[..]);
-	}
 }
 
 macro_rules! abi_type_fixed_impl {
