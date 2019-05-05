@@ -28,8 +28,8 @@ version = "0.4"
 [dependencies.pwasm-libc]
 version = "0.2"
 
-[dependencies.tiny-keccak]
-version = "1"
+#[dependencies.tiny-keccak]
+#version = "1"
 
 [dependencies.uint]
 version = "0.5.0"

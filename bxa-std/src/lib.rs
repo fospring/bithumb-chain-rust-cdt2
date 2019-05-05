@@ -31,8 +31,6 @@ extern crate fixed_hash;
 
 extern crate uint;
 
-extern crate tiny_keccak;
-
 use byteorder::{LittleEndian, ByteOrder};
 
 pub use alloc::boxed::Box;
@@ -46,7 +44,7 @@ pub mod types;
 pub mod logger;
 
 // Crypto functions
-mod crypto;
+//mod crypto;
 
 mod panic;
 
@@ -58,7 +56,7 @@ pub use panic::panic_fmt;
 #[cfg(not(feature = "std"))]
 pub use panic::oom;
 
-pub use crypto::keccak;
+//pub use crypto::keccak;
 
 /// Read u32 using native endianness
 pub fn read_u32(slc: &[u8]) -> u32 {

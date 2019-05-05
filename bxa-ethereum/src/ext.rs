@@ -74,16 +74,9 @@ mod external {
 
 		pub fn origin(dest: *mut u8);
 
-//		pub fn elog(
-//			topic_ptr: *const u8,
-//			topic_count: u32,
-//			data_ptr: *const u8,
-//			data_len: u32
-//		);
-
 		pub fn elog(
 			topic_ptr: *const u8,
-			topic_count: u32
+			topic_len: u32
 		);
 
 		pub fn create(

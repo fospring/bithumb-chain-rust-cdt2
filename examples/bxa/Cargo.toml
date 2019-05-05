@@ -4,10 +4,6 @@ version = "0.1.0"
 authors = ["fospring <fospring@outlook.com>"]
 
 [dependencies]
-#pwasm-std = "0.13"
-#pwasm-ethereum = "0.8"
-#pwasm-abi = "0.2"
-#pwasm-abi-derive = "0.2"
 bxa-std = {path="../../bxa-std",version = "0.1"}
 bxa-ethereum = {path="../../bxa-ethereum",version = "0.1"}
 bxa-abi = {path="../../bxa-abi",version = "0.1"}

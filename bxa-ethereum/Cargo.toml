@@ -25,6 +25,10 @@ default-features = false
 path="../bxa-std"
 version = "0.1.0"
 
+[dependencies.bxa-abi]
+path="../bxa-abi"
+version = "0.1.0"
+
 [features]
 default = []
 kip4 = []

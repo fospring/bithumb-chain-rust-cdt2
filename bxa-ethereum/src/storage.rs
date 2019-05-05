@@ -1,25 +1,38 @@
 //! Storage extensions for pwasm-ethereum.
 //! Storage api is a key-value storage where both key and value are 32 bytes in len
-
-use bxa_std::types::H256;
-
+use bxa_std::{vec, Vec};
 extern "C" {
-	fn storage_read2(key: *const u8, dst: *mut u8);
-	fn storage_write2(key: *const u8, src: *const u8);
+	fn storage_read(key: *const u8, klen: u32, val: *mut u8, vlen: u32, offset: u32) -> u32;
+	fn storage_write(key: *const u8, klen: u32, src: *const u8, vlen: u32);
 }
 
 /// Performs read from the storage.
-pub fn read(key: &H256) -> [u8; 32] {
-	let mut dst = [0u8; 32];
-	unsafe {
-		storage_read2(key.as_ptr(), dst.as_mut_ptr());
+pub fn read(key: &[u8]) -> Option<Vec<u8>> {
+	const INITLEN: usize = 32;
+	let mut dst = vec![0; INITLEN];
+	let size = unsafe {
+		storage_read(key.as_ptr(), key.len() as u32,dst.as_mut_ptr(), dst.len() as u32, 0)
+	};
+
+	if size == core::u32::MAX {
+		return None
 	}
-	dst
+
+	let size = size as usize;
+	dst.resize(size, 0);
+	if size > INITLEN {
+		let dest = &mut dst[INITLEN..];
+		debug_assert!(dest.len() == size - INITLEN);
+		unsafe {
+			storage_read(key.as_ptr(), key.len() as u32, dest.as_mut_ptr(), dest.len() as u32, INITLEN as u32)
+		};
+	}
+	Some(dst)
 }
 
 /// Performs write to the storage
-pub fn write(key: &H256, val: &[u8; 32]) {
+pub fn write(key: &[u8], val: &[u8]) {
 	unsafe {
-		storage_write2(key.as_ptr(), val.as_ptr());
+		storage_write(key.as_ptr(), key.len() as u32, val.as_ptr(), val.len() as u32);
 	}
 }

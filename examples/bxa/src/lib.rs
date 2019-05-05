@@ -13,67 +13,36 @@ use bxa_ethereum as bxa;
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
-    fn boo(&mut self) -> u32;
-    fn add(&mut self, x: u32, y: u32) -> u32;
-    fn addu64(&mut self, x: u64, y: u64) -> u64;
-    fn s(&mut self) -> String;
+    fn boo(&mut self) -> bool;
     fn add_u8(&mut self, x: u8, y: u8) -> u8;
+    fn add_u32(&mut self, x: u32, y: u32) -> u32;
+    fn add_u64(&mut self, x: u64, y: u64) -> u64;
+    fn str_hello(&mut self) -> String;
     fn add_i32(&mut self, x: i32, y: i32) -> i32;
     fn add_i64(&mut self, x: i64, y: i64) -> i64;
-    fn transfer(&mut self, _to: Address, _amount: U256) -> bool;
+    fn add_u64_slice(&mut self,  arr_u64: Vec<u64>) -> u64;
+    fn init(&mut self, reciver: Address) -> U256;
+    fn transfer(&mut self,from: Address, _to: Address, _amount: U256) -> bool;
+    fn balance_of(&mut self,addr: Address) -> U256;
     #[event]
-    fn Transfer(&mut self, indexed_from: Address, indexed_to: Address, _value: U256);
-}
-
-// Reads balance by address
-fn read_balance_of(owner: &Address) -> U256 {
-    U256::from_little_endian(&bxa::read(&balance_key(owner)))
-}
-
-// Generates a balance key for some address.
-// Used to map balances with their owners.
-fn balance_key(address: &Address) -> H256 {
-    let mut key = H256::from(*address);
-    key.as_fixed_bytes_mut()[0] = 1; // just a naiive "namespace";
-    key
+    fn Transfer(&mut self, from: Address, to: Address, value: U256);
 }
 
 pub struct TokenContract;
 
 impl TokenInterface for TokenContract {
 
-    fn boo(&mut self) -> u32{
-        let TOTAL_SUPPLY_KEY = H256::from(
-            [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        );
-        bxa_ethereum::read(&TOTAL_SUPPLY_KEY);
-        10_u32
+    fn boo(&mut self) -> bool{true}
+    fn add_u8(&mut self, x: u8, y: u8) -> u8 {
+        x+y
     }
+    fn add_u32(&mut self, x: u32, y: u32) -> u32 {x + y}
+    fn add_u64(&mut self, x: u64, y: u64) -> u64 {x + y}
 
-    fn add(&mut self, x: u32, y: u32) -> u32 {
-        let TOTAL_SUPPLY_KEY = H256::from(
-            [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        );
-        bxa_ethereum::read(&TOTAL_SUPPLY_KEY);
-        x + y
-    }
-
-    fn addu64(&mut self, x: u64, y: u64) -> u64 {
-        let TOTAL_SUPPLY_KEY = H256::from(
-            [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        );
-        bxa_ethereum::read(&TOTAL_SUPPLY_KEY);
-        x + y
-    }
-
-    fn s(&mut self) -> String {
+    fn str_hello(&mut self) -> String {
         let mut hello = String::from("Hello,");
         hello.push(' ');
         hello
-    }
-
-    fn add_u8(&mut self, x: u8, y: u8) -> u8 {
-        x+y
     }
 
     fn add_i32(&mut self, x: i32, y: i32) -> i32{
@@ -82,21 +51,39 @@ impl TokenInterface for TokenContract {
     fn add_i64(&mut self, x: i64, y: i64) -> i64{
         x+y
     }
-    fn transfer(&mut self, to: Address, amount: U256) -> bool {
-        let sender = bxa::sender();
-        let senderBalance = read_balance_of(&sender);
-        let recipientBalance = read_balance_of(&to);
-        if amount == 0.into() || senderBalance < amount || to == sender {
+
+    fn add_u64_slice(&mut self, arr_u64: Vec<u64>) -> u64 {
+        let mut result = 0_u64;
+        for i in arr_u64 {
+            result = result + i
+        }
+        result
+    }
+
+    fn init(&mut self, reciver: Address) -> U256 {
+        bxa::put(reciver, U256::from(1000000));
+        let issue_balance = bxa::get(reciver).unwrap_or(U256::zero());
+        issue_balance
+    }
+
+    fn transfer(&mut self, from: Address, to: Address, amount: U256) -> bool {
+        let senderBalance: U256 = bxa::get(from).unwrap_or_default();
+        let recipientBalance: U256 = bxa::get(to).unwrap_or_default();
+        if amount == 0.into() || senderBalance < amount || to == from {
             false
         } else {
             let new_sender_balance = senderBalance - amount;
             let new_recipient_balance = recipientBalance + amount;
-            // TODO: impl From<U256> for H256 makes convertion to big endian. Could be optimized
-            bxa::write(&balance_key(&sender), &new_sender_balance.into());
-            bxa::write(&balance_key(&to), &new_recipient_balance.into());
-            self.Transfer(sender, to, amount);
+            bxa::put(from, new_sender_balance);
+            bxa::put(to, new_recipient_balance);
+            self.Transfer(from, to, amount);
             true
         }
+    }
+
+    fn balance_of(&mut self, addr: Address) -> U256 {
+        let balance = bxa::get(addr).unwrap_or(U256::zero());
+        balance
     }
 }
 
