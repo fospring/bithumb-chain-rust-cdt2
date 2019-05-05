@@ -1,6 +1,6 @@
 # bxa-rust-cdt
 
-Rust contract development tool chain for BXA chain.  
+Rust contract development Toolkit for BXA chain.  
 Modify from [paritytech](https://github.com/paritytech)'s project: pwasm-std、pwasm-abi、pwasm-abi-derive、pwasm-ethereum
 
 ## Install development environment 
