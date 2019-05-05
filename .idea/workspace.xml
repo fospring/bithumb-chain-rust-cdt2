@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c24009fb-cd41-4151-836d-0fbefa6fd3a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,15 +56,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bxa-ethereum/src/database.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/bxa/src/lib.rs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="609">
@@ -91,14 +82,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="432">
-                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              <first_editor relative-caret-position="414">
+                <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -213,6 +213,7 @@
         <option value="$PROJECT_DIR$/bxa-ethereum/src/ext.rs" />
         <option value="$PROJECT_DIR$/examples/bxa/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -232,59 +233,6 @@
             <path>
               <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
               <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="bxa-abi" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="bxa-abi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="bxa-abi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="bxa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-              <item name="bxa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="json" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="wasm32-unknown-unknown" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bxa-rust-cdt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bxa-rust-cdt" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="wasm32-unknown-unknown" type="462c0819:PsiDirectoryNode" />
-              <item name="release" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -442,7 +390,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.328879" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.39346695" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30809206" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -552,13 +500,6 @@
             <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -832,13 +773,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/bxa/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/bxa/.gitignore" />
     <entry file="file://$PROJECT_DIR$/target/json/TokenInterface.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -881,10 +816,17 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="432">
-            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <first_editor relative-caret-position="414">
+            <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
         </state>
       </provider>
     </entry>
