@@ -2,7 +2,7 @@
 members = [
     "bxa-std",
     "bxa-abi",
-    "bxa-ethereum",
+    "bxa-api",
     "bxa-abi-derive",
     "examples/bxa",
 ]

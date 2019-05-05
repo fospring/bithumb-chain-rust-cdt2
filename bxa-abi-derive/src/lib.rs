@@ -12,9 +12,7 @@ extern crate syn;
 #[macro_use]
 extern crate quote;
 
-extern crate byteorder;
 extern crate serde_json;
-extern crate tiny_keccak;
 
 #[macro_use(construct_fixed_hash)]
 extern crate fixed_hash;
@@ -169,7 +167,7 @@ fn generate_bxa_endpoint_wrapper(
 		#intf
 		#[allow(non_snake_case)]
 		mod #mod_name_ident {
-			extern crate bxa_ethereum;
+			extern crate bxa_api;
 			extern crate bxa_abi;
 			use bxa_abi::types::{H160, H256, U256, Address, Vec, String};
 			use super::#name_ident_use;
@@ -203,7 +201,7 @@ fn generate_bxa_endpoint_and_client_wrapper(
 		#intf
 		#[allow(non_snake_case)]
 		mod #mod_name_ident {
-			extern crate bxa_ethereum;
+			extern crate bxa_api;
 			extern crate bxa_abi;
 			use bxa_abi::types::{H160, H256, U256, Address, Vec, String};
 			use super::#name_ident_use;
@@ -231,8 +229,6 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 	let calls: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
 		match *item {
 			Item::Signature(ref signature)  => {
-				let hash_literal = syn::Lit::Int(
-					syn::LitInt::new(signature.hash as u64, syn::IntSuffix::U32, Span::call_site()));
 				let argument_push: Vec<proc_macro2::TokenStream> = utils::iter_signature(&signature.method_sig)
 					.map(|(pat, _)| quote! { sink.push(#pat); })
 					.collect();
@@ -265,10 +261,6 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 						#![allow(unused_mut)]
 						#![allow(unused_variables)]
 						let mut payload = Vec::with_capacity(4 + #argument_count_literal * 32);
-						payload.push((#hash_literal >> 24) as u8);
-						payload.push((#hash_literal >> 16) as u8);
-						payload.push((#hash_literal >> 8) as u8);
-						payload.push(#hash_literal as u8);
 
 						let mut sink = bxa_abi::bxa::Sink::new(#argument_count_literal);
 						#(#argument_push)*
@@ -277,7 +269,7 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 
 						#result_instance
 
-						bxa_ethereum::call(self.gas.unwrap_or(200000), &self.address, self.value.clone().unwrap_or(U256::zero()), &payload, &mut result[..])
+						bxa_api::call(self.gas.unwrap_or(200000), &self.address, self.value.clone().unwrap_or(U256::zero()), &payload, &mut result[..])
 							.expect("Call failed; todo: allow handling inside contracts");
 
 						#result_pop

@@ -36,8 +36,6 @@ pub struct Signature {
 	pub canonical: String,
 	/// The parameter information of this signature.
 	pub method_sig: syn::MethodSig,
-	/// The function selector hash (4 bytes) of this signature.
-	pub hash: u32,
 	/// The arguments of this signature.
 	pub arguments: Vec<(syn::Pat, syn::Type)>,
 	/// The return type of this signature.
@@ -153,14 +151,12 @@ fn into_signature(
 		},
 	};
 	let canonical = utils::canonicalize_fn(&ident, &method_sig);
-	let hash = utils::function_selector(&canonical);
 
 	Signature {
 		name: ident,
 		arguments: arguments,
 		method_sig: method_sig,
 		canonical: canonical,
-		hash: hash,
 		return_types: return_types,
 	}
 }
@@ -233,7 +229,7 @@ impl quote::ToTokens for Item {
 								#(sink.push(#data_pats));*;
 								let payload = sink.finalize_panicking();
 
-								::bxa_ethereum::log(&payload);
+								::bxa_api::log(&payload);
 							}
 
 

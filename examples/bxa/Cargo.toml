@@ -5,7 +5,7 @@ authors = ["fospring <fospring@outlook.com>"]
 
 [dependencies]
 bxa-std = {path="../../bxa-std",version = "0.1"}
-bxa-ethereum = {path="../../bxa-ethereum",version = "0.1"}
+bxa-api = {path="../../bxa-api",version = "0.1"}
 bxa-abi = {path="../../bxa-abi",version = "0.1"}
 bxa-abi-derive = {path="../../bxa-abi-derive",version = "0.1"}
 lazy_static = { version = "1.2.0", features = ["spin_no_std"] }

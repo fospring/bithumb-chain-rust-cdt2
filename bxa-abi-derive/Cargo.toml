@@ -22,9 +22,6 @@ panic = "abort"
 [lib]
 name = "bxa_abi_derive"
 proc-macro = true
-[dependencies.byteorder]
-version = "1.2.3"
-default-features = false
 
 [dependencies.fixed-hash]
 version = "0.3.0"
@@ -48,7 +45,3 @@ version = "1.0.24"
 [dependencies.syn]
 version = "0.15.12"
 features = ["full", "extra-traits"]
-
-[dependencies.tiny-keccak]
-version = "1.4.2"
-default-features = false

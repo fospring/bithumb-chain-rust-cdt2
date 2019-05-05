@@ -3,13 +3,13 @@
 #![feature(proc_macro_hygiene)]
 
 extern crate bxa_std;
-extern crate bxa_ethereum;
+extern crate bxa_api;
 extern crate bxa_abi;
 extern crate bxa_abi_derive;
 
 use bxa_abi_derive::bxa_abi;
 use bxa_abi::types::*;
-use bxa_ethereum as bxa;
+use bxa_api as bxa;
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
@@ -92,5 +92,5 @@ use bxa_abi::bxa::EndpointInterface;
 #[no_mangle]
 pub fn call() {
     let mut endpoint = TokenEndpoint::new(TokenContract{});
-    bxa_ethereum::ret(&endpoint.dispatch(&bxa_ethereum::input()));
+    bxa_api::ret(&endpoint.dispatch(&bxa_api::input()));
 }
