@@ -13,6 +13,7 @@ use bxa_api as bxa;
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
+    fn constructor(&mut self, receiver: Address, total_supply: U256);
     fn boo(&mut self) -> bool;
     fn add_u8(&mut self, x: u8, y: u8) -> u8;
     fn add_u32(&mut self, x: u32, y: u32) -> u32;
@@ -31,7 +32,12 @@ pub trait TokenInterface {
 pub struct TokenContract;
 
 impl TokenInterface for TokenContract {
+    /// The constructor
+    fn constructor(&mut self, receiver: Address, total_supply: U256) {
+        // Set up the total supply for the token
 
+        bxa::put(receiver, total_supply);
+    }
     fn boo(&mut self) -> bool{true}
     fn add_u8(&mut self, x: u8, y: u8) -> u8 {
         x+y
@@ -93,4 +99,10 @@ use bxa_abi::bxa::EndpointInterface;
 pub fn call() {
     let mut endpoint = TokenEndpoint::new(TokenContract{});
     bxa_api::ret(&endpoint.dispatch(&bxa_api::input()));
+}
+
+#[no_mangle]
+pub fn deploy() {
+    let mut endpoint = TokenEndpoint::new(TokenContract{});
+    endpoint.dispatch_ctor(&bxa_api::input());
 }

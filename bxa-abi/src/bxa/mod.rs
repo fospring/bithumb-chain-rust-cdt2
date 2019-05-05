@@ -58,4 +58,7 @@ pub trait Encoder {
 pub trait EndpointInterface {
 	/// Dispatch payload for regular method
 	fn dispatch(&mut self, payload: &[u8]) -> ::lib::Vec<u8>;
+
+	/// Dispatch constructor payload
+	fn dispatch_ctor(&mut self, payload: &[u8]);
 }

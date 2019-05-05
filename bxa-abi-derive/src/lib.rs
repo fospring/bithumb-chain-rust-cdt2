@@ -329,6 +329,18 @@ fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro
 
 fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
 
+	let ctor_branch = intf.constructor().map(
+		|signature| {
+			let arg_types = signature.arguments.iter().map(|&(_, ref ty)| quote! { #ty });
+			quote! {
+				let mut stream = bxa_abi::bxa::Stream::new(payload);
+				self.inner.constructor(
+					#(stream.pop::<#arg_types>().expect("argument decoding failed")),*
+				);
+			}
+		}
+	);
+
 	let branches: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
 		match *item {
 			Item::Signature(ref signature)  => {
@@ -403,6 +415,12 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 					#(#branches,)*
 					_ => panic!("Invalid method name"),
 				}
+			}
+
+			#[allow(unused_variables)]
+			#[allow(unused_mut)]
+			fn dispatch_ctor(&mut self, payload: &[u8]) {
+				#ctor_branch
 			}
 		}
 	}
