@@ -162,8 +162,6 @@ fn into_signature(
 		canonical: canonical,
 		hash: hash,
 		return_types: return_types,
-//		is_constant: is_constant,
-//		is_payable: is_payable,
 	}
 }
 
@@ -178,10 +176,6 @@ fn has_attribute(attrs: &[syn::Attribute], name: &str) -> bool {
 
 impl Item {
 	fn event_from_trait_item(method_sig: syn::MethodSig) -> Self {
-		assert!(
-			method_sig.ident != "constructor",
-			"The constructor can't be an event"
-		);
 		let (indexed, non_indexed) = utils::iter_signature(&method_sig)
 			.partition(|&(ref pat, _)| quote! { #pat }.to_string().starts_with("indexed_"));
 		let canonical = utils::canonicalize_fn(&method_sig.ident, &method_sig);
@@ -196,24 +190,9 @@ impl Item {
 	}
 
 	fn signature_from_trait_item(method_trait_item: syn::TraitItemMethod) -> Self {
-//		let constant = has_attribute(&method_trait_item.attrs, "constant");
-//		let payable = has_attribute(&method_trait_item.attrs, "payable");
-//		assert!(
-//			!(constant && payable),
-//			format!(
-//				"Method {} cannot be constant and payable at the same time",
-//				method_trait_item.sig.ident.to_string()
-//			)
-//		);
-//		assert!(
-//			!(method_trait_item.sig.ident.to_string() == "constructor" && constant),
-//			"Constructor can't be constant"
-//		);
 		Item::Signature(into_signature(
 			method_trait_item.sig.ident.clone(),
 			method_trait_item.sig,
-//			constant,
-//			payable,
 		))
 	}
 
@@ -244,32 +223,20 @@ impl quote::ToTokens for Item {
 						name,
 						method_sig,
 						{
-							let keccak = utils::keccak(&event.canonical.as_bytes());
-							let hash_bytes = keccak.as_ref().iter().map(|b| {
-								syn::Lit::Int(syn::LitInt::new(*b as u64, syn::IntSuffix::U8, Span::call_site() ))
-							});
-
-							let indexed_pats = event.indexed.iter()
-								.map(|&(ref pat, _)| pat);
-
+							let arg_name = event.indexed.iter().map(|&(ref pat, _)| quote!{ #pat});
 							let data_pats = event.data.iter()
 								.map(|&(ref pat, _)| pat);
-
-							let data_pats_count_lit = syn::Lit::Int(
-								syn::LitInt::new(event.data.len() as u64, syn::IntSuffix::Usize, Span::call_site()));
-
 							quote! {
-								let topics = &[
-									[#(#hash_bytes),*].into(),
-									#(::bxa_abi::bxa::AsLog::as_log(&#indexed_pats)),*
-								];
+								let mut sink = ::bxa_abi::bxa::Sink::new(4);
+								#(sink.push(#arg_name));*;
 
-								let mut sink = ::bxa_abi::bxa::Sink::new(#data_pats_count_lit);
 								#(sink.push(#data_pats));*;
 								let payload = sink.finalize_panicking();
 
-								::bxa_ethereum::log(topics, &payload);
+								::bxa_ethereum::log(&payload);
 							}
+
+
 						}
 					)
 				]);
