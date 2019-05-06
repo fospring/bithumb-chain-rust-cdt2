@@ -157,22 +157,3 @@ pub fn canonicalize_type(ty: &syn::Type) -> String {
 	result
 }
 
-/// Returns the canonicalized string representation for the function
-/// with the given name `name` and method signature `method_sig`.
-/// 
-/// # Note
-/// 
-/// The result can be used by `function_selector` in order to retrieve
-/// the function selector for the associated function.
-pub fn canonicalize_fn(name: &syn::Ident, method_sig: &syn::MethodSig) -> String {
-	let mut s = String::new();
-	s.push_str(&name.to_string());
-	s.push('(');
-	let total_len = method_sig.decl.inputs.len();
-	for (i, (_, ty)) in iter_signature(method_sig).enumerate() {
-		push_canonicalized_type(&mut s, &ty);
-		if i != total_len-2 { s.push(','); }
-	}
-	s.push(')');
-	s
-}

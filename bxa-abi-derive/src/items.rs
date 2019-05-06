@@ -10,7 +10,7 @@ pub struct Event {
 	pub name: syn::Ident,
 	/// The canonalized string representation used by the keccak hash
 	/// in order to retrieve the first 4 bytes required upon calling.
-	pub canonical: String,
+	// pub canonical: String,
 	/// The signature of the event.
 	pub method_sig: syn::MethodSig,
 	/// Indexed parameters.
@@ -33,7 +33,7 @@ pub struct Signature {
 	/// The name of this signature.
 	pub name: syn::Ident,
 	/// The canonicalized string representation of this signature.
-	pub canonical: String,
+	// pub canonical: String,
 	/// The parameter information of this signature.
 	pub method_sig: syn::MethodSig,
 	/// The arguments of this signature.
@@ -150,13 +150,13 @@ fn into_signature(
 			}
 		},
 	};
-	let canonical = utils::canonicalize_fn(&ident, &method_sig);
+	//let canonical = utils::canonicalize_fn(&ident, &method_sig);
 
 	Signature {
 		name: ident,
 		arguments: arguments,
 		method_sig: method_sig,
-		canonical: canonical,
+		//canonical: canonical,
 		return_types: return_types,
 	}
 }
@@ -174,10 +174,10 @@ impl Item {
 	fn event_from_trait_item(method_sig: syn::MethodSig) -> Self {
 		let (indexed, non_indexed) = utils::iter_signature(&method_sig)
 			.partition(|&(ref pat, _)| quote! { #pat }.to_string().starts_with("indexed_"));
-		let canonical = utils::canonicalize_fn(&method_sig.ident, &method_sig);
+		//let canonical = utils::canonicalize_fn(&method_sig.ident, &method_sig);
 		let event = Event {
 			name: method_sig.ident.clone(),
-			canonical: canonical,
+			//canonical: canonical,
 			indexed: indexed,
 			data: non_indexed,
 			method_sig: method_sig,
