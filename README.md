@@ -39,7 +39,7 @@ First part is the argument of total length. Rest of are real params.
 * U256: An unsigned integer encoded by 32 bytes by little endian. 
 * H256: Hash256, encoded by 32 bytes by little endian. 
 * Address: Hash160, encoded by a bytes array with length 20. 
-* Vec`<T>`: A container contains above types. It was encoded by two parts, first part is number of it's member, second part is every member's encoding.
+* Vec`<T>`: A container contains above types. `T` is one of a basic types above. It was encoded by two parts, first part is number of it's member, second part is every member's encoding.
 
 ### Types decode
 * Meet with type encode.
