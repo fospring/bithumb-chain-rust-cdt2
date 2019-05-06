@@ -4,7 +4,7 @@ Rust contract development Toolkit for BXA chain.
 Modify from [paritytech](https://github.com/paritytech)'s project: pwasm-std、pwasm-abi、pwasm-abi-derive、pwasm-ethereum
 
 ## Install development environment 
-1. Install rustup,if network was slow you can set a proxy of USTC LUG:  
+1. Install rustup,if network was slow you can set a proxy of [USTC LUG](https://lug.ustc.edu.cn/wiki/mirrors/help/rust-crates#rust_crates_镜像使用帮助):  
 `curl https://sh.rustup.rs -sSf | sh`
 `rustup update`
 
@@ -160,6 +160,7 @@ After compiling, at project root will generate a directory named target:
 2. Code optimize to resize target wasm file is important for this code will be saved in blockchain permanently.
 * use wasm-gc after installing:
 ```bash
+cargo install wasm-gc
 wasm-gc ../../target/hello.wasm ./hello.wasm
 ```  
 3. inspect wasm file's size:
