@@ -140,12 +140,6 @@ fn push_canonicalized_type(target: &mut String, ty: &syn::Type) {
 
 			panic!("Unsupported! Use variable-size arrays")
 		},
-//		syn::Type::Tuple(type_array) => {
-//			if let syn::Type::Path(type_path) = &*type_array.elems {
-//				println!("Tuples:{:?}\n",type_path);
-//				return
-//			}
-//		}
 		other_type => panic!("[e2] Unable to handle param of type {:?}: not supported by abi", other_type),
 	}
 }

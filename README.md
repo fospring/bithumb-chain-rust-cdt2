@@ -51,8 +51,14 @@ First part is the argument of total length. Rest of are real params.
 * sample
 
 ## Events
+* Add `#[event]` attribute above of a function in trait,macros will generate event for it.
 
-## Storage
+## Storage  
+support two methods:  
+* put: support to write a  k-v pair at leveldb.
+* get: support to read a  k-v pair at leveldb.  
+  
+method delete can be extend at feature.
 
 ## Write a contract   
 
