@@ -10,6 +10,7 @@ extern crate bxa_abi_derive;
 use bxa_abi_derive::bxa_abi;
 use bxa_abi::types::*;
 use bxa_api as bxa;
+use bxa_api::db;
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
@@ -36,7 +37,7 @@ impl TokenInterface for TokenContract {
     fn constructor(&mut self, receiver: Address, total_supply: U256) {
         // Set up the total supply for the token
 
-        bxa::put(receiver, total_supply);
+        db::put(receiver, total_supply);
     }
     fn boo(&mut self) -> bool{true}
     fn add_u8(&mut self, x: u8, y: u8) -> u8 {
@@ -67,28 +68,28 @@ impl TokenInterface for TokenContract {
     }
 
     fn init(&mut self, reciver: Address) -> U256 {
-        bxa::put(reciver, U256::from(1000000));
-        let issue_balance = bxa::get(reciver).unwrap_or(U256::zero());
+        db::put(reciver, U256::from(1000000));
+        let issue_balance = db::get(reciver).unwrap_or(U256::zero());
         issue_balance
     }
 
     fn transfer(&mut self, from: Address, to: Address, amount: U256) -> bool {
-        let senderBalance: U256 = bxa::get(from).unwrap_or_default();
-        let recipientBalance: U256 = bxa::get(to).unwrap_or_default();
+        let senderBalance: U256 = db::get(from).unwrap_or_default();
+        let recipientBalance: U256 = db::get(to).unwrap_or_default();
         if amount == 0.into() || senderBalance < amount || to == from {
             false
         } else {
             let new_sender_balance = senderBalance - amount;
             let new_recipient_balance = recipientBalance + amount;
-            bxa::put(from, new_sender_balance);
-            bxa::put(to, new_recipient_balance);
+            db::put(from, new_sender_balance);
+            db::put(to, new_recipient_balance);
             self.Transfer(from, to, amount);
             true
         }
     }
 
     fn balance_of(&mut self, addr: Address) -> U256 {
-        let balance = bxa::get(addr).unwrap_or(U256::zero());
+        let balance = db::get(addr).unwrap_or(U256::zero());
         balance
     }
 }

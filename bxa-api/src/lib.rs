@@ -5,10 +5,9 @@
 extern crate bxa_std;
 extern crate bxa_abi;
 
-mod database;
+pub mod db;
 mod ext;
 mod storage;
 
-pub use database::*;
+//pub use db::*;
 pub use ext::*;
-pub use storage::*;

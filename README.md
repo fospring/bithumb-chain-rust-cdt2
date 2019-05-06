@@ -94,6 +94,27 @@ opt-level = "z"
 ```  
 
 5 . Contract structure
+* Import depended libraries(crates) at top of contract:
+    *  Keyword extern crate import depended crates.  
+    *  Keyword re-import crates. 
+```rust
+extern crate bxa_std;
+extern crate bxa_api;
+extern crate bxa_abi;
+extern crate bxa_abi_derive;
+
+use bxa_abi_derive::bxa_abi;
+use bxa_abi::types::*;
+use bxa_api as bxa;
+use bxa_api::db;
+```
+* crates's usages:
+    *  `bxa_abi_derive::bxa_abi`: generate ABI and generates contract codes from macros
+    *  `bxa_abi::types::*`: import data types such as bool/String/u64/U256/H256/Address and so on
+    *  `bxa_api as bxa`: Api for interacting with chain,such as get current timestamp
+    *  `bxa_api::db`: Api for connecting with storage or database. 
+
+
 * Anounce a trait as constraint and code genetate
     * All method should be declared in trait as constraint.  
     * `#[bxa_abi(TokenEndpoint)]` is a procedure macros which generate code and abi as functions when contract is compiling.
@@ -170,7 +191,7 @@ du -sh *
 4 . see code with macros extended:
 ```bash
 cargo rustc -- -Zunstable-options --pretty=expanded
-```
+```  
 ### Example
 * [code](./examples/bxa/src/lib.rs)
 * [shell](./examples/bxa/build.sh)

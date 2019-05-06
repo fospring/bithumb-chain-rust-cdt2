@@ -3,14 +3,12 @@
 #![warn(missing_docs)]
 
 mod util;
-mod log;
 mod stream;
 mod sink;
 mod common;
 #[cfg(test)]
 mod tests;
 
-pub use self::log::AsLog;
 pub use self::stream::Stream;
 pub use self::sink::Sink;
 
@@ -21,16 +19,10 @@ use super::types;
 pub enum Error {
 	/// Invalid bool for provided input
 	InvalidBool,
-	/// Invalid u32 for provided input
-	InvalidU32,
-	/// Invalid u64 for provided input
-	InvalidU64,
 	/// Unexpected end of the stream
 	UnexpectedEof,
 	/// Unexpected data the stream
 	UnexpectedData,
-	/// Invalid padding for fixed type
-	InvalidPadding,
 	/// Other error
 	Other,
 }
