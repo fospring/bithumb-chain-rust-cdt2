@@ -150,13 +150,11 @@ fn into_signature(
 			}
 		},
 	};
-	//let canonical = utils::canonicalize_fn(&ident, &method_sig);
 
 	Signature {
 		name: ident,
 		arguments: arguments,
 		method_sig: method_sig,
-		//canonical: canonical,
 		return_types: return_types,
 	}
 }
@@ -174,10 +172,8 @@ impl Item {
 	fn event_from_trait_item(method_sig: syn::MethodSig) -> Self {
 		let (indexed, non_indexed) = utils::iter_signature(&method_sig)
 			.partition(|&(ref pat, _)| quote! { #pat }.to_string().starts_with("indexed_"));
-		//let canonical = utils::canonicalize_fn(&method_sig.ident, &method_sig);
 		let event = Event {
 			name: method_sig.ident.clone(),
-			//canonical: canonical,
 			indexed: indexed,
 			data: non_indexed,
 			method_sig: method_sig,
@@ -214,6 +210,7 @@ impl quote::ToTokens for Item {
 			Item::Event(ref event) => {
 				let method_sig = &event.method_sig;
 				let name = &event.name;
+				let event_name: String = name.to_string();
 				tokens.append_all(&[
 					utils::produce_signature(
 						name,
@@ -224,6 +221,7 @@ impl quote::ToTokens for Item {
 								.map(|&(ref pat, _)| pat);
 							quote! {
 								let mut sink = ::bxa_abi::bxa::Sink::new(4);
+								sink.push(String::from(#event_name));
 								#(sink.push(#arg_name));*;
 
 								#(sink.push(#data_pats));*;

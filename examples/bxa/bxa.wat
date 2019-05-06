@@ -187,7 +187,7 @@
                                                                                                                                 br 12 (;@50;)
                                                                                                                               end
                                                                                                                               local.get 6
-                                                                                                                              i32.const 32814
+                                                                                                                              i32.const 32827
                                                                                                                               i32.add
                                                                                                                               i32.load8_u
                                                                                                                               local.tee 8
@@ -546,392 +546,26 @@
                                                                                                                                       block  ;; label = @66
                                                                                                                                         block  ;; label = @67
                                                                                                                                           block  ;; label = @68
-                                                                                                                                            block  ;; label = @69
-                                                                                                                                              block  ;; label = @70
-                                                                                                                                                block  ;; label = @71
-                                                                                                                                                  local.get 2
-                                                                                                                                                  br_table 0 (;@71;) 4 (;@67;) 25 (;@46;) 3 (;@68;) 1 (;@70;) 7 (;@64;) 5 (;@66;) 6 (;@65;) 25 (;@46;) 25 (;@46;) 2 (;@69;) 0 (;@71;)
-                                                                                                                                                end
-                                                                                                                                                block  ;; label = @71
-                                                                                                                                                  local.get 8
-                                                                                                                                                  i32.const 33233
-                                                                                                                                                  i32.eq
-                                                                                                                                                  br_if 0 (;@71;)
-                                                                                                                                                  local.get 8
-                                                                                                                                                  i32.const 33233
-                                                                                                                                                  i32.const 3
-                                                                                                                                                  call $memcmp
-                                                                                                                                                  br_if 25 (;@46;)
-                                                                                                                                                end
-                                                                                                                                                i32.const 32
-                                                                                                                                                i32.const 1
-                                                                                                                                                call $__rust_alloc
-                                                                                                                                                local.tee 2
-                                                                                                                                                i32.eqz
-                                                                                                                                                br_if 32 (;@38;)
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 188
-                                                                                                                                                i32.add
-                                                                                                                                                i32.const 0
-                                                                                                                                                i32.store
-                                                                                                                                                local.get 0
-                                                                                                                                                i64.const 1
-                                                                                                                                                i64.store offset=180 align=4
-                                                                                                                                                local.get 0
-                                                                                                                                                i64.const 32
-                                                                                                                                                i64.store offset=172 align=4
-                                                                                                                                                local.get 0
-                                                                                                                                                local.get 2
-                                                                                                                                                i32.store offset=168
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 1
-                                                                                                                                                i32.store8 offset=264
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 168
-                                                                                                                                                i32.add
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 264
-                                                                                                                                                i32.add
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 264
-                                                                                                                                                i32.add
-                                                                                                                                                i32.const 1
-                                                                                                                                                i32.add
-                                                                                                                                                call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 264
-                                                                                                                                                i32.add
-                                                                                                                                                i32.const 16
-                                                                                                                                                i32.add
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 168
-                                                                                                                                                i32.add
-                                                                                                                                                i32.const 16
-                                                                                                                                                i32.add
-                                                                                                                                                i64.load
-                                                                                                                                                i64.store
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 272
-                                                                                                                                                i32.add
-                                                                                                                                                local.get 0
-                                                                                                                                                i64.load offset=176
-                                                                                                                                                i64.store
-                                                                                                                                                local.get 0
-                                                                                                                                                local.get 0
-                                                                                                                                                i64.load offset=168
-                                                                                                                                                i64.store offset=264
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 80
-                                                                                                                                                i32.add
-                                                                                                                                                local.get 0
-                                                                                                                                                i32.const 264
-                                                                                                                                                i32.add
-                                                                                                                                                call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
-                                                                                                                                                local.get 10
-                                                                                                                                                i32.eqz
-                                                                                                                                                br_if 69 (;@1;)
-                                                                                                                                                br 68 (;@2;)
-                                                                                                                                              end
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33242
-                                                                                                                                              i32.eq
-                                                                                                                                              br_if 6 (;@63;)
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33242
-                                                                                                                                              i32.const 7
-                                                                                                                                              call $memcmp
-                                                                                                                                              i32.eqz
-                                                                                                                                              br_if 6 (;@63;)
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33249
-                                                                                                                                              i32.eq
-                                                                                                                                              br_if 18 (;@51;)
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33249
-                                                                                                                                              i32.const 7
-                                                                                                                                              call $memcmp
-                                                                                                                                              i32.eqz
-                                                                                                                                              br_if 18 (;@51;)
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33265
-                                                                                                                                              i32.eq
-                                                                                                                                              br_if 21 (;@48;)
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33265
-                                                                                                                                              i32.const 7
-                                                                                                                                              call $memcmp
-                                                                                                                                              i32.eqz
-                                                                                                                                              br_if 21 (;@48;)
-                                                                                                                                              block  ;; label = @70
-                                                                                                                                                local.get 8
-                                                                                                                                                i32.const 33272
-                                                                                                                                                i32.eq
-                                                                                                                                                br_if 0 (;@70;)
-                                                                                                                                                local.get 8
-                                                                                                                                                i32.const 33272
-                                                                                                                                                i32.const 7
-                                                                                                                                                call $memcmp
-                                                                                                                                                br_if 24 (;@46;)
-                                                                                                                                              end
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 264
-                                                                                                                                              i32.add
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 16
-                                                                                                                                              i32.add
-                                                                                                                                              call $_ZN7bxa_abi3bxa6stream6Stream3pop17h60a5f543562113ebE
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.load8_u offset=264
-                                                                                                                                              i32.const 1
-                                                                                                                                              i32.eq
-                                                                                                                                              br_if 52 (;@17;)
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 272
-                                                                                                                                              i32.add
-                                                                                                                                              local.tee 2
-                                                                                                                                              i64.load
-                                                                                                                                              local.set 3
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 264
-                                                                                                                                              i32.add
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 16
-                                                                                                                                              i32.add
-                                                                                                                                              call $_ZN7bxa_abi3bxa6stream6Stream3pop17h60a5f543562113ebE
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.load8_u offset=264
-                                                                                                                                              i32.const 1
-                                                                                                                                              i32.eq
-                                                                                                                                              br_if 53 (;@16;)
-                                                                                                                                              local.get 2
-                                                                                                                                              i64.load
-                                                                                                                                              local.set 11
-                                                                                                                                              i32.const 32
-                                                                                                                                              i32.const 1
-                                                                                                                                              call $__rust_alloc
-                                                                                                                                              local.tee 2
-                                                                                                                                              i32.eqz
-                                                                                                                                              br_if 54 (;@15;)
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 188
-                                                                                                                                              i32.add
-                                                                                                                                              i32.const 0
-                                                                                                                                              i32.store
-                                                                                                                                              local.get 0
-                                                                                                                                              i64.const 1
-                                                                                                                                              i64.store offset=180 align=4
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 2
-                                                                                                                                              i32.store offset=168
-                                                                                                                                              local.get 0
-                                                                                                                                              i64.const 32
-                                                                                                                                              i64.store offset=172 align=4
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 11
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.add
-                                                                                                                                              local.tee 3
-                                                                                                                                              i64.store8 offset=264
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 56
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=271
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 48
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=270
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 40
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=269
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 32
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=268
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 24
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=267
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 16
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=266
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 3
-                                                                                                                                              i64.const 8
-                                                                                                                                              i64.shr_u
-                                                                                                                                              i64.store8 offset=265
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 168
-                                                                                                                                              i32.add
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 264
-                                                                                                                                              i32.add
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 272
-                                                                                                                                              i32.add
-                                                                                                                                              local.tee 2
-                                                                                                                                              call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 264
-                                                                                                                                              i32.add
-                                                                                                                                              i32.const 16
-                                                                                                                                              i32.add
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 168
-                                                                                                                                              i32.add
-                                                                                                                                              i32.const 16
-                                                                                                                                              i32.add
-                                                                                                                                              i64.load
-                                                                                                                                              i64.store
-                                                                                                                                              local.get 2
-                                                                                                                                              local.get 0
-                                                                                                                                              i64.load offset=176
-                                                                                                                                              i64.store
-                                                                                                                                              local.get 0
-                                                                                                                                              local.get 0
-                                                                                                                                              i64.load offset=168
-                                                                                                                                              i64.store offset=264
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 80
-                                                                                                                                              i32.add
-                                                                                                                                              local.get 0
-                                                                                                                                              i32.const 264
-                                                                                                                                              i32.add
-                                                                                                                                              call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
-                                                                                                                                              local.get 10
-                                                                                                                                              br_if 67 (;@2;)
-                                                                                                                                              br 68 (;@1;)
-                                                                                                                                            end
-                                                                                                                                            block  ;; label = @69
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33279
-                                                                                                                                              i32.eq
-                                                                                                                                              br_if 0 (;@69;)
-                                                                                                                                              local.get 8
-                                                                                                                                              i32.const 33279
-                                                                                                                                              i32.const 13
-                                                                                                                                              call $memcmp
-                                                                                                                                              br_if 23 (;@46;)
-                                                                                                                                            end
-                                                                                                                                            local.get 0
-                                                                                                                                            i32.const 264
-                                                                                                                                            i32.add
-                                                                                                                                            local.get 0
-                                                                                                                                            i32.const 16
-                                                                                                                                            i32.add
-                                                                                                                                            call $_ZN7bxa_abi3bxa6stream6Stream8read_len17hdcf8c13104b5c466E
-                                                                                                                                            local.get 0
-                                                                                                                                            i64.load offset=264
-                                                                                                                                            local.tee 3
-                                                                                                                                            i32.wrap_i64
-                                                                                                                                            i32.const 255
-                                                                                                                                            i32.and
-                                                                                                                                            i32.const 1
-                                                                                                                                            i32.eq
-                                                                                                                                            br_if 31 (;@37;)
-                                                                                                                                            local.get 3
-                                                                                                                                            i64.const 32
-                                                                                                                                            i64.shr_u
-                                                                                                                                            i32.wrap_i64
-                                                                                                                                            local.tee 9
-                                                                                                                                            i32.const 1024
-                                                                                                                                            local.get 9
-                                                                                                                                            i32.const 1024
-                                                                                                                                            i32.lt_u
-                                                                                                                                            select
-                                                                                                                                            local.tee 2
-                                                                                                                                            i32.eqz
-                                                                                                                                            br_if 13 (;@55;)
                                                                                                                                             local.get 2
-                                                                                                                                            i32.const 3
-                                                                                                                                            i32.shl
-                                                                                                                                            local.tee 5
-                                                                                                                                            i32.const 8
-                                                                                                                                            call $__rust_alloc
-                                                                                                                                            local.tee 6
-                                                                                                                                            i32.eqz
-                                                                                                                                            br_if 41 (;@27;)
-                                                                                                                                            local.get 9
-                                                                                                                                            i32.eqz
-                                                                                                                                            br_if 14 (;@54;)
-                                                                                                                                            br 58 (;@10;)
+                                                                                                                                            br_table 0 (;@68;) 4 (;@64;) 22 (;@46;) 3 (;@65;) 1 (;@67;) 7 (;@61;) 5 (;@63;) 6 (;@62;) 22 (;@46;) 22 (;@46;) 2 (;@66;) 0 (;@68;)
                                                                                                                                           end
                                                                                                                                           block  ;; label = @68
                                                                                                                                             local.get 8
-                                                                                                                                            i32.const 33236
+                                                                                                                                            i32.const 33246
                                                                                                                                             i32.eq
                                                                                                                                             br_if 0 (;@68;)
                                                                                                                                             local.get 8
-                                                                                                                                            i32.const 33236
-                                                                                                                                            i32.const 6
+                                                                                                                                            i32.const 33246
+                                                                                                                                            i32.const 3
                                                                                                                                             call $memcmp
                                                                                                                                             br_if 22 (;@46;)
                                                                                                                                           end
-                                                                                                                                          local.get 0
-                                                                                                                                          i32.const 24
-                                                                                                                                          i32.add
-                                                                                                                                          i32.load
-                                                                                                                                          local.tee 2
-                                                                                                                                          local.get 0
-                                                                                                                                          i32.load offset=20
-                                                                                                                                          local.tee 5
-                                                                                                                                          i32.ge_u
-                                                                                                                                          br_if 27 (;@40;)
-                                                                                                                                          local.get 2
-                                                                                                                                          i32.const 1
-                                                                                                                                          i32.add
-                                                                                                                                          local.tee 4
-                                                                                                                                          local.get 5
-                                                                                                                                          i32.gt_u
-                                                                                                                                          br_if 27 (;@40;)
-                                                                                                                                          local.get 0
-                                                                                                                                          i32.load offset=16
-                                                                                                                                          local.tee 6
-                                                                                                                                          local.get 2
-                                                                                                                                          i32.add
-                                                                                                                                          i32.load8_u
-                                                                                                                                          local.set 7
-                                                                                                                                          local.get 0
-                                                                                                                                          i32.const 24
-                                                                                                                                          i32.add
-                                                                                                                                          local.get 4
-                                                                                                                                          i32.store
-                                                                                                                                          local.get 4
-                                                                                                                                          local.get 5
-                                                                                                                                          i32.ge_u
-                                                                                                                                          br_if 28 (;@39;)
-                                                                                                                                          local.get 2
-                                                                                                                                          i32.const 2
-                                                                                                                                          i32.add
-                                                                                                                                          local.tee 2
-                                                                                                                                          local.get 5
-                                                                                                                                          i32.gt_u
-                                                                                                                                          br_if 28 (;@39;)
-                                                                                                                                          local.get 6
-                                                                                                                                          local.get 4
-                                                                                                                                          i32.add
-                                                                                                                                          i32.load8_u
-                                                                                                                                          local.set 5
-                                                                                                                                          local.get 0
-                                                                                                                                          i32.const 16
-                                                                                                                                          i32.add
-                                                                                                                                          i32.const 8
-                                                                                                                                          i32.add
-                                                                                                                                          local.get 2
-                                                                                                                                          i32.store
                                                                                                                                           i32.const 32
                                                                                                                                           i32.const 1
                                                                                                                                           call $__rust_alloc
                                                                                                                                           local.tee 2
                                                                                                                                           i32.eqz
-                                                                                                                                          br_if 31 (;@36;)
+                                                                                                                                          br_if 29 (;@38;)
                                                                                                                                           local.get 0
                                                                                                                                           i32.const 188
                                                                                                                                           i32.add
@@ -947,12 +581,20 @@
                                                                                                                                           local.get 2
                                                                                                                                           i32.store offset=168
                                                                                                                                           local.get 0
+                                                                                                                                          i32.const 1
+                                                                                                                                          i32.store8 offset=264
+                                                                                                                                          local.get 0
                                                                                                                                           i32.const 168
                                                                                                                                           i32.add
-                                                                                                                                          local.get 5
-                                                                                                                                          local.get 7
+                                                                                                                                          local.get 0
+                                                                                                                                          i32.const 264
                                                                                                                                           i32.add
-                                                                                                                                          call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
+                                                                                                                                          local.get 0
+                                                                                                                                          i32.const 264
+                                                                                                                                          i32.add
+                                                                                                                                          i32.const 1
+                                                                                                                                          i32.add
+                                                                                                                                          call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
                                                                                                                                           local.get 0
                                                                                                                                           i32.const 264
                                                                                                                                           i32.add
@@ -966,9 +608,7 @@
                                                                                                                                           i64.load
                                                                                                                                           i64.store
                                                                                                                                           local.get 0
-                                                                                                                                          i32.const 264
-                                                                                                                                          i32.add
-                                                                                                                                          i32.const 8
+                                                                                                                                          i32.const 272
                                                                                                                                           i32.add
                                                                                                                                           local.get 0
                                                                                                                                           i64.load offset=176
@@ -985,18 +625,49 @@
                                                                                                                                           i32.add
                                                                                                                                           call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
                                                                                                                                           local.get 10
-                                                                                                                                          br_if 65 (;@2;)
-                                                                                                                                          br 66 (;@1;)
+                                                                                                                                          i32.eqz
+                                                                                                                                          br_if 66 (;@1;)
+                                                                                                                                          br 65 (;@2;)
                                                                                                                                         end
+                                                                                                                                        local.get 8
+                                                                                                                                        i32.const 33255
+                                                                                                                                        i32.eq
+                                                                                                                                        br_if 6 (;@60;)
+                                                                                                                                        local.get 8
+                                                                                                                                        i32.const 33255
+                                                                                                                                        i32.const 7
+                                                                                                                                        call $memcmp
+                                                                                                                                        i32.eqz
+                                                                                                                                        br_if 6 (;@60;)
+                                                                                                                                        local.get 8
+                                                                                                                                        i32.const 33262
+                                                                                                                                        i32.eq
+                                                                                                                                        br_if 15 (;@51;)
+                                                                                                                                        local.get 8
+                                                                                                                                        i32.const 33262
+                                                                                                                                        i32.const 7
+                                                                                                                                        call $memcmp
+                                                                                                                                        i32.eqz
+                                                                                                                                        br_if 15 (;@51;)
+                                                                                                                                        local.get 8
+                                                                                                                                        i32.const 33278
+                                                                                                                                        i32.eq
+                                                                                                                                        br_if 18 (;@48;)
+                                                                                                                                        local.get 8
+                                                                                                                                        i32.const 33278
+                                                                                                                                        i32.const 7
+                                                                                                                                        call $memcmp
+                                                                                                                                        i32.eqz
+                                                                                                                                        br_if 18 (;@48;)
                                                                                                                                         block  ;; label = @67
                                                                                                                                           local.get 8
-                                                                                                                                          i32.const 33292
+                                                                                                                                          i32.const 33285
                                                                                                                                           i32.eq
                                                                                                                                           br_if 0 (;@67;)
                                                                                                                                           local.get 8
-                                                                                                                                          i32.load align=1
-                                                                                                                                          i32.const 1953066601
-                                                                                                                                          i32.ne
+                                                                                                                                          i32.const 33285
+                                                                                                                                          i32.const 7
+                                                                                                                                          call $memcmp
                                                                                                                                           br_if 21 (;@46;)
                                                                                                                                         end
                                                                                                                                         local.get 0
@@ -1005,437 +676,324 @@
                                                                                                                                         local.get 0
                                                                                                                                         i32.const 16
                                                                                                                                         i32.add
-                                                                                                                                        call $_ZN7bxa_abi3bxa6stream6Stream3pop17ha85d24ca86044d3fE
+                                                                                                                                        call $_ZN7bxa_abi3bxa6stream6Stream3pop17h60a5f543562113ebE
                                                                                                                                         local.get 0
                                                                                                                                         i32.load8_u offset=264
                                                                                                                                         i32.const 1
                                                                                                                                         i32.eq
-                                                                                                                                        br_if 31 (;@35;)
+                                                                                                                                        br_if 49 (;@17;)
                                                                                                                                         local.get 0
-                                                                                                                                        i32.const 80
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 16
-                                                                                                                                        i32.add
-                                                                                                                                        local.tee 4
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 264
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 1
-                                                                                                                                        i32.or
-                                                                                                                                        local.tee 2
-                                                                                                                                        i32.const 16
-                                                                                                                                        i32.add
-                                                                                                                                        i32.load align=1
-                                                                                                                                        i32.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 80
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 8
-                                                                                                                                        i32.add
-                                                                                                                                        local.tee 6
-                                                                                                                                        local.get 2
-                                                                                                                                        i32.const 8
-                                                                                                                                        i32.add
-                                                                                                                                        i64.load align=1
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        local.get 2
-                                                                                                                                        i64.load align=1
-                                                                                                                                        i64.store offset=80
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 168
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 16
+                                                                                                                                        i32.const 272
                                                                                                                                         i32.add
                                                                                                                                         local.tee 2
-                                                                                                                                        local.get 4
-                                                                                                                                        i32.load
-                                                                                                                                        i32.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 168
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 8
-                                                                                                                                        i32.add
-                                                                                                                                        local.tee 5
-                                                                                                                                        local.get 6
                                                                                                                                         i64.load
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        local.get 0
-                                                                                                                                        i64.load offset=80
-                                                                                                                                        i64.store offset=168
-                                                                                                                                        i64.const 0
                                                                                                                                         local.set 3
                                                                                                                                         local.get 0
                                                                                                                                         i32.const 264
                                                                                                                                         i32.add
-                                                                                                                                        i32.const 24
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.const 16
                                                                                                                                         i32.add
-                                                                                                                                        local.tee 7
-                                                                                                                                        i64.const 0
-                                                                                                                                        i64.store
+                                                                                                                                        call $_ZN7bxa_abi3bxa6stream6Stream3pop17h60a5f543562113ebE
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.load8_u offset=264
+                                                                                                                                        i32.const 1
+                                                                                                                                        i32.eq
+                                                                                                                                        br_if 50 (;@16;)
+                                                                                                                                        local.get 2
+                                                                                                                                        i64.load
+                                                                                                                                        local.set 11
+                                                                                                                                        i32.const 32
+                                                                                                                                        i32.const 1
+                                                                                                                                        call $__rust_alloc
+                                                                                                                                        local.tee 2
+                                                                                                                                        i32.eqz
+                                                                                                                                        br_if 51 (;@15;)
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.const 188
+                                                                                                                                        i32.add
+                                                                                                                                        i32.const 0
+                                                                                                                                        i32.store
+                                                                                                                                        local.get 0
+                                                                                                                                        i64.const 1
+                                                                                                                                        i64.store offset=180 align=4
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 2
+                                                                                                                                        i32.store offset=168
+                                                                                                                                        local.get 0
+                                                                                                                                        i64.const 32
+                                                                                                                                        i64.store offset=172 align=4
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 11
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.add
+                                                                                                                                        local.tee 3
+                                                                                                                                        i64.store8 offset=264
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 56
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=271
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 48
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=270
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 40
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=269
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 32
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=268
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 24
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=267
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 16
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=266
+                                                                                                                                        local.get 0
+                                                                                                                                        local.get 3
+                                                                                                                                        i64.const 8
+                                                                                                                                        i64.shr_u
+                                                                                                                                        i64.store8 offset=265
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.const 168
+                                                                                                                                        i32.add
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.const 264
+                                                                                                                                        i32.add
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.const 272
+                                                                                                                                        i32.add
+                                                                                                                                        local.tee 2
+                                                                                                                                        call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
                                                                                                                                         local.get 0
                                                                                                                                         i32.const 264
                                                                                                                                         i32.add
                                                                                                                                         i32.const 16
                                                                                                                                         i32.add
-                                                                                                                                        local.tee 9
-                                                                                                                                        i64.const 0
+                                                                                                                                        local.get 0
+                                                                                                                                        i32.const 168
+                                                                                                                                        i32.add
+                                                                                                                                        i32.const 16
+                                                                                                                                        i32.add
+                                                                                                                                        i64.load
+                                                                                                                                        i64.store
+                                                                                                                                        local.get 2
+                                                                                                                                        local.get 0
+                                                                                                                                        i64.load offset=176
                                                                                                                                         i64.store
                                                                                                                                         local.get 0
-                                                                                                                                        i64.const 0
-                                                                                                                                        i64.store offset=272
                                                                                                                                         local.get 0
-                                                                                                                                        i64.const 1000000
+                                                                                                                                        i64.load offset=168
                                                                                                                                         i64.store offset=264
                                                                                                                                         local.get 0
-                                                                                                                                        i32.const 168
+                                                                                                                                        i32.const 80
                                                                                                                                         i32.add
                                                                                                                                         local.get 0
                                                                                                                                         i32.const 264
                                                                                                                                         i32.add
-                                                                                                                                        call $_ZN7bxa_api8database3put17ha0a1652047fe13cfE
-                                                                                                                                        local.get 2
-                                                                                                                                        local.get 4
-                                                                                                                                        i32.load
-                                                                                                                                        i32.store
-                                                                                                                                        local.get 5
-                                                                                                                                        local.get 6
-                                                                                                                                        i64.load
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        local.get 0
-                                                                                                                                        i64.load offset=80
-                                                                                                                                        i64.store offset=168
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 264
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 168
-                                                                                                                                        i32.add
-                                                                                                                                        call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
-                                                                                                                                        local.get 2
-                                                                                                                                        i64.const 0
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 5
-                                                                                                                                        i64.const 0
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i64.const 0
-                                                                                                                                        i64.store offset=168
-                                                                                                                                        local.get 0
-                                                                                                                                        i64.load offset=264
-                                                                                                                                        i64.const 1
-                                                                                                                                        i64.ne
-                                                                                                                                        br_if 4 (;@62;)
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 136
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 24
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 296
-                                                                                                                                        i32.add
-                                                                                                                                        i64.load
-                                                                                                                                        local.tee 3
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 136
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 16
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 7
-                                                                                                                                        i64.load
-                                                                                                                                        local.tee 11
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 136
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 8
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 9
-                                                                                                                                        i64.load
-                                                                                                                                        local.tee 14
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 112
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 8
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 11
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 112
-                                                                                                                                        i32.add
-                                                                                                                                        i32.const 16
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 3
-                                                                                                                                        i64.store
-                                                                                                                                        local.get 0
-                                                                                                                                        local.get 0
-                                                                                                                                        i64.load offset=272
-                                                                                                                                        local.tee 3
-                                                                                                                                        i64.store offset=136
-                                                                                                                                        local.get 0
-                                                                                                                                        local.get 14
-                                                                                                                                        i64.store offset=112
-                                                                                                                                        br 5 (;@61;)
+                                                                                                                                        call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
+                                                                                                                                        local.get 10
+                                                                                                                                        br_if 64 (;@2;)
+                                                                                                                                        br 65 (;@1;)
                                                                                                                                       end
                                                                                                                                       block  ;; label = @66
                                                                                                                                         local.get 8
-                                                                                                                                        i32.const 33256
+                                                                                                                                        i32.const 33292
                                                                                                                                         i32.eq
                                                                                                                                         br_if 0 (;@66;)
                                                                                                                                         local.get 8
-                                                                                                                                        i32.const 33256
-                                                                                                                                        i32.const 9
+                                                                                                                                        i32.const 33292
+                                                                                                                                        i32.const 13
                                                                                                                                         call $memcmp
                                                                                                                                         br_if 20 (;@46;)
                                                                                                                                       end
                                                                                                                                       local.get 0
                                                                                                                                       i32.const 264
                                                                                                                                       i32.add
-                                                                                                                                      i32.const 32768
-                                                                                                                                      i32.const 6
-                                                                                                                                      call $_ZN5alloc5slice64_$LT$impl$u20$alloc..borrow..ToOwned$u20$for$u20$$u5b$T$u5d$$GT$8to_owned17h00c5f0b8e566256eE
-                                                                                                                                      block  ;; label = @66
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.load offset=272
-                                                                                                                                        local.tee 2
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.load offset=268
-                                                                                                                                        local.tee 4
-                                                                                                                                        i32.ne
-                                                                                                                                        br_if 0 (;@66;)
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 264
-                                                                                                                                        i32.add
-                                                                                                                                        local.get 2
-                                                                                                                                        i32.const 1
-                                                                                                                                        call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hce929716111abd31E
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.const 272
-                                                                                                                                        i32.add
-                                                                                                                                        i32.load
-                                                                                                                                        local.set 2
-                                                                                                                                        local.get 0
-                                                                                                                                        i32.load offset=268
-                                                                                                                                        local.set 4
-                                                                                                                                      end
                                                                                                                                       local.get 0
-                                                                                                                                      i32.load offset=264
-                                                                                                                                      local.tee 5
-                                                                                                                                      local.get 2
+                                                                                                                                      i32.const 16
                                                                                                                                       i32.add
-                                                                                                                                      i32.const 32
-                                                                                                                                      i32.store8
-                                                                                                                                      i32.const 32
+                                                                                                                                      call $_ZN7bxa_abi3bxa6stream6Stream8read_len17hdcf8c13104b5c466E
+                                                                                                                                      local.get 0
+                                                                                                                                      i64.load offset=264
+                                                                                                                                      local.tee 3
+                                                                                                                                      i32.wrap_i64
+                                                                                                                                      i32.const 255
+                                                                                                                                      i32.and
                                                                                                                                       i32.const 1
+                                                                                                                                      i32.eq
+                                                                                                                                      br_if 28 (;@37;)
+                                                                                                                                      local.get 3
+                                                                                                                                      i64.const 32
+                                                                                                                                      i64.shr_u
+                                                                                                                                      i32.wrap_i64
+                                                                                                                                      local.tee 9
+                                                                                                                                      i32.const 1024
+                                                                                                                                      local.get 9
+                                                                                                                                      i32.const 1024
+                                                                                                                                      i32.lt_u
+                                                                                                                                      select
+                                                                                                                                      local.tee 7
+                                                                                                                                      i32.eqz
+                                                                                                                                      br_if 12 (;@53;)
+                                                                                                                                      local.get 7
+                                                                                                                                      i32.const 3
+                                                                                                                                      i32.shl
+                                                                                                                                      local.tee 2
+                                                                                                                                      i32.const 8
                                                                                                                                       call $__rust_alloc
                                                                                                                                       local.tee 6
                                                                                                                                       i32.eqz
-                                                                                                                                      br_if 31 (;@34;)
-                                                                                                                                      local.get 0
-                                                                                                                                      i32.const 188
-                                                                                                                                      i32.add
-                                                                                                                                      i32.const 0
-                                                                                                                                      i32.store
-                                                                                                                                      local.get 0
-                                                                                                                                      i64.const 1
-                                                                                                                                      i64.store offset=180 align=4
-                                                                                                                                      local.get 0
-                                                                                                                                      i64.const 32
-                                                                                                                                      i64.store offset=172 align=4
-                                                                                                                                      local.get 0
-                                                                                                                                      local.get 6
-                                                                                                                                      i32.store offset=168
-                                                                                                                                      local.get 2
-                                                                                                                                      i32.const 1
-                                                                                                                                      i32.add
-                                                                                                                                      local.tee 2
-                                                                                                                                      i32.const 253
-                                                                                                                                      i32.gt_u
-                                                                                                                                      br_if 5 (;@60;)
-                                                                                                                                      local.get 0
-                                                                                                                                      i32.const 168
-                                                                                                                                      i32.add
-                                                                                                                                      local.get 2
-                                                                                                                                      call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
-                                                                                                                                      local.get 0
-                                                                                                                                      i32.const 168
-                                                                                                                                      i32.add
-                                                                                                                                      local.set 6
-                                                                                                                                      br 13 (;@52;)
+                                                                                                                                      br_if 38 (;@27;)
+                                                                                                                                      local.get 9
+                                                                                                                                      i32.eqz
+                                                                                                                                      br_if 13 (;@52;)
+                                                                                                                                      br 55 (;@10;)
                                                                                                                                     end
                                                                                                                                     block  ;; label = @65
                                                                                                                                       local.get 8
-                                                                                                                                      i32.const 33304
+                                                                                                                                      i32.const 33249
                                                                                                                                       i32.eq
                                                                                                                                       br_if 0 (;@65;)
                                                                                                                                       local.get 8
-                                                                                                                                      i32.const 33304
-                                                                                                                                      i32.const 10
+                                                                                                                                      i32.const 33249
+                                                                                                                                      i32.const 6
                                                                                                                                       call $memcmp
                                                                                                                                       br_if 19 (;@46;)
                                                                                                                                     end
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 264
+                                                                                                                                    i32.const 24
                                                                                                                                     i32.add
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 16
-                                                                                                                                    i32.add
-                                                                                                                                    call $_ZN7bxa_abi3bxa6stream6Stream3pop17ha85d24ca86044d3fE
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.load8_u offset=264
-                                                                                                                                    i32.const 1
-                                                                                                                                    i32.eq
-                                                                                                                                    br_if 31 (;@33;)
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 80
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 16
-                                                                                                                                    i32.add
-                                                                                                                                    local.tee 5
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 264
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 1
-                                                                                                                                    i32.or
+                                                                                                                                    i32.load
                                                                                                                                     local.tee 2
-                                                                                                                                    i32.const 16
-                                                                                                                                    i32.add
-                                                                                                                                    i32.load align=1
-                                                                                                                                    i32.store
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 80
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 8
+                                                                                                                                    i32.load offset=20
+                                                                                                                                    local.tee 5
+                                                                                                                                    i32.ge_u
+                                                                                                                                    br_if 24 (;@40;)
+                                                                                                                                    local.get 2
+                                                                                                                                    i32.const 1
                                                                                                                                     i32.add
                                                                                                                                     local.tee 4
-                                                                                                                                    local.get 2
-                                                                                                                                    i32.const 8
-                                                                                                                                    i32.add
-                                                                                                                                    i64.load align=1
-                                                                                                                                    i64.store
+                                                                                                                                    local.get 5
+                                                                                                                                    i32.gt_u
+                                                                                                                                    br_if 24 (;@40;)
                                                                                                                                     local.get 0
+                                                                                                                                    i32.load offset=16
+                                                                                                                                    local.tee 6
                                                                                                                                     local.get 2
-                                                                                                                                    i64.load align=1
-                                                                                                                                    i64.store offset=80
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 168
                                                                                                                                     i32.add
-                                                                                                                                    i32.const 16
+                                                                                                                                    i32.load8_u
+                                                                                                                                    local.set 7
+                                                                                                                                    local.get 0
+                                                                                                                                    i32.const 24
+                                                                                                                                    i32.add
+                                                                                                                                    local.get 4
+                                                                                                                                    i32.store
+                                                                                                                                    local.get 4
+                                                                                                                                    local.get 5
+                                                                                                                                    i32.ge_u
+                                                                                                                                    br_if 25 (;@39;)
+                                                                                                                                    local.get 2
+                                                                                                                                    i32.const 2
                                                                                                                                     i32.add
                                                                                                                                     local.tee 2
                                                                                                                                     local.get 5
-                                                                                                                                    i32.load
+                                                                                                                                    i32.gt_u
+                                                                                                                                    br_if 25 (;@39;)
+                                                                                                                                    local.get 6
+                                                                                                                                    local.get 4
+                                                                                                                                    i32.add
+                                                                                                                                    i32.load8_u
+                                                                                                                                    local.set 5
+                                                                                                                                    local.get 0
+                                                                                                                                    i32.const 16
+                                                                                                                                    i32.add
+                                                                                                                                    i32.const 8
+                                                                                                                                    i32.add
+                                                                                                                                    local.get 2
+                                                                                                                                    i32.store
+                                                                                                                                    i32.const 32
+                                                                                                                                    i32.const 1
+                                                                                                                                    call $__rust_alloc
+                                                                                                                                    local.tee 2
+                                                                                                                                    i32.eqz
+                                                                                                                                    br_if 28 (;@36;)
+                                                                                                                                    local.get 0
+                                                                                                                                    i32.const 188
+                                                                                                                                    i32.add
+                                                                                                                                    i32.const 0
                                                                                                                                     i32.store
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 168
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 8
-                                                                                                                                    i32.add
-                                                                                                                                    local.tee 5
-                                                                                                                                    local.get 4
-                                                                                                                                    i64.load
-                                                                                                                                    i64.store
-                                                                                                                                    local.get 0
-                                                                                                                                    local.get 0
-                                                                                                                                    i64.load offset=80
-                                                                                                                                    i64.store offset=168
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 264
-                                                                                                                                    i32.add
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 168
-                                                                                                                                    i32.add
-                                                                                                                                    call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
-                                                                                                                                    i64.const 0
-                                                                                                                                    local.set 3
-                                                                                                                                    local.get 2
-                                                                                                                                    i64.const 0
-                                                                                                                                    i64.store
-                                                                                                                                    local.get 5
-                                                                                                                                    i64.const 0
-                                                                                                                                    i64.store
-                                                                                                                                    local.get 0
-                                                                                                                                    i64.const 0
-                                                                                                                                    i64.store offset=168
-                                                                                                                                    local.get 0
-                                                                                                                                    i64.load offset=264
                                                                                                                                     i64.const 1
-                                                                                                                                    i64.ne
-                                                                                                                                    br_if 5 (;@59;)
+                                                                                                                                    i64.store offset=180 align=4
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 136
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 24
-                                                                                                                                    i32.add
+                                                                                                                                    i64.const 32
+                                                                                                                                    i64.store offset=172 align=4
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 296
-                                                                                                                                    i32.add
-                                                                                                                                    i64.load
-                                                                                                                                    local.tee 3
-                                                                                                                                    i64.store
+                                                                                                                                    local.get 2
+                                                                                                                                    i32.store offset=168
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 136
+                                                                                                                                    i32.const 168
                                                                                                                                     i32.add
-                                                                                                                                    i32.const 16
+                                                                                                                                    local.get 5
+                                                                                                                                    local.get 7
                                                                                                                                     i32.add
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 264
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 24
-                                                                                                                                    i32.add
-                                                                                                                                    i64.load
-                                                                                                                                    local.tee 11
-                                                                                                                                    i64.store
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 136
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 8
-                                                                                                                                    i32.add
+                                                                                                                                    call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
                                                                                                                                     local.get 0
                                                                                                                                     i32.const 264
                                                                                                                                     i32.add
                                                                                                                                     i32.const 16
                                                                                                                                     i32.add
-                                                                                                                                    i64.load
-                                                                                                                                    local.tee 14
-                                                                                                                                    i64.store
                                                                                                                                     local.get 0
-                                                                                                                                    i32.const 112
-                                                                                                                                    i32.add
-                                                                                                                                    i32.const 8
-                                                                                                                                    i32.add
-                                                                                                                                    local.get 11
-                                                                                                                                    i64.store
-                                                                                                                                    local.get 0
-                                                                                                                                    i32.const 112
+                                                                                                                                    i32.const 168
                                                                                                                                     i32.add
                                                                                                                                     i32.const 16
                                                                                                                                     i32.add
-                                                                                                                                    local.get 3
+                                                                                                                                    i64.load
+                                                                                                                                    i64.store
+                                                                                                                                    local.get 0
+                                                                                                                                    i32.const 264
+                                                                                                                                    i32.add
+                                                                                                                                    i32.const 8
+                                                                                                                                    i32.add
+                                                                                                                                    local.get 0
+                                                                                                                                    i64.load offset=176
                                                                                                                                     i64.store
                                                                                                                                     local.get 0
                                                                                                                                     local.get 0
-                                                                                                                                    i64.load offset=272
-                                                                                                                                    local.tee 3
-                                                                                                                                    i64.store offset=136
+                                                                                                                                    i64.load offset=168
+                                                                                                                                    i64.store offset=264
                                                                                                                                     local.get 0
-                                                                                                                                    local.get 14
-                                                                                                                                    i64.store offset=112
-                                                                                                                                    br 6 (;@58;)
+                                                                                                                                    i32.const 80
+                                                                                                                                    i32.add
+                                                                                                                                    local.get 0
+                                                                                                                                    i32.const 264
+                                                                                                                                    i32.add
+                                                                                                                                    call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
+                                                                                                                                    local.get 10
+                                                                                                                                    br_if 62 (;@2;)
+                                                                                                                                    br 63 (;@1;)
                                                                                                                                   end
                                                                                                                                   block  ;; label = @64
                                                                                                                                     local.get 8
-                                                                                                                                    i32.const 33296
+                                                                                                                                    i32.const 33305
                                                                                                                                     i32.eq
                                                                                                                                     br_if 0 (;@64;)
                                                                                                                                     local.get 8
-                                                                                                                                    i64.load align=1
-                                                                                                                                    i64.const 8243107338930713204
-                                                                                                                                    i64.ne
+                                                                                                                                    i32.load align=1
+                                                                                                                                    i32.const 1953066601
+                                                                                                                                    i32.ne
                                                                                                                                     br_if 18 (;@46;)
                                                                                                                                   end
                                                                                                                                   local.get 0
@@ -1449,12 +1007,13 @@
                                                                                                                                   i32.load8_u offset=264
                                                                                                                                   i32.const 1
                                                                                                                                   i32.eq
-                                                                                                                                  br_if 31 (;@32;)
+                                                                                                                                  br_if 28 (;@35;)
                                                                                                                                   local.get 0
-                                                                                                                                  i32.const 32
+                                                                                                                                  i32.const 80
                                                                                                                                   i32.add
                                                                                                                                   i32.const 16
                                                                                                                                   i32.add
+                                                                                                                                  local.tee 4
                                                                                                                                   local.get 0
                                                                                                                                   i32.const 264
                                                                                                                                   i32.add
@@ -1463,112 +1022,22 @@
                                                                                                                                   local.tee 2
                                                                                                                                   i32.const 16
                                                                                                                                   i32.add
-                                                                                                                                  local.tee 5
                                                                                                                                   i32.load align=1
                                                                                                                                   i32.store
                                                                                                                                   local.get 0
-                                                                                                                                  i32.const 32
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 8
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 2
-                                                                                                                                  i32.const 8
-                                                                                                                                  i32.add
-                                                                                                                                  local.tee 4
-                                                                                                                                  i64.load align=1
-                                                                                                                                  i64.store
-                                                                                                                                  local.get 0
-                                                                                                                                  local.get 2
-                                                                                                                                  i64.load align=1
-                                                                                                                                  i64.store offset=32
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 264
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 16
-                                                                                                                                  i32.add
-                                                                                                                                  call $_ZN7bxa_abi3bxa6stream6Stream3pop17ha85d24ca86044d3fE
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.load8_u offset=264
-                                                                                                                                  i32.const 1
-                                                                                                                                  i32.eq
-                                                                                                                                  br_if 32 (;@31;)
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 56
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 16
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 5
-                                                                                                                                  i32.load align=1
-                                                                                                                                  i32.store
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 56
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 8
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 4
-                                                                                                                                  i64.load align=1
-                                                                                                                                  i64.store
-                                                                                                                                  local.get 0
-                                                                                                                                  local.get 2
-                                                                                                                                  i64.load align=1
-                                                                                                                                  i64.store offset=56
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 264
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 16
-                                                                                                                                  i32.add
-                                                                                                                                  call $_ZN7bxa_abi3bxa6stream6Stream3pop17h74b77c93ff9f4d6fE
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.load8_u offset=264
-                                                                                                                                  i32.const 1
-                                                                                                                                  i32.eq
-                                                                                                                                  br_if 33 (;@30;)
-                                                                                                                                  local.get 0
                                                                                                                                   i32.const 80
                                                                                                                                   i32.add
-                                                                                                                                  i32.const 24
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 296
-                                                                                                                                  i32.add
-                                                                                                                                  local.tee 4
-                                                                                                                                  i64.load
-                                                                                                                                  i64.store
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 80
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 16
-                                                                                                                                  i32.add
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 264
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 24
+                                                                                                                                  i32.const 8
                                                                                                                                   i32.add
                                                                                                                                   local.tee 6
-                                                                                                                                  i64.load
-                                                                                                                                  i64.store
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 80
-                                                                                                                                  i32.add
+                                                                                                                                  local.get 2
                                                                                                                                   i32.const 8
                                                                                                                                   i32.add
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 264
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 16
-                                                                                                                                  i32.add
-                                                                                                                                  local.tee 7
-                                                                                                                                  i64.load
+                                                                                                                                  i64.load align=1
                                                                                                                                   i64.store
                                                                                                                                   local.get 0
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 264
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 8
-                                                                                                                                  i32.add
-                                                                                                                                  i64.load
+                                                                                                                                  local.get 2
+                                                                                                                                  i64.load align=1
                                                                                                                                   i64.store offset=80
                                                                                                                                   local.get 0
                                                                                                                                   i32.const 168
@@ -1576,11 +1045,7 @@
                                                                                                                                   i32.const 16
                                                                                                                                   i32.add
                                                                                                                                   local.tee 2
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 32
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 16
-                                                                                                                                  i32.add
+                                                                                                                                  local.get 4
                                                                                                                                   i32.load
                                                                                                                                   i32.store
                                                                                                                                   local.get 0
@@ -1589,16 +1054,55 @@
                                                                                                                                   i32.const 8
                                                                                                                                   i32.add
                                                                                                                                   local.tee 5
-                                                                                                                                  local.get 0
-                                                                                                                                  i32.const 32
-                                                                                                                                  i32.add
-                                                                                                                                  i32.const 8
-                                                                                                                                  i32.add
+                                                                                                                                  local.get 6
                                                                                                                                   i64.load
                                                                                                                                   i64.store
                                                                                                                                   local.get 0
                                                                                                                                   local.get 0
-                                                                                                                                  i64.load offset=32
+                                                                                                                                  i64.load offset=80
+                                                                                                                                  i64.store offset=168
+                                                                                                                                  i64.const 0
+                                                                                                                                  local.set 3
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 264
+                                                                                                                                  i32.add
+                                                                                                                                  i32.const 24
+                                                                                                                                  i32.add
+                                                                                                                                  local.tee 7
+                                                                                                                                  i64.const 0
+                                                                                                                                  i64.store
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 264
+                                                                                                                                  i32.add
+                                                                                                                                  i32.const 16
+                                                                                                                                  i32.add
+                                                                                                                                  local.tee 9
+                                                                                                                                  i64.const 0
+                                                                                                                                  i64.store
+                                                                                                                                  local.get 0
+                                                                                                                                  i64.const 0
+                                                                                                                                  i64.store offset=272
+                                                                                                                                  local.get 0
+                                                                                                                                  i64.const 1000000
+                                                                                                                                  i64.store offset=264
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 168
+                                                                                                                                  i32.add
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 264
+                                                                                                                                  i32.add
+                                                                                                                                  call $_ZN7bxa_api8database3put17ha0a1652047fe13cfE
+                                                                                                                                  local.get 2
+                                                                                                                                  local.get 4
+                                                                                                                                  i32.load
+                                                                                                                                  i32.store
+                                                                                                                                  local.get 5
+                                                                                                                                  local.get 6
+                                                                                                                                  i64.load
+                                                                                                                                  i64.store
+                                                                                                                                  local.get 0
+                                                                                                                                  local.get 0
+                                                                                                                                  i64.load offset=80
                                                                                                                                   i64.store offset=168
                                                                                                                                   local.get 0
                                                                                                                                   i32.const 264
@@ -1607,17 +1111,28 @@
                                                                                                                                   i32.const 168
                                                                                                                                   i32.add
                                                                                                                                   call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
+                                                                                                                                  local.get 2
+                                                                                                                                  i64.const 0
+                                                                                                                                  i64.store
+                                                                                                                                  local.get 5
+                                                                                                                                  i64.const 0
+                                                                                                                                  i64.store
+                                                                                                                                  local.get 0
+                                                                                                                                  i64.const 0
+                                                                                                                                  i64.store offset=168
                                                                                                                                   local.get 0
                                                                                                                                   i64.load offset=264
                                                                                                                                   i64.const 1
                                                                                                                                   i64.ne
-                                                                                                                                  br_if 6 (;@57;)
+                                                                                                                                  br_if 4 (;@59;)
                                                                                                                                   local.get 0
                                                                                                                                   i32.const 136
                                                                                                                                   i32.add
                                                                                                                                   i32.const 24
                                                                                                                                   i32.add
-                                                                                                                                  local.get 4
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 296
+                                                                                                                                  i32.add
                                                                                                                                   i64.load
                                                                                                                                   local.tee 3
                                                                                                                                   i64.store
@@ -1626,7 +1141,7 @@
                                                                                                                                   i32.add
                                                                                                                                   i32.const 16
                                                                                                                                   i32.add
-                                                                                                                                  local.get 6
+                                                                                                                                  local.get 7
                                                                                                                                   i64.load
                                                                                                                                   local.tee 11
                                                                                                                                   i64.store
@@ -1635,20 +1150,21 @@
                                                                                                                                   i32.add
                                                                                                                                   i32.const 8
                                                                                                                                   i32.add
-                                                                                                                                  local.get 7
+                                                                                                                                  local.get 9
                                                                                                                                   i64.load
                                                                                                                                   local.tee 14
                                                                                                                                   i64.store
-                                                                                                                                  local.get 5
-                                                                                                                                  local.get 14
-                                                                                                                                  i64.store
-                                                                                                                                  local.get 2
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 112
+                                                                                                                                  i32.add
+                                                                                                                                  i32.const 8
+                                                                                                                                  i32.add
                                                                                                                                   local.get 11
                                                                                                                                   i64.store
                                                                                                                                   local.get 0
-                                                                                                                                  i32.const 168
+                                                                                                                                  i32.const 112
                                                                                                                                   i32.add
-                                                                                                                                  i32.const 24
+                                                                                                                                  i32.const 16
                                                                                                                                   i32.add
                                                                                                                                   local.get 3
                                                                                                                                   i64.store
@@ -1658,46 +1174,82 @@
                                                                                                                                   local.tee 3
                                                                                                                                   i64.store offset=136
                                                                                                                                   local.get 0
-                                                                                                                                  local.get 3
-                                                                                                                                  i64.store offset=168
-                                                                                                                                  br 7 (;@56;)
+                                                                                                                                  local.get 14
+                                                                                                                                  i64.store offset=112
+                                                                                                                                  br 5 (;@58;)
+                                                                                                                                end
+                                                                                                                                block  ;; label = @63
+                                                                                                                                  local.get 8
+                                                                                                                                  i32.const 33269
+                                                                                                                                  i32.eq
+                                                                                                                                  br_if 0 (;@63;)
+                                                                                                                                  local.get 8
+                                                                                                                                  i32.const 33269
+                                                                                                                                  i32.const 9
+                                                                                                                                  call $memcmp
+                                                                                                                                  br_if 17 (;@46;)
                                                                                                                                 end
                                                                                                                                 local.get 0
                                                                                                                                 i32.const 264
                                                                                                                                 i32.add
+                                                                                                                                i32.const 32768
+                                                                                                                                i32.const 6
+                                                                                                                                call $_ZN5alloc5slice64_$LT$impl$u20$alloc..borrow..ToOwned$u20$for$u20$$u5b$T$u5d$$GT$8to_owned17h00c5f0b8e566256eE
+                                                                                                                                block  ;; label = @63
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.load offset=272
+                                                                                                                                  local.tee 2
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.load offset=268
+                                                                                                                                  i32.ne
+                                                                                                                                  br_if 0 (;@63;)
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 264
+                                                                                                                                  i32.add
+                                                                                                                                  local.get 2
+                                                                                                                                  i32.const 1
+                                                                                                                                  call $_ZN5alloc7raw_vec19RawVec$LT$T$C$A$GT$7reserve17hce929716111abd31E
+                                                                                                                                  local.get 0
+                                                                                                                                  i32.const 272
+                                                                                                                                  i32.add
+                                                                                                                                  i32.load
+                                                                                                                                  local.set 2
+                                                                                                                                end
                                                                                                                                 local.get 0
-                                                                                                                                i32.const 16
+                                                                                                                                i32.load offset=264
+                                                                                                                                local.get 2
                                                                                                                                 i32.add
-                                                                                                                                call $_ZN7bxa_abi3bxa6stream6Stream3pop17h3b5f38b3af1da726E
-                                                                                                                                local.get 0
-                                                                                                                                i32.load8_u offset=264
-                                                                                                                                i32.const 1
-                                                                                                                                i32.eq
-                                                                                                                                br_if 36 (;@26;)
-                                                                                                                                local.get 0
-                                                                                                                                i32.load offset=268
-                                                                                                                                local.set 2
+                                                                                                                                i32.const 32
+                                                                                                                                i32.store8
                                                                                                                                 local.get 0
                                                                                                                                 i32.const 264
                                                                                                                                 i32.add
-                                                                                                                                local.get 0
-                                                                                                                                i32.const 16
+                                                                                                                                i32.const 8
                                                                                                                                 i32.add
-                                                                                                                                call $_ZN7bxa_abi3bxa6stream6Stream3pop17h3b5f38b3af1da726E
-                                                                                                                                local.get 0
-                                                                                                                                i32.load8_u offset=264
+                                                                                                                                local.tee 5
+                                                                                                                                local.get 2
                                                                                                                                 i32.const 1
-                                                                                                                                i32.eq
-                                                                                                                                br_if 37 (;@25;)
+                                                                                                                                i32.add
+                                                                                                                                local.tee 2
+                                                                                                                                i32.store
                                                                                                                                 local.get 0
-                                                                                                                                i32.load offset=268
-                                                                                                                                local.set 5
+                                                                                                                                i32.const 136
+                                                                                                                                i32.add
+                                                                                                                                i32.const 8
+                                                                                                                                i32.add
+                                                                                                                                local.tee 4
+                                                                                                                                local.get 2
+                                                                                                                                i32.store
+                                                                                                                                local.get 0
+                                                                                                                                local.get 0
+                                                                                                                                i64.load offset=264
+                                                                                                                                i64.store offset=136
                                                                                                                                 i32.const 32
                                                                                                                                 i32.const 1
                                                                                                                                 call $__rust_alloc
-                                                                                                                                local.tee 4
+                                                                                                                                local.tee 2
                                                                                                                                 i32.eqz
-                                                                                                                                br_if 38 (;@24;)
+                                                                                                                                br_if 28 (;@34;)
                                                                                                                                 local.get 0
                                                                                                                                 i32.const 188
                                                                                                                                 i32.add
@@ -1710,23 +1262,23 @@
                                                                                                                                 i64.const 32
                                                                                                                                 i64.store offset=172 align=4
                                                                                                                                 local.get 0
-                                                                                                                                local.get 4
-                                                                                                                                i32.store offset=168
-                                                                                                                                local.get 0
-                                                                                                                                local.get 5
                                                                                                                                 local.get 2
-                                                                                                                                i32.add
-                                                                                                                                i32.store offset=264
+                                                                                                                                i32.store offset=168
+                                                                                                                                local.get 5
+                                                                                                                                local.get 4
+                                                                                                                                i32.load
+                                                                                                                                i32.store
+                                                                                                                                local.get 0
+                                                                                                                                local.get 0
+                                                                                                                                i64.load offset=136
+                                                                                                                                i64.store offset=264
                                                                                                                                 local.get 0
                                                                                                                                 i32.const 168
                                                                                                                                 i32.add
                                                                                                                                 local.get 0
                                                                                                                                 i32.const 264
                                                                                                                                 i32.add
-                                                                                                                                local.get 0
-                                                                                                                                i32.const 268
-                                                                                                                                i32.add
-                                                                                                                                call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
+                                                                                                                                call $_ZN7bxa_abi3bxa4sink4Sink4push17h349bd3a429b8413bE
                                                                                                                                 local.get 0
                                                                                                                                 i32.const 264
                                                                                                                                 i32.add
@@ -1739,9 +1291,7 @@
                                                                                                                                 i32.add
                                                                                                                                 i64.load
                                                                                                                                 i64.store
-                                                                                                                                local.get 0
-                                                                                                                                i32.const 272
-                                                                                                                                i32.add
+                                                                                                                                local.get 5
                                                                                                                                 local.get 0
                                                                                                                                 i64.load offset=176
                                                                                                                                 i64.store
@@ -1760,149 +1310,456 @@
                                                                                                                                 br_if 60 (;@2;)
                                                                                                                                 br 61 (;@1;)
                                                                                                                               end
+                                                                                                                              block  ;; label = @62
+                                                                                                                                local.get 8
+                                                                                                                                i32.const 33317
+                                                                                                                                i32.eq
+                                                                                                                                br_if 0 (;@62;)
+                                                                                                                                local.get 8
+                                                                                                                                i32.const 33317
+                                                                                                                                i32.const 10
+                                                                                                                                call $memcmp
+                                                                                                                                br_if 16 (;@46;)
+                                                                                                                              end
                                                                                                                               local.get 0
-                                                                                                                              i32.const 112
+                                                                                                                              i32.const 264
+                                                                                                                              i32.add
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 16
+                                                                                                                              i32.add
+                                                                                                                              call $_ZN7bxa_abi3bxa6stream6Stream3pop17ha85d24ca86044d3fE
+                                                                                                                              local.get 0
+                                                                                                                              i32.load8_u offset=264
+                                                                                                                              i32.const 1
+                                                                                                                              i32.eq
+                                                                                                                              br_if 28 (;@33;)
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 80
                                                                                                                               i32.add
                                                                                                                               i32.const 16
                                                                                                                               i32.add
+                                                                                                                              local.tee 5
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 264
+                                                                                                                              i32.add
+                                                                                                                              i32.const 1
+                                                                                                                              i32.or
+                                                                                                                              local.tee 2
+                                                                                                                              i32.const 16
+                                                                                                                              i32.add
+                                                                                                                              i32.load align=1
+                                                                                                                              i32.store
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 80
+                                                                                                                              i32.add
+                                                                                                                              i32.const 8
+                                                                                                                              i32.add
+                                                                                                                              local.tee 4
                                                                                                                               local.get 2
+                                                                                                                              i32.const 8
+                                                                                                                              i32.add
+                                                                                                                              i64.load align=1
+                                                                                                                              i64.store
+                                                                                                                              local.get 0
+                                                                                                                              local.get 2
+                                                                                                                              i64.load align=1
+                                                                                                                              i64.store offset=80
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 168
+                                                                                                                              i32.add
+                                                                                                                              i32.const 16
+                                                                                                                              i32.add
+                                                                                                                              local.tee 2
+                                                                                                                              local.get 5
+                                                                                                                              i32.load
+                                                                                                                              i32.store
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 168
+                                                                                                                              i32.add
+                                                                                                                              i32.const 8
+                                                                                                                              i32.add
+                                                                                                                              local.tee 5
+                                                                                                                              local.get 4
                                                                                                                               i64.load
+                                                                                                                              i64.store
+                                                                                                                              local.get 0
+                                                                                                                              local.get 0
+                                                                                                                              i64.load offset=80
+                                                                                                                              i64.store offset=168
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 264
+                                                                                                                              i32.add
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 168
+                                                                                                                              i32.add
+                                                                                                                              call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
+                                                                                                                              i64.const 0
+                                                                                                                              local.set 3
+                                                                                                                              local.get 2
+                                                                                                                              i64.const 0
+                                                                                                                              i64.store
+                                                                                                                              local.get 5
+                                                                                                                              i64.const 0
+                                                                                                                              i64.store
+                                                                                                                              local.get 0
+                                                                                                                              i64.const 0
+                                                                                                                              i64.store offset=168
+                                                                                                                              local.get 0
+                                                                                                                              i64.load offset=264
+                                                                                                                              i64.const 1
+                                                                                                                              i64.ne
+                                                                                                                              br_if 4 (;@57;)
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 136
+                                                                                                                              i32.add
+                                                                                                                              i32.const 24
+                                                                                                                              i32.add
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 296
+                                                                                                                              i32.add
+                                                                                                                              i64.load
+                                                                                                                              local.tee 3
+                                                                                                                              i64.store
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 136
+                                                                                                                              i32.add
+                                                                                                                              i32.const 16
+                                                                                                                              i32.add
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 264
+                                                                                                                              i32.add
+                                                                                                                              i32.const 24
+                                                                                                                              i32.add
+                                                                                                                              i64.load
+                                                                                                                              local.tee 11
+                                                                                                                              i64.store
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 136
+                                                                                                                              i32.add
+                                                                                                                              i32.const 8
+                                                                                                                              i32.add
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 264
+                                                                                                                              i32.add
+                                                                                                                              i32.const 16
+                                                                                                                              i32.add
+                                                                                                                              i64.load
+                                                                                                                              local.tee 14
                                                                                                                               i64.store
                                                                                                                               local.get 0
                                                                                                                               i32.const 112
                                                                                                                               i32.add
                                                                                                                               i32.const 8
                                                                                                                               i32.add
-                                                                                                                              local.get 5
-                                                                                                                              i64.load
+                                                                                                                              local.get 11
+                                                                                                                              i64.store
+                                                                                                                              local.get 0
+                                                                                                                              i32.const 112
+                                                                                                                              i32.add
+                                                                                                                              i32.const 16
+                                                                                                                              i32.add
+                                                                                                                              local.get 3
                                                                                                                               i64.store
                                                                                                                               local.get 0
                                                                                                                               local.get 0
-                                                                                                                              i64.load offset=168
+                                                                                                                              i64.load offset=272
+                                                                                                                              local.tee 3
+                                                                                                                              i64.store offset=136
+                                                                                                                              local.get 0
+                                                                                                                              local.get 14
                                                                                                                               i64.store offset=112
+                                                                                                                              br 5 (;@56;)
+                                                                                                                            end
+                                                                                                                            block  ;; label = @61
+                                                                                                                              local.get 8
+                                                                                                                              i32.const 33309
+                                                                                                                              i32.eq
+                                                                                                                              br_if 0 (;@61;)
+                                                                                                                              local.get 8
+                                                                                                                              i64.load align=1
+                                                                                                                              i64.const 8243107338930713204
+                                                                                                                              i64.ne
+                                                                                                                              br_if 15 (;@46;)
                                                                                                                             end
                                                                                                                             local.get 0
-                                                                                                                            i32.const 136
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            call $_ZN7bxa_abi3bxa6stream6Stream3pop17ha85d24ca86044d3fE
+                                                                                                                            local.get 0
+                                                                                                                            i32.load8_u offset=264
+                                                                                                                            i32.const 1
+                                                                                                                            i32.eq
+                                                                                                                            br_if 28 (;@32;)
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 32
+                                                                                                                            i32.add
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            i32.const 1
+                                                                                                                            i32.or
+                                                                                                                            local.tee 2
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            local.tee 5
+                                                                                                                            i32.load align=1
+                                                                                                                            i32.store
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 32
+                                                                                                                            i32.add
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
+                                                                                                                            local.get 2
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
+                                                                                                                            local.tee 4
+                                                                                                                            i64.load align=1
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            local.get 2
+                                                                                                                            i64.load align=1
+                                                                                                                            i64.store offset=32
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            call $_ZN7bxa_abi3bxa6stream6Stream3pop17ha85d24ca86044d3fE
+                                                                                                                            local.get 0
+                                                                                                                            i32.load8_u offset=264
+                                                                                                                            i32.const 1
+                                                                                                                            i32.eq
+                                                                                                                            br_if 29 (;@31;)
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 56
+                                                                                                                            i32.add
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            local.get 5
+                                                                                                                            i32.load align=1
+                                                                                                                            i32.store
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 56
+                                                                                                                            i32.add
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
+                                                                                                                            local.get 4
+                                                                                                                            i64.load align=1
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            local.get 2
+                                                                                                                            i64.load align=1
+                                                                                                                            i64.store offset=56
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            call $_ZN7bxa_abi3bxa6stream6Stream3pop17h74b77c93ff9f4d6fE
+                                                                                                                            local.get 0
+                                                                                                                            i32.load8_u offset=264
+                                                                                                                            i32.const 1
+                                                                                                                            i32.eq
+                                                                                                                            br_if 30 (;@30;)
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 80
+                                                                                                                            i32.add
+                                                                                                                            i32.const 24
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 296
+                                                                                                                            i32.add
+                                                                                                                            local.tee 4
+                                                                                                                            i64.load
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 80
+                                                                                                                            i32.add
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            i32.const 24
+                                                                                                                            i32.add
+                                                                                                                            local.tee 6
+                                                                                                                            i64.load
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 80
+                                                                                                                            i32.add
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            local.tee 7
+                                                                                                                            i64.load
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
+                                                                                                                            i64.load
+                                                                                                                            i64.store offset=80
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 168
                                                                                                                             i32.add
                                                                                                                             i32.const 16
                                                                                                                             i32.add
                                                                                                                             local.tee 2
                                                                                                                             local.get 0
-                                                                                                                            i32.const 112
+                                                                                                                            i32.const 32
                                                                                                                             i32.add
                                                                                                                             i32.const 16
                                                                                                                             i32.add
+                                                                                                                            i32.load
+                                                                                                                            i32.store
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 168
+                                                                                                                            i32.add
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
+                                                                                                                            local.tee 5
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 32
+                                                                                                                            i32.add
+                                                                                                                            i32.const 8
+                                                                                                                            i32.add
                                                                                                                             i64.load
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            local.get 0
+                                                                                                                            i64.load offset=32
+                                                                                                                            i64.store offset=168
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 264
+                                                                                                                            i32.add
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 168
+                                                                                                                            i32.add
+                                                                                                                            call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
+                                                                                                                            local.get 0
+                                                                                                                            i64.load offset=264
+                                                                                                                            i64.const 1
+                                                                                                                            i64.ne
+                                                                                                                            br_if 5 (;@55;)
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 136
+                                                                                                                            i32.add
+                                                                                                                            i32.const 24
+                                                                                                                            i32.add
+                                                                                                                            local.get 4
+                                                                                                                            i64.load
+                                                                                                                            local.tee 3
+                                                                                                                            i64.store
+                                                                                                                            local.get 0
+                                                                                                                            i32.const 136
+                                                                                                                            i32.add
+                                                                                                                            i32.const 16
+                                                                                                                            i32.add
+                                                                                                                            local.get 6
+                                                                                                                            i64.load
+                                                                                                                            local.tee 11
                                                                                                                             i64.store
                                                                                                                             local.get 0
                                                                                                                             i32.const 136
                                                                                                                             i32.add
                                                                                                                             i32.const 8
                                                                                                                             i32.add
-                                                                                                                            local.tee 5
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 112
-                                                                                                                            i32.add
-                                                                                                                            i32.const 8
-                                                                                                                            i32.add
+                                                                                                                            local.get 7
                                                                                                                             i64.load
+                                                                                                                            local.tee 14
                                                                                                                             i64.store
-                                                                                                                            local.get 0
-                                                                                                                            local.get 0
-                                                                                                                            i64.load offset=112
-                                                                                                                            i64.store offset=136
-                                                                                                                            i32.const 32
-                                                                                                                            i32.const 1
-                                                                                                                            call $__rust_alloc
-                                                                                                                            local.tee 4
-                                                                                                                            i32.eqz
-                                                                                                                            br_if 31 (;@29;)
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 188
-                                                                                                                            i32.add
-                                                                                                                            i32.const 0
-                                                                                                                            i32.store
-                                                                                                                            local.get 0
-                                                                                                                            i64.const 1
-                                                                                                                            i64.store offset=180 align=4
-                                                                                                                            local.get 0
-                                                                                                                            i64.const 32
-                                                                                                                            i64.store offset=172 align=4
-                                                                                                                            local.get 0
-                                                                                                                            local.get 4
-                                                                                                                            i32.store offset=168
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 264
-                                                                                                                            i32.add
-                                                                                                                            i32.const 16
-                                                                                                                            i32.add
-                                                                                                                            local.tee 4
                                                                                                                             local.get 5
-                                                                                                                            i64.load
+                                                                                                                            local.get 14
+                                                                                                                            i64.store
+                                                                                                                            local.get 2
+                                                                                                                            local.get 11
                                                                                                                             i64.store
                                                                                                                             local.get 0
-                                                                                                                            i32.const 288
+                                                                                                                            i32.const 168
                                                                                                                             i32.add
-                                                                                                                            local.get 2
-                                                                                                                            i64.load
+                                                                                                                            i32.const 24
+                                                                                                                            i32.add
+                                                                                                                            local.get 3
                                                                                                                             i64.store
+                                                                                                                            local.get 0
+                                                                                                                            local.get 0
+                                                                                                                            i64.load offset=272
+                                                                                                                            local.tee 3
+                                                                                                                            i64.store offset=136
                                                                                                                             local.get 0
                                                                                                                             local.get 3
-                                                                                                                            i64.store offset=264
-                                                                                                                            local.get 0
-                                                                                                                            local.get 0
-                                                                                                                            i64.load offset=136
-                                                                                                                            i64.store offset=272
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 168
-                                                                                                                            i32.add
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 264
-                                                                                                                            i32.add
-                                                                                                                            call $_ZN7bxa_abi3bxa4sink4Sink4push17hb2509bafd3173b21E
-                                                                                                                            local.get 4
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 168
-                                                                                                                            i32.add
-                                                                                                                            i32.const 16
-                                                                                                                            i32.add
-                                                                                                                            i64.load
-                                                                                                                            i64.store
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 264
-                                                                                                                            i32.add
-                                                                                                                            i32.const 8
-                                                                                                                            i32.add
-                                                                                                                            local.get 0
-                                                                                                                            i64.load offset=176
-                                                                                                                            i64.store
-                                                                                                                            local.get 0
-                                                                                                                            local.get 0
-                                                                                                                            i64.load offset=168
-                                                                                                                            i64.store offset=264
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 80
-                                                                                                                            i32.add
-                                                                                                                            local.get 0
-                                                                                                                            i32.const 264
-                                                                                                                            i32.add
-                                                                                                                            call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
-                                                                                                                            local.get 10
-                                                                                                                            br_if 58 (;@2;)
-                                                                                                                            br 59 (;@1;)
+                                                                                                                            i64.store offset=168
+                                                                                                                            br 6 (;@54;)
                                                                                                                           end
-                                                                                                                          local.get 2
-                                                                                                                          i32.const 65534
-                                                                                                                          i32.gt_u
-                                                                                                                          br_if 6 (;@53;)
                                                                                                                           local.get 0
-                                                                                                                          i32.const 168
+                                                                                                                          i32.const 264
                                                                                                                           i32.add
-                                                                                                                          i32.const 254
-                                                                                                                          call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
                                                                                                                           local.get 0
+                                                                                                                          i32.const 16
+                                                                                                                          i32.add
+                                                                                                                          call $_ZN7bxa_abi3bxa6stream6Stream3pop17h3b5f38b3af1da726E
+                                                                                                                          local.get 0
+                                                                                                                          i32.load8_u offset=264
+                                                                                                                          i32.const 1
+                                                                                                                          i32.eq
+                                                                                                                          br_if 33 (;@26;)
+                                                                                                                          local.get 0
+                                                                                                                          i32.load offset=268
+                                                                                                                          local.set 2
+                                                                                                                          local.get 0
+                                                                                                                          i32.const 264
+                                                                                                                          i32.add
+                                                                                                                          local.get 0
+                                                                                                                          i32.const 16
+                                                                                                                          i32.add
+                                                                                                                          call $_ZN7bxa_abi3bxa6stream6Stream3pop17h3b5f38b3af1da726E
+                                                                                                                          local.get 0
+                                                                                                                          i32.load8_u offset=264
+                                                                                                                          i32.const 1
+                                                                                                                          i32.eq
+                                                                                                                          br_if 34 (;@25;)
+                                                                                                                          local.get 0
+                                                                                                                          i32.load offset=268
+                                                                                                                          local.set 5
+                                                                                                                          i32.const 32
+                                                                                                                          i32.const 1
+                                                                                                                          call $__rust_alloc
+                                                                                                                          local.tee 4
+                                                                                                                          i32.eqz
+                                                                                                                          br_if 35 (;@24;)
+                                                                                                                          local.get 0
+                                                                                                                          i32.const 188
+                                                                                                                          i32.add
+                                                                                                                          i32.const 0
+                                                                                                                          i32.store
+                                                                                                                          local.get 0
+                                                                                                                          i64.const 1
+                                                                                                                          i64.store offset=180 align=4
+                                                                                                                          local.get 0
+                                                                                                                          i64.const 32
+                                                                                                                          i64.store offset=172 align=4
+                                                                                                                          local.get 0
+                                                                                                                          local.get 4
+                                                                                                                          i32.store offset=168
+                                                                                                                          local.get 0
+                                                                                                                          local.get 5
                                                                                                                           local.get 2
-                                                                                                                          i32.store16 offset=264
+                                                                                                                          i32.add
+                                                                                                                          i32.store offset=264
                                                                                                                           local.get 0
                                                                                                                           i32.const 168
                                                                                                                           i32.add
@@ -1910,14 +1767,41 @@
                                                                                                                           i32.const 264
                                                                                                                           i32.add
                                                                                                                           local.get 0
-                                                                                                                          i32.const 266
+                                                                                                                          i32.const 268
                                                                                                                           i32.add
                                                                                                                           call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
                                                                                                                           local.get 0
+                                                                                                                          i32.const 264
+                                                                                                                          i32.add
+                                                                                                                          i32.const 16
+                                                                                                                          i32.add
+                                                                                                                          local.get 0
                                                                                                                           i32.const 168
                                                                                                                           i32.add
-                                                                                                                          local.set 6
-                                                                                                                          br 7 (;@52;)
+                                                                                                                          i32.const 16
+                                                                                                                          i32.add
+                                                                                                                          i64.load
+                                                                                                                          i64.store
+                                                                                                                          local.get 0
+                                                                                                                          i32.const 272
+                                                                                                                          i32.add
+                                                                                                                          local.get 0
+                                                                                                                          i64.load offset=176
+                                                                                                                          i64.store
+                                                                                                                          local.get 0
+                                                                                                                          local.get 0
+                                                                                                                          i64.load offset=168
+                                                                                                                          i64.store offset=264
+                                                                                                                          local.get 0
+                                                                                                                          i32.const 80
+                                                                                                                          i32.add
+                                                                                                                          local.get 0
+                                                                                                                          i32.const 264
+                                                                                                                          i32.add
+                                                                                                                          call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
+                                                                                                                          local.get 10
+                                                                                                                          br_if 57 (;@2;)
+                                                                                                                          br 58 (;@1;)
                                                                                                                         end
                                                                                                                         local.get 0
                                                                                                                         i32.const 112
@@ -1975,7 +1859,7 @@
                                                                                                                       call $__rust_alloc
                                                                                                                       local.tee 4
                                                                                                                       i32.eqz
-                                                                                                                      br_if 29 (;@28;)
+                                                                                                                      br_if 28 (;@29;)
                                                                                                                       local.get 0
                                                                                                                       i32.const 188
                                                                                                                       i32.add
@@ -2051,21 +1935,25 @@
                                                                                                                       br 56 (;@1;)
                                                                                                                     end
                                                                                                                     local.get 0
-                                                                                                                    i32.const 168
+                                                                                                                    i32.const 112
                                                                                                                     i32.add
-                                                                                                                    i32.const 24
+                                                                                                                    i32.const 16
                                                                                                                     i32.add
-                                                                                                                    i64.const 0
-                                                                                                                    i64.store
                                                                                                                     local.get 2
-                                                                                                                    i64.const 0
-                                                                                                                    i64.store
-                                                                                                                    local.get 5
-                                                                                                                    i64.const 0
+                                                                                                                    i64.load
                                                                                                                     i64.store
                                                                                                                     local.get 0
-                                                                                                                    i64.const 0
-                                                                                                                    i64.store offset=168
+                                                                                                                    i32.const 112
+                                                                                                                    i32.add
+                                                                                                                    i32.const 8
+                                                                                                                    i32.add
+                                                                                                                    local.get 5
+                                                                                                                    i64.load
+                                                                                                                    i64.store
+                                                                                                                    local.get 0
+                                                                                                                    local.get 0
+                                                                                                                    i64.load offset=168
+                                                                                                                    i64.store offset=112
                                                                                                                   end
                                                                                                                   local.get 0
                                                                                                                   i32.const 136
@@ -2074,12 +1962,12 @@
                                                                                                                   i32.add
                                                                                                                   local.tee 2
                                                                                                                   local.get 0
-                                                                                                                  i32.const 56
+                                                                                                                  i32.const 112
                                                                                                                   i32.add
                                                                                                                   i32.const 16
                                                                                                                   i32.add
-                                                                                                                  i32.load
-                                                                                                                  i32.store
+                                                                                                                  i64.load
+                                                                                                                  i64.store
                                                                                                                   local.get 0
                                                                                                                   i32.const 136
                                                                                                                   i32.add
@@ -2087,7 +1975,7 @@
                                                                                                                   i32.add
                                                                                                                   local.tee 5
                                                                                                                   local.get 0
-                                                                                                                  i32.const 56
+                                                                                                                  i32.const 112
                                                                                                                   i32.add
                                                                                                                   i32.const 8
                                                                                                                   i32.add
@@ -2095,295 +1983,345 @@
                                                                                                                   i64.store
                                                                                                                   local.get 0
                                                                                                                   local.get 0
-                                                                                                                  i64.load offset=56
+                                                                                                                  i64.load offset=112
                                                                                                                   i64.store offset=136
+                                                                                                                  i32.const 32
+                                                                                                                  i32.const 1
+                                                                                                                  call $__rust_alloc
+                                                                                                                  local.tee 4
+                                                                                                                  i32.eqz
+                                                                                                                  br_if 27 (;@28;)
                                                                                                                   local.get 0
-                                                                                                                  i32.const 264
+                                                                                                                  i32.const 188
                                                                                                                   i32.add
+                                                                                                                  i32.const 0
+                                                                                                                  i32.store
                                                                                                                   local.get 0
-                                                                                                                  i32.const 136
-                                                                                                                  i32.add
-                                                                                                                  call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
-                                                                                                                  i64.const 0
-                                                                                                                  local.set 14
-                                                                                                                  i64.const 0
-                                                                                                                  local.set 15
-                                                                                                                  i64.const 0
-                                                                                                                  local.set 16
-                                                                                                                  i64.const 0
-                                                                                                                  local.set 17
-                                                                                                                  block  ;; label = @56
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=264
-                                                                                                                    i64.const 1
-                                                                                                                    i64.ne
-                                                                                                                    br_if 0 (;@56;)
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 136
-                                                                                                                    i32.add
-                                                                                                                    i32.const 24
-                                                                                                                    i32.add
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 296
-                                                                                                                    i32.add
-                                                                                                                    i64.load
-                                                                                                                    local.tee 17
-                                                                                                                    i64.store
-                                                                                                                    local.get 2
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 264
-                                                                                                                    i32.add
-                                                                                                                    i32.const 24
-                                                                                                                    i32.add
-                                                                                                                    i64.load
-                                                                                                                    local.tee 16
-                                                                                                                    i64.store
-                                                                                                                    local.get 5
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 264
-                                                                                                                    i32.add
-                                                                                                                    i32.const 16
-                                                                                                                    i32.add
-                                                                                                                    i64.load
-                                                                                                                    local.tee 15
-                                                                                                                    i64.store
-                                                                                                                    local.get 0
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=272
-                                                                                                                    local.tee 14
-                                                                                                                    i64.store offset=136
-                                                                                                                  end
+                                                                                                                  i64.const 1
+                                                                                                                  i64.store offset=180 align=4
                                                                                                                   local.get 0
-                                                                                                                  i32.const 264
-                                                                                                                  i32.add
-                                                                                                                  i32.const 24
-                                                                                                                  i32.add
-                                                                                                                  i64.const 0
-                                                                                                                  i64.store
+                                                                                                                  i64.const 32
+                                                                                                                  i64.store offset=172 align=4
+                                                                                                                  local.get 0
+                                                                                                                  local.get 4
+                                                                                                                  i32.store offset=168
                                                                                                                   local.get 0
                                                                                                                   i32.const 264
                                                                                                                   i32.add
                                                                                                                   i32.const 16
                                                                                                                   i32.add
-                                                                                                                  i64.const 0
+                                                                                                                  local.tee 4
+                                                                                                                  local.get 5
+                                                                                                                  i64.load
+                                                                                                                  i64.store
+                                                                                                                  local.get 0
+                                                                                                                  i32.const 288
+                                                                                                                  i32.add
+                                                                                                                  local.get 2
+                                                                                                                  i64.load
+                                                                                                                  i64.store
+                                                                                                                  local.get 0
+                                                                                                                  local.get 3
+                                                                                                                  i64.store offset=264
+                                                                                                                  local.get 0
+                                                                                                                  local.get 0
+                                                                                                                  i64.load offset=136
+                                                                                                                  i64.store offset=272
+                                                                                                                  local.get 0
+                                                                                                                  i32.const 168
+                                                                                                                  i32.add
+                                                                                                                  local.get 0
+                                                                                                                  i32.const 264
+                                                                                                                  i32.add
+                                                                                                                  call $_ZN7bxa_abi3bxa4sink4Sink4push17hb2509bafd3173b21E
+                                                                                                                  local.get 4
+                                                                                                                  local.get 0
+                                                                                                                  i32.const 168
+                                                                                                                  i32.add
+                                                                                                                  i32.const 16
+                                                                                                                  i32.add
+                                                                                                                  i64.load
                                                                                                                   i64.store
                                                                                                                   local.get 0
                                                                                                                   i32.const 264
                                                                                                                   i32.add
                                                                                                                   i32.const 8
                                                                                                                   i32.add
-                                                                                                                  i64.const 0
+                                                                                                                  local.get 0
+                                                                                                                  i64.load offset=176
                                                                                                                   i64.store
                                                                                                                   local.get 0
-                                                                                                                  i64.const 0
+                                                                                                                  local.get 0
+                                                                                                                  i64.load offset=168
                                                                                                                   i64.store offset=264
-                                                                                                                  block  ;; label = @56
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 80
-                                                                                                                    i32.add
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 264
-                                                                                                                    i32.add
-                                                                                                                    i32.const 32
-                                                                                                                    call $memcmp
-                                                                                                                    i32.eqz
-                                                                                                                    br_if 0 (;@56;)
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 168
-                                                                                                                    i32.add
-                                                                                                                    i32.const 24
+                                                                                                                  local.get 0
+                                                                                                                  i32.const 80
+                                                                                                                  i32.add
+                                                                                                                  local.get 0
+                                                                                                                  i32.const 264
+                                                                                                                  i32.add
+                                                                                                                  call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
+                                                                                                                  local.get 10
+                                                                                                                  br_if 53 (;@2;)
+                                                                                                                  br 54 (;@1;)
+                                                                                                                end
+                                                                                                                local.get 0
+                                                                                                                i32.const 168
+                                                                                                                i32.add
+                                                                                                                i32.const 24
+                                                                                                                i32.add
+                                                                                                                i64.const 0
+                                                                                                                i64.store
+                                                                                                                local.get 2
+                                                                                                                i64.const 0
+                                                                                                                i64.store
+                                                                                                                local.get 5
+                                                                                                                i64.const 0
+                                                                                                                i64.store
+                                                                                                                local.get 0
+                                                                                                                i64.const 0
+                                                                                                                i64.store offset=168
+                                                                                                              end
+                                                                                                              local.get 0
+                                                                                                              i32.const 136
+                                                                                                              i32.add
+                                                                                                              i32.const 16
+                                                                                                              i32.add
+                                                                                                              local.tee 2
+                                                                                                              local.get 0
+                                                                                                              i32.const 56
+                                                                                                              i32.add
+                                                                                                              i32.const 16
+                                                                                                              i32.add
+                                                                                                              i32.load
+                                                                                                              i32.store
+                                                                                                              local.get 0
+                                                                                                              i32.const 136
+                                                                                                              i32.add
+                                                                                                              i32.const 8
+                                                                                                              i32.add
+                                                                                                              local.tee 5
+                                                                                                              local.get 0
+                                                                                                              i32.const 56
+                                                                                                              i32.add
+                                                                                                              i32.const 8
+                                                                                                              i32.add
+                                                                                                              i64.load
+                                                                                                              i64.store
+                                                                                                              local.get 0
+                                                                                                              local.get 0
+                                                                                                              i64.load offset=56
+                                                                                                              i64.store offset=136
+                                                                                                              local.get 0
+                                                                                                              i32.const 264
+                                                                                                              i32.add
+                                                                                                              local.get 0
+                                                                                                              i32.const 136
+                                                                                                              i32.add
+                                                                                                              call $_ZN7bxa_api8database3get17hbf02115fd7e2a67dE
+                                                                                                              i64.const 0
+                                                                                                              local.set 14
+                                                                                                              i64.const 0
+                                                                                                              local.set 15
+                                                                                                              i64.const 0
+                                                                                                              local.set 16
+                                                                                                              i64.const 0
+                                                                                                              local.set 17
+                                                                                                              block  ;; label = @54
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=264
+                                                                                                                i64.const 1
+                                                                                                                i64.ne
+                                                                                                                br_if 0 (;@54;)
+                                                                                                                local.get 0
+                                                                                                                i32.const 136
+                                                                                                                i32.add
+                                                                                                                i32.const 24
+                                                                                                                i32.add
+                                                                                                                local.get 0
+                                                                                                                i32.const 296
+                                                                                                                i32.add
+                                                                                                                i64.load
+                                                                                                                local.tee 17
+                                                                                                                i64.store
+                                                                                                                local.get 2
+                                                                                                                local.get 0
+                                                                                                                i32.const 264
+                                                                                                                i32.add
+                                                                                                                i32.const 24
+                                                                                                                i32.add
+                                                                                                                i64.load
+                                                                                                                local.tee 16
+                                                                                                                i64.store
+                                                                                                                local.get 5
+                                                                                                                local.get 0
+                                                                                                                i32.const 264
+                                                                                                                i32.add
+                                                                                                                i32.const 16
+                                                                                                                i32.add
+                                                                                                                i64.load
+                                                                                                                local.tee 15
+                                                                                                                i64.store
+                                                                                                                local.get 0
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=272
+                                                                                                                local.tee 14
+                                                                                                                i64.store offset=136
+                                                                                                              end
+                                                                                                              local.get 0
+                                                                                                              i32.const 264
+                                                                                                              i32.add
+                                                                                                              i32.const 24
+                                                                                                              i32.add
+                                                                                                              i64.const 0
+                                                                                                              i64.store
+                                                                                                              local.get 0
+                                                                                                              i32.const 264
+                                                                                                              i32.add
+                                                                                                              i32.const 16
+                                                                                                              i32.add
+                                                                                                              i64.const 0
+                                                                                                              i64.store
+                                                                                                              local.get 0
+                                                                                                              i32.const 264
+                                                                                                              i32.add
+                                                                                                              i32.const 8
+                                                                                                              i32.add
+                                                                                                              i64.const 0
+                                                                                                              i64.store
+                                                                                                              local.get 0
+                                                                                                              i64.const 0
+                                                                                                              i64.store offset=264
+                                                                                                              block  ;; label = @54
+                                                                                                                local.get 0
+                                                                                                                i32.const 80
+                                                                                                                i32.add
+                                                                                                                local.get 0
+                                                                                                                i32.const 264
+                                                                                                                i32.add
+                                                                                                                i32.const 32
+                                                                                                                call $memcmp
+                                                                                                                i32.eqz
+                                                                                                                br_if 0 (;@54;)
+                                                                                                                local.get 0
+                                                                                                                i32.const 168
+                                                                                                                i32.add
+                                                                                                                i32.const 24
+                                                                                                                i32.add
+                                                                                                                local.set 5
+                                                                                                                local.get 0
+                                                                                                                i32.const 80
+                                                                                                                i32.add
+                                                                                                                i32.const 24
+                                                                                                                i32.add
+                                                                                                                local.set 4
+                                                                                                                i32.const 3
+                                                                                                                local.set 2
+                                                                                                                block  ;; label = @55
+                                                                                                                  loop  ;; label = @56
+                                                                                                                    local.get 2
+                                                                                                                    i32.const -1
+                                                                                                                    i32.eq
+                                                                                                                    br_if 1 (;@55;)
+                                                                                                                    local.get 2
+                                                                                                                    i32.const 3
+                                                                                                                    i32.gt_u
+                                                                                                                    br_if 15 (;@41;)
+                                                                                                                    local.get 5
+                                                                                                                    i64.load
+                                                                                                                    local.tee 3
+                                                                                                                    local.get 4
+                                                                                                                    i64.load
+                                                                                                                    local.tee 11
+                                                                                                                    i64.lt_u
+                                                                                                                    br_if 2 (;@54;)
+                                                                                                                    local.get 5
+                                                                                                                    i32.const -8
                                                                                                                     i32.add
                                                                                                                     local.set 5
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 80
-                                                                                                                    i32.add
-                                                                                                                    i32.const 24
+                                                                                                                    local.get 4
+                                                                                                                    i32.const -8
                                                                                                                     i32.add
                                                                                                                     local.set 4
-                                                                                                                    i32.const 3
+                                                                                                                    local.get 2
+                                                                                                                    i32.const -1
+                                                                                                                    i32.add
                                                                                                                     local.set 2
-                                                                                                                    block  ;; label = @57
-                                                                                                                      loop  ;; label = @58
-                                                                                                                        local.get 2
-                                                                                                                        i32.const -1
-                                                                                                                        i32.eq
-                                                                                                                        br_if 1 (;@57;)
-                                                                                                                        local.get 2
-                                                                                                                        i32.const 3
-                                                                                                                        i32.gt_u
-                                                                                                                        br_if 17 (;@41;)
-                                                                                                                        local.get 5
-                                                                                                                        i64.load
-                                                                                                                        local.tee 3
-                                                                                                                        local.get 4
-                                                                                                                        i64.load
-                                                                                                                        local.tee 11
-                                                                                                                        i64.lt_u
-                                                                                                                        br_if 2 (;@56;)
-                                                                                                                        local.get 5
-                                                                                                                        i32.const -8
-                                                                                                                        i32.add
-                                                                                                                        local.set 5
-                                                                                                                        local.get 4
-                                                                                                                        i32.const -8
-                                                                                                                        i32.add
-                                                                                                                        local.set 4
-                                                                                                                        local.get 2
-                                                                                                                        i32.const -1
-                                                                                                                        i32.add
-                                                                                                                        local.set 2
-                                                                                                                        local.get 3
-                                                                                                                        local.get 11
-                                                                                                                        i64.le_u
-                                                                                                                        br_if 0 (;@58;)
-                                                                                                                      end
-                                                                                                                    end
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 56
-                                                                                                                    i32.add
-                                                                                                                    local.get 0
-                                                                                                                    i32.const 32
-                                                                                                                    i32.add
-                                                                                                                    i32.const 20
-                                                                                                                    call $memcmp
-                                                                                                                    i32.eqz
-                                                                                                                    br_if 0 (;@56;)
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=176
-                                                                                                                    local.tee 3
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=88
-                                                                                                                    local.tee 18
-                                                                                                                    i64.sub
-                                                                                                                    local.tee 19
                                                                                                                     local.get 3
-                                                                                                                    i64.gt_u
-                                                                                                                    local.set 5
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=104
-                                                                                                                    local.set 3
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=96
-                                                                                                                    local.set 11
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=192
-                                                                                                                    local.set 20
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=184
-                                                                                                                    local.set 21
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=168
-                                                                                                                    local.tee 22
-                                                                                                                    local.get 0
-                                                                                                                    i64.load offset=80
-                                                                                                                    local.tee 23
-                                                                                                                    i64.sub
-                                                                                                                    local.tee 24
-                                                                                                                    local.get 22
+                                                                                                                    local.get 11
                                                                                                                     i64.le_u
-                                                                                                                    br_if 6 (;@50;)
-                                                                                                                    local.get 19
-                                                                                                                    i64.const -1
-                                                                                                                    i64.add
-                                                                                                                    local.tee 22
-                                                                                                                    local.get 19
-                                                                                                                    i64.gt_u
-                                                                                                                    local.get 5
-                                                                                                                    i32.add
-                                                                                                                    local.set 5
-                                                                                                                    br 7 (;@49;)
+                                                                                                                    br_if 0 (;@56;)
                                                                                                                   end
-                                                                                                                  i32.const 0
-                                                                                                                  local.set 2
-                                                                                                                  br 43 (;@12;)
                                                                                                                 end
-                                                                                                                i32.const 8
-                                                                                                                local.set 6
-                                                                                                                local.get 9
-                                                                                                                br_if 44 (;@10;)
+                                                                                                                local.get 0
+                                                                                                                i32.const 56
+                                                                                                                i32.add
+                                                                                                                local.get 0
+                                                                                                                i32.const 32
+                                                                                                                i32.add
+                                                                                                                i32.const 20
+                                                                                                                call $memcmp
+                                                                                                                i32.eqz
+                                                                                                                br_if 0 (;@54;)
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=176
+                                                                                                                local.tee 3
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=88
+                                                                                                                local.tee 18
+                                                                                                                i64.sub
+                                                                                                                local.tee 19
+                                                                                                                local.get 3
+                                                                                                                i64.gt_u
+                                                                                                                local.set 5
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=104
+                                                                                                                local.set 3
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=96
+                                                                                                                local.set 11
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=192
+                                                                                                                local.set 20
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=184
+                                                                                                                local.set 21
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=168
+                                                                                                                local.tee 22
+                                                                                                                local.get 0
+                                                                                                                i64.load offset=80
+                                                                                                                local.tee 23
+                                                                                                                i64.sub
+                                                                                                                local.tee 24
+                                                                                                                local.get 22
+                                                                                                                i64.le_u
+                                                                                                                br_if 4 (;@50;)
+                                                                                                                local.get 19
+                                                                                                                i64.const -1
+                                                                                                                i64.add
+                                                                                                                local.tee 22
+                                                                                                                local.get 19
+                                                                                                                i64.gt_u
+                                                                                                                local.get 5
+                                                                                                                i32.add
+                                                                                                                local.set 5
+                                                                                                                br 5 (;@49;)
                                                                                                               end
-                                                                                                              i64.const 0
-                                                                                                              local.set 3
-                                                                                                              local.get 2
-                                                                                                              br_if 44 (;@9;)
-                                                                                                              br 45 (;@8;)
+                                                                                                              i32.const 0
+                                                                                                              local.set 2
+                                                                                                              br 41 (;@12;)
                                                                                                             end
-                                                                                                            local.get 0
-                                                                                                            i32.const 168
-                                                                                                            i32.add
-                                                                                                            i32.const 255
-                                                                                                            call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
-                                                                                                            local.get 0
-                                                                                                            local.get 2
-                                                                                                            i32.store offset=264
-                                                                                                            local.get 0
-                                                                                                            i32.const 168
-                                                                                                            i32.add
-                                                                                                            local.get 0
-                                                                                                            i32.const 264
-                                                                                                            i32.add
-                                                                                                            local.get 0
-                                                                                                            i32.const 268
-                                                                                                            i32.add
-                                                                                                            call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
-                                                                                                            local.get 0
-                                                                                                            i32.const 168
-                                                                                                            i32.add
+                                                                                                            i32.const 8
                                                                                                             local.set 6
+                                                                                                            local.get 9
+                                                                                                            br_if 42 (;@10;)
                                                                                                           end
-                                                                                                          local.get 6
-                                                                                                          local.get 5
-                                                                                                          local.get 5
-                                                                                                          local.get 2
-                                                                                                          i32.add
-                                                                                                          call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
-                                                                                                          block  ;; label = @52
-                                                                                                            local.get 4
-                                                                                                            i32.eqz
-                                                                                                            br_if 0 (;@52;)
-                                                                                                            local.get 5
-                                                                                                            local.get 4
-                                                                                                            i32.const 1
-                                                                                                            call $__rust_dealloc
-                                                                                                          end
-                                                                                                          local.get 0
-                                                                                                          i32.const 264
-                                                                                                          i32.add
-                                                                                                          i32.const 16
-                                                                                                          i32.add
-                                                                                                          local.get 0
-                                                                                                          i32.const 168
-                                                                                                          i32.add
-                                                                                                          i32.const 16
-                                                                                                          i32.add
-                                                                                                          i64.load
-                                                                                                          i64.store
-                                                                                                          local.get 0
-                                                                                                          i32.const 264
-                                                                                                          i32.add
-                                                                                                          i32.const 8
-                                                                                                          i32.add
-                                                                                                          local.get 0
-                                                                                                          i32.const 168
-                                                                                                          i32.add
-                                                                                                          i32.const 8
-                                                                                                          i32.add
-                                                                                                          i64.load
-                                                                                                          i64.store
-                                                                                                          local.get 0
-                                                                                                          local.get 0
-                                                                                                          i64.load offset=168
-                                                                                                          i64.store offset=264
-                                                                                                          local.get 0
-                                                                                                          i32.const 80
-                                                                                                          i32.add
-                                                                                                          local.get 0
-                                                                                                          i32.const 264
-                                                                                                          i32.add
-                                                                                                          call $_ZN7bxa_abi3bxa4sink4Sink18finalize_panicking17haad6d4df4c6ba757E
-                                                                                                          local.get 10
-                                                                                                          br_if 49 (;@2;)
-                                                                                                          br 50 (;@1;)
+                                                                                                          i64.const 0
+                                                                                                          local.set 3
+                                                                                                          local.get 7
+                                                                                                          br_if 42 (;@9;)
+                                                                                                          br 43 (;@8;)
                                                                                                         end
                                                                                                         local.get 0
                                                                                                         i32.const 264
@@ -2538,7 +2476,7 @@
                                                                                                       i32.eqz
                                                                                                       br_if 36 (;@13;)
                                                                                                     end
-                                                                                                    i32.const 33476
+                                                                                                    i32.const 33492
                                                                                                     call $_ZN4core9panicking5panic17hb7cb5b256fd27bcfE
                                                                                                     unreachable
                                                                                                   end
@@ -2644,7 +2582,7 @@
                                                                                                 local.set 2
                                                                                                 br 32 (;@14;)
                                                                                               end
-                                                                                              i32.const 33500
+                                                                                              i32.const 33516
                                                                                               call $_ZN4core9panicking5panic17hb7cb5b256fd27bcfE
                                                                                               unreachable
                                                                                             end
@@ -2686,13 +2624,13 @@
                                                                                     call $_ZN4core9panicking18panic_bounds_check17h8e3d7d625bb942bbE
                                                                                     unreachable
                                                                                   end
-                                                                                  i32.const 33190
+                                                                                  i32.const 33203
                                                                                   i32.const 43
                                                                                   i32.const 3
                                                                                   call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                                                                   unreachable
                                                                                 end
-                                                                                i32.const 33190
+                                                                                i32.const 33203
                                                                                 i32.const 43
                                                                                 i32.const 3
                                                                                 call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
@@ -2707,15 +2645,15 @@
                                                                             i64.const 8
                                                                             i64.shr_u
                                                                             i32.wrap_i64
-                                                                            local.set 5
-                                                                            br 31 (;@5;)
+                                                                            local.set 2
+                                                                            br 30 (;@6;)
                                                                           end
                                                                           i32.const 32
                                                                           i32.const 1
                                                                           call $rust_oom
                                                                           unreachable
                                                                         end
-                                                                        i32.const 33190
+                                                                        i32.const 33203
                                                                         i32.const 43
                                                                         local.get 0
                                                                         i32.load8_u offset=265
@@ -2727,28 +2665,28 @@
                                                                       call $rust_oom
                                                                       unreachable
                                                                     end
-                                                                    i32.const 33190
+                                                                    i32.const 33203
                                                                     i32.const 43
                                                                     local.get 0
                                                                     i32.load8_u offset=265
                                                                     call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                                                     unreachable
                                                                   end
-                                                                  i32.const 33190
+                                                                  i32.const 33203
                                                                   i32.const 43
                                                                   local.get 0
                                                                   i32.load8_u offset=265
                                                                   call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                                                   unreachable
                                                                 end
-                                                                i32.const 33190
+                                                                i32.const 33203
                                                                 i32.const 43
                                                                 local.get 0
                                                                 i32.load8_u offset=265
                                                                 call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                                                 unreachable
                                                               end
-                                                              i32.const 33190
+                                                              i32.const 33203
                                                               i32.const 43
                                                               local.get 0
                                                               i32.load8_u offset=265
@@ -2765,19 +2703,19 @@
                                                           call $rust_oom
                                                           unreachable
                                                         end
-                                                        local.get 5
+                                                        local.get 2
                                                         i32.const 8
                                                         call $rust_oom
                                                         unreachable
                                                       end
-                                                      i32.const 33190
+                                                      i32.const 33203
                                                       i32.const 43
                                                       local.get 0
                                                       i32.load8_u offset=265
                                                       call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                                       unreachable
                                                     end
-                                                    i32.const 33190
+                                                    i32.const 33203
                                                     i32.const 43
                                                     local.get 0
                                                     i32.load8_u offset=265
@@ -2789,14 +2727,14 @@
                                                   call $rust_oom
                                                   unreachable
                                                 end
-                                                i32.const 33190
+                                                i32.const 33203
                                                 i32.const 43
                                                 local.get 0
                                                 i32.load8_u offset=265
                                                 call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                                 unreachable
                                               end
-                                              i32.const 33190
+                                              i32.const 33203
                                               i32.const 43
                                               local.get 0
                                               i32.load8_u offset=265
@@ -2808,14 +2746,14 @@
                                             call $rust_oom
                                             unreachable
                                           end
-                                          i32.const 33190
+                                          i32.const 33203
                                           i32.const 43
                                           local.get 0
                                           i32.load8_u offset=265
                                           call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                           unreachable
                                         end
-                                        i32.const 33190
+                                        i32.const 33203
                                         i32.const 43
                                         local.get 0
                                         i32.load8_u offset=265
@@ -2827,14 +2765,14 @@
                                       call $rust_oom
                                       unreachable
                                     end
-                                    i32.const 33190
+                                    i32.const 33203
                                     i32.const 43
                                     local.get 0
                                     i32.load8_u offset=265
                                     call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
                                     unreachable
                                   end
-                                  i32.const 33190
+                                  i32.const 33203
                                   i32.const 43
                                   local.get 0
                                   i32.load8_u offset=265
@@ -2846,7 +2784,7 @@
                                 call $rust_oom
                                 unreachable
                               end
-                              i32.const 33190
+                              i32.const 33203
                               i32.const 43
                               local.get 2
                               call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
@@ -2940,7 +2878,7 @@
                                 i32.eqz
                                 br_if 1 (;@13;)
                               end
-                              i32.const 33476
+                              i32.const 33492
                               call $_ZN4core9panicking5panic17hb7cb5b256fd27bcfE
                               unreachable
                             end
@@ -3131,6 +3069,32 @@
                             local.get 0
                             local.get 2
                             i32.store offset=136
+                            local.get 0
+                            i32.const 264
+                            i32.add
+                            i32.const 32774
+                            i32.const 8
+                            call $_ZN5alloc5slice64_$LT$impl$u20$alloc..borrow..ToOwned$u20$for$u20$$u5b$T$u5d$$GT$8to_owned17h00c5f0b8e566256eE
+                            local.get 0
+                            i32.const 136
+                            i32.add
+                            local.get 0
+                            i32.const 264
+                            i32.add
+                            call $_ZN7bxa_abi3bxa4sink4Sink4push17h349bd3a429b8413bE
+                            local.get 0
+                            i32.const 264
+                            i32.add
+                            i32.const 32782
+                            i32.const 5
+                            call $_ZN5alloc5slice64_$LT$impl$u20$alloc..borrow..ToOwned$u20$for$u20$$u5b$T$u5d$$GT$8to_owned17h00c5f0b8e566256eE
+                            local.get 0
+                            i32.const 136
+                            i32.add
+                            local.get 0
+                            i32.const 264
+                            i32.add
+                            call $_ZN7bxa_abi3bxa4sink4Sink4push17h349bd3a429b8413bE
                             local.get 0
                             i32.const 264
                             i32.add
@@ -3335,9 +3299,11 @@
                       i32.add
                       local.set 12
                       i32.const 0
+                      local.set 5
+                      i32.const 0
                       local.set 4
                       i32.const 0
-                      local.set 5
+                      local.set 2
                       loop  ;; label = @10
                         local.get 0
                         i32.const 264
@@ -3350,29 +3316,22 @@
                         i32.load8_u offset=264
                         i32.const 1
                         i32.eq
-                        br_if 4 (;@6;)
+                        br_if 3 (;@7;)
                         local.get 12
                         i64.load
                         local.set 3
                         block  ;; label = @11
-                          local.get 5
                           local.get 2
+                          local.get 7
                           i32.ne
                           br_if 0 (;@11;)
+                          local.get 4
                           local.get 2
                           i32.const 1
                           i32.add
                           local.tee 7
-                          local.get 2
-                          i32.lt_u
-                          br_if 4 (;@7;)
-                          local.get 2
-                          i32.const 1
-                          i32.shl
-                          local.tee 13
                           local.get 7
-                          local.get 7
-                          local.get 13
+                          local.get 4
                           i32.lt_u
                           select
                           local.tee 7
@@ -3383,86 +3342,84 @@
                           i64.const 32
                           i64.shr_u
                           i32.wrap_i64
-                          br_if 4 (;@7;)
+                          br_if 6 (;@5;)
                           local.get 11
                           i32.wrap_i64
                           local.tee 13
                           i32.const 0
                           i32.lt_s
-                          br_if 4 (;@7;)
+                          br_if 6 (;@5;)
                           block  ;; label = @12
-                            block  ;; label = @13
-                              local.get 2
-                              i32.eqz
-                              br_if 0 (;@13;)
-                              local.get 6
-                              local.get 2
-                              i32.const 3
-                              i32.shl
-                              i32.const 8
-                              local.get 13
-                              call $__rust_realloc
-                              local.tee 6
-                              br_if 1 (;@12;)
-                              br 9 (;@4;)
-                            end
-                            local.get 13
-                            i32.const 8
-                            call $__rust_alloc
-                            local.tee 6
+                            local.get 2
                             i32.eqz
-                            br_if 8 (;@4;)
+                            br_if 0 (;@12;)
+                            local.get 6
+                            local.get 5
+                            i32.const 8
+                            local.get 13
+                            call $__rust_realloc
+                            local.tee 6
+                            br_if 1 (;@11;)
+                            br 8 (;@4;)
                           end
-                          local.get 7
-                          local.set 2
+                          local.get 13
+                          i32.const 8
+                          call $__rust_alloc
+                          local.tee 6
+                          i32.eqz
+                          br_if 7 (;@4;)
                         end
                         local.get 6
-                        local.get 4
+                        local.get 5
                         i32.add
                         local.get 3
                         i64.store
-                        local.get 4
-                        i32.const 8
-                        i32.add
-                        local.set 4
-                        local.get 5
-                        i32.const 1
-                        i32.add
-                        local.tee 5
-                        local.get 9
-                        i32.lt_u
-                        br_if 0 (;@10;)
-                      end
-                      local.get 5
-                      i32.const 3
-                      i32.shl
-                      local.set 4
-                      i64.const 0
-                      local.set 3
-                      local.get 6
-                      local.set 5
-                      loop  ;; label = @10
-                        local.get 5
-                        i64.load
-                        local.get 3
-                        i64.add
-                        local.set 3
                         local.get 5
                         i32.const 8
                         i32.add
                         local.set 5
                         local.get 4
-                        i32.const -8
+                        i32.const 2
                         i32.add
-                        local.tee 4
+                        local.set 4
+                        local.get 2
+                        i32.const 1
+                        i32.add
+                        local.tee 2
+                        local.get 9
+                        i32.lt_u
                         br_if 0 (;@10;)
                       end
                       local.get 2
+                      i32.const 3
+                      i32.shl
+                      local.set 5
+                      i64.const 0
+                      local.set 3
+                      local.get 6
+                      local.set 2
+                      loop  ;; label = @10
+                        local.get 2
+                        i64.load
+                        local.get 3
+                        i64.add
+                        local.set 3
+                        local.get 2
+                        i32.const 8
+                        i32.add
+                        local.set 2
+                        local.get 5
+                        i32.const -8
+                        i32.add
+                        local.tee 5
+                        br_if 0 (;@10;)
+                      end
+                      local.get 7
                       i32.eqz
                       br_if 1 (;@8;)
                     end
                     local.get 6
-                    local.get 2
+                    local.get 7
                     i32.const 3
                     i32.shl
                     i32.const 8
@@ -3526,26 +3483,26 @@
                   br_if 5 (;@2;)
                   br 6 (;@1;)
                 end
-                call $_ZN5alloc7raw_vec17capacity_overflow17hf2acb48acb5ae20aE
-                unreachable
+                local.get 0
+                i32.load8_u offset=265
+                local.set 2
+                local.get 7
+                i32.eqz
+                br_if 0 (;@6;)
+                local.get 6
+                local.get 7
+                i32.const 3
+                i32.shl
+                i32.const 8
+                call $__rust_dealloc
               end
-              local.get 0
-              i32.load8_u offset=265
-              local.set 5
+              i32.const 33203
+              i32.const 43
               local.get 2
-              i32.eqz
-              br_if 0 (;@5;)
-              local.get 6
-              local.get 2
-              i32.const 3
-              i32.shl
-              i32.const 8
-              call $__rust_dealloc
+              call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
+              unreachable
             end
-            i32.const 33190
-            i32.const 43
-            local.get 5
-            call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
+            call $_ZN5alloc7raw_vec17capacity_overflow17hf2acb48acb5ae20aE
             unreachable
           end
           local.get 13
@@ -4448,7 +4405,7 @@
         call $rust_oom
         unreachable
       end
-      i32.const 33190
+      i32.const 33203
       i32.const 43
       local.get 2
       i32.load8_u offset=57
@@ -4531,6 +4488,87 @@
       local.get 1
       i32.store
     end)
+  (func $_ZN7bxa_abi3bxa4sink4Sink4push17h349bd3a429b8413bE (type 3) (param i32 i32)
+    (local i32 i32 i32)
+    global.get 0
+    i32.const 16
+    i32.sub
+    local.tee 2
+    global.set 0
+    local.get 1
+    i32.load offset=4
+    local.set 3
+    local.get 1
+    i32.load
+    local.set 4
+    block  ;; label = @1
+      block  ;; label = @2
+        local.get 1
+        i32.load offset=8
+        local.tee 1
+        i32.const 253
+        i32.gt_u
+        br_if 0 (;@2;)
+        local.get 0
+        local.get 1
+        call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
+        br 1 (;@1;)
+      end
+      block  ;; label = @2
+        local.get 1
+        i32.const 65534
+        i32.gt_u
+        br_if 0 (;@2;)
+        local.get 0
+        i32.const 254
+        call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
+        local.get 2
+        local.get 1
+        i32.store16 offset=10
+        local.get 0
+        local.get 2
+        i32.const 10
+        i32.add
+        local.get 2
+        i32.const 12
+        i32.add
+        call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
+        br 1 (;@1;)
+      end
+      local.get 0
+      i32.const 255
+      call $_ZN7bxa_abi3bxa4sink4Sink10write_byte17hc30966f9cb142572E
+      local.get 2
+      local.get 1
+      i32.store offset=12
+      local.get 0
+      local.get 2
+      i32.const 12
+      i32.add
+      local.get 2
+      i32.const 16
+      i32.add
+      call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
+    end
+    local.get 0
+    local.get 4
+    local.get 4
+    local.get 1
+    i32.add
+    call $_ZN109_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..SpecExtend$LT$$RF$T$C$core..slice..Iter$LT$T$GT$$GT$$GT$11spec_extend17h9b0684a74e814fbaE
+    block  ;; label = @1
+      local.get 3
+      i32.eqz
+      br_if 0 (;@1;)
+      local.get 4
+      local.get 3
+      i32.const 1
+      call $__rust_dealloc
+    end
+    local.get 2
+    i32.const 16
+    i32.add
+    global.set 0)
   (func $_ZN7bxa_abi3bxa6stream6Stream3pop17h74b77c93ff9f4d6fE (type 3) (param i32 i32)
     (local i32 i32)
     block  ;; label = @1
@@ -4754,11 +4792,6 @@
     local.get 4
     call $_ZN4core5slice20slice_index_len_fail17hb81ac75c4a989ce8E
     unreachable)
-  (func $__rust_dealloc (type 8) (param i32 i32 i32)
-    local.get 0
-    local.get 1
-    local.get 2
-    call $__rg_dealloc)
   (func $_ZN7bxa_abi3bxa6stream6Stream3pop17h5aae0675a8f8a870E (type 3) (param i32 i32)
     (local i32 i32)
     block  ;; label = @1
@@ -4965,6 +4998,11 @@
   (func $_ZN4core5slice20slice_index_len_fail17hb81ac75c4a989ce8E (type 3) (param i32 i32)
     call $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E
     unreachable)
+  (func $__rust_dealloc (type 8) (param i32 i32 i32)
+    local.get 0
+    local.get 1
+    local.get 2
+    call $__rg_dealloc)
   (func $_ZN4core9panicking18panic_bounds_check17h8e3d7d625bb942bbE (type 3) (param i32 i32)
     call $_ZN4core9panicking9panic_fmt17h8a97af3c4a58de81E
     unreachable)
@@ -4981,7 +5019,7 @@
     local.get 3
     call $__rg_realloc)
   (func $_ZN5alloc7raw_vec17capacity_overflow17hf2acb48acb5ae20aE (type 7)
-    i32.const 33380
+    i32.const 33396
     call $_ZN4core9panicking5panic17hb7cb5b256fd27bcfE
     unreachable)
   (func $deploy (type 7)
@@ -5175,14 +5213,14 @@
         global.set 0
         return
       end
-      i32.const 33356
+      i32.const 33369
       i32.const 24
       local.get 0
       i32.load8_u offset=97
       call $_ZN4core6result13unwrap_failed17hcec8e8185e6d4830E
       unreachable
     end
-    i32.const 33356
+    i32.const 33369
     i32.const 24
     local.get 0
     i32.load8_u offset=97
@@ -5413,13 +5451,13 @@
         local.get 3
         i32.const 2
         i32.shl
-        i32.const 33528
+        i32.const 33544
         i32.add
         local.tee 3
         i32.eqz
         br_if 0 (;@2;)
         local.get 2
-        i32.const 33524
+        i32.const 33540
         i32.store offset=4
         local.get 2
         local.get 3
@@ -5433,7 +5471,7 @@
         local.get 2
         i32.const 4
         i32.add
-        i32.const 33428
+        i32.const 33444
         call $_ZN9wee_alloc17alloc_with_refill17hf098685871d9df6eE
         local.set 1
         local.get 3
@@ -5444,21 +5482,21 @@
       end
       local.get 2
       i32.const 0
-      i32.load offset=33524
+      i32.load offset=33540
       i32.store offset=8
       local.get 0
       local.get 1
       local.get 2
       i32.const 8
       i32.add
-      i32.const 33380
-      i32.const 33452
+      i32.const 33396
+      i32.const 33468
       call $_ZN9wee_alloc17alloc_with_refill17hf098685871d9df6eE
       local.set 1
       i32.const 0
       local.get 2
       i32.load offset=8
-      i32.store offset=33524
+      i32.store offset=33540
     end
     local.get 2
     i32.const 16
@@ -5506,13 +5544,13 @@
         local.get 0
         i32.const 2
         i32.shl
-        i32.const 33528
+        i32.const 33544
         i32.add
         local.tee 0
         i32.eqz
         br_if 0 (;@2;)
         local.get 3
-        i32.const 33524
+        i32.const 33540
         i32.store offset=8
         local.get 3
         local.get 0
@@ -5527,7 +5565,7 @@
         local.get 3
         i32.const 8
         i32.add
-        i32.const 33428
+        i32.const 33444
         call $_ZN9wee_alloc8WeeAlloc12dealloc_impl28_$u7b$$u7b$closure$u7d$$u7d$17h78220dde08d1f3d8E
         local.get 0
         local.get 3
@@ -5537,7 +5575,7 @@
       end
       local.get 3
       i32.const 0
-      i32.load offset=33524
+      i32.load offset=33540
       i32.store offset=12
       local.get 3
       i32.const 4
@@ -5545,13 +5583,13 @@
       local.get 3
       i32.const 12
       i32.add
-      i32.const 33380
-      i32.const 33452
+      i32.const 33396
+      i32.const 33468
       call $_ZN9wee_alloc8WeeAlloc12dealloc_impl28_$u7b$$u7b$closure$u7d$$u7d$17h78220dde08d1f3d8E
       i32.const 0
       local.get 3
       i32.load offset=12
-      i32.store offset=33524
+      i32.store offset=33540
     end
     local.get 3
     i32.const 16
@@ -5628,8 +5666,8 @@
     local.get 4
     i32.const 12
     i32.add
-    i32.const 33380
-    i32.const 33404
+    i32.const 33396
+    i32.const 33420
     call $_ZN9wee_alloc17alloc_with_refill17hf098685871d9df6eE
     local.set 2
     local.get 1
@@ -6358,14 +6396,14 @@
   (table (;0;) 10 10 anyfunc)
   (memory (;0;) 1)
   (global (;0;) (mut i32) (i32.const 32768))
-  (global (;1;) i32 (i32.const 34552))
-  (global (;2;) i32 (i32.const 34552))
+  (global (;1;) i32 (i32.const 34568))
+  (global (;2;) i32 (i32.const 34568))
   (export "memory" (memory 0))
   (export "__heap_base" (global 1))
   (export "__data_end" (global 2))
   (export "call" (func $call))
   (export "deploy" (func $deploy))
   (elem (;0;) (i32.const 1) $_ZN4core3ptr18real_drop_in_place17hb362d9cbd0511fbaE $_ZN70_$LT$wee_alloc..LargeAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$22new_cell_for_free_list17he8633747b3e68f20E $_ZN70_$LT$wee_alloc..LargeAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$13min_cell_size17h36473a24a292ef1eE $_ZN70_$LT$wee_alloc..LargeAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$32should_merge_adjacent_free_cells17h9fb2f0c3765940e8E $_ZN4core3ptr18real_drop_in_place17h7f1c6dba4d8a1f3eE $_ZN88_$LT$wee_alloc..size_classes..SizeClassAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$22new_cell_for_free_list17h7f322e3989781476E $_ZN88_$LT$wee_alloc..size_classes..SizeClassAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$13min_cell_size17h449f13d5e04898a2E $_ZN88_$LT$wee_alloc..size_classes..SizeClassAllocPolicy$u20$as$u20$wee_alloc..AllocPolicy$GT$32should_merge_adjacent_free_cells17h51f2062887788390E $_ZN4core3ptr18real_drop_in_place17hb362d9cbd0511fbaE.100)
-  (data (;0;) (i32.const 32768) "Hello,capacity overflowsrc/liballoc/raw_vec.rs\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\03\03\03\03\03\03\03\03\03\03\03\03\03\03\03\03\04\04\04\04\04\00\00\00\00\00\00\00\00\00\00\00arithmetic operation overflow/Users/admin/.cargo/registry/src/mirrors.ustc.edu.cn-61ef6e0cd06fb9b8/uint-0.5.0/src/lib.rscalled `Result::unwrap()` on an `Err` valuebooadd_u8add_u32add_u64str_helloadd_i32add_i64add_u64_sliceinittransferbalance_ofInvalid method nameexamples/bxa/src/lib.rsargument decoding failed")
-  (data (;1;) (i32.const 33380) "\06\80\00\00\11\00\00\00\17\80\00\00\17\00\00\00\ea\02\00\00\05\00\00\00\01\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00\05\00\00\00\04\00\00\00\04\00\00\00\06\00\00\00\07\00\00\00\08\00\00\00\09\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00.\81\00\00\1d\00\00\00K\81\00\00[\00\00\00)\00\00\00\02\00\00\00\22\82\00\00\13\00\00\005\82\00\00\17\00\00\00\0e\00\00\00\01\00\00\00")
-  (data (;2;) (i32.const 33524) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"))
+  (data (;0;) (i32.const 32768) "Hello,Transferhellocapacity overflowsrc/liballoc/raw_vec.rs\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\02\03\03\03\03\03\03\03\03\03\03\03\03\03\03\03\03\04\04\04\04\04\00\00\00\00\00\00\00\00\00\00\00arithmetic operation overflow/Users/admin/.cargo/registry/src/mirrors.ustc.edu.cn-61ef6e0cd06fb9b8/uint-0.5.0/src/lib.rscalled `Result::unwrap()` on an `Err` valuebooadd_u8add_u32add_u64str_helloadd_i32add_i64add_u64_sliceinittransferbalance_ofInvalid method nameexamples/bxa/src/lib.rsargument decoding failed\00\00\00")
+  (data (;1;) (i32.const 33396) "\13\80\00\00\11\00\00\00$\80\00\00\17\00\00\00\ea\02\00\00\05\00\00\00\01\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00\05\00\00\00\04\00\00\00\04\00\00\00\06\00\00\00\07\00\00\00\08\00\00\00\09\00\00\00\00\00\00\00\01\00\00\00\02\00\00\00\03\00\00\00\04\00\00\00;\81\00\00\1d\00\00\00X\81\00\00[\00\00\00)\00\00\00\02\00\00\00/\82\00\00\13\00\00\00B\82\00\00\17\00\00\00\0e\00\00\00\01\00\00\00")
+  (data (;2;) (i32.const 33540) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00"))

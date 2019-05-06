@@ -143,7 +143,7 @@ pub fn deploy() {
 ```
 
 ## Build contract:
-1.  set stack size to 32 kb is suitable for most contract; use nightly version compiler; wasm is compile target whith LLVM backen and lld linker.
+1 .  set stack size to 32 kb is suitable for most contract; use nightly version compiler; wasm is compile target whith LLVM backen and lld linker.
 ```bash
 RUSTFLAGS="-C link-arg=-zstack-size=32768" cargo +nightly build --release --target wasm32-unknown-unknown
 ```  
@@ -157,16 +157,20 @@ After compiling, at project root will generate a directory named target:
     -/release
       -hello.wasm            ## sub project hello's target file  
 ```
-2. Code optimize to resize target wasm file is important for this code will be saved in blockchain permanently.
+2 . Code optimize to resize target wasm file is important for this code will be saved in blockchain permanently.
 * use wasm-gc after installing:
 ```bash
 cargo install wasm-gc
 wasm-gc ../../target/hello.wasm ./hello.wasm
 ```  
-3. inspect wasm file's size:
+3 . inspect wasm file's size:
 ```bash
 du -sh *
 ```  
+4 . see code with macros extended:
+```bash
+cargo rustc -- -Zunstable-options --pretty=expanded
+```
 ### Example
 * [code](./examples/bxa/src/lib.rs)
 * [shell](./examples/bxa/build.sh)
