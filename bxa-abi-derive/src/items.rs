@@ -13,13 +13,6 @@ pub struct Event {
 	// pub canonical: String,
 	/// The signature of the event.
 	pub method_sig: syn::MethodSig,
-	/// Indexed parameters.
-	/// 
-	/// # Note
-	/// 
-	/// Only up to 4 different parameters can be indexed
-	/// for the same event.
-	pub indexed: Vec<(syn::Pat, syn::Type)>,
 	/// Non-indexed parameters.
 	pub data: Vec<(syn::Pat, syn::Type)>,
 }
@@ -170,12 +163,10 @@ fn has_attribute(attrs: &[syn::Attribute], name: &str) -> bool {
 
 impl Item {
 	fn event_from_trait_item(method_sig: syn::MethodSig) -> Self {
-		let (indexed, non_indexed) = utils::iter_signature(&method_sig)
-			.partition(|&(ref pat, _)| quote! { #pat }.to_string().starts_with("indexed_"));
+		let data = utils::iter_signature(&method_sig).collect();
 		let event = Event {
 			name: method_sig.ident.clone(),
-			indexed: indexed,
-			data: non_indexed,
+			data: data,
 			method_sig: method_sig,
 		};
 		Item::Event(event)
@@ -216,15 +207,15 @@ impl quote::ToTokens for Item {
 						name,
 						method_sig,
 						{
-							let arg_name = event.indexed.iter().map(|&(ref pat, _)| quote!{ #pat});
-							let data_pats = event.data.iter()
-								.map(|&(ref pat, _)| pat);
+							let arg_name = event.data.iter().map(|&(ref pat, _)| quote!{ #pat});
+//							let data_pats = event.data.iter()
+//								.map(|&(ref pat, _)| pat);
 							quote! {
 								let mut sink = ::bxa_abi::bxa::Sink::new(4);
 								sink.push(String::from(#event_name));
 								#(sink.push(#arg_name));*;
 
-								#(sink.push(#data_pats));*;
+								//#(sink.push(#data_pats));*;
 								let payload = sink.finalize_panicking();
 
 								::bxa_api::log(&payload);

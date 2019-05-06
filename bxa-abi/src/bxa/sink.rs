@@ -21,11 +21,6 @@ impl Sink {
 		}
 	}
 
-	/// write all type
-//	pub fn write<T: AbiType>(&mut self, val: T) {
-//		val.encode(self)
-//	}
-
 	/// write a byte
 	pub fn write_byte(&mut self, b: u8){
 		self.preamble.push(b)

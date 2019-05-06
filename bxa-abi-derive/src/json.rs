@@ -181,24 +181,13 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
     fn from(item: &items::Event) -> Self {
         BxaEventEntry {
             name: item.name.to_string(),
-            inputs: item.indexed
+            inputs: item.data
                 .iter()
                 .map(|&(ref pat, ref ty)|
                     Argument {
                         name: quote! { #pat }.to_string(),
                         type_: utils::canonicalize_type(ty),
-                        //indexed: true,
                     }
-                )
-                .chain(
-                    item.data
-                        .iter()
-                        .map(|&(ref pat, ref ty)|
-                            Argument {
-                                name: quote! { #pat }.to_string(),
-                                type_: utils::canonicalize_type(ty),
-                            }
-                        )
                 )
                 .collect(),
         }
