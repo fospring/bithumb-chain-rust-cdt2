@@ -28,8 +28,7 @@ Arguments were encoded as a bytes slice.
 First part is the argument of total length. Rest of are real params. 
 
 ### Types encode
-* String:   
-  * String type, it's encoded by two parts,first is length,second part is bytes.
+* String: String type, it's encoded by two parts,first is length,second part is bytes.
 * bool: It was encode by a byte, true: 1, false 0.
 * uint8: An unsigned integer encoded by a byte,range from [0~255]
 * uint32: An unsigned integer encoded by 4 bytes by little endian. 
