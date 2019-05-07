@@ -48,7 +48,8 @@ First part is the argument of total length. Rest of are real params.
 
 ## Abi generate
 * Feature
-* sample
+* [sample](./examples/bxa/TokenInterface.json)
+
 
 ## Events
 * Add `#[event]` attribute above of a function in trait,macros will generate event for it.
