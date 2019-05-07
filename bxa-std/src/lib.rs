@@ -34,7 +34,7 @@ extern crate uint;
 use byteorder::{LittleEndian, ByteOrder};
 
 pub use alloc::boxed::Box;
-pub use alloc::string::String;
+pub use alloc::string::{String,ToString};
 pub use alloc::str;
 pub use alloc::vec::Vec;
 

@@ -21,7 +21,7 @@ pub mod bxa;
 /// Custom types which AbiType supports
 pub mod types {
 	pub use bxa_std::Vec;
-	pub use bxa_std::String;
+	pub use bxa_std::{String, ToString};
 	pub use bxa_std::types::*;
 }
 

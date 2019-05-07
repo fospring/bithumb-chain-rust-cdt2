@@ -173,7 +173,7 @@ pub fn deploy() {
 }
 ```
 
-Method 2, create a project out of the workspace:
+Method 2, create a project out of the workspace:  
 1 . Create a contract project
 ```bash
 cargo new --lib hello

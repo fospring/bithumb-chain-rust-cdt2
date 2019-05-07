@@ -7,23 +7,35 @@ extern crate bxa_api;
 extern crate bxa_abi;
 extern crate bxa_abi_derive;
 
+#[macro_use]
+extern crate lazy_static;
+
 use bxa_abi_derive::bxa_abi;
 use bxa_abi::types::*;
 use bxa_api as bxa;
 use bxa_api::db;
 
+const SYMBOL: &'static str = "ABC";
+lazy_static! {
+    static ref TOTAL_SUPPLY: U256 = { U256::from(1000000) };
+}
+
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
-    fn constructor(&mut self, receiver: Address, total_supply: U256);
-    fn boo(&mut self) -> bool;
+    fn constructor(&mut self, receiver: Address);
+
+    fn block_hash(&mut self, block_num: u64) -> H256;
+    fn boo(&mut self, x: bool, y: bool) -> bool;
     fn add_u8(&mut self, x: u8, y: u8) -> u8;
     fn add_u32(&mut self, x: u32, y: u32) -> u32;
     fn add_u64(&mut self, x: u64, y: u64) -> u64;
-    fn str_hello(&mut self) -> String;
+    fn str_hello(&mut self, hello: String, name: String) -> String;
     fn add_i32(&mut self, x: i32, y: i32) -> i32;
     fn add_i64(&mut self, x: i64, y: i64) -> i64;
     fn add_u64_slice(&mut self,  arr_u64: Vec<u64>) -> u64;
-    fn init(&mut self, reciver: Address) -> U256;
+
+    fn get_symbol(&mut self) -> String;
+    fn get_total_supply(&mut self) -> U256;
     fn transfer(&mut self,from: Address, _to: Address, _amount: U256) -> bool;
     fn balance_of(&mut self,addr: Address) -> U256;
     #[event]
@@ -33,23 +45,27 @@ pub trait TokenInterface {
 pub struct TokenContract;
 
 impl TokenInterface for TokenContract {
-    /// The constructor
-    fn constructor(&mut self, receiver: Address, total_supply: U256) {
-        // Set up the total supply for the token
-
-        db::put(receiver, total_supply);
+    fn constructor(&mut self, receiver: Address) {
+        db::put(receiver, *TOTAL_SUPPLY);
     }
-    fn boo(&mut self) -> bool{true}
+    fn block_hash(&mut self, block_num: u64) -> H256{
+        bxa::block_hash(block_num)
+    }
+    fn boo(&mut self, x: bool, y: bool) -> bool{
+        x || y
+    }
     fn add_u8(&mut self, x: u8, y: u8) -> u8 {
         x+y
     }
     fn add_u32(&mut self, x: u32, y: u32) -> u32 {x + y}
     fn add_u64(&mut self, x: u64, y: u64) -> u64 {x + y}
 
-    fn str_hello(&mut self) -> String {
-        let mut hello = String::from("Hello,");
-        hello.push(' ');
-        hello
+    fn str_hello(&mut self, hello: String, name: String) -> String {
+        let mut greet = String::from("");
+        greet.push_str(&hello);
+        greet.push(' ');
+        greet.push_str(&name);
+        greet
     }
 
     fn add_i32(&mut self, x: i32, y: i32) -> i32{
@@ -67,12 +83,12 @@ impl TokenInterface for TokenContract {
         result
     }
 
-    fn init(&mut self, reciver: Address) -> U256 {
-        db::put(reciver, U256::from(1000000));
-        let issue_balance = db::get(reciver).unwrap_or(U256::zero());
-        issue_balance
+    fn get_symbol(&mut self) -> String {
+        SYMBOL.to_string()
     }
-
+    fn get_total_supply(&mut self) -> U256 {
+        *TOTAL_SUPPLY
+    }
     fn transfer(&mut self, from: Address, to: Address, amount: U256) -> bool {
         let senderBalance: U256 = db::get(from).unwrap_or_default();
         let recipientBalance: U256 = db::get(to).unwrap_or_default();
@@ -87,7 +103,6 @@ impl TokenInterface for TokenContract {
             true
         }
     }
-
     fn balance_of(&mut self, addr: Address) -> U256 {
         let balance = db::get(addr).unwrap_or(U256::zero());
         balance
