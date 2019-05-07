@@ -32,10 +32,7 @@ use error::{Result, Error};
 
 /// Arguments given to the `bxa_abi` attribute macro.
 struct Args {
-	/// The required name of the endpoint.
 	endpoint_name: String,
-	/// The optional name of the client.
-	client_name: Option<String>,
 }
 
 impl Args {
@@ -50,30 +47,12 @@ impl Args {
 			} else {
 				Err(Error::malformatted_argument(0))
 			}?;
-		let client_name = attr_args
-			.get(1)
-			.map(|meta| {
-				if let syn::NestedMeta::Meta(syn::Meta::Word(ident)) = meta {
-					Ok(ident.to_string())
-				} else {
-					Err(Error::malformatted_argument(1))
-				}
-			})
-			.map(|meta| meta.unwrap());
 		Ok(Args {
 			endpoint_name,
-			client_name,
 		})
 	}
-
-	/// Returns the given endpoint name.
 	pub fn endpoint_name(&self) -> &str {
 		&self.endpoint_name
-	}
-
-	/// Returns the optional client name.
-	pub fn client_name(&self) -> Option<&str> {
-		self.client_name.as_ref().map(|s| s.as_str())
 	}
 }
 
@@ -139,12 +118,7 @@ fn impl_bxa_abi(args: syn::AttributeArgs, input: syn::Item) -> Result<proc_macro
 
 	write_json_abi(&intf)?;
 
-	match args.client_name() {
-		None => generate_bxa_endpoint_wrapper(&intf, args.endpoint_name()),
-		Some(client_name) => {
-			generate_bxa_endpoint_and_client_wrapper(&intf, args.endpoint_name(), client_name)
-		}
-	}
+	generate_bxa_endpoint_wrapper(&intf, args.endpoint_name())
 }
 
 /// Generates the bxa abi code in case of a single provided endpoint.
@@ -175,156 +149,6 @@ fn generate_bxa_endpoint_wrapper(
 		}
 		pub use self::#mod_name_ident::#endpoint_ident;
 	})
-}
-
-/// Generates the bxa abi code in case of a provided endpoint and client.
-fn generate_bxa_endpoint_and_client_wrapper(
-	intf: &items::Interface,
-	endpoint_name: &str,
-	client_name: &str,
-) -> Result<proc_macro2::TokenStream> {
-
-	// FIXME: Code duplication with `generate_bxa_endpoint_and_client_wrapper`
-	//        We might want to fix this, however it is not critical.
-	//        >>>
-	let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
-	let mod_name = format!("bxa_abi_impl_{}", &intf.name().clone());
-	let mod_name_ident = syn::Ident::new(&mod_name, Span::call_site());
-	// FIXME: <<<
-
-	let endpoint_toks = generate_bxa_endpoint(endpoint_name, &intf);
-	let client_toks = generate_bxa_client(client_name, &intf);
-	let endpoint_name_ident = syn::Ident::new(endpoint_name, Span::call_site());
-	let client_name_ident = syn::Ident::new(&client_name, Span::call_site());
-
-	Ok(quote! {
-		#intf
-		#[allow(non_snake_case)]
-		mod #mod_name_ident {
-			extern crate bxa_api;
-			extern crate bxa_abi;
-			use bxa_abi::types::{H160, H256, U256, Address, Vec, String};
-			use super::#name_ident_use;
-			#endpoint_toks
-			#client_toks
-		}
-		pub use self::#mod_name_ident::#endpoint_name_ident;
-		pub use self::#mod_name_ident::#client_name_ident;
-	})
-}
-
-fn generate_bxa_client(client_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {
-	let client_ctor = intf.constructor().map(
-		|signature| utils::produce_signature(
-			&signature.name,
-			&signature.method_sig,
-			quote! {
-				#![allow(unused_mut)]
-				#![allow(unused_variables)]
-				unimplemented!()
-			}
-		)
-	);
-
-	let calls: Vec<proc_macro2::TokenStream> = intf.items().iter().filter_map(|item| {
-		match *item {
-			Item::Signature(ref signature)  => {
-				let argument_push: Vec<proc_macro2::TokenStream> = utils::iter_signature(&signature.method_sig)
-					.map(|(pat, _)| quote! { sink.push(#pat); })
-					.collect();
-				let argument_count_literal = syn::Lit::Int(
-					syn::LitInt::new(argument_push.len() as u64, syn::IntSuffix::Usize, Span::call_site()));
-
-				let result_instance = match signature.method_sig.decl.output {
-					syn::ReturnType::Default => quote!{
-						let mut result = Vec::new();
-					},
-					syn::ReturnType::Type(_, _) => quote!{
-						let mut result = [0u8; 32];
-					},
-				};
-
-				let result_pop = match signature.method_sig.decl.output {
-					syn::ReturnType::Default => None,
-					syn::ReturnType::Type(_, _) => Some(
-						quote!{
-							// let mut stream = bxa_abi::bxa::Stream::new(&result);
-							stream.pop().expect("failed decode call output")
-						}
-					),
-				};
-
-				Some(utils::produce_signature(
-					&signature.name,
-					&signature.method_sig,
-					quote!{
-						#![allow(unused_mut)]
-						#![allow(unused_variables)]
-						let mut payload = Vec::with_capacity(4 + #argument_count_literal * 32);
-
-						let mut sink = bxa_abi::bxa::Sink::new(#argument_count_literal);
-						#(#argument_push)*
-
-						sink.drain_to(&mut payload);
-
-						#result_instance
-
-						bxa_api::call(self.gas.unwrap_or(200000), &self.address, self.value.clone().unwrap_or(U256::zero()), &payload, &mut result[..])
-							.expect("Call failed; todo: allow handling inside contracts");
-
-						#result_pop
-					}
-				))
-			},
-			Item::Event(ref event)  => {
-				Some(utils::produce_signature(
-					&event.name,
-					&event.method_sig,
-					quote!{
-						#![allow(unused_variables)]
-						panic!("cannot use event in client interface");
-					}
-				))
-			},
-			_ => None,
-		}
-	}).collect();
-
-	let client_ident = syn::Ident::new(client_name, Span::call_site());
-	let name_ident = syn::Ident::new(intf.name(), Span::call_site());
-
-	quote! {
-		pub struct #client_ident {
-			gas: Option<u64>,
-			address: Address,
-			value: Option<U256>,
-		}
-
-		impl #client_ident {
-			pub fn new(address: Address) -> Self {
-				#client_ident {
-					gas: None,
-					address: address,
-					value: None,
-				}
-			}
-
-			pub fn gas(mut self, gas: u64) -> Self {
-				self.gas = Some(gas);
-				self
-			}
-
-			pub fn value(mut self, val: U256) -> Self {
-				self.value = Some(val);
-				self
-			}
-		}
-
-		impl #name_ident for #client_ident {
-			#client_ctor
-			#(#calls)*
-		}
-	}
 }
 
 fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_macro2::TokenStream {

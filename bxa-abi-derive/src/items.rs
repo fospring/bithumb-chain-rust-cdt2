@@ -208,14 +208,10 @@ impl quote::ToTokens for Item {
 						method_sig,
 						{
 							let arg_name = event.data.iter().map(|&(ref pat, _)| quote!{ #pat});
-//							let data_pats = event.data.iter()
-//								.map(|&(ref pat, _)| pat);
 							quote! {
 								let mut sink = ::bxa_abi::bxa::Sink::new(4);
 								sink.push(String::from(#event_name));
 								#(sink.push(#arg_name));*;
-
-								//#(sink.push(#data_pats));*;
 								let payload = sink.finalize_panicking();
 
 								::bxa_api::log(&payload);
