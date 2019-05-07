@@ -91,7 +91,6 @@ impl Args {
 /// ```
 ///
 /// Creates an endpoint implementation named `Endpoint2` and a
-/// client implementation named `Client2` for the interface
 /// defined in the `Contract2` trait.
 #[proc_macro_attribute]
 pub fn bxa_abi(

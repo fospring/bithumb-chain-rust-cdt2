@@ -62,12 +62,14 @@ method delete can be extend at feature.
 
 ## Write a contract   
 
-1 .  Create a sub project in workspace
+Method 1,Create a sub project in workspace:  
+
+1 .  Clone the project and create a sub project in workspace
 
 ```bash
+git clone https://github.com/BXA/bxa-rust-cdt
 cd examples
-# project name is hello
-cargo new --lib hello
+cargo new --lib hello # sub project name is hello
 ```  
 
 2 . Add this project to workspace in Cargo.toml at root:  
@@ -86,6 +88,8 @@ bxa-std = {path="../../bxa-std",version = "0.1"}
 bxa-api = {path="../../bxa-api",version = "0.1"}
 bxa-abi = {path="../../bxa-abi",version = "0.1"}
 ```
+or use libs from github of out the workspace:   
+
 4 . Add compile dynamics library option and optimize option in Cargo.toml of this sub project:
 ```toml
 [lib]
@@ -167,6 +171,24 @@ pub fn deploy() {
     endpoint.dispatch_ctor(&bxa_api::input());
 }
 ```
+
+Method 2, create a project out of the workspace:
+1 . Create a contract project
+```bash
+cargo new --lib hello
+```
+2 . Add dependencies at hello project in Cargo.toml from github:
+```toml
+[dependencies]
+bxa-std = {git = "https://github.com/BXA/bxa-rust-cdt"}
+bxa-api = {git = "https://github.com/BXA/bxa-rust-cdt"}
+bxa-abi = {git = "https://github.com/BXA/bxa-rust-cdt"}
+bxa-abi-derive = {git = "https://github.com/BXA/bxa-rust-cdt"}
+```   
+
+3 . Dynamics library option and optimize option are same as method 1.  
+
+4 . Contract structure is same as method 1.
 
 ## Build contract:
 1 .  set stack size to 32 kb is suitable for most contract; use nightly version compiler; wasm is compile target whith LLVM backen and lld linker.
