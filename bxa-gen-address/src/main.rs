@@ -68,7 +68,8 @@ fn main() -> io::Result<()> {
         println!("Path for contract argument: {}", contract);
         ctr_path = contract
     } else {
-        println!("please chose a contract");
+        println!("please chose a contract as a input");
+        println!("for help: ./bxa-gen-address -h");
         panic!();
     }
 
@@ -76,7 +77,8 @@ fn main() -> io::Result<()> {
         println!("Path for abi argument: {}", abi);
         abi_path = abi
     } else {
-        println!("please chose a abi file");
+        println!("please chose a abi file as a input");
+        println!("for help: ./bxa-gen-address -h");
         panic!();
     }
 
