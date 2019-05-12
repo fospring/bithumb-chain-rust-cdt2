@@ -201,6 +201,7 @@ After compiling, at project root will generate a directory named target:
 /target  
   -/debug
   -/json                     ## ABI files save here
+    -/*.json
   -/release
   -/wasm32-unknown-unknown   ## compiled target file save here
     -/release
@@ -220,6 +221,22 @@ du -sh *
 ```bash
 cargo rustc -- -Zunstable-options --pretty=expanded
 ```  
+
+## Generate contract address
+1 . switch to sub project bxa-rust-cdt/bxa-gen-address, build this sub project.
+```bash
+cd ./bxa-gen-addresscargo build
+```
+2 . copy the binary executable file `bxa-gen-address` from path `./target/debug` to `./bxa-gen-address`  
+3 . show usage:  
+```bash
+./bxa-gen-address -h
+```  
+4 . generate address from contract for abi file:  
+```bash
+./bxa-gen-address ./sample.wasm ./sample.json
+```  
+5. After these steps, sample.json's Address field will be generate by sample.wasm.
 ### Example
 * [code](./examples/bxa/src/lib.rs)
 * [shell](./examples/bxa/build.sh)

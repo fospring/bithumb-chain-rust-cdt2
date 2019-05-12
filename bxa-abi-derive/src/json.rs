@@ -119,7 +119,7 @@ pub struct BxaFunctionEntry {
 
 #[derive(Serialize, Debug)]
 pub struct BxaAbi{
-    pub verison: String,
+    pub version: String,
     pub address: String,
     pub functions: Vec<BxaFunctionEntry>,
     pub events: Vec<BxaEventEntry>,
@@ -134,7 +134,7 @@ pub struct BxaEventEntry {
 impl<'a> From<&'a items::Interface> for BxaAbi {
     fn from(intf: &items::Interface) -> Self {
         let mut result = BxaAbi{
-            verison: "1.0".to_string(),
+			version: "1.0".to_string(),
             address: "".to_string(),
             functions: Vec::new(),
             events: Vec::new(),

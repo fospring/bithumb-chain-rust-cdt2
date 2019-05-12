@@ -28,6 +28,7 @@ pub trait TokenInterface {
     fn boo(&mut self, x: bool, y: bool) -> bool;
     fn add_u8(&mut self, x: u8, y: u8) -> u8;
     fn add_u32(&mut self, x: u32, y: u32) -> u32;
+    fn double_u32(&mut self, x: u32) -> u32;
     fn add_u64(&mut self, x: u64, y: u64) -> u64;
     fn str_hello(&mut self, hello: String, name: String) -> String;
     fn add_i32(&mut self, x: i32, y: i32) -> i32;
@@ -58,6 +59,7 @@ impl TokenInterface for TokenContract {
         x+y
     }
     fn add_u32(&mut self, x: u32, y: u32) -> u32 {x + y}
+    fn double_u32(&mut self, x: u32) -> u32 {2*x}
     fn add_u64(&mut self, x: u64, y: u64) -> u64 {x + y}
 
     fn str_hello(&mut self, hello: String, name: String) -> String {

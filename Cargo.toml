@@ -5,6 +5,7 @@ members = [
     "bxa-api",
     "bxa-abi-derive",
     "examples/bxa",
+    "bxa-gen-address",
 ]
 
 [profile.release]
