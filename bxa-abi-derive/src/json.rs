@@ -94,7 +94,6 @@ pub fn write_json_abi(intf: &items::Interface) -> JsonResult<()> {
 	let mut f =
 		fs::File::create(target).map_err(|err| JsonError::failed_to_create_json_file(err))?;
 
-	//let abi: Abi = intf.into();
     let abi: BxaAbi = intf.into();
 
 	serde_json::to_writer_pretty(&mut f, &abi)

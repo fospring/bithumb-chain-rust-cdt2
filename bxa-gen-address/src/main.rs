@@ -62,8 +62,8 @@ fn main() -> io::Result<()> {
     )
         .get_matches();
 
-    let mut ctr_path : &str = &"".to_string();
-    let mut abi_path : &str = &"".to_string();
+    let mut ctr_path : &str = "";
+    let mut abi_path : &str = "";
     if let Some(contract) = matches.value_of("contract") {
         println!("Path for contract argument: {}", contract);
         ctr_path = contract

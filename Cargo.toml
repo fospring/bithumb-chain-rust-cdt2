@@ -5,6 +5,7 @@ members = [
     "bxa-api",
     "bxa-abi-derive",
     "examples/bxa",
+    "examples/token",
     "bxa-gen-address",
 ]
 
