@@ -8,7 +8,6 @@ use byteorder::{ByteOrder, LittleEndian};
 pub struct Sink {
 	// capacity: usize,
 	preamble: Vec<u8>,
-	heap: Vec<u8>,
 }
 
 impl Sink {
@@ -17,7 +16,6 @@ impl Sink {
 		Sink {
 			// capacity: 32 * capacity,
 			preamble: Vec::with_capacity(32 * capacity),
-			heap: Vec::new(),
 		}
 	}
 
@@ -66,30 +64,20 @@ impl Sink {
 	/// Drain current Sink to the target vector
 	pub fn drain_to(self, target: &mut Vec<u8>) {
 		let preamble = self.preamble;
-		let heap = self.heap;
-		target.reserve(preamble.len() + heap.len());
+		target.reserve(preamble.len());
 		target.extend_from_slice(&preamble);
-		target.extend_from_slice(&heap);
 	}
 
 	/// Consume current Sink to produce a vector with content.
 	/// May panic if declared number of arguments does not match the resulting number of bytes should be produced.
 	pub fn finalize_panicking(self) -> Vec<u8> {
 		// if self.preamble.len() != self.capacity { panic!("Underflow of pushed parameters {}/{}!", self.preamble.len(), self.capacity); }
-		let mut result = self.preamble;
-		let heap = self.heap;
-
-		result.extend_from_slice(&heap);
+		let result = self.preamble;
 		result
 	}
 
 	/// Mutable reference to the Sink preamble
 	pub fn preamble_mut(&mut self) -> &mut Vec<u8> {
 		&mut self.preamble
-	}
-
-	/// Mutable reference to the Sink heap
-	pub fn heap_mut(&mut self) -> &mut Vec<u8> {
-		&mut self.heap
 	}
 }

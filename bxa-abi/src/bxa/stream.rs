@@ -5,7 +5,7 @@ use super::{AbiType, Error};
 use byteorder::{ByteOrder, LittleEndian};
 
 
-fn varuint_encode_size(val: u32) -> usize {
+fn encode_size(val: u32) -> usize {
 	if val < 0xfe {
 		1
 	} else if val <= 0xffff {
@@ -90,7 +90,7 @@ impl<'a> Stream<'a> {
 			0xFF => self.read_u32().map(|v|(5, v as u32)),
 			val => Ok((1, val as u32)),
 		}
-		.and_then(|(len,val)| match len == varuint_encode_size(val){
+		.and_then(|(len,val)| match len == encode_size(val){
 				true => Ok(val),
 				false => Err(Error::UnexpectedData),
 		})
