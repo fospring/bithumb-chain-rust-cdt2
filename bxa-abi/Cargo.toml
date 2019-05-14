@@ -28,6 +28,11 @@ default-features = false
 [dependencies.bxa-std]
 path="../bxa-std"
 version = "0.1"
+
+[dependencies.base58]
+version = "0.1.0"
+default-features = false
+
 #default-features = false
 [dev-dependencies.hex-literal]
 version = "0.1"

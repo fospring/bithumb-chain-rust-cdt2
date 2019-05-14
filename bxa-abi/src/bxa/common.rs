@@ -1,9 +1,10 @@
 //! Common types encoding/decoding
 
 use lib::*;
-use super::{util, Stream, AbiType, Encoder, Sink, Error};
+use super::{util, Stream, AbiType, Encoder, ToBXAString, Sink, Error};
 use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
+use base58::ToBase58;
 
 impl AbiType for u8 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -221,6 +222,26 @@ impl<T: AbiType> AbiType for Vec<T> {
 		}
 	}
 
+}
+
+impl ToBXAString for Address {
+	fn to_bxa_string(&self) -> String {
+		let mut bytes:[u8;20] = [0;20];
+		self.copy_to(&mut bytes);
+		bytes.to_base58()
+	}
+}
+
+impl ToBXAString for u64 {
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
+}
+
+impl ToBXAString for String {
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 macro_rules! abi_type_fixed_impl {

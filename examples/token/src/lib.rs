@@ -7,9 +7,7 @@ extern crate bxa_api;
 extern crate bxa_abi;
 extern crate bxa_abi_derive;
 
-#[macro_use]
-extern crate lazy_static;
-
+use bxa_abi::bxa::*;
 use bxa_abi_derive::bxa_abi;
 use bxa_abi::types::*;
 use bxa_api as bxa;
@@ -62,7 +60,7 @@ impl TokenInterface for TokenContract {
     }
 }
 
-use bxa_abi::bxa::EndpointInterface;
+//use bxa_abi::bxa::EndpointInterface;
 
 #[no_mangle]
 pub fn call() {

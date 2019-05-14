@@ -7,6 +7,7 @@
 
 extern crate byteorder;
 extern crate bxa_std;
+extern crate base58;
 
 #[cfg(test)]
 #[cfg_attr(all(test, feature = "std"), macro_use)]

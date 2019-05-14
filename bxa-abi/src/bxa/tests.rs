@@ -318,3 +318,45 @@ fn u32slice() {
 	sink.push(v1);
 	assert_eq!(sink.preamble_mut(),&[0x02, 0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00]);
 }
+
+#[test]
+fn addr_to_string() {
+	let payload: &[u8; 20] = &[
+		0x41, 0x42, 0x43, 0x44,
+		0x45, 0x46, 0x47, 0x48,
+		0x49, 0x4A, 0x4B, 0x4C,
+		0x4D, 0x4E, 0x4F, 0x50,
+		0x51, 0x52, 0x53, 0x54
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	// stream.pop::<Address>().unwrap();
+	let mut addr: Address = stream.pop::<Address>().unwrap();
+	assert_eq!("ujS4cV4BB9fzD3QbbXJRkB8P7Gw".to_string(), addr.to_bxa_string());
+}
+
+#[test]
+fn u64_to_string() {
+	let payload: &[u8; 8] = &[
+		0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: u64 = stream.pop::<u64>().unwrap();
+	assert_eq!(val, 69);
+	assert_eq!("69".to_string(), val.to_bxa_string());
+}
+
+#[test]
+fn string_to_string() {
+	let payload: &[u8; 4] = &[
+		0x03, 0x41, 0x42, 0x43
+	];
+
+	let mut stream = Stream::new(&payload[..]);
+
+	let val: String = stream.pop::<String>().unwrap();
+	assert_eq!(val, val.to_bxa_string());
+}

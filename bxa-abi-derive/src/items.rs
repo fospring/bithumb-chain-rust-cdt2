@@ -211,7 +211,8 @@ impl quote::ToTokens for Item {
 							quote! {
 								let mut sink = ::bxa_abi::bxa::Sink::new(4);
 								sink.push(String::from(#event_name));
-								#(sink.push(#arg_name));*;
+								#(sink.push(#arg_name.to_bxa_string()));*;
+								// #(sink.push(#arg_name));*;
 								let payload = sink.finalize_panicking();
 
 								::bxa_api::log(&payload);

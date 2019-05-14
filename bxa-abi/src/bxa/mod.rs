@@ -11,6 +11,8 @@ mod tests;
 
 pub use self::stream::Stream;
 pub use self::sink::Sink;
+//pub use self::ToBXAString;
+use bxa_std::{String};
 
 use super::types;
 
@@ -53,4 +55,10 @@ pub trait EndpointInterface {
 
 	/// Dispatch constructor payload
 	fn dispatch_ctor(&mut self, payload: &[u8]);
+}
+
+/// to bxa string
+pub trait ToBXAString {
+	/// convert to string
+	fn to_bxa_string(&self) -> String;
 }

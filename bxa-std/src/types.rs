@@ -19,8 +19,10 @@ construct_fixed_hash!{
 
 // Auto-impl `From` conversions between `H256` and `H160`.
 impl_fixed_hash_conversions!(H256, H160);
+//use alloc::string::ToString;
+//use alloc::string::String;
 
-/// Represents an address in ethereum context.
+/// Represents an address in bxa context.
 /// 
 /// # Note
 /// 
@@ -30,6 +32,13 @@ pub type Address = H160;
 impl AsRef<Address> for Address {
 	fn as_ref(&self) -> &Address {
 		return self;
+	}
+}
+
+impl Address {
+	/// copy bytes to dest
+	pub fn copy_to(&self, dest: &mut[u8]) {
+		dest.copy_from_slice(&self.0[0..20]);
 	}
 }
 
