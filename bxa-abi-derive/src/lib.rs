@@ -180,6 +180,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 								#(stream.pop::<#arg_types>().unwrap()),*
 							);
 							let mut sink = bxa_abi::bxa::Sink::new(#return_count_literal);
+							sink.push_type(result.clone());
 							sink.push(result);
 							sink.finalize_panicking()
 						}

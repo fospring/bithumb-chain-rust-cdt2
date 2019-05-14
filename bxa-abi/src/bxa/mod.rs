@@ -40,6 +40,8 @@ pub trait AbiType : Sized {
 	/// Should never be called manually! Use sink.push(val)
 	fn encode(self, sink: &mut Sink);
 
+	/// encode type
+	fn push_type(self, sink: &mut Sink);
 }
 
 /// Encoder type trait

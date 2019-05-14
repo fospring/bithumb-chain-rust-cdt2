@@ -14,6 +14,8 @@ impl AbiType for u8 {
 	fn encode(self, sink: &mut Sink) {
 		sink.write_byte(self);
 	}
+
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(2_u8);}
 }
 
 impl AbiType for u16 {
@@ -31,6 +33,7 @@ impl AbiType for u16 {
 		sink.preamble_mut().extend_from_slice(&util::pad_u16(self)[..]);
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(255_u8);}
 }
 
 impl AbiType for i32 {
@@ -51,6 +54,8 @@ impl AbiType for i32 {
 	fn encode(self, sink: &mut Sink) {
 		sink.preamble_mut().extend_from_slice(&util::pad_i32(self)[..]);
 	}
+
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(4_u8);}
 }
 
 impl AbiType for u32 {
@@ -69,6 +74,8 @@ impl AbiType for u32 {
 	fn encode(self, sink: &mut Sink) {
 		sink.preamble_mut().extend_from_slice(&util::pad_u32(self)[..]);
 	}
+
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(5_u8);}
 }
 
 impl AbiType for i64 {
@@ -94,6 +101,8 @@ impl AbiType for i64 {
 	fn encode(self, sink: &mut Sink) {
 		sink.preamble_mut().extend_from_slice(&util::pad_i64(self)[..]);
 	}
+
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(6_u8);}
 }
 
 impl AbiType for u64 {
@@ -119,6 +128,7 @@ impl AbiType for u64 {
 		sink.preamble_mut().extend_from_slice(&util::pad_u64(self)[..]);
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(7_u8);}
 }
 
 impl Encoder for &str {
@@ -145,6 +155,7 @@ impl AbiType for String {
 		self.as_str().encode(sink);
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(8_u8);}
 }
 
 impl AbiType for bool {
@@ -161,6 +172,7 @@ impl AbiType for bool {
 		sink.preamble_mut().extend_from_slice(&util::pad_u8(match self { true => 1, false => 0})[..]);
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(9_u8);}
 }
 
 impl AbiType for U256 {
@@ -178,6 +190,7 @@ impl AbiType for U256 {
 		self.to_little_endian(&mut sink.preamble_mut()[tail..tail+32]);
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(15_u8);}
 }
 
 impl AbiType for Address {
@@ -191,6 +204,7 @@ impl AbiType for Address {
 		sink.write_bytes(self.as_ref())
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(11_u8);}
 }
 
 impl AbiType for H256 {
@@ -203,6 +217,8 @@ impl AbiType for H256 {
 	fn encode(self, sink: &mut Sink) {
 		self.as_fixed_bytes().encode(sink)
 	}
+
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(12_u8);}
 }
 
 impl<T: AbiType> AbiType for Vec<T> {
@@ -222,6 +238,7 @@ impl<T: AbiType> AbiType for Vec<T> {
 		}
 	}
 
+	fn push_type(self, sink: &mut Sink) {sink.write_byte(13_u8);}
 }
 
 impl ToBXAString for Address {
@@ -261,6 +278,7 @@ macro_rules! abi_type_fixed_impl {
 				sink.preamble_mut().extend_from_slice(&padded[..]);
 			}
 
+			fn push_type(self, sink: &mut Sink) {sink.write_byte(13_u8);}
 		}
 	}
 }
@@ -281,7 +299,7 @@ macro_rules! tuple_impls {
 					$(sink.push(self.$idx);)+
 				}
 
-
+				fn push_type(self, sink: &mut Sink) {sink.write_byte(254_u8);}
 			}
 		)+
 	}
