@@ -21,6 +21,12 @@ use super::types;
 pub enum Error {
 	/// Invalid bool for provided input
 	InvalidBool,
+	/// Invalid u32 for provided input
+	InvalidU32,
+	/// Invalid u64 for provided input
+	InvalidU64,
+	/// Data size out  of range for provided input
+	DataSizeOutOfRange,
 	/// Unexpected end of the stream
 	UnexpectedEof,
 	/// Unexpected data the stream
@@ -42,6 +48,16 @@ pub trait AbiType : Sized {
 
 	/// encode type
 	fn push_type(self, sink: &mut Sink);
+}
+
+/// Serialize and deserialize from db
+pub trait DbSerializer : Sized{
+
+	/// decode from db
+	fn decode_db(stream: &mut Stream) -> Result<Self, Error>;
+
+	/// encode to db
+	fn encode_db(self, sink: &mut Sink);
 }
 
 /// Encoder type trait

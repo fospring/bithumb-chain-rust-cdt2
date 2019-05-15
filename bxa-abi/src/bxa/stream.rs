@@ -1,7 +1,7 @@
 //! Stream module
 
 use lib::*;
-use super::{AbiType, Error};
+use super::{AbiType, Error, DbSerializer};
 use byteorder::{ByteOrder, LittleEndian};
 
 
@@ -107,5 +107,10 @@ impl<'a> Stream<'a> {
 				Err(err) => Err(err),
 			}
 		}
+	}
+
+	/// Deserialize from db
+	pub fn pop_db<T:DbSerializer>(&mut self) -> Result<T, Error> {
+		T::decode_db(self)
 	}
 }

@@ -360,3 +360,43 @@ fn string_to_string() {
 	let val: String = stream.pop::<String>().unwrap();
 	assert_eq!(val, val.to_bxa_string());
 }
+
+#[test]
+fn u32_write_db() {
+	let mut sink = Sink::new(1);
+	sink.push_db(9_u32);
+	sink.push_db(7_u32);
+	let arr = sink.preamble_mut();
+	let mut stream = Stream::new(arr.as_ref());
+	let val: u32 = stream.pop_db::<u32>().unwrap();
+	assert_eq!(val, 9_u32);
+	let val: u32 = stream.pop_db::<u32>().expect("argument decoding failed");
+	assert_eq!(val, 7_u32);
+}
+
+#[test]
+fn u64_write_db() {
+	let mut sink = Sink::new(1);
+	sink.push_db(9_u64);
+	sink.push_db(7_u64);
+	let arr = sink.preamble_mut();
+	let mut stream = Stream::new(arr.as_ref());
+	let val: u64 = stream.pop_db::<u64>().unwrap();
+	assert_eq!(val, 9_u64);
+	let val: u64 = stream.pop_db::<u64>().expect("argument decoding failed");
+	assert_eq!(val, 7_u64);
+}
+
+#[test]
+fn str_write_db() {
+	let mut sink = Sink::new(1);
+	sink.push_db("Hello".to_string());
+	sink.push_db("world!".to_string());
+	let arr = sink.preamble_mut();
+	let mut stream = Stream::new(arr.as_ref());
+	let val: String = stream.pop_db::<String>().unwrap();
+	assert_eq!(val, "Hello".to_string());
+	assert_eq!(6, stream.position());
+	let val: String = stream.pop_db::<String>().expect("argument decoding failed");
+	assert_eq!(val, "world!".to_string());
+}

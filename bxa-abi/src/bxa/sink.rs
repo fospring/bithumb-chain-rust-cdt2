@@ -2,7 +2,7 @@
 
 use lib::*;
 // use super::AbiType;
-use super::{AbiType};
+use super::{AbiType, DbSerializer};
 use byteorder::{ByteOrder, LittleEndian};
 /// Sink for returning number of arguments
 pub struct Sink {
@@ -84,5 +84,10 @@ impl Sink {
 	/// Mutable reference to the Sink preamble
 	pub fn preamble_mut(&mut self) -> &mut Vec<u8> {
 		&mut self.preamble
+	}
+
+	/// Serialize to db
+	pub fn push_db<T: DbSerializer>(&mut self, val: T) {
+		val.encode_db(self)
 	}
 }
