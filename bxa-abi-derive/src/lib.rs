@@ -183,6 +183,7 @@ fn generate_bxa_endpoint(endpoint_name: &str, intf: &items::Interface) -> proc_m
 							sink.push_type(result.clone());
 							sink.push(result);
 							sink.finalize_panicking()
+							//sink.preamble_mut()
 						}
 					})
 				} else {

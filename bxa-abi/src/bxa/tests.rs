@@ -86,23 +86,15 @@ fn u32() {
 
 #[test]
 fn u64() {
-	let payload: &[u8; 16] = &[
-		0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: u64 = stream.pop::<u64>().unwrap();
-	assert_eq!(val, 69);
-	let val: u64 = stream.pop::<u64>().expect("argument decoding failed");
-	assert_eq!(val, 70);
-
 	let mut sink = Sink::new(1);
-	sink.push(69_u64);
-	sink.push(70_u64);
-	assert_eq!(sink.preamble_mut(),&[0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]);
+	sink.push(9_u64);
+	sink.push(7_u64);
+	let arr = sink.preamble_mut();
+	let mut stream = Stream::new(arr.as_ref());
+	let val: u64 = stream.pop::<u64>().unwrap();
+	assert_eq!(val, 9_u64);
+	let val: u64 = stream.pop::<u64>().expect("argument decoding failed");
+	assert_eq!(val, 7_u64);
 }
 
 #[test]

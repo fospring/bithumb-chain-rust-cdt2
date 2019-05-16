@@ -213,7 +213,8 @@ impl quote::ToTokens for Item {
 								sink.push(String::from(#event_name));
 								#(sink.push(#arg_name.to_bxa_string()));*;
 								// #(sink.push(#arg_name));*;
-								let payload = sink.finalize_panicking();
+								// let payload = sink.finalize_panicking();
+								let payload = sink.preamble_mut();
 
 								::bxa_api::log(&payload);
 							}
