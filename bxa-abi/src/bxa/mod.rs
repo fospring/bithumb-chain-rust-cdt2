@@ -48,17 +48,10 @@ pub trait AbiType : Sized {
 
 	/// encode type
 	fn push_type(self, sink: &mut Sink);
-}
 
-///// Serialize and deserialize from db
-//pub trait DbSerializer : Sized{
-//
-//	/// decode from db
-//	fn decode_db(stream: &mut Stream) -> Result<Self, Error>;
-//
-//	/// encode to db
-//	fn encode_db(self, sink: &mut Sink);
-//}
+	/// to bxa string
+	fn to_bxa_string(&self) -> String;
+}
 
 /// Encoder type trait
 pub trait Encoder {
@@ -73,10 +66,4 @@ pub trait EndpointInterface {
 
 	/// Dispatch constructor payload
 	fn dispatch_ctor(&mut self, payload: &[u8]);
-}
-
-/// to bxa string
-pub trait ToBXAString {
-	/// convert to string
-	fn to_bxa_string(&self) -> String;
 }

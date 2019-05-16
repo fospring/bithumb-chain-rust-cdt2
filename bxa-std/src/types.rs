@@ -19,14 +19,11 @@ construct_fixed_hash!{
 
 // Auto-impl `From` conversions between `H256` and `H160`.
 impl_fixed_hash_conversions!(H256, H160);
-//use alloc::string::ToString;
-//use alloc::string::String;
+
 
 /// Represents an address in bxa context.
 /// 
 /// # Note
-/// 
-/// Addresses have 160 bytes length.
 pub type Address = H160;
 
 impl AsRef<Address> for Address {

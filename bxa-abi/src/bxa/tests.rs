@@ -9,141 +9,228 @@ macro_rules! assert_eq_core  { ($a:expr, $b:expr) => (assert_eq!($a, $b)) }
 macro_rules! assert_eq_core  { ($a:expr, $b:expr) => (assert!($a == $b, stringify!($a == $b))) }
 
 #[test]
-fn u8() {
-	let payload: &[u8; 2] = &[
-		0x45, 0x46
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: u8 = stream.pop::<u8>().unwrap();
-	assert_eq!(val, 69);
-	let val: u8 = stream.pop::<u8>().expect("argument decoding failed");
-	assert_eq!(val, 70);
-
+fn bool_serializ_tostring() {
+	let v1 :bool = true;
+	let v2 :bool = false;
 	let mut sink = Sink::new(1);
-	sink.push(69_u8);
-	sink.push(70_u8);
-	assert_eq!(sink.preamble_mut(),&[0x45, 0x46]);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1: bool = stream.pop::<bool>().unwrap();
+	let val2: bool = stream.pop::<bool>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("true"), true.to_bxa_string());
+	assert_eq!(String::from("false"), false.to_bxa_string());
 }
 
 #[test]
-fn u16() {
-	let payload: &[u8; 4] = &[
-		0x45, 0x00, 0x46, 0x00
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: u16 = stream.pop::<u16>().unwrap();
-	assert_eq!(val, 69);
-	let val: u16 = stream.pop::<u16>().expect("argument decoding failed");
-	assert_eq!(val, 70);
-
+fn u8_serializ_tostring() {
+	let v1 :u8 = (1 << 7) -1;
+	let v2 :u8 = 255;
 	let mut sink = Sink::new(1);
-	sink.push(69_u16);
-	sink.push(70_u16);
-	assert_eq!(sink.preamble_mut(),&[0x45, 0x00, 0x46, 0x00]);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1: u8 = stream.pop::<u8>().unwrap();
+	let val2: u8 = stream.pop::<u8>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("127"), v1.to_bxa_string());
+	assert_eq!(String::from("255"), v2.to_bxa_string());
 }
 
 #[test]
-fn i32() {
-	let payload: &[u8; 8] = &[
-		0x09, 0x00, 0x00, 0x00, 0xf9, 0xff, 0xff, 0xff
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: i32 = stream.pop::<i32>().unwrap();
-	assert_eq!(val, 9_i32);
-	let val: i32 = stream.pop::<i32>().expect("argument decoding failed");
-	assert_eq!(val, -7_i32);
-
+fn u16_serializ_tostring() {
+	let v1 :u16 = 65535;
+	let v2 :u16 = 256;
 	let mut sink = Sink::new(1);
-	sink.push(9_i32);
-	sink.push(-7_i32);
-	assert_eq!(sink.preamble_mut(),&[0x09, 0x00, 0x00, 0x00, 0xf9, 0xff, 0xff, 0xff]);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1 = stream.pop::<u16>().unwrap();
+	let val2 = stream.pop::<u16>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("65535"), v1.to_bxa_string());
+	assert_eq!(String::from("256"), v2.to_bxa_string());
 }
 
 #[test]
-fn u32() {
-	let payload: &[u8; 8] = &[
-		0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: u32 = stream.pop::<u32>().unwrap();
-	assert_eq!(val, 69);
-	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
-	assert_eq!(val, 70);
-
+fn i32_serializ_tostring() {
+	let v1 :i32 = 2147483647;
+	let v2 :i32 = -2147483647;
 	let mut sink = Sink::new(1);
-	sink.push(69_u32);
-	sink.push(70_u32);
-	assert_eq!(sink.preamble_mut(),&[0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00]);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1 = stream.pop::<i32>().unwrap();
+	let val2 = stream.pop::<i32>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("2147483647"), v1.to_bxa_string());
+	assert_eq!(String::from("-2147483647"), v2.to_bxa_string());
 }
 
 #[test]
-fn u64() {
+fn u32_serializ_tostring() {
+	let v1 :u32 = 4294967295;
+	let v2 :u32 = 83647;
 	let mut sink = Sink::new(1);
-	sink.push(9_u64);
-	sink.push(7_u64);
-	let arr = sink.preamble_mut();
-	let mut stream = Stream::new(arr.as_ref());
-	let val: u64 = stream.pop::<u64>().unwrap();
-	assert_eq!(val, 9_u64);
-	let val: u64 = stream.pop::<u64>().expect("argument decoding failed");
-	assert_eq!(val, 7_u64);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1 = stream.pop::<u32>().unwrap();
+	let val2 = stream.pop::<u32>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("4294967295"), v1.to_bxa_string());
+	assert_eq!(String::from("83647"), v2.to_bxa_string());
 }
 
 #[test]
-fn i64() {
-	let payload: &[u8; 16] = &[
-		0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0xf9, 0xff, 0xff, 0xff,0xff, 0xff, 0xff,0xff
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: i64 = stream.pop::<i64>().unwrap();
-	assert_eq!(val, 9_i64);
-	let val: i64 = stream.pop::<i64>().expect("argument decoding failed");
-	assert_eq!(val, -7_i64);
-
+fn u64_serializ_tostring() {
+	let v1 :u64 = u64::max_value();
+	let v2 :u64 = 83647;
 	let mut sink = Sink::new(1);
-	sink.push(9_i64);
-	sink.push(-7_i64);
-	assert_eq!(sink.preamble_mut(),&[0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0xf9, 0xff, 0xff, 0xff,0xff, 0xff, 0xff,0xff]);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1 = stream.pop::<u64>().unwrap();
+	let val2 = stream.pop::<u64>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("18446744073709551615"), v1.to_bxa_string());
+	assert_eq!(String::from("83647"), v2.to_bxa_string());
+}
+
+#[test]
+fn i64_serializ_tostring() {
+	let v1 :i64 = i64::max_value();
+	let v2 :i64 = i64::min_value();
+	let mut sink = Sink::new(1);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1 = stream.pop::<i64>().unwrap();
+	let val2 = stream.pop::<i64>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("9223372036854775807"), v1.to_bxa_string());
+	assert_eq!(String::from("-9223372036854775808"), v2.to_bxa_string());
 }
 
 #[test]
 fn u256() {
-	let payload: &[u8; 36] = &[
-		0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x03, 0x61,0x64,0x64
+
+	let v1 :U256 = U256::from(u64::max_value());
+	let v2 :U256 = U256::max_value();
+	let mut sink = Sink::new(1);
+	sink.push(v1);
+	sink.push(v2);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+	let val1 = stream.pop::<U256>().unwrap();
+	let val2 = stream.pop::<U256>().unwrap();
+	assert_eq!(v1, val1);
+	assert_eq!(v2, val2);
+
+	assert_eq!(String::from("18446744073709551615"), v1.to_bxa_string());
+	assert_eq!(String::from("115792089237316195423570985008687907853269984665640564039457584007913129639935"), v2.to_bxa_string());
+}
+
+#[test]
+fn addr_serialize() {
+	let payload: &[u8; 20] = &[
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x03, 0x61, 0x64, 0x64
 	];
 
 	let mut stream = Stream::new(&payload[..]);
+	let mut addr = stream.pop::<Address>().unwrap();
+	assert_eq!(addr.as_mut(), &[0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x03, 0x61, 0x64, 0x64]);
 
-	let val: U256 = stream.pop::<U256>().unwrap();
-	assert_eq!(val, U256::from(69));
-	let val: String = stream.pop::<String>().unwrap();
-	assert_eq!(val, "add".to_string());
-
-	let mut sink = Sink::new(2);
-	sink.push(U256::from(69));
-	sink.push("add".to_string());
-	let sample: &[u8] = &[0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x03, 0x61,0x64,0x64];
+	let mut sink = Sink::new(1);
+	let arr:[u8; 20] = [0x03, 0x61, 0x64, 0x64,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00];
+	let addr = Address::new(arr);
+	sink.push(addr);
+	let arr:[u8; 20] = [0x00;20];
+	let addr2 = Address::new(arr);
+	sink.push(addr2);
+	let sample: &[u8] = &[
+		0x03, 0x61, 0x64, 0x64,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x45, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00];
 	let payload = sink.finalize_panicking();
 	assert_eq!(&payload[..],sample);
+
+	let payload: &[u8; 20] = &[
+		0x41, 0x42, 0x43, 0x44,
+		0x45, 0x46, 0x47, 0x48,
+		0x49, 0x4A, 0x4B, 0x4C,
+		0x4D, 0x4E, 0x4F, 0x50,
+		0x51, 0x52, 0x53, 0x54
+	];
+	let addr2: Address = Address::new(*payload);
+	assert_eq!("ujS4cV4BB9fzD3QbbXJRkB8P7Gw".to_string(), addr2.to_bxa_string());
 }
+
+#[test]
+fn u32slice_serialize() {
+	let v1 :Vec<u32> = vec![69,70,80];
+	let mut sink = Sink::new(2);
+	sink.push(v1);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+
+	let val: Vec<u32> = stream.pop::<Vec<u32>>().unwrap();
+	assert_eq!(val, vec![69,70,80]);
+}
+
+
+#[test]
+fn str_serialize_tostring() {
+	let mut sink = Sink::new(1);
+	sink.push("Hello".to_string());
+	let v1:String = "Welcome to The Rust Programming Language book! This version of the text assumes you are using Rust 1.31.0 or later, with edition=\"2018\" in Cargo.toml of all projects to use Rust 2018 Edition idioms. See the \"Installation\" section of Chapter 1 to install or update Rust, and see Appendix E for information on what editions of Rust are.!".to_string();
+	sink.push(v1.clone());
+	let arr = sink.preamble_mut();
+	let mut stream = Stream::new(arr.as_ref());
+	let val: String = stream.pop::<String>().unwrap();
+	assert_eq!(val, "Hello".to_string());
+	assert_eq!(6, stream.position());
+	let val: String = stream.pop::<String>().expect("argument decoding failed");
+	assert_eq!(val, v1.clone());
+}
+
 
 #[test]
 fn h256() {
@@ -185,210 +272,4 @@ fn h256() {
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,];
 	let payload = sink.finalize_panicking();
 	assert_eq!(&payload[..],sample);
-}
-
-#[test]
-fn boo() {
-	let payload: &[u8; 2] = &[
-		0x0, 0x1
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: bool = stream.pop::<bool>().unwrap();
-	assert_eq!(val, false);
-	let val: bool = stream.pop::<bool>().expect("argument decoding failed");
-	assert_eq!(val, true);
-
-	let mut sink = Sink::new(1);
-	sink.push(true);
-	sink.push(false);
-	let sample: &[u8] = &[
-		0x01, 0x00];
-	let payload = sink.finalize_panicking();
-	assert_eq!(&payload[..],sample);
-}
-
-#[test]
-fn string() {
-	let payload: &[u8; 4] = &[
-		0x03, 0x61,0x64,0x64
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let str_val: String = stream.pop::<String>().unwrap();
-
-	assert_eq!(str_val, "add".to_string());
-
-	let mut sink = Sink::new(1);
-	sink.push("add".to_string());
-	sink.push("add".to_string());
-	let sample: &[u8] = &[
-		0x03, 0x61,0x64,0x64,
-		0x03, 0x61,0x64,0x64];
-	let payload = sink.finalize_panicking();
-	assert_eq!(&payload[..],sample);
-}
-
-#[test]
-fn params() {
-	let payload: &[u8; 12] = &[
-		0x03, 0x61, 0x64, 0x64,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let str_val: String = stream.pop::<String>().unwrap();
-	assert_eq!(str_val, "add".to_string());
-	let val: u32 = stream.pop::<u32>().unwrap();
-	assert_eq!(val, 69);
-	let val: u32 = stream.pop::<u32>().expect("argument decoding failed");
-	assert_eq!(val, 69);
-}
-
-#[test]
-fn addr() {
-	let payload: &[u8; 24] = &[
-		0x03, 0x61, 0x64, 0x64,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x03, 0x61, 0x64, 0x64
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	// stream.pop::<Address>().unwrap();
-	let mut addr = stream.pop::<Address>().unwrap();
-	assert_eq!(addr.as_mut(), &[0x03, 0x61, 0x64, 0x64,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,0x45, 0x00, 0x00, 0x00,]);
-	let val: String = stream.pop::<String>().unwrap();
-	assert_eq!(val, "add".to_string());
-
-	let mut sink = Sink::new(1);
-	let arr:[u8; 20] = [0x03, 0x61, 0x64, 0x64,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00];
-	let addr = Address::new(arr);
-	sink.push(addr);
-	let arr:[u8; 20] = [0x00;20];
-	let addr2 = Address::new(arr);
-	sink.push(addr2);
-	let sample: &[u8] = &[
-		0x03, 0x61, 0x64, 0x64,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x45, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00];
-	let payload = sink.finalize_panicking();
-	assert_eq!(&payload[..],sample);
-}
-
-#[test]
-fn u32slice() {
-	let payload: &[u8; 9] = &[
-		0x02, 0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: Vec<u32> = stream.pop::<Vec<u32>>().unwrap();
-	assert_eq!(val, vec![69_u32,70_u32]);
-
-	let mut sink = Sink::new(1);
-	let v1 = vec![69_u32,70_u32];
-	sink.push(v1);
-	assert_eq!(sink.preamble_mut(),&[0x02, 0x45, 0x00, 0x00, 0x00, 0x46, 0x00, 0x00, 0x00]);
-}
-
-#[test]
-fn addr_to_string() {
-	let payload: &[u8; 20] = &[
-		0x41, 0x42, 0x43, 0x44,
-		0x45, 0x46, 0x47, 0x48,
-		0x49, 0x4A, 0x4B, 0x4C,
-		0x4D, 0x4E, 0x4F, 0x50,
-		0x51, 0x52, 0x53, 0x54
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	// stream.pop::<Address>().unwrap();
-	let mut addr: Address = stream.pop::<Address>().unwrap();
-	assert_eq!("ujS4cV4BB9fzD3QbbXJRkB8P7Gw".to_string(), addr.to_bxa_string());
-}
-
-#[test]
-fn u64_to_string() {
-	let payload: &[u8; 8] = &[
-		0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: u64 = stream.pop::<u64>().unwrap();
-	assert_eq!(val, 69);
-	assert_eq!("69".to_string(), val.to_bxa_string());
-}
-
-#[test]
-fn string_to_string() {
-	let payload: &[u8; 4] = &[
-		0x03, 0x41, 0x42, 0x43
-	];
-
-	let mut stream = Stream::new(&payload[..]);
-
-	let val: String = stream.pop::<String>().unwrap();
-	assert_eq!(val, val.to_bxa_string());
-}
-
-#[test]
-fn u32_write_db() {
-	let mut sink = Sink::new(1);
-	sink.push_db(9_u32);
-	sink.push_db(7_u32);
-	let arr = sink.preamble_mut();
-	let mut stream = Stream::new(arr.as_ref());
-	let val: u32 = stream.pop_db::<u32>().unwrap();
-	assert_eq!(val, 9_u32);
-	let val: u32 = stream.pop_db::<u32>().expect("argument decoding failed");
-	assert_eq!(val, 7_u32);
-}
-
-#[test]
-fn u64_write_db() {
-	let mut sink = Sink::new(1);
-	sink.push_db(9_u64);
-	sink.push_db(7_u64);
-	let arr = sink.preamble_mut();
-	let mut stream = Stream::new(arr.as_ref());
-	let val: u64 = stream.pop_db::<u64>().unwrap();
-	assert_eq!(val, 9_u64);
-	let val: u64 = stream.pop_db::<u64>().expect("argument decoding failed");
-	assert_eq!(val, 7_u64);
-}
-
-#[test]
-fn str_write_db() {
-	let mut sink = Sink::new(1);
-	sink.push_db("Hello".to_string());
-	sink.push_db("world!".to_string());
-	let arr = sink.preamble_mut();
-	let mut stream = Stream::new(arr.as_ref());
-	let val: String = stream.pop_db::<String>().unwrap();
-	assert_eq!(val, "Hello".to_string());
-	assert_eq!(6, stream.position());
-	let val: String = stream.pop_db::<String>().expect("argument decoding failed");
-	assert_eq!(val, "world!".to_string());
 }

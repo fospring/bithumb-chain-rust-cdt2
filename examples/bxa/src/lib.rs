@@ -14,6 +14,7 @@ use bxa_abi_derive::bxa_abi;
 use bxa_abi::types::*;
 use bxa_api as bxa;
 use bxa_api::db;
+use bxa_abi::bxa::*;
 
 const SYMBOL: &'static str = "ABC";
 lazy_static! {
@@ -110,8 +111,6 @@ impl TokenInterface for TokenContract {
         balance
     }
 }
-
-use bxa_abi::bxa::EndpointInterface;
 
 #[no_mangle]
 pub fn call() {

@@ -1,7 +1,7 @@
 //! Common types encoding/decoding
 use lib::*;
 // util,
-use super::{util, Stream, AbiType, Encoder, ToBXAString, Sink, Error};
+use super::{util, Stream, AbiType, Encoder, Sink, Error};
 use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
 use base58::ToBase58;
@@ -35,6 +35,10 @@ impl AbiType for u8 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_UINT8);}
+
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl AbiType for u16 {
@@ -50,6 +54,9 @@ impl AbiType for u16 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(255_u8);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl AbiType for i32 {
@@ -65,6 +72,9 @@ impl AbiType for i32 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_INT32);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 
@@ -81,6 +91,9 @@ impl AbiType for u32 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_UINT32);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 
@@ -97,6 +110,9 @@ impl AbiType for i64 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_INT64);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl AbiType for u64 {
@@ -111,6 +127,9 @@ impl AbiType for u64 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_UINT64);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl Encoder for &str {
@@ -146,6 +165,9 @@ impl AbiType for String {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_STRING);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl AbiType for bool {
@@ -163,6 +185,9 @@ impl AbiType for bool {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_BOOL);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl AbiType for U256 {
@@ -181,6 +206,9 @@ impl AbiType for U256 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_UINT256);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl AbiType for Address {
@@ -195,7 +223,13 @@ impl AbiType for Address {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_ADDRESS);}
+	fn to_bxa_string(&self) -> String {
+		let mut bytes:[u8;20] = [0;20];
+		self.copy_to(&mut bytes);
+		bytes.to_base58()
+	}
 }
+
 
 impl AbiType for H256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -209,6 +243,9 @@ impl AbiType for H256 {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(12_u8);}
+	fn to_bxa_string(&self) -> String {
+		self.to_string()
+	}
 }
 
 impl<T: AbiType> AbiType for Vec<T> {
@@ -231,25 +268,13 @@ impl<T: AbiType> AbiType for Vec<T> {
 	}
 
 	fn push_type(self, sink: &mut Sink) {sink.write_byte(TYPE_ARRAY);}
-}
-
-impl ToBXAString for Address {
 	fn to_bxa_string(&self) -> String {
-		let mut bytes:[u8;20] = [0;20];
-		self.copy_to(&mut bytes);
-		bytes.to_base58()
-	}
-}
-
-impl ToBXAString for u64 {
-	fn to_bxa_string(&self) -> String {
-		self.to_string()
-	}
-}
-
-impl ToBXAString for String {
-	fn to_bxa_string(&self) -> String {
-		self.to_string()
+		//let size = self.len();
+		let mut res = String::from("");
+		for v in self {
+			res.push_str(&v.to_bxa_string());
+		}
+		res
 	}
 }
 
@@ -271,6 +296,9 @@ macro_rules! abi_type_fixed_impl {
 			}
 
 			fn push_type(self, sink: &mut Sink) {sink.write_byte(13_u8);}
+				fn to_bxa_string(&self) -> String {
+					String::from("")
+				}
 		}
 	}
 }
@@ -292,6 +320,10 @@ macro_rules! tuple_impls {
 				}
 
 				fn push_type(self, sink: &mut Sink) {sink.write_byte(254_u8);}
+
+				fn to_bxa_string(&self) -> String {
+					String::from("")
+				}
 			}
 		)+
 	}
