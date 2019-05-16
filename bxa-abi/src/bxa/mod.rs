@@ -50,15 +50,15 @@ pub trait AbiType : Sized {
 	fn push_type(self, sink: &mut Sink);
 }
 
-/// Serialize and deserialize from db
-pub trait DbSerializer : Sized{
-
-	/// decode from db
-	fn decode_db(stream: &mut Stream) -> Result<Self, Error>;
-
-	/// encode to db
-	fn encode_db(self, sink: &mut Sink);
-}
+///// Serialize and deserialize from db
+//pub trait DbSerializer : Sized{
+//
+//	/// decode from db
+//	fn decode_db(stream: &mut Stream) -> Result<Self, Error>;
+//
+//	/// encode to db
+//	fn encode_db(self, sink: &mut Sink);
+//}
 
 /// Encoder type trait
 pub trait Encoder {

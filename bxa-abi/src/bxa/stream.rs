@@ -1,19 +1,7 @@
 //! Stream module
 
 use lib::*;
-use super::{AbiType, Error, DbSerializer};
-use byteorder::{ByteOrder, LittleEndian};
-
-
-fn encode_size(val: u32) -> usize {
-	if val < 0xfe {
-		1
-	} else if val <= 0xffff {
-		3
-	} else {
-		5
-	}
-}
+use super::{AbiType, Error};
 
 /// Stream interpretation of incoming payload
 pub struct Stream<'a> {
@@ -62,6 +50,68 @@ impl<'a> Stream<'a> {
 		Ok(())
 	}
 
+	/// read u64
+	pub fn read_u64(&mut self) -> Result<u64, Error> {
+		let mut d:[u8;1] = [0;1];
+		self.read_into(d.as_mut())?;
+		let p = d[0] as u64;
+		if p <= 0x80 {
+			return Ok(p)
+		}
+		let result: u64;
+		match p - 0x80 {
+			1 => {
+				d = [0;1];
+				self.read_into(d.as_mut())?;
+				result = d[0] as u64;
+			},
+			2 => {
+				let mut d = [0;2];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[1] as u16) | (d[0] as u16) << 8) as u64;
+			},
+			3 => {
+				let mut d = [0;3];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[2] as u32) | (d[1] as u32) << 8 | (d[0] as u32) << 16) as u64;
+			},
+			4 => {
+				let mut d = [0;4];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[3] as u32) | (d[2] as u32) << 8 | (d[1] as u32) << 16 | (d[0] as u32) << 24) as u64;
+			},
+			5 => {
+				let mut d = [0;5];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[4] as u64) | (d[3] as u64) << 8 | (d[2] as u64) << 16 | (d[1] as u64) << 24 | (d[0] as u64) << 32) as u64;
+			},
+			6 => {
+				let mut d = [0;6];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[5] as u64) | (d[4] as u64) << 8 | (d[3] as u64) << 16 | (d[2] as u64) << 24 | (d[1] as u64) << 32 | (d[0] as u64) << 40) as u64;
+			},
+			7 => {
+				let mut d = [0;7];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[6] as u64) | (d[5] as u64) << 8 | (d[4] as u64) << 16 | (d[3] as u64) << 24 | (d[2] as u64) << 32 | (d[1] as u64) << 40 | (d[0] as u64) << 48) as u64;
+			},
+			8 => {
+				let mut d = [0;8];
+				self.read_into(d.as_mut())?;
+				result =
+					((d[7] as u64) | (d[6] as u64) << 8 | (d[5] as u64) << 16 | (d[4] as u64) << 24 | (d[3] as u64) << 32 | (d[2] as u64) << 40 | (d[1] as u64) << 48 | (d[0] as u64) << 56) as u64;
+			},
+			_ => return Err(Error::InvalidU64),
+		}
+		Ok(result)
+	}
+
 	/// read bytes
 	pub fn read_bytes(&mut self, len: usize) -> Result<&[u8], Error> {
 		if self.position + len > self.payload.len() {
@@ -71,29 +121,6 @@ impl<'a> Stream<'a> {
 			self.position += len;
 			Ok(bytes)
 		}
-	}
-
-	/// read u16
-	pub fn read_u16(&mut self) -> Result<u16, Error> {
-		Ok(LittleEndian::read_u16(self.read_bytes(2)?))
-	}
-
-	/// read u32
-	pub fn read_u32(&mut self) -> Result<u32, Error> {
-		Ok(LittleEndian::read_u32(self.read_bytes(4)?))
-	}
-
-	/// read lens
-	pub fn read_len(&mut self) -> Result<u32, Error> {
-		match self.read_byte() ? {
-			0xFE => self.read_u16().map(|v|(3, v as u32)),
-			0xFF => self.read_u32().map(|v|(5, v as u32)),
-			val => Ok((1, val as u32)),
-		}
-		.and_then(|(len,val)| match len == encode_size(val){
-				true => Ok(val),
-				false => Err(Error::UnexpectedData),
-		})
 	}
 
 	/// read byte as u8
@@ -107,10 +134,5 @@ impl<'a> Stream<'a> {
 				Err(err) => Err(err),
 			}
 		}
-	}
-
-	/// Deserialize from db
-	pub fn pop_db<T:DbSerializer>(&mut self) -> Result<T, Error> {
-		T::decode_db(self)
 	}
 }

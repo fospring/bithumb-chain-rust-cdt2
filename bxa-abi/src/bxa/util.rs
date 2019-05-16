@@ -1,73 +1,79 @@
-//! Utility module
-
-use lib::*;
-/// Converts u8 to right aligned array of 32 bytes.
-pub fn pad_u8(value: u16) -> [u8; 1] {
-	let mut padded = [0u8; 1];
-	padded[0] = value as u8;
-	padded
-}
-
-/// Converts u16 to right aligned array of 32 bytes.
-pub fn pad_u16(value: u16) -> [u8; 2] {
-	let mut padded = [0u8; 2];
-	padded[0] = value as u8;
-	padded[1] = (value >> 8) as u8;
-	padded
-}
-
-/// Converts u32 to right aligned array of 32 bytes.
-pub fn pad_u32(value: u32) -> [u8; 4] {
-	let mut padded = [0u8; 4];
-	padded[0] = value as u8;
-	padded[1] = (value >> 8) as u8;
-	padded[2] = (value >> 16) as u8;
-	padded[3] = (value >> 24) as u8;
-	padded
-}
-
-/// Converts u64 to right aligned array of 32 bytes.
-pub fn pad_u64(value: u64) -> [u8; 8] {
-	let mut padded = [0u8; 8];
-	padded[0] = value as u8;
-	padded[1] = (value >> 8) as u8;
-	padded[2] = (value >> 16) as u8;
-	padded[3] = (value >> 24) as u8;
-	padded[4] = (value >> 32) as u8;
-	padded[5] = (value >> 40) as u8;
-	padded[6] = (value >> 48) as u8;
-	padded[7] = (value >> 56) as u8;
-	padded
-}
-
-/// Converts i64 to right aligned array of 32 bytes.
-pub fn pad_i64(value: i64) -> [u8; 8] {
-	if value >= 0 {
-		return pad_u64(value as u64);
-	}
-
-	let mut padded = [0xffu8; 8];
-	padded[0] = value as u8;
-	padded[1] = (value >> 8) as u8;
-	padded[2] = (value >> 16) as u8;
-	padded[3] = (value >> 24) as u8;
-	padded[4] = (value >> 32) as u8;
-	padded[5] = (value >> 40) as u8;
-	padded[6] = (value >> 48) as u8;
-	padded[7] = (value >> 56) as u8;
-	padded
-}
-
-/// Converts i32 to right aligned array of 32 bytes.
-pub fn pad_i32(value: i32) -> [u8; 4] {
-	if value >= 0 {
-		return pad_u32(value as u32);
-	}
-
-	let mut padded = [0xffu8; 4];
-	padded[0] = value as u8;
-	padded[1] = (value >> 8) as u8;
-	padded[2] = (value >> 16) as u8;
-	padded[3] = (value >> 24) as u8;
-	padded
+/// Converts u64 to right aligned array of bytes.
+pub fn pad_u64(value: u64, size: &mut usize) -> [u8; 9] {
+    let mut data :[u8;9] = [0;9];
+    match value {
+        num if num < 0x80 => {
+            data[0] = num as u8;
+            *size = 1;
+        },
+        num if num < (1<<8) => {
+            data[0] = 0x80 + 1;
+            data[1] = num as u8;
+            *size = 2;
+        },
+        num if num < (1<<16) => {
+            data[0] = 0x80 + 2;
+            data[1] = (num >> 8) as u8;
+            data[2] = num as u8;
+            *size = 3;
+        },
+        num if num < (1<<24) => {
+            data[0] = 0x80 + 3;
+            data[1] = (num >> 16) as u8;
+            data[2] = (num >> 8) as u8;
+            data[3] = num as u8;
+            *size = 4;
+        },
+        num if num < (1<<32) => {
+            data[0] = 0x80 + 4;
+            data[1] = (num >> 24) as u8;
+            data[2] = (num >> 16) as u8;
+            data[3] = (num >> 8) as u8;
+            data[4] = num as u8;
+            *size = 5;
+        },
+        num if num < (1<<40) => {
+            data[0] = 0x80 + 5;
+            data[1] = (num >> 32) as u8;
+            data[2] = (num >> 24) as u8;
+            data[3] = (num >> 16) as u8;
+            data[4] = (num >> 8) as u8;
+            data[5] = num as u8;
+            *size = 6;
+        },
+        num if num < (1<<48) => {
+            data[0] = 0x80 + 6;
+            data[1] = (num >> 40) as u8;
+            data[2] = (num >> 32) as u8;
+            data[3] = (num >> 24) as u8;
+            data[4] = (num >> 16) as u8;
+            data[5] = (num >> 8) as u8;
+            data[6] = num as u8;
+            *size = 7;
+        },
+        num if num < (1<<56) => {
+            data[0] = 0x80 + 7;
+            data[1] = (num >> 48) as u8;
+            data[2] = (num >> 40) as u8;
+            data[3] = (num >> 32) as u8;
+            data[4] = (num >> 24) as u8;
+            data[5] = (num >> 16) as u8;
+            data[6] = (num >> 8) as u8;
+            data[7] = num as u8;
+            *size = 8;
+        },
+        num => {
+            data[0] = 0x80 + 8;
+            data[1] = (num >> 56) as u8;
+            data[2] = (num >> 48) as u8;
+            data[3] = (num >> 40) as u8;
+            data[4] = (num >> 32) as u8;
+            data[5] = (num >> 24) as u8;
+            data[6] = (num >> 16) as u8;
+            data[7] = (num >> 8) as u8;
+            data[8] = num as u8;
+            *size = 9;
+        },
+    }
+    data
 }

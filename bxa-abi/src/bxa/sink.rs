@@ -2,8 +2,7 @@
 
 use lib::*;
 // use super::AbiType;
-use super::{AbiType, DbSerializer};
-use byteorder::{ByteOrder, LittleEndian};
+use super::{AbiType};
 /// Sink for returning number of arguments
 pub struct Sink {
 	// capacity: usize,
@@ -27,33 +26,6 @@ impl Sink {
 	/// write bytes
 	pub fn write_bytes(&mut self, data: &[u8]) {
 		self.preamble.extend_from_slice(data)
-	}
-
-	/// write u16
-	pub fn write_u16(&mut self, val: u16) {
-		let mut buf = [0; 2];
-		LittleEndian::write_u16(&mut buf, val);
-		self.write_bytes(&buf)
-	}
-
-	/// write u32
-	pub(crate) fn write_u32(&mut self, val: u32) {
-		let mut buf = [0; 4];
-		LittleEndian::write_u32(&mut buf, val);
-		self.write_bytes(&buf)
-	}
-
-	/// write length
-	pub fn write_len(&mut self, val: u32) {
-		if val < 0xFE {
-			self.write_byte(val as u8);
-		} else if val < 0xFFFF {
-			self.write_byte(0xFE);
-			self.write_u16(val as u16);
-		} else {
-			self.write_byte(0xFF);
-			self.write_u32(val);
-		}
 	}
 
 	/// Consume `type` of `val` to the Sink
@@ -84,10 +56,5 @@ impl Sink {
 	/// Mutable reference to the Sink preamble
 	pub fn preamble_mut(&mut self) -> &mut Vec<u8> {
 		&mut self.preamble
-	}
-
-	/// Serialize to db
-	pub fn push_db<T: DbSerializer>(&mut self, val: T) {
-		val.encode_db(self)
 	}
 }
