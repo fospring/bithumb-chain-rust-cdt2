@@ -193,14 +193,13 @@ fn addr_serialize() {
 	assert_eq!(&payload[..],sample);
 
 	let payload: &[u8; 20] = &[
-		0x41, 0x42, 0x43, 0x44,
-		0x45, 0x46, 0x47, 0x48,
-		0x49, 0x4A, 0x4B, 0x4C,
-		0x4D, 0x4E, 0x4F, 0x50,
-		0x51, 0x52, 0x53, 0x54
+		199, 20, 153, 223, 232,
+		208, 165, 207, 92, 28,
+		136, 202, 9, 193, 175,
+		137, 243, 71, 224, 161
 	];
 	let addr2: Address = Address::new(*payload);
-	assert_eq!("ujS4cV4BB9fzD3QbbXJRkB8P7Gw".to_string(), addr2.to_bxa_string());
+	assert_eq!("AZvWo4SpSpRL7Li7gqwgwEdWWjSUpPvn4Y".to_string(), addr2.to_bxa_string());
 }
 
 #[test]

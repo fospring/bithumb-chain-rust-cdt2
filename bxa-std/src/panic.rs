@@ -1,6 +1,7 @@
-//#![cfg(not(feature = "std"))]
-//
+#![cfg(not(feature = "std"))]
+
 ///// Overrides the default panic_fmt
+////#[cfg(not(test))]
 //#[cfg(not(feature = "panic_with_msg"))]
 //#[no_mangle]
 //#[panic_handler]
@@ -9,7 +10,7 @@
 //		panic(crate::core::ptr::null(), 0u32);
 //	}
 //}
-//
+
 ///// Overrides the default panic_fmt
 //#[cfg(feature = "panic_with_msg")]
 //#[no_mangle]
@@ -89,8 +90,9 @@
 //
 //#[lang = "eh_personality"]
 //extern "C" fn eh_personality() {}
-//
+
 ///// Overrides the default oom
+////#[cfg(not(test))]
 //#[lang = "oom"]
 //#[no_mangle]
 //pub extern fn oom(_: crate::core::alloc::Layout) -> ! {

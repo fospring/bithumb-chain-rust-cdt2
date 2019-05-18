@@ -12,7 +12,6 @@
 
 [package]
 name = "bxa-std"
-#version = "0.13.1"
 version = "0.1.0"
 [dependencies.byteorder]
 version = "1"
@@ -28,8 +27,12 @@ version = "0.4"
 [dependencies.pwasm-libc]
 version = "0.2"
 
-#[dependencies.tiny-keccak]
-#version = "1"
+[dependencies.sha2]
+version = "0.8"
+default-features = false
+
+[dependencies.num]
+version = "0.2"
 
 [dependencies.uint]
 version = "0.5.0"

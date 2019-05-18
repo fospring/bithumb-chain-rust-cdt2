@@ -7,7 +7,9 @@
 
 extern crate byteorder;
 extern crate bxa_std;
-extern crate base58;
+//extern crate base58;
+//extern crate sha2;
+//extern crate bitcoin;
 
 #[cfg(test)]
 #[cfg_attr(all(test, feature = "std"), macro_use)]

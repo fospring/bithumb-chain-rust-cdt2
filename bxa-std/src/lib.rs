@@ -1,5 +1,5 @@
 //! Standard library for parity wasm programs
-
+//#![no_std]
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(feature = "strict", deny(warnings))]
 #![feature(lang_items)]
@@ -31,32 +31,33 @@ extern crate fixed_hash;
 
 extern crate uint;
 
+extern crate num;
+extern crate sha2;
+
 use byteorder::{LittleEndian, ByteOrder};
 
 pub use alloc::boxed::Box;
 pub use alloc::string::{String,ToString};
 pub use alloc::str;
 pub use alloc::vec::Vec;
-
+/// bitcoin base58 encoding
+pub mod base58;
 pub mod types;
 
 // Safe wrapper around debug logging
 pub mod logger;
 
-// Crypto functions
-//mod crypto;
-
 mod panic;
 
+////#[cfg(not(test))]
 //#[no_mangle]
 //#[cfg(not(feature = "std"))]
 //pub use panic::panic_fmt;
-//
+////
+////#[cfg(not(test))]
 //#[no_mangle]
 //#[cfg(not(feature = "std"))]
 //pub use panic::oom;
-
-//pub use crypto::keccak;
 
 /// Read u32 using native endianness
 pub fn read_u32(slc: &[u8]) -> u32 {

@@ -11,7 +11,6 @@ mod tests;
 
 pub use self::stream::Stream;
 pub use self::sink::Sink;
-//pub use self::ToBXAString;
 use bxa_std::{String};
 
 use super::types;
@@ -46,8 +45,11 @@ pub trait AbiType : Sized {
 	/// Should never be called manually! Use sink.push(val)
 	fn encode(self, sink: &mut Sink);
 
-	/// encode type
+	/// push type
 	fn push_type(self, sink: &mut Sink);
+
+	/// get type
+	fn get_type() -> u8;
 
 	/// to bxa string
 	fn to_bxa_string(&self) -> String;

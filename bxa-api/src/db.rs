@@ -4,14 +4,16 @@ use super::storage;
 use bxa_abi::bxa::{AbiType, Sink, Stream};
 
 pub fn get<K: AsRef<[u8]>, T: AbiType>(key: K) -> Option<T> {
-    storage::read(key.as_ref()).map(|val|{
+    let ty:u8 = T::get_type();
+    storage::read(key.as_ref(),ty).map(|val|{
         let mut stream = Stream::new(&val);
         stream.pop().unwrap()
     })
 }
 
-pub fn put<K: AsRef<[u8]>, T: AbiType>(key:K, val: T) {
+pub fn put<K: AsRef<[u8]>, T: AbiType + Clone>(key:K, val: T) {
     let mut sink = Sink::new(4);
+    sink.push_type(val.clone());
     sink.push(val);
     storage::write(key.as_ref(), sink.preamble_mut())
 }
