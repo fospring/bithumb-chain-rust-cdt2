@@ -9,7 +9,7 @@ extern crate bxa_abi_derive;
 
 use bxa_abi_derive::bxa_abi;
 use bxa_abi::types::*;
-//use bxa_api as bxa;
+use bxa_api as runtime;
 use bxa_api::db;
 use bxa_abi::bxa::*;
 
@@ -38,9 +38,9 @@ impl TokenInterface for TokenContract {
             return false
         } else {
             db::put(INNITIALIZE, true);
+            db::put(receiver, TOTAL_SUPPLY);
+            true
         }
-        db::put(receiver, TOTAL_SUPPLY);
-        true
     }
     fn get_symbol(&mut self) -> String {
         SYMBOL.to_string()
@@ -49,6 +49,7 @@ impl TokenInterface for TokenContract {
         TOTAL_SUPPLY
     }
     fn transfer(&mut self, from: Address, to: Address, amount: u64) -> bool {
+        assert!(runtime::check_witness(&from));
         let senderBalance: u64 = db::get(from).unwrap_or_default();
         let recipientBalance: u64 = db::get(to).unwrap_or_default();
         if amount == 0_u64 || senderBalance < amount || to == from {

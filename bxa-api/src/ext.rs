@@ -103,6 +103,8 @@ mod external {
 		pub fn input_length() -> u32;
 
 		pub fn fetch_input(dst: *mut u8);
+
+		pub fn check_witness(address: *const u8) ->u32;
 	}
 }
 
@@ -381,4 +383,8 @@ unsafe fn fetch_u256<F>(f: F) -> U256 where F: Fn(*mut u8) {
 	let mut res = [0u8; 32];
 	f(res.as_mut_ptr());
 	U256::from_big_endian(&res)
+}
+
+pub fn check_witness(address: &Address) -> bool {
+	unsafe {external::check_witness(address.as_ptr()) != 0}
 }
