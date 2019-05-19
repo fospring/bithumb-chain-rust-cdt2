@@ -5,9 +5,6 @@ use super::{util, Stream, AbiType, Encoder, Sink, Error};
 use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
 use bxa_std::base58;
-//use base58::ToBase58;
-//bitcoin::util::base58
-//use sha2::{Sha256, Digest};
 
 type DataType = u8;
 const TYPE_NIL: DataType = 0x00;

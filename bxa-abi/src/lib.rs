@@ -1,4 +1,5 @@
 //! WASM ABI Tools
+#![no_std]
 
 #![cfg_attr(not(feature="std"), no_std)]
 #![cfg_attr(not(feature="std"), feature(alloc))]
@@ -7,9 +8,6 @@
 
 extern crate byteorder;
 extern crate bxa_std;
-//extern crate base58;
-//extern crate sha2;
-//extern crate bitcoin;
 
 #[cfg(test)]
 #[cfg_attr(all(test, feature = "std"), macro_use)]

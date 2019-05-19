@@ -1,5 +1,5 @@
 //! Standard library for parity wasm programs
-//#![no_std]
+#![no_std]
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(feature = "strict", deny(warnings))]
 #![feature(lang_items)]

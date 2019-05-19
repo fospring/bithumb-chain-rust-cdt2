@@ -1,7 +1,7 @@
 #![cfg(not(feature = "std"))]
 
 ///// Overrides the default panic_fmt
-////#[cfg(not(test))]
+//#[cfg(not(test))]
 //#[cfg(not(feature = "panic_with_msg"))]
 //#[no_mangle]
 //#[panic_handler]
@@ -87,10 +87,10 @@
 //		panic(sink.as_ptr(), sink.len() as u32)
 //	}
 //}
-//
+
 //#[lang = "eh_personality"]
 //extern "C" fn eh_personality() {}
-
+//
 ///// Overrides the default oom
 ////#[cfg(not(test))]
 //#[lang = "oom"]

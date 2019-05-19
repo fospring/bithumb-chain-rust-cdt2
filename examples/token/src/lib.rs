@@ -13,13 +13,14 @@ use bxa_abi::types::*;
 use bxa_api::db;
 use bxa_abi::bxa::*;
 
+const INNITIALIZE: &'static str = "INNITIALIZE";
 const SYMBOL: &'static str = "ABC";
 const TOTAL_SUPPLY: u64 = 100000000000;
 
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
-    fn init(&mut self, receiver: Address);
+    fn init(&mut self, receiver: Address) -> bool;
     fn get_symbol(&mut self) -> String;
     fn get_total_supply(&mut self) -> u64;
     fn transfer(&mut self,from: Address, to: Address, amount: u64) -> bool;
@@ -31,8 +32,15 @@ pub trait TokenInterface {
 pub struct TokenContract;
 
 impl TokenInterface for TokenContract {
-    fn init(&mut self, receiver: Address) {
+    fn init(&mut self, receiver: Address) -> bool{
+        let inited: bool = db::get(INNITIALIZE).unwrap();
+        if inited {
+            return false
+        } else {
+            db::put(INNITIALIZE, true);
+        }
         db::put(receiver, TOTAL_SUPPLY);
+        true
     }
     fn get_symbol(&mut self) -> String {
         SYMBOL.to_string()

@@ -218,16 +218,21 @@ fn u32slice_serialize() {
 #[test]
 fn str_serialize_tostring() {
 	let mut sink = Sink::new(1);
-	sink.push("Hello".to_string());
+	sink.push(String::from("Transfer"));
+
 	let v1:String = "Welcome to The Rust Programming Language book! This version of the text assumes you are using Rust 1.31.0 or later, with edition=\"2018\" in Cargo.toml of all projects to use Rust 2018 Edition idioms. See the \"Installation\" section of Chapter 1 to install or update Rust, and see Appendix E for information on what editions of Rust are.!".to_string();
 	sink.push(v1.clone());
+
 	let arr = sink.preamble_mut();
 	let mut stream = Stream::new(arr.as_ref());
+
 	let val: String = stream.pop::<String>().unwrap();
-	assert_eq!(val, "Hello".to_string());
-	assert_eq!(6, stream.position());
+	assert_eq!(val, String::from("Transfer"));
+
+	assert_eq!(9, stream.position());
+
 	let val: String = stream.pop::<String>().expect("argument decoding failed");
-	assert_eq!(val, v1.clone());
+	assert_eq!(val, v1.to_bxa_string());
 }
 
 
@@ -271,4 +276,21 @@ fn h256() {
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,];
 	let payload = sink.finalize_panicking();
 	assert_eq!(&payload[..],sample);
+}
+
+#[test]
+fn sink() {
+	let mut sink = Sink::new(4);
+	sink.push(String::from("Transfer"));
+	sink.push(String::from("100"));
+	sink.push(String::from("AHYKi9BKkP4ZeM5vH7xtPDfLQ5sXxxoRKq"));
+	sink.push(String::from("foreverSpring"));
+	let arr = sink.preamble_mut();
+	let mut stream = Stream::new(arr.as_ref());
+	let balance = stream.pop::<String>().unwrap();
+	assert_eq!(balance, String::from("Transfer"));
+	assert_eq!(stream.pop::<String>().unwrap(), String::from("100"));
+	assert_eq!(stream.pop::<String>().unwrap(), String::from("AHYKi9BKkP4ZeM5vH7xtPDfLQ5sXxxoRKq"));
+	assert_eq!(stream.pop::<String>().unwrap(), String::from("foreverSpring"));
+	assert_eq!(arr,&[8_u8,84,114,97])
 }

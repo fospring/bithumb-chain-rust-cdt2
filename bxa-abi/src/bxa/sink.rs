@@ -13,8 +13,8 @@ impl Sink {
 	/// New sink with known capacity
 	pub fn new(capacity: usize) -> Self {
 		Sink {
-			// capacity: 32 * capacity,
-			preamble: Vec::with_capacity(8 * capacity),
+			// capacity: 12 * capacity,
+			preamble: Vec::with_capacity(12 * capacity),
 		}
 	}
 
