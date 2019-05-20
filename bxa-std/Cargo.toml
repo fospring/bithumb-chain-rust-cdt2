@@ -21,7 +21,9 @@ default-features = false
 version = "0.3.0"
 default-features = false
 
-[dependencies.pwasm-alloc]
+#[dependencies.pwasm-alloc]
+#version = "0.4"
+[dependencies.wee_alloc]
 version = "0.4"
 
 [dependencies.pwasm-libc]
@@ -42,5 +44,5 @@ default-features = false
 default = ["uint/common"]
 panic_with_msg = []
 std = ["fixed-hash/std", "uint/std", "byteorder/std"]
-strict = ["pwasm-libc/strict", "pwasm-alloc/strict"]
+strict = ["pwasm-libc/strict"]
 test = ["std", "strict"]

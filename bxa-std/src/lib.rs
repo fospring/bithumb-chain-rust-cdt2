@@ -13,8 +13,13 @@
 #[cfg(feature = "std")]
 extern crate core;
 
-#[cfg(not(feature = "std"))]
-extern crate pwasm_alloc;
+//#[cfg(not(feature = "std"))]
+//extern crate pwasm_alloc;
+
+extern crate wee_alloc;
+
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[cfg(not(feature = "std"))]
 extern crate pwasm_libc;

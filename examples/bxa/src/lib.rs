@@ -39,6 +39,8 @@ pub trait TokenInterface {
 
     fn add_u8_slice(&mut self,  arr_u8: Vec<u8>) -> u32;
 
+
+
     fn get_symbol(&mut self) -> String;
     fn get_total_supply(&mut self) -> U256;
     fn transfer(&mut self,from: Address, _to: Address, _amount: U256) -> bool;
