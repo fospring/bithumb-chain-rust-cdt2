@@ -312,11 +312,14 @@ impl<T: AbiType> AbiType for Vec<T> {
 	}
 	fn get_type() -> u8 {TYPE_ARRAY}
 	fn to_bxa_string(&self) -> String {
-		//let size = self.len();
 		let mut res = String::from("");
+		res.push('[');
 		for v in self {
 			res.push_str(&v.to_bxa_string());
+			res.push(',')
 		}
+		res.pop();
+		res.push(']');
 		res
 	}
 }

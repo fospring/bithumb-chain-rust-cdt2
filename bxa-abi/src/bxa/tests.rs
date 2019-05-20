@@ -212,6 +212,32 @@ fn u32slice_serialize() {
 
 	let val: Vec<u32> = stream.pop::<Vec<u32>>().unwrap();
 	assert_eq!(val, vec![69,70,80]);
+	assert_eq!(vec![69,70,80].to_bxa_string(),"[69,70,80]".to_string());
+}
+
+#[test]
+fn u8slice_serialize() {
+	let v1 :Vec<u8> = vec![69,70,80];
+	let mut sink = Sink::new(2);
+	sink.push(v1);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+
+	let val: Vec<u8> = stream.pop::<Vec<u8>>().unwrap();
+	assert_eq!(val, vec![69,70,80]);
+	assert_eq!(vec![69,70,80].to_bxa_string(),"[69,70,80]".to_string());
+}
+
+#[test]
+fn u8bytes_serialize() {
+	let v1 :[u8;32] = [0_u8;32];
+	let mut sink = Sink::new(2);
+	sink.push(v1);
+	let bytes = sink.preamble_mut();
+	let mut stream = Stream::new(bytes);
+
+	let val: [u8;32] = stream.pop::<[u8;32]>().unwrap();
+	assert_eq!(val, [0_u8;32]);
 }
 
 

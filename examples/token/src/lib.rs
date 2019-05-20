@@ -74,9 +74,3 @@ pub fn call() {
     let mut endpoint = TokenEndpoint::new(TokenContract{});
     bxa_api::ret(&endpoint.dispatch(&bxa_api::input()));
 }
-
-#[no_mangle]
-pub fn deploy() {
-    let mut endpoint = TokenEndpoint::new(TokenContract{});
-    endpoint.dispatch_ctor(&bxa_api::input());
-}

@@ -31,10 +31,13 @@ pub trait TokenInterface {
     fn add_u32(&mut self, x: u32, y: u32) -> u32;
     fn double_u32(&mut self, x: u32) -> u32;
     fn add_u64(&mut self, x: u64, y: u64) -> u64;
-    fn str_hello(&mut self, hello: String, name: String) -> String;
+    fn str_hello(&mut self, key: String, hello: String, name: String) -> String;
+    fn get_str(&mut self, key:String) -> String;
     fn add_i32(&mut self, x: i32, y: i32) -> i32;
     fn add_i64(&mut self, x: i64, y: i64) -> i64;
     fn add_u64_slice(&mut self,  arr_u64: Vec<u64>) -> u64;
+
+    fn add_u8_slice(&mut self,  arr_u8: Vec<u8>) -> u32;
 
     fn get_symbol(&mut self) -> String;
     fn get_total_supply(&mut self) -> U256;
@@ -63,14 +66,17 @@ impl TokenInterface for TokenContract {
     fn double_u32(&mut self, x: u32) -> u32 {2*x}
     fn add_u64(&mut self, x: u64, y: u64) -> u64 {x + y}
 
-    fn str_hello(&mut self, hello: String, name: String) -> String {
+    fn str_hello(&mut self, key: String, hello: String, name: String) -> String {
         let mut greet = String::from("");
         greet.push_str(&hello);
         greet.push(' ');
         greet.push_str(&name);
+        db::put(key,greet.clone());
         greet
     }
-
+    fn get_str(&mut self, key:String) -> String {
+        db::get(key).unwrap_or_default()
+    }
     fn add_i32(&mut self, x: i32, y: i32) -> i32{
         x+y
     }
@@ -82,6 +88,14 @@ impl TokenInterface for TokenContract {
         let mut result = 0_u64;
         for i in arr_u64 {
             result = result + i
+        }
+        result
+    }
+
+    fn add_u8_slice(&mut self,  arr_u8: Vec<u8>) -> u32 {
+        let mut result = 0_u32;
+        for i in arr_u8 {
+            result = result + (i as u32)
         }
         result
     }
