@@ -16,39 +16,13 @@ use bxa_api as bxa;
 use bxa_api::db;
 use bxa_abi::bxa::*;
 
+mod serialize;
+use serialize::Student;
+
 const SYMBOL: &'static str = "ABC";
 lazy_static! {
     static ref TOTAL_SUPPLY: U256 = { U256::from(1000000) };
 }
-
-#[derive(Clone)]
-pub struct Student {
-    pub name: String,
-    pub score: u32,
-}
-impl AbiType for Student {
-    fn decode(stream: &mut Stream) -> Result<Self, Error> {
-        let mut student = Student{name: "".to_string(), score: 0,};
-        student.name = String::decode(stream)?;
-        student.score = u32::decode(stream)?;
-        Ok(student)
-    }
-    fn encode(self, sink: &mut Sink) {
-        self.name.encode(sink);
-        self.score.encode(sink);
-    }
-    fn push_type(self, sink: &mut Sink) { sink.write_byte(TYPE_STRUCT); }
-    fn get_type() -> u8 { TYPE_STRUCT }
-    fn to_bxa_string(&self) -> String {
-        let mut stustr = "{".to_string();
-        stustr.push_str(&self.clone().name);
-        stustr.push(',');
-        stustr.push_str(&self.score.to_string());
-        stustr.push(',');
-        stustr
-    }
-}
-
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
