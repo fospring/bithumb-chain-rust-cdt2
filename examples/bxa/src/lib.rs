@@ -138,10 +138,10 @@ impl TokenInterface for TokenContract {
 
     fn get_aver_points(&mut self, students: Vec<Student>) -> u32 {
         let mut total_points = 0_u32;
-        for s in students {
+        for s in &students {
             total_points = total_points + s.score;
         }
-        total_points
+        total_points/(students.len() as u32)
     }
 }
 
