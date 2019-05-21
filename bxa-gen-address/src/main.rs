@@ -46,6 +46,7 @@ pub struct Type {
     pub name: String,
     #[serde(rename = "type")]
     pub type_: String,
+    pub component: Vec<Box<Type>>,
 }
 
 fn main() -> io::Result<()> {
