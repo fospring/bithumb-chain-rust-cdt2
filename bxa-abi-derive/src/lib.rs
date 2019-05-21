@@ -38,7 +38,7 @@ struct Args {
 impl Args {
 	/// Extracts `bxa_abi` argument information from the given `syn::AttributeArgs`.
 	pub fn from_attribute_args(attr_args: syn::AttributeArgs) -> Result<Args> {
-		if attr_args.len() == 0 || attr_args.len() > 2 {
+		if attr_args.len() != 1 {
 			return Err(Error::invalid_number_of_arguments(0));
 		}
 		let endpoint_name =
@@ -128,7 +128,7 @@ fn generate_bxa_endpoint_wrapper(
 	// FIXME: Code duplication with `generate_bxa_endpoint_and_client_wrapper`
 	//        We might want to fix this, however it is not critical.
 	//        >>>
-	let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
+	// let name_ident_use = syn::Ident::new(intf.name(), Span::call_site());
 	let mod_name = format!("bxa_abi_impl_{}", &intf.name().clone());
 	let mod_name_ident = syn::Ident::new(&mod_name, Span::call_site());
 	// FIXME: <<<
@@ -143,7 +143,8 @@ fn generate_bxa_endpoint_wrapper(
 			extern crate bxa_api;
 			extern crate bxa_abi;
 			use bxa_abi::types::{H160, H256, U256, Address, Vec, String};
-			use super::#name_ident_use;
+			// use super::#name_ident_use;
+			use super::*;
 			#endpoint_toks
 		}
 		pub use self::#mod_name_ident::#endpoint_ident;

@@ -19,8 +19,8 @@ const TYPE_BOOL: DataType = 0x08;
 const TYPE_BYTES: DataType = 0x09;
 const TYPE_ADDRESS: DataType = 0x0A;
 const TYPE_UINT256: DataType = 0x0B;
-const TYPE_ARRAY: DataType = 0x0C;
-const TYPE_STRUCT: DataType = 0x0D;
+pub const TYPE_ARRAY: DataType = 0x0C;
+pub const TYPE_STRUCT: DataType = 0x0D;
 
 impl AbiType for u8 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {

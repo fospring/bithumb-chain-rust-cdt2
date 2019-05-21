@@ -21,6 +21,35 @@ lazy_static! {
     static ref TOTAL_SUPPLY: U256 = { U256::from(1000000) };
 }
 
+#[derive(Clone)]
+pub struct Student {
+    pub name: String,
+    pub score: u32,
+}
+impl AbiType for Student {
+    fn decode(stream: &mut Stream) -> Result<Self, Error> {
+        let mut student = Student{name: "".to_string(), score: 0,};
+        student.name = String::decode(stream)?;
+        student.score = u32::decode(stream)?;
+        Ok(student)
+    }
+    fn encode(self, sink: &mut Sink) {
+        self.name.encode(sink);
+        self.score.encode(sink);
+    }
+    fn push_type(self, sink: &mut Sink) { sink.write_byte(TYPE_STRUCT); }
+    fn get_type() -> u8 { TYPE_STRUCT }
+    fn to_bxa_string(&self) -> String {
+        let mut stustr = "{".to_string();
+        stustr.push_str(&self.clone().name);
+        stustr.push(',');
+        stustr.push_str(&self.score.to_string());
+        stustr.push(',');
+        stustr
+    }
+}
+
+
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
     fn constructor(&mut self, receiver: Address);
@@ -39,14 +68,14 @@ pub trait TokenInterface {
 
     fn add_u8_slice(&mut self,  arr_u8: Vec<u8>) -> u32;
 
-
-
     fn get_symbol(&mut self) -> String;
     fn get_total_supply(&mut self) -> U256;
     fn transfer(&mut self,from: Address, _to: Address, _amount: U256) -> bool;
     fn balance_of(&mut self,addr: Address) -> U256;
     #[event]
     fn Transfer(&mut self, from: Address, to: Address, value: U256);
+
+    fn get_student_point(&mut self, student: Student) -> u32;
 }
 
 pub struct TokenContract;
@@ -125,6 +154,10 @@ impl TokenInterface for TokenContract {
     fn balance_of(&mut self, addr: Address) -> U256 {
         let balance = db::get(addr).unwrap_or(U256::zero());
         balance
+    }
+
+    fn get_student_point(&mut self, student: Student) -> u32 {
+        student.score
     }
 }
 

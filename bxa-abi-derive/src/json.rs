@@ -107,6 +107,7 @@ pub struct Argument {
     pub name: String,
     #[serde(rename = "type")]
     pub type_: String,
+	pub component: Vec<Argument>,
 }
 
 #[derive(Serialize, Debug)]
@@ -142,7 +143,6 @@ impl<'a> From<&'a items::Interface> for BxaAbi {
             match *item {
                 items::Item::Signature(ref signature) => result.functions.push(signature.into()),
                 items::Item::Event(ref event) => result.events.push(event.into()),
-				//items::Item::
                 _ => {}
             }
         }
@@ -164,13 +164,14 @@ impl<'a> From<&'a items::Signature> for BxaFunctionEntry {
                     Argument {
                         name: quote! { #pat }.to_string(),
                         type_: utils::canonicalize_type(ty),
+						component: Vec::new(),
                     }
                 )
                 .collect(),
             outputs: item.return_types
                 .iter()
                 .enumerate()
-                .map(|(idx, ty)| Argument { name: format!("returnValue{}", idx), type_: utils::canonicalize_type(ty) })
+                .map(|(idx, ty)| Argument { name: format!("returnValue{}", idx), type_: utils::canonicalize_type(ty), component: Vec::new() })
                 .collect(),
         }
     }
@@ -186,6 +187,7 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
                     Argument {
                         name: quote! { #pat }.to_string(),
                         type_: utils::canonicalize_type(ty),
+						component: Vec::new(),
                     }
                 )
                 .collect(),

@@ -11,6 +11,8 @@ mod tests;
 
 pub use self::stream::Stream;
 pub use self::sink::Sink;
+pub use self::common::TYPE_ARRAY;
+pub use self::common::TYPE_STRUCT;
 use bxa_std::{String};
 
 use super::types;
