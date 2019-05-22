@@ -5,6 +5,7 @@ use serde_json;
 
 use std::{io};
 use std;
+use utils::type_mapping;
 
 /// The result type for JSON errors.
 pub type JsonResult<T> = std::result::Result<T, JsonError>;
@@ -193,4 +194,21 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
                 .collect(),
         }
     }
+}
+
+impl Argument{
+	pub fn new() -> Self {
+		Argument{name:"".to_string(), type_:"".to_string(), component: Vec::new()}
+	}
+	pub fn set_name(&mut self, name: String) -> &mut Self {
+		self.name = name;
+		self
+	}
+	pub fn set_type(&mut self, type_: String) -> &mut Self{
+		self.type_ = type_;
+		self
+	}
+	pub fn type_map(&mut self) {
+		self.type_ = type_mapping(self.type_.clone());
+	}
 }

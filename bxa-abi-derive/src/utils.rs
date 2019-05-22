@@ -89,6 +89,7 @@ fn push_canonicalized_vec(target: &mut String, args: &syn::PathArguments) {
 				else {
 					push_canonicalized_path(target, type_path);
 					target.push_str("[]");
+					// target.push_str("array");
 				}
 			}
 			panic!("Unsupported generic arguments")
@@ -115,6 +116,27 @@ fn push_canonicalized_primitive(target: &mut String, seg: &syn::PathSegment) {
 //			val
 //		),
 		val => target.push_str(val),
+	}
+}
+
+pub fn type_mapping(target: String) -> String {
+	match target.as_str() {
+		"u8" => "uint8".to_string(),
+		"u32" => "uint32".to_string(),
+		"i32" => "int32".to_string(),
+		"u64" => "uint64".to_string(),
+		"i64" => "int64".to_string(),
+		"U256" => "uint256".to_string(),
+		"H256" => "uint256".to_string(),
+		"Address" => "address".to_string(),
+		"String" => "string".to_string(),
+		"bool" => "bool".to_string(),
+//		"Vec" => push_canonicalized_vec(target, &seg.arguments),
+		val => panic!(
+			"[e1] Unable to handle param of type {}: not supported by abi",
+			val
+		),
+		//val => target.push_str(val),
 	}
 }
 

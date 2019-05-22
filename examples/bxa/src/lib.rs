@@ -1,7 +1,7 @@
 #![no_std]
 #![allow(non_snake_case)]
 #![feature(proc_macro_hygiene)]
-
+#![feature(custom_attribute)]
 extern crate bxa_std;
 extern crate bxa_api;
 extern crate bxa_abi;
@@ -52,6 +52,8 @@ pub trait TokenInterface {
     fn get_student_point(&mut self, student: Student) -> u32;
 
     fn get_aver_points(&mut self, students: Vec<Student>) -> u32;
+//
+//    fn nums_add(&mut self, t: (u32,u32,u32)) -> u32;
 }
 
 pub struct TokenContract;
@@ -143,6 +145,10 @@ impl TokenInterface for TokenContract {
         }
         total_points/(students.len() as u32)
     }
+
+//    fn nums_add(&mut self, t: (u32,u32,u32)) -> u32 {
+//        t.0 + t.1 + t.2
+//    }
 }
 
 #[no_mangle]

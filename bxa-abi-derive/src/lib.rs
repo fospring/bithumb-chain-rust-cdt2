@@ -12,6 +12,7 @@ extern crate syn;
 #[macro_use]
 extern crate quote;
 
+//extern crate serde;
 extern crate serde_json;
 
 #[macro_use(construct_fixed_hash)]
@@ -29,6 +30,11 @@ use proc_macro2::{Span};
 use json::write_json_abi;
 use items::Item;
 use error::{Result, Error};
+use syn::DeriveInput;
+use json::Argument;
+//use std::io;
+use std::fs::File;
+use std::io::Write;
 
 /// Arguments given to the `bxa_abi` attribute macro.
 struct Args {
@@ -82,16 +88,6 @@ impl Args {
 ///
 /// Creates an endpoint implementation named `Endpoint` for the
 /// interface defined in the `Contract` trait.
-///
-/// # Example: Using two arguments
-///
-/// ```
-/// #[bxa_abi(Endpoint2, Client2)]
-/// trait Contract2 { }
-/// ```
-///
-/// Creates an endpoint implementation named `Endpoint2` and a
-/// defined in the `Contract2` trait.
 #[proc_macro_attribute]
 pub fn bxa_abi(
 	args: proc_macro::TokenStream,
@@ -106,6 +102,39 @@ pub fn bxa_abi(
 	};
 
 	output.into()
+}
+
+#[proc_macro_attribute]
+pub fn abi_struct(_args: proc_macro::TokenStream, input: proc_macro::TokenStream) -> proc_macro::TokenStream {
+	let input_trans = input.clone();
+	let input: DeriveInput = syn::parse(input.clone()).unwrap();
+	let stru_name = input.ident.clone().to_string();
+	let mut stu = Argument::new();
+	&stu.set_name(stru_name).set_type(String::from("struct"));
+	if let syn::Data::Struct(data) = input.data {
+		for val in data.fields.iter() {
+			let mut stu1 = Argument::new();
+			stu1.set_name(val.clone().ident.unwrap().to_string());
+			if let syn::Type::Path(ty) = val.clone().ty {
+				for item in ty.path.segments.iter() {
+					stu1.set_type(item.ident.to_string());
+				}
+			}
+			stu1.type_map();
+		stu.component.push(stu1);
+		}
+	} else {
+		panic!("Only impl to struct");
+	}
+
+	let mut structs:Vec<Argument> = Vec::new();
+	structs.push(stu);
+	let encode =  serde_json::to_string_pretty(&structs).unwrap();
+	let mut file = File::create("./target/json/component.json").unwrap();
+	file.write_all(encode.as_bytes()).unwrap();
+
+
+	input_trans
 }
 
 /// Implementation of `bxa_abi`.
