@@ -41,12 +41,12 @@ pub struct Event {
     pub inputs: Vec<Type>,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Type {
     pub name: String,
     #[serde(rename = "type")]
     pub type_: String,
-    pub component: Vec<Box<Type>>,
+    pub component: Vec<Type>,
 }
 
 fn main() -> io::Result<()> {
@@ -65,6 +65,8 @@ fn main() -> io::Result<()> {
 
     let mut ctr_path : &str = "";
     let mut abi_path : &str = "";
+//    let mut ctr_path : &str = "./sample.wasm";
+//    let mut abi_path : &str = "./sample.json";
     if let Some(contract) = matches.value_of("contract") {
         println!("Path for contract argument: {}", contract);
         ctr_path = contract
@@ -83,6 +85,7 @@ fn main() -> io::Result<()> {
         panic!();
     }
 
+    // wasm file
     let mut f = File::open(ctr_path)?;
     let mut buffer = vec![];
     f.read_to_end(&mut buffer)?;
@@ -97,11 +100,30 @@ fn main() -> io::Result<()> {
     let hex_str = hex::encode(result2);
     println!("Address: {:?}", hex_str);
 
+    // abi file
     let mut file = File::open(abi_path).unwrap();
     let mut data = String::new();
     file.read_to_string(&mut data).unwrap();
     let mut p : ContractAbi = serde_json::from_str(&data).unwrap();
     p.generate_address(hex_str);
+
+    // read component
+    let mut file = File::open("./component.json")?;
+    let mut data = String::new();
+    file.read_to_string(&mut data).unwrap();
+    let component : Vec<Type> = serde_json::from_str(&data).unwrap();
+    for c in &component {
+        for funcs in &mut p.functions {
+            for args in &mut funcs.inputs {
+                if c.name == args.type_ {
+                    // args.component.clone_from_slice(&c.component);
+                    args.component.extend_from_slice(&c.component);
+                    args.type_ = "struct".to_string();
+                }
+            }
+        }
+    }
+
     let encode =  serde_json::to_string_pretty(&p).unwrap();
 
     let mut file = File::create(abi_path)?;
