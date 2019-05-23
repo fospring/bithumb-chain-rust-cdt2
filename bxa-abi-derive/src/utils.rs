@@ -140,6 +140,13 @@ pub fn type_mapping(target: String) -> String {
 	}
 }
 
+pub fn is_basic(target: String) -> bool {
+	match target.as_str() {
+		"uint8" | "uint32" | "int32" | "uint64" | "int64" | "uint256" | "address" | "string" | "bool" | "bytes" => true,
+		_  => false,
+	}
+}
+
 fn push_canonicalized_path(target: &mut String, type_path: &syn::TypePath) {
 	assert!(type_path.qself.is_none(), "Unsupported type path for canonicalization!");
 	let last_path = type_path.path.segments.last().unwrap();
@@ -174,3 +181,34 @@ pub fn canonicalize_type(ty: &syn::Type) -> String {
 	result
 }
 
+pub fn get_type_string(ty: &syn::Type) -> String {
+	let mut result = String::new();
+	canonicalized_type(&mut result, ty);
+	result
+}
+
+fn canonicalized_type(target: &mut String, ty: &syn::Type) {
+	match ty {
+		syn::Type::Path(type_path) if type_path.qself.is_none() => {
+			canonicalized_path(target, &type_path)
+		},
+		syn::Type::Array(type_array) => {
+			// Special cases for `bytesN`
+			if let syn::Type::Path(type_path) = &*type_array.elem {
+				if "u8" == type_path.path.segments.last().unwrap().value().ident.to_string() {
+					target.push_str("bytes");
+					return;
+				}
+			}
+
+			panic!("Unsupported! Use variable-size arrays")
+		},
+		other_type => panic!("[e2] Unable to handle param of type {:?}: not supported by abi", other_type),
+	}
+}
+
+fn canonicalized_path(target: &mut String, type_path: &syn::TypePath) {
+	assert!(type_path.qself.is_none(), "Unsupported type path for canonicalization!");
+	let last_path = type_path.path.segments.last().unwrap();
+	push_canonicalized_primitive(target, *last_path.value())
+}

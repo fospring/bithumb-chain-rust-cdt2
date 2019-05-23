@@ -109,68 +109,17 @@
       ]
     },
     {
-      "name": "str_hello",
-      "inputs": [
-        {
-          "name": "hello",
-          "type": "string"
-        },
-        {
-          "name": "name",
-          "type": "string"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "returnValue0",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "add_i32",
-      "inputs": [
-        {
-          "name": "x",
-          "type": "int32"
-        },
-        {
-          "name": "y",
-          "type": "int32"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "returnValue0",
-          "type": "int32"
-        }
-      ]
-    },
-    {
-      "name": "add_i64",
-      "inputs": [
-        {
-          "name": "x",
-          "type": "int64"
-        },
-        {
-          "name": "y",
-          "type": "int64"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "returnValue0",
-          "type": "int64"
-        }
-      ]
-    },
-    {
       "name": "add_u64_slice",
       "inputs": [
         {
           "name": "arr_u64",
-          "type": "uint64[]"
+          "type": "array",
+          "component": [
+            {
+              "name": "arr_u64_item",
+              "type": "uint64"
+            }
+          ]
         }
       ],
       "outputs": [
@@ -181,60 +130,73 @@
       ]
     },
     {
-      "name": "get_symbol",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "returnValue0",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "get_total_supply",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "returnValue0",
-          "type": "uint256"
-        }
-      ]
-    },
-    {
-      "name": "transfer",
+      "name": "add_u8_slice",
       "inputs": [
         {
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "name": "_to",
-          "type": "address"
-        },
-        {
-          "name": "_amount",
-          "type": "uint256"
+          "name": "arr_u8",
+          "type": "bytes"
         }
       ],
       "outputs": [
         {
           "name": "returnValue0",
-          "type": "bool"
+          "type": "uint32"
         }
       ]
     },
     {
-      "name": "balance_of",
+      "name": "get_student_point",
       "inputs": [
         {
-          "name": "addr",
-          "type": "address"
+          "name": "student",
+          "type": "struct",
+          "component": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "score",
+              "type": "uint32"
+            }
+          ]
         }
       ],
       "outputs": [
         {
           "name": "returnValue0",
-          "type": "uint256"
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "get_aver_points",
+      "inputs": [
+        {
+          "name": "students",
+          "type": "array",
+          "component": [
+            {
+              "name": "Student",
+              "type": "struct",
+              "component": [
+                {
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "name": "score",
+                  "type": "uint32"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "uint32"
         }
       ]
     },

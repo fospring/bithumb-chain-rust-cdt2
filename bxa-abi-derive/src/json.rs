@@ -104,18 +104,42 @@ pub fn write_json_abi(intf: &items::Interface) -> JsonResult<()> {
 }
 
 #[derive(Serialize, Debug)]
-pub struct Argument {
-    pub name: String,
-    #[serde(rename = "type")]
-    pub type_: String,
-	pub component: Vec<Argument>,
+#[serde(untagged)]
+pub enum AllArgs {
+	Common(CommonArgs),
+	Component(ComponentArgs),
 }
+
+#[derive(Serialize, Debug)]
+pub struct CommonArgs {
+	pub name: String,
+	#[serde(rename = "type")]
+	pub type_: String,
+}
+
+#[derive(Serialize, Debug)]
+pub struct ComponentArgs {
+	pub name: String,
+	#[serde(rename = "type")]
+	pub type_: String,
+	pub component: Vec<AllArgs>,
+}
+
+//#[derive(Serialize, Debug)]
+//pub struct Argument {
+//    pub name: String,
+//    #[serde(rename = "type")]
+//    pub type_: String,
+//	pub component: Vec<Argument>,
+//}
+
+
 
 #[derive(Serialize, Debug)]
 pub struct BxaFunctionEntry {
     pub name: String,
-    pub inputs: Vec<Argument>,
-    pub outputs: Vec<Argument>,
+    pub inputs: Vec<AllArgs>,
+    pub outputs: Vec<AllArgs>,
 }
 
 #[derive(Serialize, Debug)]
@@ -129,7 +153,7 @@ pub struct BxaAbi{
 #[derive(Serialize, Debug)]
 pub struct BxaEventEntry {
     pub name: String,
-    pub inputs: Vec<Argument>,
+    pub inputs: Vec<AllArgs>,
 }
 
 impl<'a> From<&'a items::Interface> for BxaAbi {
@@ -162,17 +186,44 @@ impl<'a> From<&'a items::Signature> for BxaFunctionEntry {
             inputs: item.arguments
                 .iter()
                 .map(|&(ref pat, ref ty)|
-                    Argument {
-                        name: quote! { #pat }.to_string(),
-                        type_: utils::canonicalize_type(ty),
-						component: Vec::new(),
-                    }
+					 if utils::is_basic(utils::get_type_string(ty)) {
+						 AllArgs::Common(CommonArgs{
+							 name: quote! { #pat }.to_string(),
+							 type_: utils::canonicalize_type(ty),
+						 })
+					 } else {
+						 AllArgs::Component(ComponentArgs{
+							 name: quote! { #pat }.to_string(),
+							 type_: utils::canonicalize_type(ty),
+							 component: Vec::new()
+						 })
+					 }
+
+//                    Argument {
+//                        name: quote! { #pat }.to_string(),
+//                        type_: utils::canonicalize_type(ty),
+//						component: Vec::new(),
+//                    }
                 )
                 .collect(),
             outputs: item.return_types
                 .iter()
                 .enumerate()
-                .map(|(idx, ty)| Argument { name: format!("returnValue{}", idx), type_: utils::canonicalize_type(ty), component: Vec::new() })
+                .map(|(idx, ty)|
+					// Argument { name: format!("returnValue{}", idx), type_: utils::canonicalize_type(ty), component: Vec::new() }
+					 if utils::is_basic(utils::get_type_string(ty)) {
+						 AllArgs::Common(CommonArgs{
+							 name: format!("returnValue{}", idx),
+							 type_: utils::canonicalize_type(ty),
+						 })
+					 } else {
+						 AllArgs::Component(ComponentArgs{
+							 name: format!("returnValue{}", idx),
+							 type_: utils::canonicalize_type(ty),
+							 component: Vec::new()
+						 })
+					 }
+				)
                 .collect(),
         }
     }
@@ -185,20 +236,50 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
             inputs: item.data
                 .iter()
                 .map(|&(ref pat, ref ty)|
-                    Argument {
-                        name: quote! { #pat }.to_string(),
-                        type_: utils::canonicalize_type(ty),
-						component: Vec::new(),
-                    }
+					if utils::is_basic(utils::get_type_string(ty)) {
+						AllArgs::Common(CommonArgs{
+							name: quote! { #pat }.to_string(),
+							type_: utils::canonicalize_type(ty),
+						})
+					} else {
+						AllArgs::Component(ComponentArgs{
+							name: quote! { #pat }.to_string(),
+							type_: utils::canonicalize_type(ty),
+							component: Vec::new()
+						})
+					}
+
+//                    Argument {
+//                        name: quote! { #pat }.to_string(),
+//                        type_: utils::canonicalize_type(ty),
+//						component: Vec::new(),
+//                    }
                 )
                 .collect(),
         }
     }
 }
 
-impl Argument{
+impl ComponentArgs{
 	pub fn new() -> Self {
-		Argument{name:"".to_string(), type_:"".to_string(), component: Vec::new()}
+		ComponentArgs{name:"".to_string(), type_:"".to_string(), component: Vec::new()}
+	}
+	pub fn set_name(&mut self, name: String) -> &mut Self {
+		self.name = name;
+		self
+	}
+	pub fn set_type(&mut self, type_: String) -> &mut Self{
+		self.type_ = type_;
+		self
+	}
+//	pub fn type_map(&mut self) {
+//		self.type_ = type_mapping(self.type_.clone());
+//	}
+}
+
+impl CommonArgs{
+	pub fn new() -> Self {
+		CommonArgs{name:"".to_string(), type_:"".to_string()}
 	}
 	pub fn set_name(&mut self, name: String) -> &mut Self {
 		self.name = name;
