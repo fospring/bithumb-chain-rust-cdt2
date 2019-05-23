@@ -4,11 +4,11 @@ use bxa_abi::bxa::{AbiType,TYPE_STRUCT,Stream,Sink,Error};
 use bxa_abi_derive::abi_struct;
 
 #[abi_struct]
+#[derive(Clone)]
 pub struct Student {
     pub name: String,
     pub score: u32,
 }
-
 impl AbiType for Student {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let mut student = Student{name: "".to_string(), score: 0,};

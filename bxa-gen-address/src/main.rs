@@ -13,6 +13,7 @@ use sha2::{Sha256,Digest};
 use ripemd160::{Ripemd160};
 use serde::{Deserialize, Serialize};
 use clap::{Arg, App};
+use std::ptr::null;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct ContractAbi  {
@@ -68,7 +69,6 @@ fn main() -> io::Result<()> {
 //    let mut ctr_path : &str = "./sample.wasm";
 //    let mut abi_path : &str = "./sample.json";
     if let Some(contract) = matches.value_of("contract") {
-        println!("Path for contract argument: {}", contract);
         ctr_path = contract
     } else {
         println!("please chose a contract as a input");
@@ -77,7 +77,6 @@ fn main() -> io::Result<()> {
     }
 
     if let Some(abi) = matches.value_of("abi") {
-        println!("Path for abi argument: {}", abi);
         abi_path = abi
     } else {
         println!("please chose a abi file as a input");
@@ -112,13 +111,41 @@ fn main() -> io::Result<()> {
     let mut data = String::new();
     file.read_to_string(&mut data).unwrap();
     let component : Vec<Type> = serde_json::from_str(&data).unwrap();
+
+    //array extend
+    for funcs in &mut p.functions {
+        for args in &mut funcs.inputs {
+            if args.type_.len() > 2 && args.type_[args.type_.len()-2..] == "[]".to_string() {
+                let mut name = args.name[..].to_string() + "_item";
+                for i in &component {
+                    if args.type_[..args.type_.len()-2] == i.name {
+                        name = "".to_string();
+                        name.push_str(&i.name);
+                        break
+                    }
+                }
+                let item = Type{name: name,type_: args.type_[..args.type_.len()-2].to_string(),component:Vec::new()};
+                args.component.push(item);
+                args.type_ = "array".to_string();
+            }
+        }
+    }
+
+    //replace replace
     for c in &component {
         for funcs in &mut p.functions {
             for args in &mut funcs.inputs {
                 if c.name == args.type_ {
-                    // args.component.clone_from_slice(&c.component);
                     args.component.extend_from_slice(&c.component);
                     args.type_ = "struct".to_string();
+                }
+                if args.type_ == "array".to_string() {
+                    for rcomponent in &mut args.component {
+                        if c.name == rcomponent.type_ {
+                            rcomponent.component.extend_from_slice(&c.component);
+                            rcomponent.type_ = "struct".to_string();
+                        }
+                    }
                 }
             }
         }
