@@ -88,7 +88,8 @@ pub fn write_json_abi(intf: &items::Interface) -> JsonResult<()> {
 		target.push("target");
 		target.push("json");
 		fs::create_dir_all(&target).map_err(|err| JsonError::failed_to_create_dir(err))?;
-		target.push(&format!("{}.json", intf.name()));
+//		target.push(&format!("{}.json", intf.name()));
+		target.push("abi.json");
 		target
 	};
 
@@ -124,16 +125,6 @@ pub struct ComponentArgs {
 	pub type_: String,
 	pub component: Vec<AllArgs>,
 }
-
-//#[derive(Serialize, Debug)]
-//pub struct Argument {
-//    pub name: String,
-//    #[serde(rename = "type")]
-//    pub type_: String,
-//	pub component: Vec<Argument>,
-//}
-
-
 
 #[derive(Serialize, Debug)]
 pub struct BxaFunctionEntry {
@@ -198,19 +189,12 @@ impl<'a> From<&'a items::Signature> for BxaFunctionEntry {
 							 component: Vec::new()
 						 })
 					 }
-
-//                    Argument {
-//                        name: quote! { #pat }.to_string(),
-//                        type_: utils::canonicalize_type(ty),
-//						component: Vec::new(),
-//                    }
                 )
                 .collect(),
             outputs: item.return_types
                 .iter()
                 .enumerate()
                 .map(|(idx, ty)|
-					// Argument { name: format!("returnValue{}", idx), type_: utils::canonicalize_type(ty), component: Vec::new() }
 					 if utils::is_basic(utils::get_type_string(ty)) {
 						 AllArgs::Common(CommonArgs{
 							 name: format!("returnValue{}", idx),
@@ -248,12 +232,6 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
 							component: Vec::new()
 						})
 					}
-
-//                    Argument {
-//                        name: quote! { #pat }.to_string(),
-//                        type_: utils::canonicalize_type(ty),
-//						component: Vec::new(),
-//                    }
                 )
                 .collect(),
         }
@@ -272,9 +250,6 @@ impl ComponentArgs{
 		self.type_ = type_;
 		self
 	}
-//	pub fn type_map(&mut self) {
-//		self.type_ = type_mapping(self.type_.clone());
-//	}
 }
 
 impl CommonArgs{

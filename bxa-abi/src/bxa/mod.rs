@@ -71,3 +71,9 @@ pub trait EndpointInterface {
 	/// Dispatch constructor payload
 	fn dispatch_ctor(&mut self, payload: &[u8]);
 }
+
+/// generate zero value
+pub trait Zero {
+	/// generate zero value
+	fn zero() -> Self;
+}

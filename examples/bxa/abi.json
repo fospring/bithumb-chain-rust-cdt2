@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "address": "b4d513aa611277b2dd3efd331ea0d3c90c995764",
+  "address": "ebbc7a241568c0d6ab06509d322a167d48782ce7",
   "functions": [
     {
       "name": "block_hash",
@@ -109,6 +109,82 @@
       ]
     },
     {
+      "name": "str_hello",
+      "inputs": [
+        {
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "name": "hello",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "get_str",
+      "inputs": [
+        {
+          "name": "key",
+          "type": "string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "add_i32",
+      "inputs": [
+        {
+          "name": "x",
+          "type": "int32"
+        },
+        {
+          "name": "y",
+          "type": "int32"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "int32"
+        }
+      ]
+    },
+    {
+      "name": "add_i64",
+      "inputs": [
+        {
+          "name": "x",
+          "type": "int64"
+        },
+        {
+          "name": "y",
+          "type": "int64"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "int64"
+        }
+      ]
+    },
+    {
       "name": "add_u64_slice",
       "inputs": [
         {
@@ -141,6 +217,64 @@
         {
           "name": "returnValue0",
           "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "get_symbol",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "get_total_supply",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "name": "transfer",
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "balance_of",
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "uint256"
         }
       ]
     },

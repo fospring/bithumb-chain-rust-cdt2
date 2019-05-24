@@ -1,7 +1,7 @@
 //! Common types encoding/decoding
 use lib::*;
 // util,
-use super::{util, Stream, AbiType, Encoder, Sink, Error};
+use super::{util, Stream, AbiType, Encoder, Sink, Zero, Error};
 use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
 use bxa_std::base58;
@@ -45,6 +45,12 @@ impl AbiType for u8 {
 	}
 }
 
+impl Zero for u8 {
+	fn zero() -> Self {
+		0_u8
+	}
+}
+
 impl AbiType for u16 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let n =  u64::decode(stream)?;
@@ -64,6 +70,12 @@ impl AbiType for u16 {
 	fn get_type() -> u8 {255_u8}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
+	}
+}
+
+impl Zero for u16 {
+	fn zero() -> Self {
+		0_u16
 	}
 }
 
@@ -88,6 +100,11 @@ impl AbiType for i32 {
 	}
 }
 
+impl Zero for i32 {
+	fn zero() -> Self {
+		0_i32
+	}
+}
 
 impl AbiType for u32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -111,6 +128,11 @@ impl AbiType for u32 {
 	}
 }
 
+impl Zero for u32 {
+	fn zero() -> Self {
+		0_u32
+	}
+}
 
 impl AbiType for i64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -134,6 +156,12 @@ impl AbiType for i64 {
 	}
 }
 
+impl Zero for i64 {
+	fn zero() -> Self {
+		0_i64
+	}
+}
+
 impl AbiType for u64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		stream.read_u64()
@@ -152,6 +180,12 @@ impl AbiType for u64 {
 	fn get_type() -> u8 {TYPE_UINT64}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
+	}
+}
+
+impl Zero for u64 {
+	fn zero() -> Self {
+		0_u64
 	}
 }
 
@@ -197,6 +231,12 @@ impl AbiType for String {
 	}
 }
 
+impl Zero for String {
+	fn zero() -> Self {
+		String::from("")
+	}
+}
+
 impl AbiType for bool {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let decoded = u8::decode(stream)?;
@@ -218,6 +258,12 @@ impl AbiType for bool {
 	fn get_type() -> u8 {TYPE_BOOL}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
+	}
+}
+
+impl Zero for bool {
+	fn zero() -> Self {
+		false
 	}
 }
 
@@ -246,6 +292,12 @@ impl AbiType for U256 {
 	}
 }
 
+impl Zero for U256 {
+	fn zero() -> Self {
+		U256::from(0)
+	}
+}
+
 impl AbiType for Address {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
 		let mut addr = Address::zero();
@@ -267,6 +319,12 @@ impl AbiType for Address {
 	}
 }
 
+impl Zero for Address {
+	fn zero() -> Self {
+		let bytes : [u8;20] = [0_u8;20];
+		Address::new(bytes)
+	}
+}
 
 impl AbiType for H256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -285,6 +343,13 @@ impl AbiType for H256 {
 	fn get_type() -> u8 {2_u8}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
+	}
+}
+
+impl Zero for H256 {
+	fn zero() -> Self {
+		let bytes : [u8;32] = [0_u8;32];
+		H256::new(bytes)
 	}
 }
 
@@ -322,6 +387,50 @@ impl<T: AbiType> AbiType for Vec<T> {
 		res.push(']');
 		res
 	}
+}
+
+impl<T: AbiType> Zero for Vec<T> {
+	fn zero() -> Self {
+		let v : Vec<T> = Vec::new();
+		v
+	}
+}
+
+#[macro_export]
+macro_rules! abi_extends {
+	    ($vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* }) => {
+        #[abi_struct]
+		#[derive(Clone)]
+        pub struct $name {
+            $($v $fname : $ftype),*
+        }
+
+        impl AbiType for $name {
+			fn decode(stream: &mut Stream) -> Result<Self, Error> {
+				let mut st = $name{$($fname: <$ftype>::zero()),*};
+				$(st.$fname = <$ftype>::decode(stream)?);*;
+				Ok(st)
+			}
+			fn encode(self, sink: &mut Sink) {
+				$(&self.$fname.encode(sink));*;
+			}
+			fn push_type(self, sink: &mut Sink) { sink.write_byte(TYPE_STRUCT); }
+    		fn get_type() -> u8 { TYPE_STRUCT }
+            fn to_bxa_string(&self) -> String {
+                let mut s = String::from("");
+                s.push('{');
+                $(
+                	s.push_str(stringify!($fname));
+                	s.push(':');
+                    s.push_str(&self.$fname.to_bxa_string());
+                    s.push(',');
+                );*;
+                s.pop();
+                s.push('}');
+                s
+            }
+        }
+    }
 }
 
 macro_rules! abi_type_fixed_impl {

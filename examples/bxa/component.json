@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Student",
+    "type": "struct",
+    "component": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "uint32"
+      }
+    ]
+  }
+]

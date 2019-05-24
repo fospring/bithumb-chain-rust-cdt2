@@ -35,6 +35,8 @@ use json::{AllArgs,ComponentArgs,CommonArgs};
 //use std::io;
 use std::fs::File;
 use std::io::Write;
+use std::{fs,env,path};
+use json::JsonError;
 
 /// Arguments given to the `bxa_abi` attribute macro.
 struct Args {
@@ -130,7 +132,14 @@ pub fn abi_struct(_args: proc_macro::TokenStream, input: proc_macro::TokenStream
 	let mut structs:Vec<AllArgs> = Vec::new();
 	structs.push(AllArgs::Component(stu));
 	let encode =  serde_json::to_string_pretty(&structs).unwrap();
-	let mut file = File::create("./target/json/component.json").unwrap();
+
+	let mut target =
+		path::PathBuf::from(env::var("CARGO_TARGET_DIR").unwrap_or(".".to_owned()));
+	target.push("target");
+	target.push("json");
+	fs::create_dir_all(&target).map_err(|err| JsonError::failed_to_create_dir(err)).unwrap();
+	target.push("component.json");
+	let mut file = File::create(target).unwrap();
 	file.write_all(encode.as_bytes()).unwrap();
 
 

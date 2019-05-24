@@ -71,38 +71,38 @@ fn is_basic_type(target :&str) -> bool {
 }
 
 fn main() -> io::Result<()> {
-//    let matches = App::new("gen-address")
-//        .version("0.1.0")
-//        .author("BXA")
-//        .about("Generate contract address in Rust")
-//        .arg(Arg::with_name("contract")
-//            .help("contract path.")
-//            .empty_values(false)
-//        ).arg(Arg::with_name("abi")
-//        .help("abi path.")
-//        .empty_values(false)
-//    )
-//        .get_matches();
-//
-//    let mut ctr_path : &str = "";
-//    let mut abi_path : &str = "";
-    let mut ctr_path : &str = "./sample.wasm";
-    let mut abi_path : &str = "./sample.json";
-//    if let Some(contract) = matches.value_of("contract") {
-//        ctr_path = contract
-//    } else {
-//        println!("please chose a contract as a input");
-//        println!("for help: ./bxa-gen-address -h");
-//        panic!();
-//    }
-//
-//    if let Some(abi) = matches.value_of("abi") {
-//        abi_path = abi
-//    } else {
-//        println!("please chose a abi file as a input");
-//        println!("for help: ./bxa-gen-address -h");
-//        panic!();
-//    }
+    let matches = App::new("gen-address")
+        .version("0.1.0")
+        .author("BXA")
+        .about("Generate contract address in Rust")
+        .arg(Arg::with_name("contract")
+            .help("contract path.")
+            .empty_values(false)
+        ).arg(Arg::with_name("abi")
+        .help("abi path.")
+        .empty_values(false)
+    )
+        .get_matches();
+
+    let mut ctr_path : &str = "";
+    let mut abi_path : &str = "";
+//    let mut ctr_path : &str = "./sample.wasm";
+//    let mut abi_path : &str = "./sample.json";
+    if let Some(contract) = matches.value_of("contract") {
+        ctr_path = contract
+    } else {
+        println!("please chose a contract as a input");
+        println!("for help: ./bxa-gen-address -h");
+        panic!();
+    }
+
+    if let Some(abi) = matches.value_of("abi") {
+        abi_path = abi
+    } else {
+        println!("please chose a abi file as a input");
+        println!("for help: ./bxa-gen-address -h");
+        panic!();
+    }
 
     // wasm file
     let mut f = File::open(ctr_path)?;

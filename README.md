@@ -225,7 +225,8 @@ cargo rustc -- -Zunstable-options --pretty=expanded
 ## Generate contract address
 1 . switch to sub project bxa-rust-cdt/bxa-gen-address, build this sub project.
 ```bash
-cd ./bxa-gen-addresscargo build
+cd ./bxa-gen-addresscargo
+cargo build
 ```
 2 . copy the binary executable file `bxa-gen-address` from path `./target/debug` to `./bxa-gen-address`  
 3 . show usage:  
