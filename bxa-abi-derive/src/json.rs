@@ -123,7 +123,7 @@ pub struct ComponentArgs {
 	pub name: String,
 	#[serde(rename = "type")]
 	pub type_: String,
-	pub component: Vec<AllArgs>,
+	pub components: Vec<AllArgs>,
 }
 
 #[derive(Serialize, Debug)]
@@ -186,7 +186,7 @@ impl<'a> From<&'a items::Signature> for BxaFunctionEntry {
 						 AllArgs::Component(ComponentArgs{
 							 name: quote! { #pat }.to_string(),
 							 type_: utils::canonicalize_type(ty),
-							 component: Vec::new()
+							 components: Vec::new()
 						 })
 					 }
                 )
@@ -204,7 +204,7 @@ impl<'a> From<&'a items::Signature> for BxaFunctionEntry {
 						 AllArgs::Component(ComponentArgs{
 							 name: format!("returnValue{}", idx),
 							 type_: utils::canonicalize_type(ty),
-							 component: Vec::new()
+							 components: Vec::new()
 						 })
 					 }
 				)
@@ -229,7 +229,7 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
 						AllArgs::Component(ComponentArgs{
 							name: quote! { #pat }.to_string(),
 							type_: utils::canonicalize_type(ty),
-							component: Vec::new()
+							components: Vec::new()
 						})
 					}
                 )
@@ -240,7 +240,7 @@ impl<'a> From<&'a items::Event> for BxaEventEntry {
 
 impl ComponentArgs{
 	pub fn new() -> Self {
-		ComponentArgs{name:"".to_string(), type_:"".to_string(), component: Vec::new()}
+		ComponentArgs{name:"".to_string(), type_:"".to_string(), components: Vec::new()}
 	}
 	pub fn set_name(&mut self, name: String) -> &mut Self {
 		self.name = name;

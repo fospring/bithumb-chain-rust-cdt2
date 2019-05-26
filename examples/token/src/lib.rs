@@ -4,6 +4,7 @@
 
 extern crate bxa_std;
 extern crate bxa_api;
+#[macro_use]
 extern crate bxa_abi;
 extern crate bxa_abi_derive;
 
@@ -12,11 +13,27 @@ use bxa_abi::types::*;
 use bxa_api as runtime;
 use bxa_api::db;
 use bxa_abi::bxa::*;
+#[macro_use]
+extern crate lazy_static;
 
 const INNITIALIZE: &'static str = "INNITIALIZE";
 const SYMBOL: &'static str = "ABC";
 const TOTAL_SUPPLY: u64 = 100000000000;
+lazy_static! {
+    static ref ADMIN: Address = bxa_abi_derive::base58_to_address!("AZvWo4SpSpRL7Li7gqwgwEdWWjSUpPvn4Y");
+    static ref RECIVER: Address = bxa_abi_derive::base58_to_address!("AHoGzMnbRmxpeJ9jgSEKbCT5exqvCxFXVH");
+}
 
+
+use bxa_abi_derive::abi_struct;
+
+abi_extends!{
+    pub struct Transfer {
+        pub from: Address,
+        pub to: Address,
+        pub amount: u64
+    }
+}
 
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
@@ -24,6 +41,8 @@ pub trait TokenInterface {
     fn get_symbol(&mut self) -> String;
     fn get_total_supply(&mut self) -> u64;
     fn transfer(&mut self,from: Address, to: Address, amount: u64) -> bool;
+    fn muti_transfer(&mut self, args: Vec<Transfer>) -> bool;
+    fn donate(&mut self, donater: Address, amount: u64) -> bool;
     fn balance_of(&mut self,addr: Address) -> u64;
     #[event]
     fn Transfer(&mut self, from: Address, to: Address, value: u64);
@@ -33,10 +52,11 @@ pub struct TokenContract;
 
 impl TokenInterface for TokenContract {
     fn init(&mut self, receiver: Address) -> bool{
-        let inited: bool = db::get(INNITIALIZE).unwrap();
+        let inited: bool = db::get::<_, bool>(INNITIALIZE).unwrap();
         if inited {
             return false
         } else {
+            assert!(runtime::check_witness(&ADMIN));
             db::put(INNITIALIZE, true);
             db::put(receiver, TOTAL_SUPPLY);
             true
@@ -50,7 +70,7 @@ impl TokenInterface for TokenContract {
     }
     fn transfer(&mut self, from: Address, to: Address, amount: u64) -> bool {
         assert!(runtime::check_witness(&from));
-        let senderBalance: u64 = db::get(from).unwrap_or_default();
+        let senderBalance = db::get::<_, u64>(from).unwrap_or_default();
         let recipientBalance: u64 = db::get(to).unwrap_or_default();
         if amount == 0_u64 || senderBalance < amount || to == from {
             false
@@ -62,6 +82,17 @@ impl TokenInterface for TokenContract {
             self.Transfer(from, to, amount);
             true
         }
+    }
+    fn muti_transfer(&mut self, args: Vec<Transfer>) -> bool {
+        for trans in args {
+            if ! self.transfer(trans.from, trans.to, trans.amount) {
+                return false
+            }
+        }
+        true
+    }
+    fn donate(&mut self, donater: Address, amount: u64) -> bool {
+        self.transfer(donater, *RECIVER, amount)
     }
     fn balance_of(&mut self, addr: Address) -> u64 {
         let balance = db::get(addr).unwrap_or(0_u64);

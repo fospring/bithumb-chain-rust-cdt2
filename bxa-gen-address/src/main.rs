@@ -46,7 +46,7 @@ pub struct ComponentArgs {
     pub name: String,
     #[serde(rename = "type")]
     pub type_: String,
-    pub component: Vec<AllArgs>,
+    pub components: Vec<AllArgs>,
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -127,10 +127,10 @@ fn main() -> io::Result<()> {
     p.generate_address(hex_str);
 
     // read component
-    let mut file = File::open("./component.json")?;
+    let mut file = File::open("../../target/json/component.json")?;
     let mut data = String::new();
     file.read_to_string(&mut data).unwrap();
-    let component : Vec<ComponentArgs> = serde_json::from_str(&data).unwrap();
+    let components : Vec<ComponentArgs> = serde_json::from_str(&data).unwrap();
 
     //array extend
     for funcs in &mut p.functions {
@@ -138,7 +138,7 @@ fn main() -> io::Result<()> {
             if let AllArgs::Component(arg) = args {
                 if arg.type_.len() > 2 && arg.type_[arg.type_.len()-2..] == "[]".to_string() {
                     let mut name = arg.name[..].to_string() + "_item";
-                    for i in &component {
+                    for i in &components {
                         if arg.type_[..arg.type_.len()-2] == i.name {
                             name = "".to_string();
                             name.push_str(&i.name);
@@ -147,10 +147,10 @@ fn main() -> io::Result<()> {
                     }
                     if is_basic_type(&arg.type_[..arg.type_.len()-2]) {
                         let item = CommonArgs{name: name,type_: arg.type_[..arg.type_.len()-2].to_string()};
-                        arg.component.push(AllArgs::Common(item));
+                        arg.components.push(AllArgs::Common(item));
                     } else {
-                        let item = ComponentArgs{name: name,type_: arg.type_[..arg.type_.len()-2].to_string(),component:Vec::new()};
-                        arg.component.push(AllArgs::Component(item));
+                        let item = ComponentArgs{name: name,type_: arg.type_[..arg.type_.len()-2].to_string(),components:Vec::new()};
+                        arg.components.push(AllArgs::Component(item));
                     }
                     arg.type_ = "array".to_string();
                 }
@@ -159,19 +159,19 @@ fn main() -> io::Result<()> {
     }
 
     //replace replace
-    for c in &component {
+    for c in &components {
         for funcs in &mut p.functions {
             for args in &mut funcs.inputs {
                 if let AllArgs::Component(args) = args {
                     if c.name == args.type_ {
-                        args.component.extend_from_slice(&c.component);
+                        args.components.extend_from_slice(&c.components);
                         args.type_ = "struct".to_string();
                     }
                     if args.type_ == "array".to_string() {
-                        for rcomponent in &mut args.component {
+                        for rcomponent in &mut args.components {
                             if let AllArgs::Component(rcomponent) = rcomponent {
                                 if c.name == rcomponent.type_ {
-                                    rcomponent.component.extend_from_slice(&c.component);
+                                    rcomponent.components.extend_from_slice(&c.components);
                                     rcomponent.type_ = "struct".to_string();
                                 }
                             }

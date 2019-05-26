@@ -7,7 +7,7 @@ pub fn get<K: AsRef<[u8]>, T: AbiType>(key: K) -> Option<T> {
     let ty:u8 = T::get_type();
     storage::read(key.as_ref(),ty).map(|val|{
         let mut stream = Stream::new(&val);
-        stream.pop().unwrap()
+        stream.pop::<T>().unwrap()
     })
 }
 

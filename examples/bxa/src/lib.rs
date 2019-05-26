@@ -115,8 +115,8 @@ impl TokenInterface for TokenContract {
         *TOTAL_SUPPLY
     }
     fn transfer(&mut self, from: Address, to: Address, amount: U256) -> bool {
-        let senderBalance: U256 = db::get(from).unwrap_or_default();
-        let recipientBalance: U256 = db::get(to).unwrap_or_default();
+        let senderBalance = db::get::<_, U256>(from).unwrap_or_default();
+        let recipientBalance = db::get::<_, U256>(to).unwrap_or_default();
         if amount == 0.into() || senderBalance < amount || to == from {
             false
         } else {
@@ -129,7 +129,7 @@ impl TokenInterface for TokenContract {
         }
     }
     fn balance_of(&mut self, addr: Address) -> U256 {
-        let balance = db::get(addr).unwrap_or(U256::zero());
+        let balance = db::get::<_, U256>(addr).unwrap_or(U256::zero());
         balance
     }
 

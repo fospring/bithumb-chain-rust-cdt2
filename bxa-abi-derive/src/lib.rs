@@ -2,7 +2,7 @@
 
 #![recursion_limit = "128"]
 #![deny(unused)]
-
+extern crate bxa_std;
 extern crate proc_macro;
 extern crate proc_macro2;
 
@@ -30,7 +30,7 @@ use proc_macro2::{Span};
 use json::write_json_abi;
 use items::Item;
 use error::{Result, Error};
-use syn::DeriveInput;
+use syn::{DeriveInput,Lit};
 use json::{AllArgs,ComponentArgs,CommonArgs};
 //use std::io;
 use std::fs::File;
@@ -123,7 +123,7 @@ pub fn abi_struct(_args: proc_macro::TokenStream, input: proc_macro::TokenStream
 				}
 			}
 			stu1.type_map();
-		stu.component.push(AllArgs::Common(stu1));
+		stu.components.push(AllArgs::Common(stu1));
 		}
 	} else {
 		panic!("Only impl to struct");
@@ -144,6 +144,20 @@ pub fn abi_struct(_args: proc_macro::TokenStream, input: proc_macro::TokenStream
 
 
 	input_trans
+}
+
+#[proc_macro]
+pub fn base58_to_address(item: proc_macro::TokenStream) -> proc_macro::TokenStream {
+    let input = parse_macro_input!(item as Lit);
+    let address = match input {
+        syn::Lit::Str(litstr) => bxa_std::base58::from_base58(&litstr.value())
+			.unwrap_or_else(|e| panic!("failed to parse address from base58 string for: {}", e)),
+		syn::Lit::ByteStr(lit_byte_str) => bxa_std::base58::from_base58(&String::from_utf8(lit_byte_str.value()).unwrap())
+			.unwrap_or_else(|e| panic!("failed to parse address from base58 byte slice for: {}", e)),
+		_ => panic!("base58_to_address! only support string literal"),
+    };
+	let res = quote! { Address::new([#(#address),*])};
+	res.into()
 }
 
 /// Implementation of `bxa_abi`.

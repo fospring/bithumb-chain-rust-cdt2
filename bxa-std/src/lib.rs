@@ -89,3 +89,4 @@ pub fn read_u64(slc: &[u8]) -> u64 {
 pub fn write_u64(dst: &mut [u8], val: u64) {
 	LittleEndian::write_u64(dst, val)
 }
+

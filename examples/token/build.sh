@@ -4,4 +4,5 @@ RUSTFLAGS="-C link-arg=-zstack-size=32768" cargo +nightly build --release --targ
 #wasm-build --target=wasm32-unknown-unknown ../../target token
 wasm-gc ../../target/wasm32-unknown-unknown/release/token.wasm ./token.wasm
 wasm2wat ./token.wasm -o ./token.wat
-../../target/debug/bxa-gen-address ./token.wasm ./token.json
+../../target/debug/bxa-gen-address ./token.wasm ../../target/json/abi.json
+cp ../../target/json/abi.json ./abi.json

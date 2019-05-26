@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "address": "ebbc7a241568c0d6ab06509d322a167d48782ce7",
+  "address": "46a0bfb5c110462e559b6d0aedfd8fd74937c862",
   "functions": [
     {
       "name": "block_hash",
@@ -190,7 +190,7 @@
         {
           "name": "arr_u64",
           "type": "array",
-          "component": [
+          "components": [
             {
               "name": "arr_u64_item",
               "type": "uint64"
@@ -284,7 +284,7 @@
         {
           "name": "student",
           "type": "struct",
-          "component": [
+          "components": [
             {
               "name": "name",
               "type": "string"
@@ -309,11 +309,11 @@
         {
           "name": "students",
           "type": "array",
-          "component": [
+          "components": [
             {
               "name": "Student",
               "type": "struct",
-              "component": [
+              "components": [
                 {
                   "name": "name",
                   "type": "string"

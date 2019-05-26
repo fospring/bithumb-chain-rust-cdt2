@@ -45,3 +45,7 @@ version = "1.0.24"
 [dependencies.syn]
 version = "0.15.12"
 features = ["full", "extra-traits"]
+
+[dependencies.bxa-std]
+path="../bxa-std"
+version = "0.1"
