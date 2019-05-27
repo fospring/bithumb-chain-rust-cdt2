@@ -48,7 +48,7 @@ pub trait AbiType : Sized {
 	fn encode(self, sink: &mut Sink);
 
 	/// push type
-	fn push_type(self, sink: &mut Sink);
+	fn push_type(&self, sink: &mut Sink);
 
 	/// get type
 	fn get_type() -> u8;

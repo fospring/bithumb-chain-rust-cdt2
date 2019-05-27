@@ -44,23 +44,23 @@ fn u8_serializ_tostring() {
 	assert_eq!(String::from("255"), v2.to_bxa_string());
 }
 
-#[test]
-fn u16_serializ_tostring() {
-	let v1 :u16 = 65535;
-	let v2 :u16 = 256;
-	let mut sink = Sink::new(1);
-	sink.push(v1);
-	sink.push(v2);
-	let bytes = sink.preamble_mut();
-	let mut stream = Stream::new(bytes);
-	let val1 = stream.pop::<u16>().unwrap();
-	let val2 = stream.pop::<u16>().unwrap();
-	assert_eq!(v1, val1);
-	assert_eq!(v2, val2);
-
-	assert_eq!(String::from("65535"), v1.to_bxa_string());
-	assert_eq!(String::from("256"), v2.to_bxa_string());
-}
+//#[test]
+//fn u16_serializ_tostring() {
+//	let v1 :u16 = 65535;
+//	let v2 :u16 = 256;
+//	let mut sink = Sink::new(1);
+//	sink.push(v1);
+//	sink.push(v2);
+//	let bytes = sink.preamble_mut();
+//	let mut stream = Stream::new(bytes);
+//	let val1 = stream.pop::<u16>().unwrap();
+//	let val2 = stream.pop::<u16>().unwrap();
+//	assert_eq!(v1, val1);
+//	assert_eq!(v2, val2);
+//
+//	assert_eq!(String::from("65535"), v1.to_bxa_string());
+//	assert_eq!(String::from("256"), v2.to_bxa_string());
+//}
 
 #[test]
 fn i32_serializ_tostring() {

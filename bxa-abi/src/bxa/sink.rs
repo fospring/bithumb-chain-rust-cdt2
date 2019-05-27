@@ -29,7 +29,7 @@ impl Sink {
 	}
 
 	/// Consume `type` of `val` to the Sink
-	pub fn push_type<T: AbiType>(&mut self, val: T) {
+	pub fn push_type<T: AbiType>(&mut self, val: &T) {
 		val.push_type(self);
 	}
 

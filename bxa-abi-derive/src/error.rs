@@ -55,7 +55,7 @@ impl Error {
 	/// Returns an error representing that an invalid number of
 	/// arguments passed to `eth_abi` have been found.
 	pub fn invalid_number_of_arguments(found: usize) -> Self {
-		assert!(found != 1 && found != 2);
+		assert!(found != 1);
 		Error::from_kind(ErrorKind::InvalidNumberOfArguments { found })
 	}
 

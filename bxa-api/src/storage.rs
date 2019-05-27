@@ -4,6 +4,7 @@ use bxa_std::{vec, Vec};
 extern "C" {
 	fn storage_read(key: *const u8, klen: u32, val: *mut u8, vlen: u32, offset: u32, vt: u8) -> u32;
 	fn storage_write(key: *const u8, klen: u32, src: *const u8, vlen: u32);
+	fn storage_delete(key: *const u8, klen:u32);
 }
 
 /// Performs read from the storage.
@@ -34,5 +35,12 @@ pub fn read(key: &[u8], vt: u8) -> Option<Vec<u8>> {
 pub fn write(key: &[u8], val: &[u8]) {
 	unsafe {
 		storage_write(key.as_ptr(), key.len() as u32, val.as_ptr(), val.len() as u32);
+	}
+}
+
+/// Performs delete from the storage
+pub fn delete(key: &[u8]) {
+	unsafe {
+		storage_delete(key.as_ptr(), key.len() as u32);
 	}
 }

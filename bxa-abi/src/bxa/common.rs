@@ -21,6 +21,7 @@ const TYPE_ADDRESS: DataType = 0x0A;
 const TYPE_UINT256: DataType = 0x0B;
 pub const TYPE_ARRAY: DataType = 0x0C;
 pub const TYPE_STRUCT: DataType = 0x0D;
+const OTHER_TYPE: DataType = 0xff;
 
 impl AbiType for u8 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -34,7 +35,7 @@ impl AbiType for u8 {
 		n.encode(sink);
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_UINT8);
 	}
 
@@ -51,33 +52,33 @@ impl Zero for u8 {
 	}
 }
 
-impl AbiType for u16 {
-	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let n =  u64::decode(stream)?;
-		let res = n as u16;
-		Ok(res)
-	}
-
-	fn encode(self, sink: &mut Sink) {
-		let n = self as u64;
-		n.encode(sink);
-	}
-
-	fn push_type(self, sink: &mut Sink) {
-		sink.write_byte(255_u8);
-	}
-
-	fn get_type() -> u8 {255_u8}
-	fn to_bxa_string(&self) -> String {
-		self.to_string()
-	}
-}
-
-impl Zero for u16 {
-	fn zero() -> Self {
-		0_u16
-	}
-}
+//impl AbiType for u16 {
+//	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+//		let n =  u64::decode(stream)?;
+//		let res = n as u16;
+//		Ok(res)
+//	}
+//
+//	fn encode(self, sink: &mut Sink) {
+//		let n = self as u64;
+//		n.encode(sink);
+//	}
+//
+//	fn push_type(&self, sink: &mut Sink) {
+//		sink.write_byte(255_u8);
+//	}
+//
+//	fn get_type() -> u8 {255_u8}
+//	fn to_bxa_string(&self) -> String {
+//		self.to_string()
+//	}
+//}
+//
+//impl Zero for u16 {
+//	fn zero() -> Self {
+//		0_u16
+//	}
+//}
 
 impl AbiType for i32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
@@ -90,7 +91,7 @@ impl AbiType for i32 {
 		let n = self as u64;
 		n.encode(sink);
 	}
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_INT32);
 	}
 
@@ -118,7 +119,7 @@ impl AbiType for u32 {
 		n.encode(sink);
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_UINT32);
 	}
 
@@ -146,7 +147,7 @@ impl AbiType for i64 {
 		n.encode(sink);
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_INT64);
 	}
 
@@ -173,7 +174,7 @@ impl AbiType for u64 {
 		sink.preamble_mut().extend_from_slice(&data[..size]);
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_UINT64);
 	}
 
@@ -221,7 +222,7 @@ impl AbiType for String {
 		sink.write_bytes(self.as_str().as_bytes());
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_STRING);
 	}
 
@@ -251,7 +252,7 @@ impl AbiType for bool {
 		sink.preamble_mut().extend_from_slice(match self { true => &[1_u8;1], false => &[0_u8;1]});
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_BOOL);
 	}
 
@@ -282,7 +283,7 @@ impl AbiType for U256 {
 		self.to_little_endian(&mut sink.preamble_mut()[tail..tail+32]);
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_UINT256);
 	}
 
@@ -308,7 +309,7 @@ impl AbiType for Address {
 	fn encode(self, sink: &mut Sink) {
 		sink.write_bytes(self.as_ref())
 	}
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_ADDRESS);
 	}
 	fn get_type() -> u8 {TYPE_ADDRESS}
@@ -336,11 +337,11 @@ impl AbiType for H256 {
 	fn encode(self, sink: &mut Sink) {
 		self.as_fixed_bytes().encode(sink)
 	}
-	fn push_type(self, sink: &mut Sink) {
-		sink.write_byte(2_u8);
+	fn push_type(&self, sink: &mut Sink) {
+		sink.write_byte(TYPE_UINT256);
 	}
 
-	fn get_type() -> u8 {2_u8}
+	fn get_type() -> u8 {TYPE_UINT256}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
 	}
@@ -372,7 +373,7 @@ impl<T: AbiType> AbiType for Vec<T> {
 		}
 	}
 
-	fn push_type(self, sink: &mut Sink) {
+	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_ARRAY);
 	}
 	fn get_type() -> u8 {TYPE_ARRAY}
@@ -414,7 +415,7 @@ macro_rules! abi_extends {
 			fn encode(self, sink: &mut Sink) {
 				$(&self.$fname.encode(sink));*;
 			}
-			fn push_type(self, sink: &mut Sink) { sink.write_byte(TYPE_STRUCT); }
+			fn push_type(&self, sink: &mut Sink) { sink.write_byte(TYPE_STRUCT); }
     		fn get_type() -> u8 { TYPE_STRUCT }
             fn to_bxa_string(&self) -> String {
                 let mut s = String::from("");
@@ -449,150 +450,16 @@ macro_rules! abi_type_fixed_impl {
 				padded[0..$num].copy_from_slice(&self[..]);
 				sink.preamble_mut().extend_from_slice(&padded[..]);
 			}
-			fn push_type(self, sink: &mut Sink) {
-				sink.write_byte(13_u8);
+			fn push_type(&self, sink: &mut Sink) {
+				sink.write_byte(OTHER_TYPE);
 			}
-			fn get_type() -> u8 {13_u8}
+			fn get_type() -> u8 {OTHER_TYPE}
 			fn to_bxa_string(&self) -> String {
 				String::from("")
 			}
 		}
 	}
 }
-
-macro_rules! tuple_impls {
-	($(
-		$Tuple:ident {
-			$(($idx:tt) -> $T:ident)+
-		}
-	)+) => {
-		$(
-			impl<$($T:AbiType),+> AbiType for ($($T,)+) {
-				fn decode(_stream: &mut Stream) -> Result<Self, Error> {
-					panic!("Tuples allow only encoding, not decoding (for supporting multiple return types)")
-				}
-
-				fn encode(self, sink: &mut Sink) {
-					$(sink.push(self.$idx);)+
-				}
-				fn push_type(self, sink: &mut Sink) {
-					sink.write_byte(254_u8);
-				}
-				fn get_type() -> u8 {254_u8}
-
-				fn to_bxa_string(&self) -> String {
-					String::from("")
-				}
-			}
-		)+
-	}
-}
-
-tuple_impls! {
-	Tuple1 {
-		(0) -> A
-	}
-	Tuple2 {
-		(0) -> A
-		(1) -> B
-	}
-	Tuple3 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-	}
-	Tuple4 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-	}
-	Tuple5 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-	}
-	Tuple6 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-	}
-	Tuple7 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-		(6) -> G
-	}
-	Tuple8 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-		(6) -> G
-		(7) -> H
-	}
-	Tuple9 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-		(6) -> G
-		(7) -> H
-		(8) -> I
-	}
-	Tuple10 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-		(6) -> G
-		(7) -> H
-		(8) -> I
-		(9) -> J
-	}
-	Tuple11 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-		(6) -> G
-		(7) -> H
-		(8) -> I
-		(9) -> J
-		(10) -> K
-	}
-	Tuple12 {
-		(0) -> A
-		(1) -> B
-		(2) -> C
-		(3) -> D
-		(4) -> E
-		(5) -> F
-		(6) -> G
-		(7) -> H
-		(8) -> I
-		(9) -> J
-		(10) -> K
-		(11) -> L
-	}
-}
-
 
 abi_type_fixed_impl!(1);
 abi_type_fixed_impl!(2);
