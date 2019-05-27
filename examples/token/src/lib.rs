@@ -31,7 +31,7 @@ abi_extends!{
     pub struct Transfer {
         pub from: Address,
         pub to: Address,
-        pub amount: u64
+        pub amount: u64,
     }
 }
 

@@ -398,7 +398,7 @@ impl<T: AbiType> Zero for Vec<T> {
 
 #[macro_export]
 macro_rules! abi_extends {
-	    ($vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* }) => {
+	    ($vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* $(,)*}) => {
         #[abi_struct]
 		#[derive(Clone)]
         pub struct $name {
