@@ -89,7 +89,21 @@ fn push_canonicalized_vec(target: &mut String, args: &syn::PathArguments) {
 				else {
 					push_canonicalized_path(target, type_path);
 					target.push_str("[]");
-					// target.push_str("array");
+				}
+			}
+
+			for val in gen_args.clone().args {
+				if let syn::GenericArgument::Type(syn::Type::Tuple(type_tunple)) = val {
+					target.push_str("tunple");
+					// push component
+					for ty in type_tunple.elems {
+						if let syn::Type::Path(type_path) = ty {
+							target.push(',');
+							push_canonicalized_path(target,&type_path);
+						}
+					}
+					target.push_str("[]");
+					return
 				}
 			}
 			panic!("Unsupported generic arguments")
@@ -170,6 +184,18 @@ fn push_canonicalized_type(target: &mut String, ty: &syn::Type) {
 
 			panic!("Unsupported! Use variable-size arrays")
 		},
+		syn::Type::Tuple(type_tuple) => {
+			target.push_str("tunple");
+			for val in &type_tuple.elems {
+				match val {
+					syn::Type::Path(type_path) => {
+						target.push_str(",");
+						push_canonicalized_path(target, &type_path)
+					},
+					other_type => panic!("[e3] Unable to handle param of type {:?}: not supported by abi", other_type),
+				}
+			}
+		}
 		other_type => panic!("[e2] Unable to handle param of type {:?}: not supported by abi", other_type),
 	}
 }
@@ -203,7 +229,17 @@ fn canonicalized_type(target: &mut String, ty: &syn::Type) {
 
 			panic!("Unsupported! Use variable-size arrays")
 		},
-		other_type => panic!("[e2] Unable to handle param of type {:?}: not supported by abi", other_type),
+		syn::Type::Tuple(type_tuple) => {
+			for val in  &type_tuple.elems {
+				match val {
+					syn::Type::Path(type_path) => {
+						canonicalized_path(target, &type_path)
+					},
+					other_type => panic!("[e3] Unable to handle param of type {:?}: not supported by abi", other_type),
+				}
+			}
+		},
+		other_type => panic!("[e3] Unable to handle param of type {:?}: not supported by abi", other_type),
 	}
 }
 

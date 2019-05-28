@@ -51,6 +51,8 @@ pub trait TokenInterface {
     fn muti_transfer(&mut self, args: Vec<Transfer>) -> bool;
     fn donate(&mut self, donater: Donater) -> bool;
     fn balance_of(&mut self,addr: Address) -> u64;
+    fn tunple(&mut self,obj: (u64,u32)) -> u64;
+    fn tunples(&mut self,obj: Vec<(u64,u32)>) -> u64;
     #[event]
     fn Transfer(&mut self, from: Address, to: Address, value: u64);
 }
@@ -105,7 +107,19 @@ impl TokenInterface for TokenContract {
         let balance = db::get(addr).unwrap_or(0_u64);
         balance
     }
+    fn tunple(&mut self,obj: (u64,u32)) -> u64 {
+        obj.0 + obj.1 as u64
+    }
+    fn tunples(&mut self,obj: Vec<(u64,u32)>) -> u64 {
+        let mut res:u64 = 0;
+        for item in obj {
+            res = res + item.0;
+            res = res + item.1 as u64;
+        }
+        res
+    }
 }
+
 
 #[no_mangle]
 pub fn call() {

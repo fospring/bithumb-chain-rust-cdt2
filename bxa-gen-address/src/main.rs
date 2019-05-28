@@ -136,6 +136,32 @@ fn main() -> io::Result<()> {
     for funcs in &mut p.functions {
         for args in &mut funcs.inputs {
             if let AllArgs::Component(arg) = args {
+
+                if arg.type_.starts_with("tunple") && !arg.type_.ends_with("[]") {
+                    arg.type_ = arg.type_[7..arg.type_.len()].to_string();
+                    let v = arg.type_.split(",").collect::<Vec<&str>>();
+                    for ty in v {
+                        let item = CommonArgs{name: String::from("elem"),type_: ty.to_string()};
+                        arg.components.push(AllArgs::Common(item));
+                    }
+                    arg.type_ = "tunple".to_string();
+                }
+
+                if arg.type_.starts_with("tunple") && arg.type_.ends_with("[]") {
+                    arg.type_ = arg.type_[7..arg.type_.len()-2].to_string();
+                    let v = arg.type_.split(",").collect::<Vec<&str>>();
+
+                    let mut item = ComponentArgs{name: String::from(""),type_: String::from("tunple"),components:Vec::new()};
+
+                    for ty in v {
+                        let elem = CommonArgs{name: String::from("elem"),type_: ty.to_string()};
+                        item.components.push(AllArgs::Common(elem));
+                    }
+
+                    arg.type_ = "array".to_string();
+                    arg.components.push(AllArgs::Component(item));
+                }
+
                 if arg.type_.len() > 2 && arg.type_[arg.type_.len()-2..] == "[]".to_string() {
                     let mut name = arg.name[..].to_string() + "_item";
                     for i in &components {
