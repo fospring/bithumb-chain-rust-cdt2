@@ -3,3 +3,4 @@
 Cargo.lock
 .idea
 /bxa-gen-address/bxa-gen-address
+**/*.txt

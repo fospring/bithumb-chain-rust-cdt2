@@ -34,6 +34,7 @@ use syn::{DeriveInput,Lit};
 use json::{AllArgs,ComponentArgs,CommonArgs};
 //use std::io;
 use std::fs::File;
+use std::io::Read;
 use std::io::Write;
 use std::{fs,env,path};
 use json::JsonError;
@@ -129,8 +130,24 @@ pub fn abi_struct(_args: proc_macro::TokenStream, input: proc_macro::TokenStream
 		panic!("Only impl to struct");
 	}
 
-	let mut structs:Vec<AllArgs> = Vec::new();
-	structs.push(AllArgs::Component(stu));
+	let mut data = String::new();
+	match File::open("./target/json/components.json") {
+		Ok(mut file) => {file.read_to_string(&mut data).unwrap();
+			()
+		},
+		Err(_) => data.push_str("[]"),
+	}
+
+	let components : Vec<ComponentArgs> = serde_json::from_str(&data).unwrap();
+
+	let mut structs:Vec<ComponentArgs> = Vec::new();
+	structs.push(stu.clone());
+	for c in components.clone() {
+		if stu.clone().name != c.clone().name {
+			structs.push(c);
+		}
+	}
+
 	let encode =  serde_json::to_string_pretty(&structs).unwrap();
 
 	let mut target =
@@ -138,7 +155,7 @@ pub fn abi_struct(_args: proc_macro::TokenStream, input: proc_macro::TokenStream
 	target.push("target");
 	target.push("json");
 	fs::create_dir_all(&target).map_err(|err| JsonError::failed_to_create_dir(err)).unwrap();
-	target.push("component.json");
+	target.push("components.json");
 	let mut file = File::create(target).unwrap();
 	file.write_all(encode.as_bytes()).unwrap();
 

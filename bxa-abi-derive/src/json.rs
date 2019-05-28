@@ -104,21 +104,21 @@ pub fn write_json_abi(intf: &items::Interface) -> JsonResult<()> {
 	Ok(())
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(untagged)]
 pub enum AllArgs {
 	Common(CommonArgs),
 	Component(ComponentArgs),
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonArgs {
 	pub name: String,
 	#[serde(rename = "type")]
 	pub type_: String,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ComponentArgs {
 	pub name: String,
 	#[serde(rename = "type")]

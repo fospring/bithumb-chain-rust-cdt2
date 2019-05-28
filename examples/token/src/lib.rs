@@ -35,6 +35,13 @@ abi_extends!{
     }
 }
 
+abi_extends!{
+    pub struct Donater {
+        pub donater: Address,
+        pub amount: u64,
+    }
+}
+
 #[bxa_abi(TokenEndpoint)]
 pub trait TokenInterface {
     fn init(&mut self, receiver: Address) -> bool;
@@ -42,7 +49,7 @@ pub trait TokenInterface {
     fn get_total_supply(&mut self) -> u64;
     fn transfer(&mut self,from: Address, to: Address, amount: u64) -> bool;
     fn muti_transfer(&mut self, args: Vec<Transfer>) -> bool;
-    fn donate(&mut self, donater: Address, amount: u64) -> bool;
+    fn donate(&mut self, donater: Donater) -> bool;
     fn balance_of(&mut self,addr: Address) -> u64;
     #[event]
     fn Transfer(&mut self, from: Address, to: Address, value: u64);
@@ -91,8 +98,8 @@ impl TokenInterface for TokenContract {
         }
         true
     }
-    fn donate(&mut self, donater: Address, amount: u64) -> bool {
-        self.transfer(donater, *RECIVER, amount)
+    fn donate(&mut self, donater: Donater) -> bool {
+        self.transfer(donater.donater, *RECIVER, donater.amount)
     }
     fn balance_of(&mut self, addr: Address) -> u64 {
         let balance = db::get(addr).unwrap_or(0_u64);

@@ -127,7 +127,7 @@ fn main() -> io::Result<()> {
     p.generate_address(hex_str);
 
     // read component
-    let mut file = File::open("../../target/json/component.json")?;
+    let mut file = File::open("../../target/json/components.json")?;
     let mut data = String::new();
     file.read_to_string(&mut data).unwrap();
     let components : Vec<ComponentArgs> = serde_json::from_str(&data).unwrap();
