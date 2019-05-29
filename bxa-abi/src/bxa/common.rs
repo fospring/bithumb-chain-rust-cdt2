@@ -405,9 +405,6 @@ macro_rules! abi_type_fixed_impl {
 				padded[0..$num].copy_from_slice(&self[..]);
 				sink.preamble_mut().extend_from_slice(&padded[..]);
 			}
-//			fn push_type(&self, sink: &mut Sink) {
-//				sink.write_byte(OTHER_TYPE);
-//			}
 			fn get_type() -> u8 {OTHER_TYPE}
 			fn to_bxa_string(&self) -> String {
 				String::from("")
@@ -429,13 +426,11 @@ macro_rules! tuple_impls {
 				}
 
 				fn encode(self, sink: &mut Sink) {
-					sink.write_byte(OTHER_TYPE);
-					$(sink.push(self.$idx);)+
+					sink.write_byte(TYPE_STRUCT);
+					$(&self.$idx.encode(sink));*;
+					//$(sink.push(self.$idx);)+
 				}
-//				fn push_type(&self, sink: &mut Sink) {
-//					sink.write_byte(OTHER_TYPE);
-//				}
-				fn get_type() -> u8 {OTHER_TYPE}
+				fn get_type() -> u8 {TYPE_STRUCT}
 
 				fn to_bxa_string(&self) -> String {
 					String::from("")

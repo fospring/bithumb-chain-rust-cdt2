@@ -144,14 +144,14 @@ fn main() -> io::Result<()> {
                         let item = CommonArgs{name: String::from("elem"),type_: ty.to_string()};
                         arg.components.push(AllArgs::Common(item));
                     }
-                    arg.type_ = "tunple".to_string();
+                    arg.type_ = "struct".to_string();
                 }
 
                 if arg.type_.starts_with("tunple") && arg.type_.ends_with("[]") {
                     arg.type_ = arg.type_[7..arg.type_.len()-2].to_string();
                     let v = arg.type_.split(",").collect::<Vec<&str>>();
 
-                    let mut item = ComponentArgs{name: String::from(""),type_: String::from("tunple"),components:Vec::new()};
+                    let mut item = ComponentArgs{name: String::from(""),type_: String::from("struct"),components:Vec::new()};
 
                     for ty in v {
                         let elem = CommonArgs{name: String::from("elem"),type_: ty.to_string()};

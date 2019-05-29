@@ -4,6 +4,7 @@
 
 extern crate bxa_std;
 extern crate bxa_api;
+#[macro_use]
 extern crate bxa_abi;
 extern crate bxa_abi_derive;
 
@@ -12,9 +13,21 @@ use bxa_abi::types::*;
 use bxa_api as runtime;
 use bxa_abi::bxa::*;
 
+use bxa_abi_derive::abi_struct;
+abi_extends!{
+    pub struct Transfer {
+        pub from: Address,
+        pub to: Address,
+        pub amount: u64,
+    }
+}
+
 #[bxa_abi(TokenEndpoint)]
 pub trait CallContractInterface {
     fn call_contract(&mut self, ctr: String, number: u64) -> u64;
+    fn call_native_transfer(&mut self, ctr: String, transferArgs:Vec<(Address,Address,u64)>) -> bool;
+    fn call_native_transfer2(&mut self, ctr: String, transferArgs:Vec<Transfer>) -> bool;
+    fn call_native_symbol(&mut self, ctr: String) -> String;
 }
 
 pub struct CallContract;
@@ -28,6 +41,31 @@ impl CallContractInterface for CallContract {
         runtime::call_code(&ctr, method.as_bytes(),sink.preamble_mut(),&mut res).unwrap();
         let mut stream = Stream::new(&res);
         let ret = stream.pop::<u64>().unwrap();
+        ret
+    }
+    fn call_native_transfer(&mut self, ctr: String, transferArgs:Vec<(Address,Address,u64)>) -> bool {
+        let mut sink = Sink::new(2);
+        let method = String::from("transfer");
+        let mut res = [0_u8;5];
+        sink.push(transferArgs);
+        runtime::call_code(&ctr, method.as_bytes(),sink.preamble_mut(),&mut res).unwrap();
+        true
+    }
+    fn call_native_transfer2(&mut self, ctr: String, transferArgs:Vec<Transfer>) -> bool {
+        let mut sink = Sink::new(2);
+        let method = String::from("transfer");
+        let mut res = [0_u8;5];
+        sink.push(transferArgs);
+        runtime::call_code(&ctr, method.as_bytes(),sink.preamble_mut(),&mut res).unwrap();
+        true
+    }
+    fn call_native_symbol(&mut self, ctr: String) -> String {
+        let mut sink = Sink::new(2);
+        let method = String::from("symbol");
+        let mut res = [0_u8;10];
+        runtime::call_code(&ctr, method.as_bytes(),sink.preamble_mut(),&mut res).unwrap();
+        let mut stream = Stream::new(&res);
+        let ret = stream.pop::<String>().unwrap();
         ret
     }
 }
