@@ -44,24 +44,6 @@ fn u8_serializ_tostring() {
 	assert_eq!(String::from("255"), v2.to_bxa_string());
 }
 
-//#[test]
-//fn u16_serializ_tostring() {
-//	let v1 :u16 = 65535;
-//	let v2 :u16 = 256;
-//	let mut sink = Sink::new(1);
-//	sink.push(v1);
-//	sink.push(v2);
-//	let bytes = sink.preamble_mut();
-//	let mut stream = Stream::new(bytes);
-//	let val1 = stream.pop::<u16>().unwrap();
-//	let val2 = stream.pop::<u16>().unwrap();
-//	assert_eq!(v1, val1);
-//	assert_eq!(v2, val2);
-//
-//	assert_eq!(String::from("65535"), v1.to_bxa_string());
-//	assert_eq!(String::from("256"), v2.to_bxa_string());
-//}
-
 #[test]
 fn i32_serializ_tostring() {
 	let v1 :i32 = 2147483647;
@@ -82,8 +64,8 @@ fn i32_serializ_tostring() {
 
 #[test]
 fn u32_serializ_tostring() {
-	let v1 :u32 = 4294967295;
-	let v2 :u32 = 83647;
+	let v1 :u32 = 1;
+	let v2 :u32 = 2;
 	let mut sink = Sink::new(1);
 	sink.push(v1);
 	sink.push(v2);
@@ -94,8 +76,8 @@ fn u32_serializ_tostring() {
 	assert_eq!(v1, val1);
 	assert_eq!(v2, val2);
 
-	assert_eq!(String::from("4294967295"), v1.to_bxa_string());
-	assert_eq!(String::from("83647"), v2.to_bxa_string());
+	assert_eq!(String::from("1"), v1.to_bxa_string());
+	assert_eq!(String::from("2"), v2.to_bxa_string());
 }
 
 #[test]
@@ -114,6 +96,14 @@ fn u64_serializ_tostring() {
 
 	assert_eq!(String::from("18446744073709551615"), v1.to_bxa_string());
 	assert_eq!(String::from("83647"), v2.to_bxa_string());
+}
+
+#[test]
+fn u64_decode() {
+	let bytes:[u8;5] = [6,12,0,0,0];
+	let mut stream = Stream::new(&bytes);
+	let res = stream.pop::<u64>().unwrap();
+	assert_eq!(12_u64,res);
 }
 
 #[test]
@@ -244,18 +234,17 @@ fn u8bytes_serialize() {
 #[test]
 fn str_serialize_tostring() {
 	let mut sink = Sink::new(1);
-	sink.push(String::from("Transfer"));
+	sink.push(String::from("ABC"));
 
 	let v1:String = "Welcome to The Rust Programming Language book! This version of the text assumes you are using Rust 1.31.0 or later, with edition=\"2018\" in Cargo.toml of all projects to use Rust 2018 Edition idioms. See the \"Installation\" section of Chapter 1 to install or update Rust, and see Appendix E for information on what editions of Rust are.!".to_string();
 	sink.push(v1.clone());
 
 	let arr = sink.preamble_mut();
+	assert_eq!(vec![7_u8,3_u8,65_u8,66_u8,67_u8],*arr);
 	let mut stream = Stream::new(arr.as_ref());
 
 	let val: String = stream.pop::<String>().unwrap();
-	assert_eq!(val, String::from("Transfer"));
-
-	assert_eq!(9, stream.position());
+	assert_eq!(String::from("ABC"),val);
 
 	let val: String = stream.pop::<String>().expect("argument decoding failed");
 	assert_eq!(val, v1.to_bxa_string());

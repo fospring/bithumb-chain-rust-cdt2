@@ -1,7 +1,6 @@
 //! Common types encoding/decoding
 use lib::*;
-// util,
-use super::{util, Stream, AbiType, Encoder, Sink, Zero, Error};
+use super::{util, Stream, AbiType, Sink, Zero, Error};
 use super::types::{Address, H256, U256};
 use bxa_std::str::from_utf8;
 use bxa_std::base58;
@@ -25,22 +24,21 @@ const OTHER_TYPE: DataType = 0xff;
 
 impl AbiType for u8 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let n =  u64::decode(stream)?;
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_UINT8,ty);
+		let n = stream.read_u64()?;
 		let res = n as u8;
 		Ok(res)
 	}
-
 	fn encode(self, sink: &mut Sink) {
-		let n = self as u64;
-		n.encode(sink);
-	}
-
-	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_UINT8);
+
+		let mut size:usize = 0;
+		let data: [u8;9] = util::pad_u64(self as u64, &mut size);
+		sink.preamble_mut().extend_from_slice(&data[..size]);
+
 	}
-
 	fn get_type() -> u8 {TYPE_UINT8}
-
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
 	}
@@ -52,49 +50,20 @@ impl Zero for u8 {
 	}
 }
 
-//impl AbiType for u16 {
-//	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-//		let n =  u64::decode(stream)?;
-//		let res = n as u16;
-//		Ok(res)
-//	}
-//
-//	fn encode(self, sink: &mut Sink) {
-//		let n = self as u64;
-//		n.encode(sink);
-//	}
-//
-//	fn push_type(&self, sink: &mut Sink) {
-//		sink.write_byte(255_u8);
-//	}
-//
-//	fn get_type() -> u8 {255_u8}
-//	fn to_bxa_string(&self) -> String {
-//		self.to_string()
-//	}
-//}
-//
-//impl Zero for u16 {
-//	fn zero() -> Self {
-//		0_u16
-//	}
-//}
-
 impl AbiType for i32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let n =  u64::decode(stream)?;
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_INT32,ty);
+		let n = stream.read_u64()?;
 		let res = n as i32;
 		Ok(res)
 	}
-
 	fn encode(self, sink: &mut Sink) {
-		let n = self as u64;
-		n.encode(sink);
-	}
-	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_INT32);
+		let mut size:usize = 0;
+		let data: [u8;9] = util::pad_u64(self as u64, &mut size);
+		sink.preamble_mut().extend_from_slice(&data[..size]);
 	}
-
 	fn get_type() -> u8 {TYPE_INT32}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -109,20 +78,18 @@ impl Zero for i32 {
 
 impl AbiType for u32 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let n =  u64::decode(stream)?;
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_UINT32,ty);
+		let n = stream.read_u64()?;
 		let res = n as u32;
 		Ok(res)
 	}
-
 	fn encode(self, sink: &mut Sink) {
-		let n = self as u64;
-		n.encode(sink);
-	}
-
-	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_UINT32);
+		let mut size:usize = 0;
+		let data: [u8;9] = util::pad_u64(self as u64, &mut size);
+		sink.preamble_mut().extend_from_slice(&data[..size]);
 	}
-
 	fn get_type() -> u8 {TYPE_UINT32}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -137,20 +104,18 @@ impl Zero for u32 {
 
 impl AbiType for i64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let n =  u64::decode(stream)?;
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_INT64,ty);
+		let n = stream.read_u64()?;
 		let res = n as i64;
 		Ok(res)
 	}
-
 	fn encode(self, sink: &mut Sink) {
-		let n = self as u64;
-		n.encode(sink);
-	}
-
-	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_INT64);
+		let mut size:usize = 0;
+		let data: [u8;9] = util::pad_u64(self as u64, &mut size);
+		sink.preamble_mut().extend_from_slice(&data[..size]);
 	}
-
 	fn get_type() -> u8 {TYPE_INT64}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -165,24 +130,23 @@ impl Zero for i64 {
 
 impl AbiType for u64 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_UINT64,ty);
 		stream.read_u64()
 	}
-
 	fn encode(self, sink: &mut Sink) {
+		sink.write_byte(TYPE_UINT64);
 		let mut size:usize = 0;
 		let data: [u8;9] = util::pad_u64(self, &mut size);
 		sink.preamble_mut().extend_from_slice(&data[..size]);
 	}
-
-	fn push_type(&self, sink: &mut Sink) {
-		sink.write_byte(TYPE_UINT64);
-	}
-
 	fn get_type() -> u8 {TYPE_UINT64}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
 	}
 }
+
+
 
 impl Zero for u64 {
 	fn zero() -> Self {
@@ -190,17 +154,12 @@ impl Zero for u64 {
 	}
 }
 
-impl Encoder for &str {
-	fn encode(&self, sink: &mut Sink) {
-		let size = (self.len()) as u64;
-		size.encode(sink);
-		sink.write_bytes(self.as_bytes());
-	}
-}
-
 impl AbiType for String {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let n =  u32::decode(stream)?;
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_STRING,ty);
+		let res = stream.read_u64()?;
+		let n = res as u32;
 		if n == 0 {
 			return Ok("".to_string())
 		}
@@ -215,17 +174,14 @@ impl AbiType for String {
 			return Ok(result)
 		}
 	}
-
 	fn encode(self, sink: &mut Sink) {
-		let size = (self.as_str().len()) as u64;
-		size.encode(sink);
+		sink.write_byte(TYPE_STRING);
+
+		let mut size:usize = 0;
+		let data: [u8;9] = util::pad_u64((self.as_str().len()) as u64, &mut size);
+		sink.preamble_mut().extend_from_slice(&data[..size]);
 		sink.write_bytes(self.as_str().as_bytes());
 	}
-
-	fn push_type(&self, sink: &mut Sink) {
-		sink.write_byte(TYPE_STRING);
-	}
-
 	fn get_type() -> u8 {TYPE_STRING}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -240,8 +196,11 @@ impl Zero for String {
 
 impl AbiType for bool {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let decoded = u8::decode(stream)?;
-		match decoded {
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_BOOL,ty);
+		let n = stream.read_u64()?;
+		let res = n as u8;
+		match res {
 			0 => Ok(false),
 			1 => Ok(true),
 			_ => Err(Error::InvalidBool),
@@ -249,13 +208,9 @@ impl AbiType for bool {
 	}
 
 	fn encode(self, sink: &mut Sink) {
+		sink.write_byte(TYPE_BOOL);
 		sink.preamble_mut().extend_from_slice(match self { true => &[1_u8;1], false => &[0_u8;1]});
 	}
-
-	fn push_type(&self, sink: &mut Sink) {
-		sink.write_byte(TYPE_BOOL);
-	}
-
 	fn get_type() -> u8 {TYPE_BOOL}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -270,23 +225,20 @@ impl Zero for bool {
 
 impl AbiType for U256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_UINT256,ty);
 		let previous = stream.advance(32)?;
-
 		Ok(
 			U256::from_little_endian(&stream.payload()[previous..stream.position()])
 		)
 	}
 
 	fn encode(self, sink: &mut Sink) {
+		sink.write_byte(TYPE_UINT256);
 		let tail = sink.preamble_mut().len();
 		sink.preamble_mut().resize(tail + 32, 0);
 		self.to_little_endian(&mut sink.preamble_mut()[tail..tail+32]);
 	}
-
-	fn push_type(&self, sink: &mut Sink) {
-		sink.write_byte(TYPE_UINT256);
-	}
-
 	fn get_type() -> u8 {TYPE_UINT256}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -301,16 +253,16 @@ impl Zero for U256 {
 
 impl AbiType for Address {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_ADDRESS,ty);
 		let mut addr = Address::zero();
 		stream.read_into(addr.as_mut())?;
 		Ok(addr)
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		sink.write_bytes(self.as_ref())
-	}
-	fn push_type(&self, sink: &mut Sink) {
 		sink.write_byte(TYPE_ADDRESS);
+		sink.write_bytes(self.as_ref())
 	}
 	fn get_type() -> u8 {TYPE_ADDRESS}
 	fn to_bxa_string(&self) -> String {
@@ -329,18 +281,16 @@ impl Zero for Address {
 
 impl AbiType for H256 {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_UINT256,ty);
 		let mut hash = H256::zero();
 		stream.read_into(hash.as_mut())?;
 		Ok(hash)
 	}
-
 	fn encode(self, sink: &mut Sink) {
+		sink.write_byte(TYPE_UINT256);
 		self.as_fixed_bytes().encode(sink)
 	}
-	fn push_type(&self, sink: &mut Sink) {
-		sink.write_byte(TYPE_UINT256);
-	}
-
 	fn get_type() -> u8 {TYPE_UINT256}
 	fn to_bxa_string(&self) -> String {
 		self.to_string()
@@ -356,7 +306,10 @@ impl Zero for H256 {
 
 impl<T: AbiType> AbiType for Vec<T> {
 	fn decode(stream: &mut Stream) -> Result<Self, Error> {
-		let len =  u32::decode(stream)?;
+		let ty = stream.read_byte().unwrap();
+		assert_eq!(TYPE_ARRAY,ty);
+		let len = stream.read_u64()?;
+		let len = len as u32;
 		let mut result = Vec::with_capacity(cmp::min(len, 1024) as usize);
 		for _ in 0..len {
 			result.push(stream.pop::<T>()?);
@@ -365,16 +318,13 @@ impl<T: AbiType> AbiType for Vec<T> {
 	}
 
 	fn encode(self, sink: &mut Sink) {
+		// if T == u8...
+		sink.write_byte(TYPE_ARRAY);
 		let size = self.len() as u64;
 		size.encode(sink);
-
 		for member in self.into_iter() {
 			sink.push(member);
 		}
-	}
-
-	fn push_type(&self, sink: &mut Sink) {
-		sink.write_byte(TYPE_ARRAY);
 	}
 	fn get_type() -> u8 {TYPE_ARRAY}
 	fn to_bxa_string(&self) -> String {
@@ -408,14 +358,16 @@ macro_rules! abi_extends {
 
         impl AbiType for $name {
 			fn decode(stream: &mut Stream) -> Result<Self, Error> {
+				let ty = stream.read_byte().unwrap();
+				assert_eq!(TYPE_STRUCT,ty);
 				let mut st = $name{$($fname: <$ftype>::zero()),*};
 				$(st.$fname = <$ftype>::decode(stream)?);*;
 				Ok(st)
 			}
 			fn encode(self, sink: &mut Sink) {
+				sink.write_byte(TYPE_STRUCT);
 				$(&self.$fname.encode(sink));*;
 			}
-			fn push_type(&self, sink: &mut Sink) { sink.write_byte(TYPE_STRUCT); }
     		fn get_type() -> u8 { TYPE_STRUCT }
             fn to_bxa_string(&self) -> String {
                 let mut s = String::from("");
@@ -438,6 +390,8 @@ macro_rules! abi_type_fixed_impl {
 	($num: expr) => {
 		impl AbiType for [u8; $num] {
 			fn decode(stream: &mut Stream) -> Result<Self, Error> {
+				let ty = stream.read_byte().unwrap();
+				assert_eq!(OTHER_TYPE,ty);
 				let previous_position = stream.advance(32)?;
 				let slice = &stream.payload()[previous_position..stream.position()];
 				let mut result = [0u8; $num];
@@ -446,13 +400,14 @@ macro_rules! abi_type_fixed_impl {
 			}
 
 			fn encode(self, sink: &mut Sink) {
+				sink.write_byte(OTHER_TYPE);
 				let mut padded = [0u8; 32];
 				padded[0..$num].copy_from_slice(&self[..]);
 				sink.preamble_mut().extend_from_slice(&padded[..]);
 			}
-			fn push_type(&self, sink: &mut Sink) {
-				sink.write_byte(OTHER_TYPE);
-			}
+//			fn push_type(&self, sink: &mut Sink) {
+//				sink.write_byte(OTHER_TYPE);
+//			}
 			fn get_type() -> u8 {OTHER_TYPE}
 			fn to_bxa_string(&self) -> String {
 				String::from("")
@@ -474,11 +429,12 @@ macro_rules! tuple_impls {
 				}
 
 				fn encode(self, sink: &mut Sink) {
+					sink.write_byte(OTHER_TYPE);
 					$(sink.push(self.$idx);)+
 				}
-				fn push_type(&self, sink: &mut Sink) {
-					sink.write_byte(OTHER_TYPE);
-				}
+//				fn push_type(&self, sink: &mut Sink) {
+//					sink.write_byte(OTHER_TYPE);
+//				}
 				fn get_type() -> u8 {OTHER_TYPE}
 
 				fn to_bxa_string(&self) -> String {

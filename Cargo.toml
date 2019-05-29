@@ -4,9 +4,11 @@ members = [
     "bxa-abi",
     "bxa-api",
     "bxa-abi-derive",
+    "bxa-gen-address",
     "examples/bxa",
     "examples/token",
-    "bxa-gen-address",
+    "examples/call-contract",
+    "examples/called-contract",
 ]
 
 [profile.release]

@@ -28,8 +28,9 @@ mod external {
 		/// Delegate call.
 		/// Corresponds to "CALLCODE" opcode in EVM
 		pub fn dcall(
-			gas: i64,
 			address: *const u8,
+			method_ptr: *const u8,
+			method_len: u32,
 			input_ptr: *const u8,
 			input_len: u32,
 			result_ptr: *mut u8,
@@ -213,11 +214,12 @@ pub fn call(gas: u64, address: &Address, value: U256, input: &[u8], result: &mut
 /// different code (i.e. like `DELEGATECALL` EVM instruction).
 ///
 /// [`call`]: fn.call.html
-pub fn call_code(gas: u64, address: &Address, input: &[u8], result: &mut [u8]) -> Result<(), Error> {
+pub fn call_code(address: &str,method: &[u8], input: &[u8], result: &mut [u8]) -> Result<(), Error> {
 	unsafe {
 		if external::dcall(
-			gas as i64,
 			address.as_ptr(),
+			method.as_ptr(),
+			method.len() as u32,
 			input.as_ptr(),
 			input.len() as u32,
 			result.as_mut_ptr(),

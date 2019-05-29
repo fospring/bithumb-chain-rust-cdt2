@@ -47,20 +47,11 @@ pub trait AbiType : Sized {
 	/// Should never be called manually! Use sink.push(val)
 	fn encode(self, sink: &mut Sink);
 
-	/// push type
-	fn push_type(&self, sink: &mut Sink);
-
 	/// get type
 	fn get_type() -> u8;
 
 	/// to bxa string
 	fn to_bxa_string(&self) -> String;
-}
-
-/// Encoder type trait
-pub trait Encoder {
-	/// Encode for &str
-	fn encode(&self, sink: &mut Sink);
 }
 
 /// Endpoint interface for contracts
