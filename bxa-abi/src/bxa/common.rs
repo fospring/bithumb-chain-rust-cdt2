@@ -353,9 +353,9 @@ impl<T: AbiType> Zero for Vec<T> {
 
 #[macro_export]
 macro_rules! abi_extends {
-	    ($vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* $(,)*}) => {
+	    ($(#[derive($($mt:meta),*)])* $vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* $(,)*}) => {
         #[abi_struct]
-		#[derive(Clone,Debug,PartialEq)]
+		$(#[derive($($mt),*)])*
         pub struct $name {
             $($v $fname : $ftype),*
         }
@@ -610,7 +610,7 @@ mod tests {
 	#[test]
 	fn fixed_array_padding() {
 		let data = &[
-			1u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8,
+			255u8, 1u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8,
 			0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8
 		];
 
@@ -634,7 +634,7 @@ mod tests {
 	#[test]
 	fn fixed_array_padding_2() {
 		let data = &[
-			1u8, 2u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8,
+			255u8,1u8, 2u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8,
 			0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8
 		];
 

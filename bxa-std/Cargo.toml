@@ -21,8 +21,6 @@ default-features = false
 version = "0.3.0"
 default-features = false
 
-#[dependencies.pwasm-alloc]
-#version = "0.4"
 [dependencies.wee_alloc]
 version = "0.4"
 

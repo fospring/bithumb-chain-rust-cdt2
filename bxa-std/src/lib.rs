@@ -13,9 +13,6 @@
 #[cfg(feature = "std")]
 extern crate core;
 
-//#[cfg(not(feature = "std"))]
-//extern crate pwasm_alloc;
-
 extern crate wee_alloc;
 
 #[global_allocator]
@@ -45,7 +42,6 @@ pub use alloc::boxed::Box;
 pub use alloc::string::{String,ToString};
 pub use alloc::str;
 pub use alloc::vec::Vec;
-/// bitcoin base58 encoding
 pub mod base58;
 pub mod types;
 

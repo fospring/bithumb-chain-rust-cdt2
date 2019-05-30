@@ -125,10 +125,6 @@ fn push_canonicalized_primitive(target: &mut String, seg: &syn::PathSegment) {
 		"String" => target.push_str("string"),
 		"bool" => target.push_str("bool"),
 		"Vec" => push_canonicalized_vec(target, &seg.arguments),
-//		val => panic!(
-//			"[e1] Unable to handle param of type {}: not supported by abi",
-//			val
-//		),
 		val => target.push_str(val),
 	}
 }
@@ -145,12 +141,10 @@ pub fn type_mapping(target: String) -> String {
 		"Address" => "address".to_string(),
 		"String" => "string".to_string(),
 		"bool" => "bool".to_string(),
-//		"Vec" => push_canonicalized_vec(target, &seg.arguments),
 		val => panic!(
 			"[e1] Unable to handle param of type {}: not supported by abi",
 			val
 		),
-		//val => target.push_str(val),
 	}
 }
 

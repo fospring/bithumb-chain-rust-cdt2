@@ -8,9 +8,6 @@ use proc_macro2::{self, Span};
 pub struct Event {
 	/// The name of the event.
 	pub name: syn::Ident,
-	/// The canonalized string representation used by the keccak hash
-	/// in order to retrieve the first 4 bytes required upon calling.
-	// pub canonical: String,
 	/// The signature of the event.
 	pub method_sig: syn::MethodSig,
 	/// Non-indexed parameters.
@@ -25,8 +22,6 @@ pub struct Event {
 pub struct Signature {
 	/// The name of this signature.
 	pub name: syn::Ident,
-	/// The canonicalized string representation of this signature.
-	// pub canonical: String,
 	/// The parameter information of this signature.
 	pub method_sig: syn::MethodSig,
 	/// The arguments of this signature.
@@ -212,8 +207,6 @@ impl quote::ToTokens for Item {
 								let mut sink = ::bxa_abi::bxa::Sink::new(4);
 								sink.push(String::from(#event_name));
 								#(sink.push(#arg_name.to_bxa_string()));*;
-								// #(sink.push(#arg_name));*;
-								// let payload = sink.finalize_panicking();
 								let payload = sink.preamble_mut();
 
 								::bxa_api::log(&payload);

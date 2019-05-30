@@ -15,6 +15,7 @@ use bxa_abi::bxa::*;
 
 use bxa_abi_derive::abi_struct;
 abi_extends!{
+    #[derive(Clone,Debug,PartialEq)]
     pub struct Transfer {
         pub from: Address,
         pub to: Address,
