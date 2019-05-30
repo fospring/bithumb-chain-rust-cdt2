@@ -126,3 +126,19 @@ pub fn call() {
     let mut endpoint = TokenEndpoint::new(TokenContract{});
     bxa_api::ret(&endpoint.dispatch(&bxa_api::input()));
 }
+
+#[test]
+fn serialize(){
+    let mut ts = Vec::new();
+    let ts1 = Transfer{from: Address::new([0_u8;20]), to: Address::new([1_u8;20]),amount: 100};
+    let ts2 = Transfer{from: Address::new([0_u8;20]), to: Address::new([1_u8;20]),amount: 100};
+    ts.push(ts1.clone());
+    ts.push(ts2.clone());
+    let mut sink = Sink::new(4);
+    sink.push(ts.clone());
+    let bytes = sink.preamble_mut();
+    let mut stream = Stream::new(bytes);
+
+    let ts_n:Vec<Transfer> = stream.pop::<Vec<Transfer>>().unwrap();
+    assert_eq!(ts.as_ptr(),ts_n.as_ptr());
+}

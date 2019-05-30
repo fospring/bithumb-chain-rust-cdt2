@@ -318,10 +318,14 @@ impl<T: AbiType> AbiType for Vec<T> {
 	}
 
 	fn encode(self, sink: &mut Sink) {
-		// if T == u8...
+		// todo if T::get_type == TYPE_UINT8
 		sink.write_byte(TYPE_ARRAY);
 		let size = self.len() as u64;
-		size.encode(sink);
+
+		let mut len:usize = 0;
+		let data: [u8;9] = util::pad_u64(size, &mut len);
+		sink.preamble_mut().extend_from_slice(&data[..len]);
+
 		for member in self.into_iter() {
 			sink.push(member);
 		}
@@ -351,7 +355,7 @@ impl<T: AbiType> Zero for Vec<T> {
 macro_rules! abi_extends {
 	    ($vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* $(,)*}) => {
         #[abi_struct]
-		#[derive(Clone)]
+		#[derive(Clone,Debug,PartialEq)]
         pub struct $name {
             $($v $fname : $ftype),*
         }
@@ -360,12 +364,20 @@ macro_rules! abi_extends {
 			fn decode(stream: &mut Stream) -> Result<Self, Error> {
 				let ty = stream.read_byte().unwrap();
 				assert_eq!(TYPE_STRUCT,ty);
+				let _size = stream.read_u64()?;
+
 				let mut st = $name{$($fname: <$ftype>::zero()),*};
 				$(st.$fname = <$ftype>::decode(stream)?);*;
 				Ok(st)
 			}
 			fn encode(self, sink: &mut Sink) {
 				sink.write_byte(TYPE_STRUCT);
+				static NAMES: &'static [&'static str] = &[$(stringify!($fname)),*];
+				let size:u64 = NAMES.len() as u64;
+				let mut len:usize = 0;
+				let data: [u8;9] = pad_u64(size, &mut len);
+				sink.preamble_mut().extend_from_slice(&data[..len]);
+
 				$(&self.$fname.encode(sink));*;
 			}
     		fn get_type() -> u8 { TYPE_STRUCT }
@@ -421,12 +433,24 @@ macro_rules! tuple_impls {
 	)+) => {
 		$(
 			impl<$($T:AbiType),+> AbiType for ($($T,)+) {
-				fn decode(_stream: &mut Stream) -> Result<Self, Error> {
-					panic!("Tuples allow only encoding, not decoding (for supporting multiple return types)")
+				fn decode(stream: &mut Stream) -> Result<Self, Error> {
+					let ty = stream.read_byte().unwrap();
+					assert_eq!(TYPE_STRUCT,ty);
+					let _size = stream.read_u64()?;
+					Ok(($(<$T>::decode(stream)?),*,))
+
+					//panic!("Tuples allow only encoding, not decoding (for supporting multiple return types)")
 				}
 
 				fn encode(self, sink: &mut Sink) {
 					sink.write_byte(TYPE_STRUCT);
+
+					static NAMES: &'static [&'static str] = &[$(stringify!($idx)),*];
+					let size:u64 = NAMES.len() as u64;
+					let mut len:usize = 0;
+					let data: [u8;9] = util::pad_u64(size, &mut len);
+					sink.preamble_mut().extend_from_slice(&data[..len]);
+
 					$(&self.$idx.encode(sink));*;
 					//$(sink.push(self.$idx);)+
 				}
