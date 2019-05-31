@@ -356,7 +356,7 @@ macro_rules! abi_extends {
 	    ($(#[derive($($mt:meta),*)])* $vi:vis struct $name:ident { $($v:vis $fname:ident : $ftype:ty),* $(,)*}) => {
         #[abi_struct]
 		$(#[derive($($mt),*)])*
-        pub struct $name {
+        $vi struct $name {
             $($v $fname : $ftype),*
         }
 
@@ -438,8 +438,6 @@ macro_rules! tuple_impls {
 					assert_eq!(TYPE_STRUCT,ty);
 					let _size = stream.read_u64()?;
 					Ok(($(<$T>::decode(stream)?),*,))
-
-					//panic!("Tuples allow only encoding, not decoding (for supporting multiple return types)")
 				}
 
 				fn encode(self, sink: &mut Sink) {
@@ -452,7 +450,6 @@ macro_rules! tuple_impls {
 					sink.preamble_mut().extend_from_slice(&data[..len]);
 
 					$(&self.$idx.encode(sink));*;
-					//$(sink.push(self.$idx);)+
 				}
 				fn get_type() -> u8 {TYPE_STRUCT}
 

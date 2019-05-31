@@ -1,0 +1,119 @@
+{
+  "version": "1.0",
+  "address": "f964ae17c7db9331d0449dd63b0e22d7d4d777f7",
+  "functions": [
+    {
+      "name": "call_contract",
+      "inputs": [
+        {
+          "name": "ctr",
+          "type": "string"
+        },
+        {
+          "name": "number",
+          "type": "uint64"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "call_native_transfer",
+      "inputs": [
+        {
+          "name": "ctr",
+          "type": "string"
+        },
+        {
+          "name": "transferArgs",
+          "type": "array",
+          "components": [
+            {
+              "name": "",
+              "type": "struct",
+              "components": [
+                {
+                  "name": "elem",
+                  "type": "address"
+                },
+                {
+                  "name": "elem",
+                  "type": "address"
+                },
+                {
+                  "name": "elem",
+                  "type": "uint64"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "call_native_transfer2",
+      "inputs": [
+        {
+          "name": "ctr",
+          "type": "string"
+        },
+        {
+          "name": "transferArgs",
+          "type": "array",
+          "components": [
+            {
+              "name": "Transfer",
+              "type": "struct",
+              "components": [
+                {
+                  "name": "from",
+                  "type": "address"
+                },
+                {
+                  "name": "to",
+                  "type": "address"
+                },
+                {
+                  "name": "amount",
+                  "type": "uint64"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "call_native_symbol",
+      "inputs": [
+        {
+          "name": "ctr",
+          "type": "string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "events": []
+}

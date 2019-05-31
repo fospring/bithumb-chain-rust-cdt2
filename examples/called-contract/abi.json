@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "address": "37c0ea0c8dc72079562f1d08b70c401dde4d345d",
+  "functions": [
+    {
+      "name": "double",
+      "inputs": [
+        {
+          "name": "number",
+          "type": "uint64"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "add",
+      "inputs": [
+        {
+          "name": "number",
+          "type": "uint32"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "returnValue0",
+          "type": "uint32"
+        }
+      ]
+    }
+  ],
+  "events": []
+}
