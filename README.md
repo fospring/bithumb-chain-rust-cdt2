@@ -10,7 +10,7 @@ Modify from [paritytech](https://github.com/paritytech)'s project: pwasm-std、p
 
 2. Install nightly compiler version, and set it to default:   
 `rustup install nightly`
-`rustup default nighly`  
+`rustup default nightly`  
 
 3. Add WebAssembly compile target with LLVM backend and lld linker.
 `rustup target add wasm32-unknown-unknown`
@@ -31,7 +31,7 @@ First part is the argument of total length. Rest of are real params.
 * String: String type, it's encoded by two parts,first is length,second part is bytes.
 * bool: It was encode by a byte, true: 1, false 0.
 * uint8: An unsigned integer encoded by a byte,range from [0~255]
-* uint32: An unsigned integer encoded by 4 bytes by little endian. 
+* uint32: An unsigned integer encoded by 4wasm bytes by little endian.
 * int32: An signed integer encoded by 4 bytes by little endian. 
 * uint64: An unsigned integer encoded by 8 bytes by little endian. 
 * int64: An signed integer encoded by 8 bytes by little endian. 

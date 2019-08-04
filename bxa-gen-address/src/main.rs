@@ -73,7 +73,7 @@ fn is_basic_type(target :&str) -> bool {
 fn main() -> io::Result<()> {
     let matches = App::new("gen-address")
         .version("0.1.0")
-        .author("BXA")
+        .author("xtario")
         .about("Generate contract address in Rust")
         .arg(Arg::with_name("contract")
             .help("contract path.")
@@ -127,7 +127,17 @@ fn main() -> io::Result<()> {
     p.generate_address(hex_str);
 
     // read component
-    let mut file = File::open("../../target/json/components.json")?;
+//    let mut file = File::open("../../target/json/components.json")?;
+    let file = File::open("../../target/json/components.json");
+    let mut file = match file {
+        Ok(f) => f,
+        Err(e) => {
+            println!("#######ERROR:################");
+            println!("cannot open components.json");
+            panic!(e)
+        },
+    };
+
     let mut data = String::new();
     file.read_to_string(&mut data).unwrap();
     let components : Vec<ComponentArgs> = serde_json::from_str(&data).unwrap();
