@@ -26,7 +26,7 @@ impl_fixed_hash_conversions!(H256, H160);
 /// # Note
 pub type Address = H160;
 
-use super::{String};
+use super::String;
 use base58::{from_base58, to_base58};
 
 impl AsRef<Address> for Address {
@@ -95,14 +95,14 @@ impl H256 {
 
 type AccountType = u8;
 
-const AddressAccount: AccountType = 0x01;
-const VdnsNameAccount: AccountType = 0x02;
-const MAX_VDNS_NAME_LENGTH: usize = 32;
+pub const AddressAccount: AccountType = 0x01;
+pub const VdnsNameAccount: AccountType = 0x02;
+pub const MAX_VDNS_NAME_LENGTH: usize = 32;
 
-struct Account {
-    address: Address,
-    vdns_name: String,
-    a_type: u8,
+pub struct Account {
+    pub address: Address,
+    pub vdns_name: String,
+    pub a_type: u8,
 }
 
 impl Account {
@@ -124,19 +124,19 @@ impl Account {
         let addr = Address::from_base58(value);
         return Account::from_address(addr);
     }
-    pub fn to_string(&mut self) -> String {
+    pub fn to_string(&self) -> String {
         if self.a_type == VdnsNameAccount {
-            return self.vdns_name.clone()
+            return self.vdns_name.clone();
         }
         self.to_base58()
     }
     pub fn from_base58(b: String) -> Self {
         let addr = Address::from_base58(b);
-        return Account::from_address(addr)
+        return Account::from_address(addr);
     }
-    pub fn to_base58(&mut self) -> String {
+    pub fn to_base58(&self) -> String {
         if self.a_type != AddressAccount {
-            return String::from("")
+            return String::from("");
         }
         let b = self.address.to_base58();
         b
@@ -152,4 +152,5 @@ fn test_account_from_address() {
     let mut acc1 = Account::from_address(addr);
     let mut acc2 = Account::from_string(String::from("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw"));
     assert_eq!(acc1.to_string(), acc2.to_string());
+    assert_eq!(String::from("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw"), acc1.to_string());
 }
