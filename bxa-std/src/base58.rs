@@ -15,7 +15,7 @@ pub fn db_hash256<D: AsRef<[u8]>>(data: D) -> [u8; 32] {
 }
 
 const BITCOIN_ENCODING: &'static str = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-const SPEC_CHAR: u8 = 23;
+const SPEC_CHAR: u8 = 76;
 
 /// Address to base58 string
 #[allow(dead_code)]
@@ -90,11 +90,11 @@ pub fn from_base58(val: &str) -> Result<[u8; 20], String> {
 
 #[test]
 fn base58() {
-    assert_eq!("AZvWo4SpSpRL7Li7gqwgwEdWWjSUpPvn4Y", to_base58(&[
-        199, 20, 153, 223, 232,
-        208, 165, 207, 92, 28,
-        136, 202, 9, 193, 175,
-        137, 243, 71, 224, 161
+    assert_eq!("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw", to_base58(&[
+        39, 23, 142, 93, 140,
+        86, 72, 0, 7, 118,
+        20, 84, 149, 59, 28,
+        233, 63, 19, 77, 40
     ]));
     assert_eq!([0; 20], from_base58(to_base58(&[0; 20]).as_str()).unwrap());
 }

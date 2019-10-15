@@ -20,8 +20,8 @@ const INNITIALIZE: &'static str = "INNITIALIZE";
 const SYMBOL: &'static str = "ABC";
 const TOTAL_SUPPLY: u64 = 100000000000;
 lazy_static! {
-    static ref ADMIN: Address = bxa_abi_derive::base58_to_address!("AZvWo4SpSpRL7Li7gqwgwEdWWjSUpPvn4Y");
-    static ref RECIVER: Address = bxa_abi_derive::base58_to_address!("AHoGzMnbRmxpeJ9jgSEKbCT5exqvCxFXVH");
+    static ref ADMIN: Address = bxa_abi_derive::base58_to_address!("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw");
+    static ref RECIVER: Address = bxa_abi_derive::base58_to_address!("XvsMWzFWBzMvs6um8irTxSejn5JSo4ALPF");
 }
 
 

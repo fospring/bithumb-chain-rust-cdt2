@@ -9,6 +9,7 @@ members = [
     "examples/token",
     "examples/call-contract",
     "examples/called-contract",
+    "examples/add",
 ]
 
 [profile.release]
