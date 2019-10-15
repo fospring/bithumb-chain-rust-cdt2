@@ -27,7 +27,7 @@ impl_fixed_hash_conversions!(H256, H160);
 pub type Address = H160;
 
 use super::{String};
-use base58::from_base58;
+use base58::{from_base58, to_base58};
 
 impl AsRef<Address> for Address {
     fn as_ref(&self) -> &Address {
@@ -75,10 +75,14 @@ impl Address {
     pub fn new(data: [u8; 20]) -> Self {
         H160(data)
     }
-
     pub fn from_base58(b: String) -> Self {
         let res = from_base58(&b).unwrap();
         Address::new(res)
+    }
+    pub fn to_base58(&self) -> String {
+        let a = self.0;
+        let b = to_base58(&a);
+        b
     }
 }
 
@@ -120,8 +124,32 @@ impl Account {
         let addr = Address::from_base58(value);
         return Account::from_address(addr);
     }
+    pub fn to_string(&mut self) -> String {
+        if self.a_type == VdnsNameAccount {
+            return self.vdns_name.clone()
+        }
+        self.to_base58()
+    }
     pub fn from_base58(b: String) -> Self {
         let addr = Address::from_base58(b);
         return Account::from_address(addr)
     }
+    pub fn to_base58(&mut self) -> String {
+        if self.a_type != AddressAccount {
+            return String::from("")
+        }
+        let b = self.address.to_base58();
+        b
+    }
+}
+
+#[test]
+fn test_account_from_address() {
+    let addr = Address::new([39, 23, 142, 93, 140,
+        86, 72, 0, 7, 118,
+        20, 84, 149, 59, 28,
+        233, 63, 19, 77, 40]);
+    let mut acc1 = Account::from_address(addr);
+    let mut acc2 = Account::from_string(String::from("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw"));
+    assert_eq!(acc1.to_string(), acc2.to_string());
 }
