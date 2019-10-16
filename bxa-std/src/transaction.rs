@@ -3,6 +3,8 @@ use lib::*;
 use tx_attribute::TransactionAttribute;
 use types::Address;
 use sig::Sig;
+use stream::Stream;
+use sink::Sink;
 
 pub const TX_VERSION:u8 = 0;
 
@@ -31,5 +33,9 @@ pub struct TransactionInfo {
 impl TransactionInfo {
     pub fn new() {
         let tx = TransactionInfo{height: 0, tx: vec![]};
+    }
+
+    pub fn serialize(&mut self, sink: &mut Sink){
+        sink.write_u32(self.height);
     }
 }
