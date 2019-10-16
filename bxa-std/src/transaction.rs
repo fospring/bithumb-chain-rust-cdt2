@@ -29,5 +29,7 @@ pub struct TransactionInfo {
 }
 
 impl TransactionInfo {
-
+    pub fn new() {
+        let tx = TransactionInfo{height: 0, tx: vec![]};
+    }
 }

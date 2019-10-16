@@ -117,6 +117,7 @@ pub mod tx_action;
 pub mod contract_info;
 pub mod tx_attribute;
 pub mod sig;
+pub mod utils;
 
 // Safe wrapper around debug logging
 pub mod logger;

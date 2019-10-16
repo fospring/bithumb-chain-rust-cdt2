@@ -1,6 +1,7 @@
 //! Sink module;
 
 use lib::*;
+use utils;
 /// Sink for returning number of arguments
 pub struct Sink {
     // capacity: usize,
@@ -14,6 +15,13 @@ impl Sink {
             // capacity: 12 * capacity,
             preamble: Vec::with_capacity(12 * capacity),
         }
+    }
+
+    /// write u64
+    pub fn write_u64(&mut self, v: u64) {
+        let mut size: usize = 0;
+        let data: [u8; 9] = utils::pad_u64(v, &mut size);
+        self.preamble_mut().extend_from_slice(&data[..size]);
     }
 
     /// write a byte
@@ -36,7 +44,6 @@ impl Sink {
     /// Consume current Sink to produce a vector with content.
     /// May panic if declared number of arguments does not match the resulting number of bytes should be produced.
     pub fn finalize_panicking(self) -> Vec<u8> {
-        // if self.preamble.len() != self.capacity { panic!("Underflow of pushed parameters {}/{}!", self.preamble.len(), self.capacity); }
         let result = self.preamble;
         result
     }

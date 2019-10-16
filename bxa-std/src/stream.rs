@@ -2,6 +2,7 @@
 
 use lib::*;
 use Error;
+use super::str::from_utf8;
 
 /// Stream interpretation of incoming payload
 pub struct Stream<'a> {
@@ -39,7 +40,7 @@ impl<'a> Stream<'a> {
 
     /// read into
     pub fn read_into(&mut self, arr: &mut [u8]) -> Result<(), Error> {
-        let bytes = self.read_bytes(arr.len())?;
+        let bytes = self.read_fixed_bytes(arr.len())?;
         arr.copy_from_slice(bytes);
         Ok(())
     }
@@ -132,6 +133,7 @@ impl<'a> Stream<'a> {
         Ok(result)
     }
 
+    /// read bool
     pub fn read_bool(&mut self) -> Result<bool, Error> {
         let n = self.read_u64()?;
         let res = n as u8;
@@ -142,16 +144,32 @@ impl<'a> Stream<'a> {
         }
     }
 
-
-    /// read bytes
-    pub fn read_bytes(&mut self, len: usize) -> Result<&[u8], Error> {
-        if self.position + len > self.payload.len() {
+    /// read fix bytes
+    pub fn read_fixed_bytes(&mut self, size: usize) -> Result<&[u8], Error> {
+        if self.position + size > self.payload.len() {
             Err(Error::UnexpectedEof)
         } else {
-            let bytes = &self.payload[self.position..self.position + len];
-            self.position += len;
+            let bytes = &self.payload[self.position..self.position + size];
+            self.position += size;
             Ok(bytes)
         }
+    }
+
+
+    /// read bytes
+    pub fn read_bytes(&mut self) -> Result<&[u8], Error> {
+        let l = self.read_u32()?;
+        let len = l as usize;
+        let result = self.read_fixed_bytes(len)?;
+        Ok(result)
+    }
+
+    /// read String
+    pub fn read_string(&mut self) -> Result<String, Error> {
+        let b = self.read_bytes()?;
+        let s = from_utf8(b).map_err(|_err| Error::Other)?
+            .to_string();
+        Ok(s)
     }
 
     /// read byte as u8
