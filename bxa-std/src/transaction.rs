@@ -27,3 +27,7 @@ pub struct TransactionInfo {
     pub height: u32,
     pub tx: Vec<Transaction>,
 }
+
+impl TransactionInfo {
+
+}
