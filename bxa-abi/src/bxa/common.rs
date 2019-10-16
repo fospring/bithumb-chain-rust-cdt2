@@ -20,6 +20,7 @@ const TYPE_BYTES: DataType = 0x09;
 const TYPE_ADDRESS: DataType = 0x0A;
 const TYPE_ACCOUNT: DataType = 0x0A;
 const TYPE_UINT256: DataType = 0x0B;
+const TYPE_HASH256: DataType = 0x0B;
 pub const TYPE_ARRAY: DataType = 0x0C;
 pub const TYPE_STRUCT: DataType = 0x0D;
 const OTHER_TYPE: DataType = 0xff;
