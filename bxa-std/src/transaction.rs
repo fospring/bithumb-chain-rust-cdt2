@@ -54,6 +54,7 @@ impl Transaction {
         for attribute in &mut self.attributes {
             attribute.serialize(sink);
         }
+        self.payer.serialize(sink);
     }
 }
 

@@ -28,6 +28,8 @@ pub type Address = H160;
 
 use super::String;
 use base58::{from_base58, to_base58};
+use sink::Sink;
+use stream::Stream;
 
 impl AsRef<Address> for Address {
     fn as_ref(&self) -> &Address {
@@ -83,6 +85,9 @@ impl Address {
         let a = self.0;
         let b = to_base58(&a);
         b
+    }
+    pub fn serialize(&self, sink: &mut Sink) {
+        sink.write_bytes(&self.0);
     }
 }
 
