@@ -39,6 +39,17 @@ impl Transaction {
         tx
     }
     pub fn serialize(&mut self, sink: &mut Sink) {}
+
+    pub fn serialize_unsigned(&mut self, sink: &mut Sink) {
+        sink.write_byte(self.version);
+        sink.write_u64(self.nonce);
+        let size = self.actions.len() as u32;
+        sink.write_u32(size);
+        for action in &mut self.actions {
+            sink.write_byte(action.get_type());
+            action.serialize(sink);
+        }
+    }
 }
 
 pub struct TransactionInfo {
