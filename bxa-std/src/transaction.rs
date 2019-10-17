@@ -49,6 +49,11 @@ impl Transaction {
             sink.write_byte(action.get_type());
             action.serialize(sink);
         }
+        let size = self.attributes.len() as u32;
+        sink.write_u32(size);
+        for attribute in &mut self.attributes {
+            attribute.serialize(sink);
+        }
     }
 }
 
