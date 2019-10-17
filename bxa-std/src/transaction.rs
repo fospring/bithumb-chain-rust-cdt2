@@ -6,9 +6,10 @@ use sig::Sig;
 use stream::Stream;
 use sink::Sink;
 
-pub const TX_VERSION:u8 = 0;
+pub const TX_VERSION: u8 = 0;
 
 pub type ActionType = u8;
+
 pub const INVOKE: ActionType = 0;
 pub const DEPLOY: ActionType = 1;
 
@@ -25,17 +26,34 @@ pub struct Transaction {
     pub sig_data: Vec<Sig>,
 }
 
+impl Transaction {
+    pub fn new() -> Self {
+        let tx = Transaction {
+            version: TX_VERSION,
+            nonce: 0,
+            actions: vec![],
+            attributes: vec![],
+            payer: Address::new([0_u8; 20]),
+            sig_data: vec![],
+        };
+        tx
+    }
+    pub fn serialize(&mut self, sink: &mut Sink) {}
+}
+
 pub struct TransactionInfo {
     pub height: u32,
-    pub tx: Vec<Transaction>,
+    pub tx: Transaction,
 }
 
 impl TransactionInfo {
-    pub fn new() {
-        let tx = TransactionInfo{height: 0, tx: vec![]};
+    pub fn new() -> Self {
+        let tx_inf = TransactionInfo { height: 0, tx: Transaction::new() };
+        tx_inf
     }
 
-    pub fn serialize(&mut self, sink: &mut Sink){
+    pub fn serialize(&mut self, sink: &mut Sink) {
         sink.write_u32(self.height);
+        self.tx.serialize(sink);
     }
 }
