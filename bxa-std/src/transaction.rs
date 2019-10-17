@@ -38,7 +38,14 @@ impl Transaction {
         };
         tx
     }
-    pub fn serialize(&mut self, sink: &mut Sink) {}
+    pub fn serialize(&mut self, sink: &mut Sink) {
+        self.serialize_unsigned(sink);
+        let size = self.sig_data.len() as u32;
+        sink.write_u32(size);
+        for sig in &mut self.sig_data {
+            sig.serialize(sink);
+        }
+    }
 
     pub fn serialize_unsigned(&mut self, sink: &mut Sink) {
         sink.write_byte(self.version);

@@ -38,6 +38,9 @@ version = "0.2"
 version = "0.5.0"
 default-features = false
 
+[dependencies.crypto-hash]
+version = "0.3.4"
+
 [features]
 default = ["uint/common"]
 panic_with_msg = []

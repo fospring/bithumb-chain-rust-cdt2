@@ -30,6 +30,10 @@ pub enum Error {
     UnexpectedEof,
     /// Unexpected data the stream
     UnexpectedData,
+    /// ErrUnsupportedCryptoScheme
+    ErrUnsupportedCryptoScheme,
+    /// ErrUnKnownCryptoScheme
+    ErrUnKnownCryptoScheme,
     /// Other error
     Other,
 }
@@ -99,6 +103,7 @@ extern crate uint;
 
 extern crate num;
 extern crate sha2;
+extern crate crypto_hash;
 
 use byteorder::{LittleEndian, ByteOrder};
 
@@ -118,6 +123,7 @@ pub mod contract_info;
 pub mod tx_attribute;
 pub mod sig;
 pub mod utils;
+pub mod crypto;
 
 // Safe wrapper around debug logging
 pub mod logger;
