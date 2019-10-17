@@ -11,7 +11,9 @@ pub struct DeployContract {
 }
 
 impl Serializer for DeployContract {
-    fn serialize(&self, sink: &mut Sink){}
+    fn serialize(&self, sink: &mut Sink){
+        self.contract.serialize(sink);
+    }
 }
 
 impl Deserializer for DeployContract {
@@ -30,4 +32,12 @@ pub struct InvokeContract {
     pub contract_account: Account,
     pub method: String,
     pub args: Vec<u8>,
+}
+
+impl Serializer for InvokeContract {
+    fn serialize(&self, sink: &mut Sink) {
+        self.contract_account.serialize(sink);
+        sink.write_string(self.method.clone());
+        sink.write_bytes(&self.args);
+    }
 }

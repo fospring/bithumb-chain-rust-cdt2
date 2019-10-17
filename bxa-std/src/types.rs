@@ -152,7 +152,16 @@ impl Account {
         let b = self.address.to_base58();
         b
     }
+    pub fn serialize(&self, sink: &mut Sink) {
+        sink.write_byte(self.a_type);
+        if self.a_type == AddressAccount {
+            self.address.serialize(sink);
+        } else {
+            sink.write_string(self.vdns_name.clone());
+        }
+    }
 }
+
 
 #[test]
 fn test_account_from_address() {
