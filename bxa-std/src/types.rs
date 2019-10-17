@@ -45,6 +45,12 @@ impl From<U256> for H256 {
     }
 }
 
+impl H256 {
+    pub fn serialize(&self, sink: &mut Sink) {
+        sink.write_bytes(&self.0)
+    }
+}
+
 impl<'a> From<&'a U256> for H256 {
     fn from(uint: &'a U256) -> H256 {
         let mut hash: H256 = H256::zero();
