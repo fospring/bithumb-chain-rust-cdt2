@@ -131,6 +131,8 @@ pub mod tx_attribute;
 pub mod sig;
 pub mod utils;
 pub mod crypto;
+pub mod block;
+pub mod header;
 
 // Safe wrapper around debug logging
 pub mod logger;

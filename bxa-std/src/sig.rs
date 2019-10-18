@@ -40,9 +40,10 @@ impl Sig {
         }
         self.m = stream.read_u8().unwrap();
         let size = stream.read_u64().unwrap();
+        self.sig_data.clear();
         for _ in 0..size {
             let s_data: &[u8] = stream.read_bytes().unwrap();
-            let mut b :Vec<u8> = s_data.iter().cloned().collect();
+            let b :Vec<u8> = s_data.iter().cloned().collect();
             self.sig_data.push(b);
         }
     }

@@ -20,6 +20,7 @@ construct_fixed_hash! {
 // Auto-impl `From` conversions between `H256` and `H160`.
 impl_fixed_hash_conversions!(H256, H160);
 
+pub const H256Size: u32 = 32;
 
 /// Represents an address in bxa context.
 /// 
