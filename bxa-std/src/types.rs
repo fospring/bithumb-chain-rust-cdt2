@@ -47,7 +47,10 @@ impl From<U256> for H256 {
 
 impl H256 {
     pub fn serialize(&self, sink: &mut Sink) {
-        sink.write_bytes(&self.0)
+        sink.write_fixed_bytes(&self.0);
+    }
+    pub fn deserialize(&mut self, stream: &mut Stream) {
+        stream.read_into(self.as_mut());
     }
 }
 
@@ -94,6 +97,9 @@ impl Address {
     }
     pub fn serialize(&self, sink: &mut Sink) {
         sink.write_bytes(&self.0);
+    }
+    pub fn deserialize(&mut self, stream: &mut Stream) {
+        stream.read_into(self.as_mut());
     }
 }
 
@@ -158,6 +164,14 @@ impl Account {
             self.address.serialize(sink);
         } else {
             sink.write_string(self.vdns_name.clone());
+        }
+    }
+    pub fn deserialize(&mut self, stream: &mut Stream) {
+        self.a_type = stream.read_byte().unwrap();
+        if self.a_type == AddressAccount {
+            self.address.deserialize(stream);
+        } else {
+            self.vdns_name = stream.read_string().unwrap();
         }
     }
 }

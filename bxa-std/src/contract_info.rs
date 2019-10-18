@@ -43,4 +43,13 @@ impl ContractInfo {
         sink.write_byte(self.c_type);
         self.tx_hash.serialize(sink);
     }
+    pub fn deserialize(&mut self, stream: &mut Stream) {
+        self.code = stream.read_bytes().unwrap().to_vec();
+        self.name = stream.read_string().unwrap();
+        self.author = stream.read_string().unwrap();
+        self.version = stream.read_string().unwrap();
+        self.email = stream.read_string().unwrap();
+        self.description = stream.read_string().unwrap();
+        self.tx_hash.deserialize(stream);
+    }
 }

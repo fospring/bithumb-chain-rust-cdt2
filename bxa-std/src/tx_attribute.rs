@@ -13,9 +13,12 @@ impl TransactionAttribute {
         let attr = TransactionAttribute{typ: 0_u8, data:vec![]};
         attr
     }
-
     pub fn serialize(&self, sink: &mut Sink) {
         sink.write_byte(self.typ);
         sink.write_bytes(&self.data);
+    }
+    pub fn deserialize(&mut self, stream: &mut Stream){
+        self.typ = stream.read_byte().unwrap();
+        self.data = stream.read_bytes().unwrap().to_vec();
     }
 }

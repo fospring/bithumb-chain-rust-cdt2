@@ -34,6 +34,8 @@ pub enum Error {
     ErrUnsupportedCryptoScheme,
     /// ErrUnKnownCryptoScheme
     ErrUnKnownCryptoScheme,
+    /// Unknown transaction payload
+    UnknownTransactionPayloadType,
     /// Other error
     Other,
 }

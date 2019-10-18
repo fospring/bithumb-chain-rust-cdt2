@@ -7,5 +7,5 @@ pub trait Serializer {
 }
 
 pub trait Deserializer {
-    fn deserialize(&self, stream: &mut Stream);
+    fn deserialize(&mut self, stream: &mut Stream);
 }

@@ -5,6 +5,7 @@ use types::Address;
 use sig::Sig;
 use stream::Stream;
 use sink::Sink;
+use tx_action::deserialize_payload;
 
 pub const TX_VERSION: u8 = 0;
 
@@ -46,7 +47,6 @@ impl Transaction {
             sig.serialize(sink);
         }
     }
-
     pub fn serialize_unsigned(&mut self, sink: &mut Sink) {
         sink.write_byte(self.version);
         sink.write_u64(self.nonce);
@@ -63,6 +63,27 @@ impl Transaction {
         }
         self.payer.serialize(sink);
     }
+
+    pub fn deserialize(&mut self, stream: &mut Stream) {
+        self.deserialize_unsigned(stream);
+    }
+    pub fn deserialize_unsigned(&mut self, stream: &mut Stream) {
+        self.version = stream.read_byte().unwrap();
+        self.nonce = stream.read_u64().unwrap();
+        let size = stream.read_u32().unwrap();
+        for _ in 0..size {
+            let action_type = stream.read_byte().unwrap();
+            let action = deserialize_payload(stream, action_type).unwrap();
+            self.actions.push(action);
+        }
+        let size = stream.read_u32().unwrap();
+        for _ in 0..size {
+            let mut attr = TransactionAttribute::new();
+            attr.deserialize(stream);
+            self.attributes.push(attr);
+        }
+        self.payer.deserialize(stream);
+    }
 }
 
 pub struct TransactionInfo {
@@ -75,9 +96,12 @@ impl TransactionInfo {
         let tx_inf = TransactionInfo { height: 0, tx: Transaction::new() };
         tx_inf
     }
-
     pub fn serialize(&mut self, sink: &mut Sink) {
         sink.write_u32(self.height);
         self.tx.serialize(sink);
+    }
+    pub fn deserialize(&mut self, stream: &mut Stream) {
+        let height = stream.read_u32().unwrap();
+        self.tx.deserialize(stream);
     }
 }
