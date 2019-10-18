@@ -5,8 +5,10 @@ use types::Address;
 use sig::Sig;
 use stream::Stream;
 use sink::Sink;
-use tx_action::deserialize_payload;
+use tx_action::{deserialize_payload, InvokeContract, DeployContract};
 use hex;
+use std;
+use downcast_rs::DowncastSync;
 
 pub const TX_VERSION: u8 = 0;
 
@@ -15,9 +17,10 @@ pub type ActionType = u8;
 pub const INVOKE: ActionType = 0;
 pub const DEPLOY: ActionType = 1;
 
-pub trait Action: Serializable {
+pub trait Action: Serializable + DowncastSync {
     fn get_type(&self) -> ActionType;
 }
+impl_downcast!(sync Action);
 
 pub struct Transaction {
     pub version: u8,
@@ -122,6 +125,20 @@ fn deserialize_transaction() {
     tx.deserialize(&mut stream);
     assert_eq!(TX_VERSION, tx.version);
     let mut sink = Sink::new(1);
+    if (tx.actions.len() > 0) {
+        let p = &mut tx.actions[0];
+        if (p.get_type() == INVOKE) {
+            if let Some(invoke) = p.downcast_ref::<InvokeContract>() {
+                assert_eq!(String::from("transfer"), invoke.method);
+            } else {
+                assert_eq!(1,2);
+            }
+        } else if (p.get_type() == INVOKE) {
+            assert_eq!(2,2);
+        } else {
+            assert_eq!(1,2);
+        }
+    }
     tx.serialize(&mut sink);
     let nbs = sink.preamble_mut();
     let n_hex_str = hex::encode(nbs);

@@ -40,6 +40,8 @@ pub enum Error {
     Other,
 }
 
+extern crate std;
+
 mod lib {
     mod core {
         #[cfg(feature = "std")]
@@ -93,6 +95,9 @@ extern crate pwasm_libc;
 #[allow(unused)]
 #[macro_use]
 extern crate alloc;
+
+#[macro_use]
+extern crate downcast_rs;
 
 pub use alloc::{vec, format};
 
