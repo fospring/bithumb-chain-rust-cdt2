@@ -50,6 +50,7 @@ impl ContractInfo {
         self.version = stream.read_string().unwrap();
         self.email = stream.read_string().unwrap();
         self.description = stream.read_string().unwrap();
+        self.c_type = stream.read_byte().unwrap();
         self.tx_hash.deserialize(stream);
     }
 }

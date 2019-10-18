@@ -108,6 +108,7 @@ impl Header {
         self.height = stream.read_u32().unwrap();
         self.vrf_value = stream.read_bytes().unwrap().iter().cloned().collect();
         self.vrf_proof = stream.read_bytes().unwrap().iter().cloned().collect();
+        self.next_bookkeeper.deserialize(stream);
         let size = stream.read_u32().unwrap();
         self.bookkeepers.clear();
         for _ in 0..size {
