@@ -1,5 +1,4 @@
 use crypto::common::{ECDSA256WithSHA256, CryptoScheme, PublicKey};
-use crypto_hash;
 use Error;
 use super::super::sink::Sink;
 use super::super::stream::Stream;
@@ -34,7 +33,7 @@ impl PublicKey for EcPublicKey {
         self.decode(stream);
     }
     fn encode(&self, sink: &mut Sink) {
-        sink.write_bytes(&self.data);
+        sink.write_fixed_bytes(&self.data);
     }
     fn decode(&mut self, stream: &mut Stream) {
         let flag = stream.read_byte().unwrap();

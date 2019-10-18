@@ -96,7 +96,7 @@ impl Address {
         b
     }
     pub fn serialize(&self, sink: &mut Sink) {
-        sink.write_bytes(&self.0);
+        sink.write_fixed_bytes(&self.0);
     }
     pub fn deserialize(&mut self, stream: &mut Stream) {
         stream.read_into(self.as_mut());

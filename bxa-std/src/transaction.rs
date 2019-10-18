@@ -6,6 +6,7 @@ use sig::Sig;
 use stream::Stream;
 use sink::Sink;
 use tx_action::deserialize_payload;
+use hex;
 
 pub const TX_VERSION: u8 = 0;
 
@@ -66,6 +67,12 @@ impl Transaction {
 
     pub fn deserialize(&mut self, stream: &mut Stream) {
         self.deserialize_unsigned(stream);
+        let size = stream.read_u32().unwrap();
+        for _ in 0..size {
+            let mut sig = Sig::new();
+            sig.deserialize(stream);
+            self.sig_data.push(sig);
+        }
     }
     pub fn deserialize_unsigned(&mut self, stream: &mut Stream) {
         self.version = stream.read_byte().unwrap();
@@ -105,3 +112,19 @@ impl TransactionInfo {
         self.tx.deserialize(stream);
     }
 }
+
+#[test]
+fn deserialize_transaction() {
+    let hex_str = "00856523cd5aca0100010000000000000000000000000000000000000001087472616e73666572360c010d030a0127178e5d8c56480007761454953b1ce93f134d280a01dd5f748487825258a6bc9ef117714d1aea2575b1068405f5e1000027178e5d8c56480007761454953b1ce93f134d2801010103776933b620272510599da0dd3c817a68f7b5e01eb5adb989f6fe1346b023521801014101c4bd235d37d1b6fa96e6030e8e3091e57c7cadc05638d29cc8f39bc25b48f6dd9dc86fed97ba251d960f023f71e9695a7a27172bf74a13733cf78b0396c46829";
+    let bs = hex::decode(hex_str).unwrap();
+    let mut stream = Stream::new(&bs);
+    let mut tx = Transaction::new();
+    tx.deserialize(&mut stream);
+    assert_eq!(TX_VERSION, tx.version);
+    let mut sink = Sink::new(1);
+    tx.serialize(&mut sink);
+    let nbs = sink.preamble_mut();
+    let n_hex_str = hex::encode(nbs);
+    assert_eq!(String::from(n_hex_str), String::from(hex_str));
+}
+

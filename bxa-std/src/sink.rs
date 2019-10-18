@@ -56,7 +56,7 @@ impl Sink {
         let mut size: usize = 0;
         let data: [u8; 9] = utils::pad_u64((s.as_str().len()) as u64, &mut size);
         self.preamble_mut().extend_from_slice(&data[..size]);
-        self.write_bytes(s.as_str().as_bytes());
+        self.write_fixed_bytes(s.as_str().as_bytes());
     }
 
     /// write a byte

@@ -105,7 +105,7 @@ extern crate uint;
 
 extern crate num;
 extern crate sha2;
-extern crate crypto_hash;
+extern crate hex;
 
 use byteorder::{LittleEndian, ByteOrder};
 

@@ -1,7 +1,6 @@
 pub mod common;
 pub mod ecdsa;
 
-use super::crypto_hash;
 use super::Error;
 use super::lib::*;
 use super::sink::Sink;

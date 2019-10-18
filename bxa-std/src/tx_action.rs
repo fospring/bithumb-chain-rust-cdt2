@@ -86,6 +86,7 @@ pub fn deserialize_payload(stream: &mut Stream, payload_type: ActionType) -> Res
         return Ok(Box::new(deploy));
     } else if (payload_type == INVOKE) {
         let mut invoke = InvokeContract::new();
+        invoke.deserialize(stream);
         return Ok(Box::new(invoke));
     } else {
         return Err(Error::UnknownTransactionPayloadType)

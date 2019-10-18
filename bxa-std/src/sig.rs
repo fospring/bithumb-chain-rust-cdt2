@@ -25,6 +25,7 @@ impl Sig {
         for pk in &self.public_keys {
             pk.serialize(sink);
         }
+        sink.write_byte(self.m);
         sink.write_u64(self.sig_data.len() as u64);
         for s_data in &self.sig_data {
             sink.write_bytes(&s_data);
