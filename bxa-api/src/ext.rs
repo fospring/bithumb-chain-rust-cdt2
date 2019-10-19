@@ -106,6 +106,9 @@ mod external {
 		pub fn fetch_input(dst: *mut u8);
 
 		pub fn check_witness(address: *const u8) ->u32;
+
+		pub fn debug(str_ptr: *const u8, str_len: u32);
+
 	}
 }
 
@@ -389,4 +392,9 @@ unsafe fn fetch_u256<F>(f: F) -> U256 where F: Fn(*mut u8) {
 
 pub fn check_witness(address: &Address) -> bool {
 	unsafe {external::check_witness(address.as_ptr()) != 0}
+}
+
+/// Log debug message to the runtime
+pub fn debug(msg: &str) {
+	unsafe { external::debug(msg.as_ptr(), msg.len() as u32); }
 }
