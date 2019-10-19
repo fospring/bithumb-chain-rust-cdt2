@@ -1,5 +1,6 @@
 #!/bin/bash
-
+rustup default nightly
+rustup target add wasm32-unknown-unknown
 RUSTFLAGS="-C link-arg=-zstack-size=32768" cargo +nightly build --release --target wasm32-unknown-unknown
 #wasm-build --target=wasm32-unknown-unknown ../../target token
 wasm-gc ../../target/wasm32-unknown-unknown/release/token.wasm ./token.wasm
