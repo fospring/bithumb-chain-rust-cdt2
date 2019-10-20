@@ -91,11 +91,11 @@ fn serialize(){
     let mut stream = Stream::new(bytes);
 
     let s = stream.pop::<String>().unwrap();
-    assert_eq!(String::from("transfer"),s);
+    debug_assert_eq!(String::from("transfer"),s);
     let ts_n:Vec<Transfer> = stream.pop::<Vec<Transfer>>().unwrap();
     for val in ts_n {
-        assert_eq!(val.from,Address::new([0_u8;20]));
-        assert_eq!(val.amount,100_u64);
+        debug_assert_eq!(val.from,Address::new([0_u8;20]));
+        debug_assert_eq!(val.amount,100_u64);
     }
 }
 
@@ -113,13 +113,13 @@ fn params(){
         207, 92, 28, 136, 202, 9, 193, 175, 137, 243, 71, 224, 161, 10, 145, 188, 61, 81, 255, 163, 170, 223, 10,
         197, 206, 214, 44, 16, 0, 140, 162, 211, 164, 227, 6, 100];
     let by = sink.finalize_panicking();
-    assert_eq!(bytes.len(),by.len());
-    assert_eq!(bytes,&by[..]);
+    debug_assert_eq!(bytes.len(),by.len());
+    debug_assert_eq!(bytes,&by[..]);
     let mut stream = Stream::new(bytes);
     let method = stream.pop::<String>().unwrap();
-    assert_eq!(String::from("call_native_transfer2"),method);
+    debug_assert_eq!(String::from("call_native_transfer2"),method);
     let address = stream.pop::<String>().unwrap();
-    assert_eq!(String::from("0000000000000000000000000000000000000001"),address);
+    debug_assert_eq!(String::from("0000000000000000000000000000000000000001"),address);
     let ts:Vec<Transfer> = stream.pop::<Vec<Transfer>>().unwrap();
-    assert_eq!(Transfer{from:Address::new([0_u8;20]),to:Address::new([0_u8;20]),amount:100_u64},ts[1])
+    debug_assert_eq!(Transfer{from:Address::new([0_u8;20]),to:Address::new([0_u8;20]),amount:100_u64},ts[1])
 }

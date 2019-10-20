@@ -141,5 +141,5 @@ fn serialize(){
     let mut stream = Stream::new(bytes);
 
     let ts_n:Vec<Transfer> = stream.pop::<Vec<Transfer>>().unwrap();
-    assert_eq!(ts.as_ptr(),ts_n.as_ptr());
+    debug_assert_eq!(ts.as_ptr(),ts_n.as_ptr());
 }

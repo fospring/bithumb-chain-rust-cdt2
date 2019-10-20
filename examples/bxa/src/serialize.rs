@@ -20,7 +20,7 @@ fn serialize(){
     let bytes = sink.preamble_mut();
     let mut stream = Stream::new(bytes);
     let sam_student = stream.pop::<Student>().unwrap();
-    assert_eq!(student1.name,sam_student.name);
-    assert_eq!(student1.score,sam_student.score);
-    assert_eq!(student1.to_bxa_string(),"{name:ABC,score:90}")
+    debug_assert_eq!(student1.name,sam_student.name);
+    debug_assert_eq!(student1.score,sam_student.score);
+    debug_assert_eq!(student1.to_bxa_string(),"{name:ABC,score:90}")
 }

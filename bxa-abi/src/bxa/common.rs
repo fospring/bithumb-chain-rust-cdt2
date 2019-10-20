@@ -28,7 +28,7 @@ const OTHER_TYPE: DataType = 0xff;
 impl AbiType for u8 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_UINT8, ty);
+        debug_assert_eq!(TYPE_UINT8, ty);
         let n = stream.read_u64()?;
         let res = n as u8;
         Ok(res)
@@ -55,7 +55,7 @@ impl Zero for u8 {
 impl AbiType for i32 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_INT32, ty);
+        debug_assert_eq!(TYPE_INT32, ty);
         let n = stream.read_u64()?;
         let res = n as i32;
         Ok(res)
@@ -81,7 +81,7 @@ impl Zero for i32 {
 impl AbiType for u32 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_UINT32, ty);
+        debug_assert_eq!(TYPE_UINT32, ty);
         let n = stream.read_u64()?;
         let res = n as u32;
         Ok(res)
@@ -107,7 +107,7 @@ impl Zero for u32 {
 impl AbiType for i64 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_INT64, ty);
+        debug_assert_eq!(TYPE_INT64, ty);
         let n = stream.read_u64()?;
         let res = n as i64;
         Ok(res)
@@ -133,7 +133,7 @@ impl Zero for i64 {
 impl AbiType for u64 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_UINT64, ty);
+        debug_assert_eq!(TYPE_UINT64, ty);
         stream.read_u64()
     }
     fn encode(self, sink: &mut Sink) {
@@ -158,7 +158,7 @@ impl Zero for u64 {
 impl AbiType for String {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_STRING, ty);
+        debug_assert_eq!(TYPE_STRING, ty);
         let res = stream.read_u64()?;
         let n = res as u32;
         if n == 0 {
@@ -198,7 +198,7 @@ impl Zero for String {
 impl AbiType for bool {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_BOOL, ty);
+        debug_assert_eq!(TYPE_BOOL, ty);
         let n = stream.read_u64()?;
         let res = n as u8;
         match res {
@@ -230,7 +230,7 @@ impl Zero for bool {
 impl AbiType for U256 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_UINT256, ty);
+        debug_assert_eq!(TYPE_UINT256, ty);
         let previous = stream.advance(32)?;
         Ok(
             U256::from_little_endian(&stream.payload()[previous..stream.position()])
@@ -258,7 +258,7 @@ impl Zero for U256 {
 impl AbiType for Address {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_ADDRESS, ty);
+        debug_assert_eq!(TYPE_ADDRESS, ty);
         let mut addr = Address::zero();
         stream.read_into(addr.as_mut())?;
         Ok(addr)
@@ -286,7 +286,7 @@ impl Zero for Address {
 impl AbiType for Account {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let mut ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_ACCOUNT, ty);
+        debug_assert_eq!(TYPE_ACCOUNT, ty);
         let mut account = Account::new();
         ty = stream.read_byte().unwrap();
         if ty == AddressAccount {
@@ -329,7 +329,7 @@ impl AbiType for Account {
 impl AbiType for H256 {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_UINT256, ty);
+        debug_assert_eq!(TYPE_UINT256, ty);
         let mut hash = H256::zero();
         stream.read_into(hash.as_mut())?;
         Ok(hash)
@@ -354,7 +354,7 @@ impl Zero for H256 {
 impl<T: AbiType> AbiType for Vec<T> {
     fn decode(stream: &mut Stream) -> Result<Self, Error> {
         let ty = stream.read_byte().unwrap();
-        assert_eq!(TYPE_ARRAY, ty);
+        debug_assert_eq!(TYPE_ARRAY, ty);
         let len = stream.read_u64()?;
         let len = len as u32;
         let mut result = Vec::with_capacity(cmp::min(len, 1024) as usize);
@@ -410,7 +410,7 @@ macro_rules! abi_extends {
         impl AbiType for $name {
 			fn decode(stream: &mut Stream) -> Result<Self, Error> {
 				let ty = stream.read_byte().unwrap();
-				assert_eq!(TYPE_STRUCT,ty);
+				debug_assert_eq!(TYPE_STRUCT,ty);
 				let _size = stream.read_u64()?;
 
 				let mut st = $name{$($fname: <$ftype>::zero()),*};
@@ -450,7 +450,7 @@ macro_rules! abi_type_fixed_impl {
 		impl AbiType for [u8; $num] {
 			fn decode(stream: &mut Stream) -> Result<Self, Error> {
 				let ty = stream.read_byte().unwrap();
-				assert_eq!(OTHER_TYPE,ty);
+				debug_assert_eq!(OTHER_TYPE,ty);
 				let previous_position = stream.advance(32)?;
 				let slice = &stream.payload()[previous_position..stream.position()];
 				let mut result = [0u8; $num];
@@ -482,7 +482,7 @@ macro_rules! tuple_impls {
 			impl<$($T:AbiType),+> AbiType for ($($T,)+) {
 				fn decode(stream: &mut Stream) -> Result<Self, Error> {
 					let ty = stream.read_byte().unwrap();
-					assert_eq!(TYPE_STRUCT,ty);
+					debug_assert_eq!(TYPE_STRUCT,ty);
 					let _size = stream.read_u64()?;
 					Ok(($(<$T>::decode(stream)?),*,))
 				}
@@ -661,7 +661,7 @@ mod tests {
 
         let val: [u8; 31] = stream.pop().expect("fixed array failed to deserialize");
 
-        assert_eq!(val,
+        debug_assert_eq!(val,
                    [
                        1u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8,
                        0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8
@@ -671,7 +671,7 @@ mod tests {
         let mut sink = Sink::new(1);
         sink.push(val);
 
-        assert_eq!(&sink.finalize_panicking()[..], &data[..]);
+        debug_assert_eq!(&sink.finalize_panicking()[..], &data[..]);
     }
 
     #[test]
@@ -685,11 +685,11 @@ mod tests {
 
         let val: [u8; 2] = stream.pop().expect("fixed array failed to deserialize");
 
-        assert_eq!(val, [1u8, 2u8]);
+        debug_assert_eq!(val, [1u8, 2u8]);
 
         let mut sink = Sink::new(1);
         sink.push(val);
 
-        assert_eq!(&sink.finalize_panicking()[..], &data[..]);
+        debug_assert_eq!(&sink.finalize_panicking()[..], &data[..]);
     }
 }

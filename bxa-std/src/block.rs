@@ -43,10 +43,10 @@ fn block_serialize() {
     let mut stream = Stream::new(&bs);
     let mut block = Block::new();
     block.deserialize(&mut stream);
-    assert_eq!(block.header.height, 0);
+    debug_assert_eq!(block.header.height, 0);
     let mut sink = Sink::new(1);
     block.serialize(&mut sink);
     let nbs = sink.preamble_mut();
     let n_hex_str = hex::encode(nbs);
-    assert_eq!(String::from(n_hex_str), String::from(hex_str));
+    debug_assert_eq!(String::from(n_hex_str), String::from(hex_str));
 }

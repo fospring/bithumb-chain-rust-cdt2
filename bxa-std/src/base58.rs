@@ -90,11 +90,11 @@ pub fn from_base58(val: &str) -> Result<[u8; 20], String> {
 
 #[test]
 fn base58() {
-    assert_eq!("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw", to_base58(&[
+    debug_assert_eq!("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw", to_base58(&[
         39, 23, 142, 93, 140,
         86, 72, 0, 7, 118,
         20, 84, 149, 59, 28,
         233, 63, 19, 77, 40
     ]));
-    assert_eq!([0; 20], from_base58(to_base58(&[0; 20]).as_str()).unwrap());
+    debug_assert_eq!([0; 20], from_base58(to_base58(&[0; 20]).as_str()).unwrap());
 }

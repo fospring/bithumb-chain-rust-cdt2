@@ -126,25 +126,25 @@ fn deserialize_transaction() {
     let mut stream = Stream::new(&bs);
     let mut tx = Transaction::new();
     tx.deserialize(&mut stream);
-    assert_eq!(TX_VERSION, tx.version);
+    debug_assert_eq!(TX_VERSION, tx.version);
     let mut sink = Sink::new(1);
     if (tx.actions.len() > 0) {
         let p = &mut tx.actions[0];
         if (p.get_type() == INVOKE) {
             if let Some(invoke) = p.downcast_ref::<InvokeContract>() {
-                assert_eq!(String::from("transfer"), invoke.method);
+                debug_assert_eq!(String::from("transfer"), invoke.method);
             } else {
-                assert_eq!(1,2);
+                debug_assert_eq!(1,2);
             }
         } else if (p.get_type() == INVOKE) {
-            assert_eq!(2,2);
+            debug_assert_eq!(2,2);
         } else {
-            assert_eq!(1,2);
+            debug_assert_eq!(1,2);
         }
     }
     tx.serialize(&mut sink);
     let nbs = sink.preamble_mut();
     let n_hex_str = hex::encode(nbs);
-    assert_eq!(String::from(n_hex_str), String::from(hex_str));
+    debug_assert_eq!(String::from(n_hex_str), String::from(hex_str));
 }
 

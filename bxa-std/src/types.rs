@@ -186,6 +186,6 @@ fn test_account_from_address() {
         233, 63, 19, 77, 40]);
     let mut acc1 = Account::from_address(addr);
     let mut acc2 = Account::from_string(String::from("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw"));
-    assert_eq!(acc1.to_string(), acc2.to_string());
-    assert_eq!(String::from("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw"), acc1.to_string());
+    debug_assert_eq!(acc1.to_string(), acc2.to_string());
+    debug_assert_eq!(String::from("XeFYQScWSznQGMv9i9QL1ukMnLeEe11Bdw"), acc1.to_string());
 }
