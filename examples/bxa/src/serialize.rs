@@ -1,5 +1,6 @@
 use bxa_abi::types::*;
 use bxa_abi::bxa::{AbiType,TYPE_STRUCT,Stream,Sink,Zero,Error};
+use bxa_abi::bxa::pad_u64;
 
 use bxa_abi_derive::abi_struct;
 
